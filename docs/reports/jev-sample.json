@@ -1,0 +1,165 @@
+{
+  "request": {
+    "model": "typesafe/jev-1.13",
+    "state": {
+      "新消息": "我的快递到哪了"
+    },
+    "questions": {
+      "intent": {
+        "type": "choice",
+        "instructions": "买家这条新消息的主要意图是什么？结合最近对话和已知信息判断，只选择一个最符合的类别。",
+        "criteria": {
+          "product_consult": "询问商品的材质、版型、颜色、细节、洗护、是否适合某场合",
+          "size_recommend": "询问该穿什么尺码，常给出身高体重",
+          "stock_check": "询问某款某码某色是否有货、何时补货",
+          "promotion": "询问优惠、折扣、优惠券、满减、会员价",
+          "shipping_policy": "下单前询问发货时间、快递公司、运费、配送范围",
+          "order_status": "询问订单当前状态、是否付款成功、订单详情",
+          "logistics_track": "询问包裹到哪了、物流进度、何时送达",
+          "urge_shipping": "催促尽快发货",
+          "modify_order": "修改收货地址、电话或未发货订单的规格",
+          "cancel_order": "想取消尚未发货的订单",
+          "refund_apply": "想申请退款或退货退款",
+          "refund_progress": "询问退款/退货处理到哪一步、钱何时到账",
+          "exchange": "想换尺码或换颜色",
+          "quality_issue": "反映收到的商品有质量问题：破损、色差、起球、开线、异味",
+          "return_policy": "询问退换货规则、期限、运费谁出",
+          "invoice": "询问或申请发票",
+          "human_request": "明确要求人工客服",
+          "greeting": "打招呼、感谢、结束语，没有具体诉求",
+          "multi_step_complex": "一句话里有多个诉求，或需要多步查询/操作才能完成",
+          "other": "与本店购物无关或无法判断"
+        }
+      },
+      "multi_step": {
+        "type": "noul",
+        "instructions": "这条新消息是否包含两个及以上不同诉求，或需要多步查询/操作才能完成？",
+        "criteria": {
+          "true": "多个诉求或多步操作",
+          "false": "单一诉求且一步即可处理"
+        }
+      },
+      "legal_threat": {
+        "type": "noul",
+        "instructions": "买家是否威胁向监管部门（如 12315、消协）投诉、起诉、找律师，或曝光到媒体/社交平台？",
+        "criteria": {
+          "true": "明确威胁投诉、起诉、找律师或公开曝光",
+          "false": "没有这些威胁或相关表达"
+        }
+      },
+      "health_safety": {
+        "type": "noul",
+        "instructions": "买家是否提到商品造成身体伤害、过敏、皮肤问题、受伤或其他安全隐患？",
+        "criteria": {
+          "true": "明确提到商品引起伤害、过敏、皮肤问题或安全隐患",
+          "false": "没有伤害、过敏或安全隐患表达"
+        }
+      },
+      "fraud_security": {
+        "type": "noul",
+        "instructions": "是否涉及账号被盗、被诈骗、可疑链接、有人冒充客服，或被要求线下转账？",
+        "criteria": {
+          "true": "明确涉及盗号、诈骗、可疑链接、冒充客服或线下转账",
+          "false": "没有账号安全、诈骗或可疑交易问题"
+        }
+      },
+      "abuse_extreme": {
+        "type": "noul",
+        "instructions": "消息是否包含辱骂、人身攻击或极端情绪？",
+        "criteria": {
+          "true": "包含明显辱骂、人身攻击或极端情绪",
+          "false": "没有明显辱骂、人身攻击或极端情绪"
+        }
+      },
+      "emotion": {
+        "type": "score",
+        "instructions": "评估买家在新消息中的情绪激烈程度。",
+        "criteria": [
+          "平静",
+          "有些不满",
+          "明显生气",
+          "非常愤怒"
+        ]
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "model": "typesafe/jev-1.13-20260917",
+      "answers": {
+        "intent": {
+          "type": "choice",
+          "choice": "logistics_track",
+          "probabilities": {
+            "cancel_order": 0,
+            "modify_order": 0,
+            "invoice": 0,
+            "promotion": 0,
+            "greeting": 0,
+            "shipping_policy": 0,
+            "urge_shipping": 0,
+            "exchange": 0,
+            "refund_apply": 0,
+            "stock_check": 0,
+            "refund_progress": 0,
+            "logistics_track": 1,
+            "human_request": 0,
+            "order_status": 0,
+            "other": 0,
+            "return_policy": 0,
+            "multi_step_complex": 0,
+            "product_consult": 0,
+            "size_recommend": 0,
+            "quality_issue": 0
+          },
+          "confidence": 1
+        },
+        "multi_step": {
+          "type": "noul",
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "health_safety": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "emotion": {
+          "type": "score",
+          "score": 0.05,
+          "legend": {
+            "0": "平静",
+            "1": "有些不满",
+            "2": "明显生气",
+            "3": "非常愤怒"
+          },
+          "probabilities": {
+            "0": 0.96,
+            "1": 0.04,
+            "2": 0,
+            "3": 0
+          },
+          "confidence": 0.95
+        }
+      },
+      "usage": {
+        "input_tokens": 1404,
+        "output_tokens": 288,
+        "cost": 0.000058968
+      },
+      "id": "gen-dec-1791043964-GHMLXfQenZOZaKMjftIT",
+      "provider": "TypeSafe"
+    }
+  }
+}
