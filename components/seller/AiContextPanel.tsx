@@ -1,6 +1,6 @@
 "use client";
 
-import type { Conversation, PendingAction, RiskKey, RouteTrace, Slots } from "@/lib/types";
+import type { ChatMessage, Conversation, PendingAction, RouteTrace, Slots } from "@/lib/types";
 import {
   ACTION_TYPE_META,
   formatSlotValue,
@@ -10,10 +10,9 @@ import {
   SLOT_LABEL,
   TASK_STATUS_LABEL,
 } from "./labels";
+import { RouteTraceList } from "./RouteTraceList";
 import { bubbleTime } from "./time";
 import { RiskChip } from "./ui";
-
-const RISK_KEYS: RiskKey[] = ["health_safety", "legal_threat", "fraud_security", "abuse_extreme", "emotion"];
 
 function SectionTitle({ children, hint }: { children: React.ReactNode; hint?: string }) {
   return (
@@ -24,54 +23,22 @@ function SectionTitle({ children, hint }: { children: React.ReactNode; hint?: st
   );
 }
 
-/** 最近一次带风险评分的路由轨迹（风险闸门每条消息都会打分）。 */
-function latestRiskTrace(traces: RouteTrace[]): RouteTrace | undefined {
-  return [...traces].reverse().find((t) => t.riskScores && Object.values(t.riskScores).some((v) => (v ?? 0) > 0));
-}
-
-function RiskBars({ trace }: { trace: RouteTrace }) {
-  const scores = trace.riskScores ?? {};
-  const hit = new Set(trace.riskHit ?? []);
-  return (
-    <ul className="space-y-1.5">
-      {RISK_KEYS.map((k) => {
-        const v = scores[k] ?? 0;
-        const isHit = hit.has(k);
-        return (
-          <li key={k} className="flex items-center gap-2 text-xs">
-            <span className={`w-14 shrink-0 ${isHit ? "font-semibold text-risk" : "text-warm"}`}>{RISK_LABEL[k]}</span>
-            <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-stone-200/80">
-              <span
-                className={`block h-full rounded-full ${isHit ? "bg-risk" : "bg-stone-400"}`}
-                style={{ width: `${Math.round(v * 100)}%` }}
-              />
-            </span>
-            <span className={`w-9 shrink-0 text-right tabular-nums ${isHit ? "font-semibold text-risk" : "text-warm"}`}>
-              {v.toFixed(2)}
-            </span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
 interface Props {
   conversation: Conversation;
+  messages: ChatMessage[];
   traces: RouteTrace[];
   pendingActions: PendingAction[];
   open: boolean;
   onToggle: () => void;
 }
 
-export function AiContextPanel({ conversation: c, traces, pendingActions, open, onToggle }: Props) {
+export function AiContextPanel({ conversation: c, messages, traces, pendingActions, open, onToggle }: Props) {
   const { state } = c;
   const task = state.currentTask;
   const slotEntries = (Object.keys(state.slots) as (keyof Slots)[]).filter((k) => {
     const v = state.slots[k];
     return v !== undefined && v !== null && v !== "";
   });
-  const riskTrace = latestRiskTrace(traces);
   const hasHandoff = Boolean(c.handoffReason || c.handoffSummary);
 
   const collapsedSummary = [
@@ -116,7 +83,7 @@ export function AiContextPanel({ conversation: c, traces, pendingActions, open, 
       </button>
 
       {open ? (
-        <div className="max-h-[40dvh] space-y-4 overflow-y-auto overscroll-contain border-t border-line bg-cream/60 px-4 pb-4 pt-3">
+        <div className="max-h-[50dvh] space-y-4 overflow-y-auto overscroll-contain border-t border-line bg-cream/60 px-4 pb-4 pt-3">
           {/* 1. 转人工原因：接管前最先要看的 */}
           {hasHandoff ? (
             <div className="rounded-card border border-orange-200 bg-orange-50/70 p-3">
@@ -140,13 +107,11 @@ export function AiContextPanel({ conversation: c, traces, pendingActions, open, 
             </div>
           ) : null}
 
-          {/* 2. 风险评分 */}
-          {riskTrace ? (
-            <div>
-              <SectionTitle hint="最近一次判断，越接近 1 越危险">风险评分</SectionTitle>
-              <RiskBars trace={riskTrace} />
-            </div>
-          ) : null}
+          {/* 2. 路由轨迹：每条买家消息是哪一层接住的、为什么 */}
+          <div>
+            <SectionTitle hint="点击一行看风险分数和工具调用">路由轨迹</SectionTitle>
+            <RouteTraceList traces={traces} messages={messages} />
+          </div>
 
           {/* 3. 当前任务 */}
           <div>

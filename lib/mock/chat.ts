@@ -35,6 +35,7 @@ import type {
 } from "@/lib/types";
 import { intentLabel } from "@/components/seller/labels";
 import { MOCK_BUYERS, MOCK_COUPONS, MOCK_ORDERS, MOCK_PRODUCTS } from "./data";
+import { mockRuleEnabled, mockRuleHit } from "./admin";
 import { MockApiError } from "./index";
 import { mockRelease, mockReply, mockSellerStore, mockTakeover, type Seed } from "./seller";
 
@@ -77,6 +78,16 @@ const mdText = (iso: string) => `${Number(iso.slice(5, 7))} 月 ${Number(iso.sli
 /** 买家端新建的会话 id → 方便区分于卖家端预置的演示会话 */
 const buyerConvIds = new Set<string>();
 let convCounter = 0;
+
+/** 跨标签页同步用（lib/mock/sync.ts）：买家会话 id 集合与计数器。 */
+export function exportChatMeta(): { ids: string[]; counter: number } {
+  return { ids: [...buyerConvIds], counter: convCounter };
+}
+
+export function importChatMeta(meta: { ids: string[]; counter: number }) {
+  for (const id of meta.ids) buyerConvIds.add(id);
+  convCounter = Math.max(convCounter, meta.counter);
+}
 
 function findSeed(id: string): Seed | undefined {
   return mockSellerStore().find((s) => s.conversation.id === id);
@@ -824,14 +835,8 @@ function riskGate(ctx: Ctx): Turn | null {
 
 // ───────────────────────── 路由：文本 → Turn ─────────────────────────
 
-function routeText(ctx: Ctx): Turn {
-  const raw = ctx.text.trim();
-  const t = raw.replace(/\s+/g, "");
-
-  const risk = riskGate(ctx);
-  if (risk) return risk;
-
-  // ── L1 规则（DATA_SPEC §5）
+/** L1 规则（DATA_SPEC §5）。返回命中的 Turn，没命中返回 null。 */
+function matchL1(ctx: Ctx, t: string): Turn | null {
   if (t.length <= 12 && /人工|真人|转客服/.test(t)) return humanTurn(ctx, true);
   if (t.length <= 10 && /^(到哪了|物流|查物流|快递到哪了?|发货了吗)[?？!！。]*$/.test(t)) return logisticsTurn(ctx, true);
   if (t.length <= 12 && /退款(进度|到哪|到账|什么时候到)/.test(t)) return refundProgressTurn(ctx, true);
@@ -848,6 +853,29 @@ function routeText(ctx: Ctx): Turn {
   }
   if (t.length <= 12 && /运费险/.test(t)) {
     return l1("return_policy", "R006", [{ text: "7 天无理由退货的订单可以投保运费险；金卡会员退货运费由我们承担，不需要另外购买哦。" }]);
+  }
+  // R007「尺码（宽泛）」：反面教材，「尺码不合适想退」也会被它吞掉；在规则页把它关掉就会走 L2
+  if (t.length <= 20 && /尺码/.test(t)) {
+    return { ...sizeTurn(ctx), layer: "L1", ruleId: "R007", confidence: 0.99, delayMs: 260, totalMs: 11, decideMs: undefined, handlerMs: undefined, cost: l1Cost };
+  }
+  if (t.length <= 10 && /优惠码/.test(t)) {
+    return l1("promotion", "R008", [{ text: "目前没有可用的优惠码，您可以看看「我的优惠券」里有哪些券可以使用～" }]);
+  }
+  return null;
+}
+
+function routeText(ctx: Ctx): Turn {
+  const raw = ctx.text.trim();
+  const t = raw.replace(/\s+/g, "");
+
+  const risk = riskGate(ctx);
+  if (risk) return risk;
+
+  // L1 规则：关掉的规则不参与匹配（卖家端规则页的开关）；命中则累计命中次数
+  const l1Turn = matchL1(ctx, t);
+  if (l1Turn?.ruleId && mockRuleEnabled(l1Turn.ruleId)) {
+    mockRuleHit(l1Turn.ruleId);
+    return l1Turn;
   }
 
   // ── L2 / L3

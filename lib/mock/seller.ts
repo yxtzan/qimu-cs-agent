@@ -91,6 +91,7 @@ const C1 = "C1001";
 const c1: Seed = {
   conversation: {
     id: C1,
+    handoffAt: at("10-05 09:40"),
     buyerId: "B002",
     mode: "ai",
     status: "waiting_human",
@@ -185,6 +186,7 @@ const C2 = "C1002";
 const c2: Seed = {
   conversation: {
     id: C2,
+    handoffAt: at("10-05 09:52"),
     buyerId: "B005",
     mode: "ai",
     status: "waiting_human",
@@ -242,6 +244,7 @@ const C3 = "C1003";
 const c3: Seed = {
   conversation: {
     id: C3,
+    handoffAt: at("10-05 09:12"),
     buyerId: "B004",
     mode: "ai",
     status: "waiting_human",
@@ -332,6 +335,7 @@ const C4 = "C1004";
 const c4: Seed = {
   conversation: {
     id: C4,
+    handoffAt: at("10-05 09:25"),
     buyerId: "B006",
     mode: "human",
     status: "human_active",
@@ -696,7 +700,14 @@ const c8: Seed = {
   pendingActions: [],
 };
 
-const SEEDS: Seed[] = [c1, c2, c3, c4, c5, c6, c7, c8];
+/** lastLayer = 最近一条 RouteTrace 的层级（契约：每写一条 trace 就更新）。 */
+function withLastLayer(seed: Seed): Seed {
+  const last = seed.traces[seed.traces.length - 1];
+  if (last) seed.conversation.lastLayer = last.layer;
+  return seed;
+}
+
+const SEEDS: Seed[] = [c1, c2, c3, c4, c5, c6, c7, c8].map(withLastLayer);
 
 // ───────────────────────── 内存状态 ─────────────────────────
 
@@ -737,7 +748,7 @@ function sortConversations(list: Conversation[]): Conversation[] {
     const aw = a.status === "waiting_human";
     const bw = b.status === "waiting_human";
     if (aw !== bw) return aw ? -1 : 1;
-    if (aw && bw) return Date.parse(a.updatedAt) - Date.parse(b.updatedAt);
+    if (aw && bw) return Date.parse(a.handoffAt ?? a.updatedAt) - Date.parse(b.handoffAt ?? b.updatedAt);
     return Date.parse(b.updatedAt) - Date.parse(a.updatedAt);
   });
 }
@@ -802,6 +813,7 @@ export async function mockRelease(id: string): Promise<Conversation> {
   c.mode = "ai";
   c.status = "ai_active";
   c.assignee = undefined;
+  c.handoffAt = undefined; // 契约：交还 AI 后清空 handoffAt
   c.state.unresolvedTurns = 0;
   pushMessage(s, "system", "已切换回智能客服");
   touch(s, "已切换回智能客服");
@@ -829,6 +841,24 @@ export async function mockMarkMisfire(traceId: string): Promise<RouteTrace> {
 /** 买家端聊天 mock（lib/mock/chat.ts）与卖家端共用同一份内存会话：买家新建的会话会出现在卖家会话列表里，卖家接管 / 回复买家端也能收到。 */
 export function mockSellerStore(): Seed[] {
   return store;
+}
+
+/**
+ * 跨标签页同步（lib/mock/sync.ts）：用另一个标签页写入的快照覆盖内存数据。
+ * 就地更新（保持对象引用不变），避免正在进行中的调用拿着旧引用写丢数据。
+ */
+export function replaceSellerStore(next: Seed[]) {
+  const merged: Seed[] = next.map((n) => {
+    const cur = store.find((x) => x.conversation.id === n.conversation.id);
+    if (!cur) return n;
+    for (const k of Object.keys(cur.conversation)) delete (cur.conversation as unknown as Record<string, unknown>)[k];
+    Object.assign(cur.conversation, n.conversation);
+    cur.messages.splice(0, cur.messages.length, ...n.messages);
+    cur.traces.splice(0, cur.traces.length, ...n.traces);
+    cur.pendingActions.splice(0, cur.pendingActions.length, ...n.pendingActions);
+    return cur;
+  });
+  store.splice(0, store.length, ...merged);
 }
 
 /** 测试 / 演示用：重置卖家端 mock 数据。 */

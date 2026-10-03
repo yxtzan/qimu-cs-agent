@@ -94,3 +94,30 @@ body {
 .confirm-pulse {
   animation: qimu-confirm-pulse 2.2s ease-in-out infinite;
 }
+
+/* ───────── 卖家端底部弹层（T13） ───────── */
+@keyframes qimu-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes qimu-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sheet-up {
+  animation: qimu-sheet-up 0.26s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.fade-in {
+  animation: qimu-fade-in 0.2s ease-out both;
+}

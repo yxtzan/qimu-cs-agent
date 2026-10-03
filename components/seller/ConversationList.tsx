@@ -6,7 +6,7 @@ import type { Buyer, Conversation, ConversationStatus } from "@/lib/types";
 import { intentLabel } from "./labels";
 import { useSeller } from "./SellerProvider";
 import { waitText } from "./time";
-import { Avatar, MemberBadge, PageHeader, RiskChip } from "./ui";
+import { Avatar, LayerBadge, MemberBadge, PageHeader, RiskChip } from "./ui";
 
 interface Group {
   status: ConversationStatus;
@@ -67,12 +67,13 @@ function Row({ c, buyer }: { c: Conversation; buyer?: Buyer }) {
                 <circle cx="6" cy="6" r="4.6" />
                 <path d="M6 3.4V6l1.8 1.1" />
               </svg>
-              {waitText(c.updatedAt)}
+              {waitText(c.handoffAt ?? c.updatedAt)}
             </span>
           ) : null}
           {c.riskFlags.map((r) => (
             <RiskChip key={r} risk={r} />
           ))}
+          {c.lastLayer ? <LayerBadge layer={c.lastLayer} /> : null}
           {!waiting && c.status === "human_active" ? (
             <span className="rounded-md bg-sky-50 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-sky-700">
               {c.assignee ?? "阿栖"} 接管中
@@ -127,6 +128,21 @@ export function ConversationList() {
       />
 
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-6">
+        {waitingCount > 0 && conversations ? (
+          <Link
+            href={`/seller/c/${conversations.find((c) => c.status === "waiting_human")?.id ?? ""}`}
+            role="status"
+            className="mx-4 mt-3 flex min-h-[48px] items-center gap-2.5 rounded-card bg-red-600 px-3.5 text-white shadow-card active:bg-red-700"
+          >
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
+            </span>
+            <span className="min-w-0 flex-1 text-sm font-semibold">有 {waitingCount} 位买家等待人工</span>
+            <span className="shrink-0 text-xs font-medium text-white/90">去处理 ›</span>
+          </Link>
+        ) : null}
+
         {conversations === null && !error ? <Skeleton /> : null}
 
         {error && conversations === null ? (

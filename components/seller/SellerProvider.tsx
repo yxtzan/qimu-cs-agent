@@ -17,7 +17,7 @@ interface SellerContextValue {
 
 const SellerContext = createContext<SellerContextValue | null>(null);
 
-const POLL_MS = 5000;
+const POLL_MS = 3000; // 任务卡：会话列表每 3 秒刷新
 
 export function SellerProvider({ children }: { children: React.ReactNode }) {
   const [tick, setTick] = useState(0);

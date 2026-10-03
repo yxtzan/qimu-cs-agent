@@ -17,7 +17,7 @@ import { useSeller } from "./SellerProvider";
 import { waitText } from "./time";
 import { Avatar, MemberBadge } from "./ui";
 
-const POLL_MS = 3000;
+const POLL_MS = 2000; // 任务卡：每 2 秒轮询新消息
 
 function BackButton() {
   return (
@@ -162,7 +162,7 @@ export function ConversationScreen({ id }: { id: string }) {
           <p className="min-w-0 flex-1 text-xs leading-5 text-warm">
             {c.status === "waiting_human" ? (
               <>
-                <span className="font-semibold text-red-700">{waitText(c.updatedAt)}</span>
+                <span className="font-semibold text-red-700">{waitText(c.handoffAt ?? c.updatedAt)}</span>
                 <br />
                 买家正在等人工回复
               </>
@@ -218,6 +218,7 @@ export function ConversationScreen({ id }: { id: string }) {
 
       <AiContextPanel
         conversation={c}
+        messages={messages}
         traces={traces}
         pendingActions={pendingActions}
         open={open}

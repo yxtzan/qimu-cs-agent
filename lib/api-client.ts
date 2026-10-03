@@ -4,8 +4,8 @@
  * - 类型一律来自 lib/types.ts。
  * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 强制使用本地 mock；设为 "0" 强制走真实后端；
  *   不设置时默认使用 mock（后端接口就绪前的过渡约定，后端合并后请在 .env.local 里设 NEXT_PUBLIC_USE_MOCK=0）。
- * - 商城（CONTRACTS §1）、买家聊天（§2，T12）和卖家会话（§3，T11）已实现（mock + 真实 fetch）；
- *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务（T13/T14…）填实现。
+ * - 商城（CONTRACTS §1）、买家聊天（§2，T12）、卖家会话（§3，T11）、知识库（§4）和规则（§5）（T13）已实现（mock + 真实 fetch）；
+ *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务（T14…）填实现。
  * - 失败统一抛 `ApiError`（带 code / status，message 为中文，可直接展示）。
  */
 import type {
@@ -37,6 +37,18 @@ import {
   mockGetProduct,
   mockGetProducts,
 } from "@/lib/mock";
+import {
+  mockCreateRule,
+  mockDeleteKbDoc,
+  mockDeleteRule,
+  mockGetKbChunks,
+  mockImportKbDoc,
+  mockListKbDocs,
+  mockListRules,
+  mockSearchKb,
+  mockUpdateRule,
+} from "@/lib/mock/admin";
+import { mockRead, mockReadClearingUnread, mockWrite } from "@/lib/mock/sync";
 import { mockGetConversationMessages, mockGetLatestConversation, mockSendChat } from "@/lib/mock/chat";
 import {
   mockClose,
@@ -187,7 +199,7 @@ export function getCoupons(buyerId: string): Promise<Coupon[]> {
 
 /** POST /api/chat */
 export function sendChat(req: ChatRequest): Promise<ChatResponse> {
-  if (USE_MOCK) return viaMock(() => mockSendChat(req));
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockSendChat(req)));
   return http<ChatResponse>("/api/chat", { method: "POST", body: JSON.stringify(req) });
 }
 
@@ -196,7 +208,7 @@ export function getConversationMessages(
   conversationId: string,
   after?: string,
 ): Promise<{ messages: ChatMessage[]; conversation: Conversation }> {
-  if (USE_MOCK) return viaMock(() => mockGetConversationMessages(conversationId, after));
+  if (USE_MOCK) return viaMock(() => mockRead(() => mockGetConversationMessages(conversationId, after)));
   return http(`/api/conversations/${encodeURIComponent(conversationId)}/messages${qs({ after })}`);
 }
 
@@ -204,7 +216,7 @@ export function getConversationMessages(
 export function getLatestConversation(
   buyerId: string,
 ): Promise<{ conversation: Conversation | null; messages: ChatMessage[] }> {
-  if (USE_MOCK) return viaMock(() => mockGetLatestConversation(buyerId));
+  if (USE_MOCK) return viaMock(() => mockRead(() => mockGetLatestConversation(buyerId)));
   return http(`/api/conversations/latest${qs({ buyerId })}`);
 }
 
@@ -212,7 +224,7 @@ export function getLatestConversation(
 
 /** GET /api/conversations?status=&includeSimulated= */
 export function listConversations(params: { status?: ConversationStatus; includeSimulated?: boolean } = {}): Promise<Conversation[]> {
-  if (USE_MOCK) return viaMock(() => mockListConversations(params));
+  if (USE_MOCK) return viaMock(() => mockRead(() => mockListConversations(params)));
   return http<Conversation[]>(
     `/api/conversations${qs({ status: params.status, includeSimulated: params.includeSimulated ? 1 : undefined })}`,
   );
@@ -220,19 +232,19 @@ export function listConversations(params: { status?: ConversationStatus; include
 
 /** GET /api/conversations/:id （读取后 unreadForSeller 归零） */
 export function getConversationDetail(id: string): Promise<ConversationDetail> {
-  if (USE_MOCK) return viaMock(() => mockGetConversationDetail(id));
+  if (USE_MOCK) return viaMock(() => mockReadClearingUnread(id, () => mockGetConversationDetail(id)));
   return http<ConversationDetail>(`/api/conversations/${encodeURIComponent(id)}`);
 }
 
 /** POST /api/conversations/:id/takeover */
 export function takeoverConversation(id: string): Promise<Conversation> {
-  if (USE_MOCK) return viaMock(() => mockTakeover(id));
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockTakeover(id)));
   return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/takeover`, { method: "POST" });
 }
 
 /** POST /api/conversations/:id/reply */
 export function replyConversation(id: string, text: string): Promise<ChatMessage> {
-  if (USE_MOCK) return viaMock(() => mockReply(id, text));
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockReply(id, text)));
   return http<ChatMessage>(`/api/conversations/${encodeURIComponent(id)}/reply`, {
     method: "POST",
     body: JSON.stringify({ text }),
@@ -241,78 +253,94 @@ export function replyConversation(id: string, text: string): Promise<ChatMessage
 
 /** POST /api/conversations/:id/release */
 export function releaseConversation(id: string): Promise<Conversation> {
-  if (USE_MOCK) return viaMock(() => mockRelease(id));
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockRelease(id)));
   return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/release`, { method: "POST" });
 }
 
 /** POST /api/conversations/:id/close */
 export function closeConversation(id: string): Promise<Conversation> {
-  if (USE_MOCK) return viaMock(() => mockClose(id));
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockClose(id)));
   return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/close`, { method: "POST" });
 }
 
 /** POST /api/traces/:id/misfire （P1） */
 export function markTraceMisfire(traceId: string): Promise<RouteTrace> {
-  if (USE_MOCK) return viaMock(() => mockMarkMisfire(traceId));
+  if (USE_MOCK) return viaMock(() => mockRead(() => mockMarkMisfire(traceId)));
   return http<RouteTrace>(`/api/traces/${encodeURIComponent(traceId)}/misfire`, { method: "POST" });
 }
 
-// ───────────────────────── 4. 知识库 ─────────────────────────
+// ───────────────────────── 4. 知识库 — T13 已实现（mock + 真实 fetch） ─────────────────────────
 
 /** GET /api/kb */
 export function listKbDocs(): Promise<KbDoc[]> {
-  return notImplemented("listKbDocs");
+  if (USE_MOCK) return viaMock(() => mockListKbDocs());
+  return http<KbDoc[]>("/api/kb");
 }
 
 /** POST /api/kb/import （multipart 上传文件，或 JSON 粘贴文本） */
-export function importKbDoc(input: KbImportInput): Promise<KbDoc> {
-  void input;
-  return notImplemented("importKbDoc");
+export async function importKbDoc(input: KbImportInput): Promise<KbDoc> {
+  if (USE_MOCK) {
+    if ("file" in input) {
+      const content = await input.file.text();
+      const fallbackTitle = input.file.name.replace(/\.(md|txt)$/i, "");
+      return viaMock(() => mockImportKbDoc({ title: input.title, content, source: "upload", fallbackTitle }));
+    }
+    return viaMock(() => mockImportKbDoc({ title: input.title, content: input.content, source: "paste" }));
+  }
+  if ("file" in input) {
+    const form = new FormData();
+    form.append("file", input.file);
+    if (input.title) form.append("title", input.title);
+    return http<KbDoc>("/api/kb/import", { method: "POST", body: form });
+  }
+  return http<KbDoc>("/api/kb/import", {
+    method: "POST",
+    body: JSON.stringify({ title: input.title, content: input.content }),
+  });
 }
 
 /** DELETE /api/kb/:id */
 export function deleteKbDoc(id: string): Promise<{ ok: true }> {
-  void id;
-  return notImplemented("deleteKbDoc");
+  if (USE_MOCK) return viaMock(() => mockDeleteKbDoc(id));
+  return http<{ ok: true }>(`/api/kb/${encodeURIComponent(id)}`, { method: "DELETE" });
 }
 
 /** GET /api/kb/:id/chunks */
 export function getKbChunks(id: string): Promise<KbChunk[]> {
-  void id;
-  return notImplemented("getKbChunks");
+  if (USE_MOCK) return viaMock(() => mockGetKbChunks(id));
+  return http<KbChunk[]>(`/api/kb/${encodeURIComponent(id)}/chunks`);
 }
 
 /** POST /api/kb/search */
 export function searchKb(query: string, topK?: number): Promise<KbSearchHit[]> {
-  void query;
-  void topK;
-  return notImplemented("searchKb");
+  if (USE_MOCK) return viaMock(() => mockSearchKb(query, topK));
+  return http<KbSearchHit[]>("/api/kb/search", { method: "POST", body: JSON.stringify({ query, topK }) });
 }
 
-// ───────────────────────── 5. 规则 ─────────────────────────
+// ───────────────────────── 5. 规则 — T13 已实现（mock + 真实 fetch） ─────────────────────────
 
 /** GET /api/rules */
 export function listRules(): Promise<Rule[]> {
-  return notImplemented("listRules");
+  if (USE_MOCK) return viaMock(() => mockRead(() => mockListRules()));
+  return http<Rule[]>("/api/rules");
 }
 
 /** POST /api/rules （pattern 非法正则 → 400） */
 export function createRule(input: RuleInput): Promise<Rule> {
-  void input;
-  return notImplemented("createRule");
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockCreateRule(input)));
+  return http<Rule>("/api/rules", { method: "POST", body: JSON.stringify(input) });
 }
 
 /** PATCH /api/rules/:id */
 export function updateRule(id: string, patch: RulePatch): Promise<Rule> {
-  void id;
-  void patch;
-  return notImplemented("updateRule");
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockUpdateRule(id, patch)));
+  return http<Rule>(`/api/rules/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(patch) });
 }
 
 /** DELETE /api/rules/:id */
 export function deleteRule(id: string): Promise<{ ok: true }> {
-  void id;
-  return notImplemented("deleteRule");
+  if (USE_MOCK) return viaMock(() => mockWrite(() => mockDeleteRule(id)));
+  return http<{ ok: true }>(`/api/rules/${encodeURIComponent(id)}`, { method: "DELETE" });
 }
 
 // ───────────────────────── 6. 看板 / 评测 ─────────────────────────

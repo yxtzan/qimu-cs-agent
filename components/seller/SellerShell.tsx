@@ -116,7 +116,7 @@ export function SellerShell({ children }: { children: React.ReactNode }) {
   return (
     <SellerProvider>
       <div className="min-h-dvh bg-[#E9E7E2] md:flex md:items-center md:justify-center md:py-6">
-        <div className="mx-auto flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-cream md:h-[min(900px,calc(100dvh-48px))] md:rounded-[28px] md:shadow-lift md:ring-1 md:ring-black/5">
+        <div className="relative mx-auto flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-cream md:h-[min(900px,calc(100dvh-48px))] md:rounded-[28px] md:shadow-lift md:ring-1 md:ring-black/5">
           <main className="flex min-h-0 flex-1 flex-col">{children}</main>
           {hideTabs ? null : <TabBar />}
         </div>

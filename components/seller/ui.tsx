@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import type { Layer, RiskKey } from "@/lib/types";
 import { LAYER_META, RISK_LABEL } from "./labels";
 
@@ -105,5 +108,72 @@ export function Placeholder({ title, note, task }: { title: string; note: string
         <span className="rounded-full bg-white px-3 py-1 text-xs text-warm ring-1 ring-line">将在 {task} 完成</span>
       </div>
     </>
+  );
+}
+
+/**
+ * 底部弹层：铺满卖家端"手机容器"（外壳已设 relative），不会溢出到桌面背景上。
+ * footer 固定在底部，body 可滚动。
+ */
+export function BottomSheet({
+  open,
+  title,
+  onClose,
+  children,
+  footer,
+}: {
+  open: boolean;
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div className="absolute inset-0 z-40 flex flex-col justify-end" role="dialog" aria-modal="true" aria-label={title}>
+      <button type="button" aria-label="关闭" onClick={onClose} className="fade-in absolute inset-0 bg-black/40" />
+      <div className="sheet-up relative flex max-h-[90%] flex-col rounded-t-[20px] bg-white shadow-lift">
+        <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-stone-300" />
+        <div className="flex shrink-0 items-center justify-between px-4 pb-2 pt-2">
+          <h2 className="text-[17px] font-semibold text-foreground">{title}</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="关闭"
+            className="-mr-2 flex h-10 w-10 items-center justify-center rounded-full text-warm active:bg-stone-100"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">{children}</div>
+        {footer ? <div className="shrink-0 border-t border-line bg-white px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3">{footer}</div> : null}
+      </div>
+    </div>
+  );
+}
+
+/** 页面底部浮出的短暂提示（成功 / 失败）。 */
+export function Toast({ message, tone = "ok" }: { message: string | null; tone?: "ok" | "error" }) {
+  if (!message) return null;
+  return (
+    <div className="pointer-events-none absolute inset-x-0 bottom-[84px] z-50 flex justify-center px-4">
+      <p
+        role="status"
+        className={`fade-in max-w-full rounded-full px-4 py-2.5 text-sm font-medium text-white shadow-lift ${tone === "ok" ? "bg-brand" : "bg-red-600"}`}
+      >
+        {message}
+      </p>
+    </div>
   );
 }
