@@ -23,8 +23,8 @@ interface ShopContextValue {
   ready: boolean;
   setBuyerId: (id: string) => void;
   /**
-   * 打开客服聊天窗。T10 只记录意图（console.log + 写入 chatTarget）；
-   * T12 在此基础上实现右侧抽屉，读取 chatOpen / chatTarget 即可。
+   * 打开客服聊天窗（右侧抽屉，components/chat/ChatWidget.tsx）。
+   * target 决定聊天窗里"上下文条"显示的商品 / 订单，并作为 context 随消息发给后端。
    */
   openChat: (target?: ChatTarget) => void;
   closeChat: () => void;
@@ -96,10 +96,12 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const buyerId =
     buyers.length > 0 && !buyers.some((b) => b.id === storedBuyerId) ? buyers[0].id : storedBuyerId;
 
-  const setBuyerId = useCallback((id: string) => storeBuyerId(id), []);
+  const setBuyerId = useCallback((id: string) => {
+    storeBuyerId(id);
+    setChatTarget(null); // 换了买家，原来的「正在咨询」订单 / 商品不再适用
+  }, []);
 
   const openChat = useCallback((target?: ChatTarget) => {
-    console.log("[openChat]", target ?? {});
     setChatTarget(target ?? null);
     setChatOpen(true);
   }, []);

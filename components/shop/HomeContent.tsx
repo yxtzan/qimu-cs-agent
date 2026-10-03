@@ -46,13 +46,13 @@ function Hero() {
         </div>
         <div className="col-span-5 flex items-end justify-end gap-4">
           <div className="h-64 w-40 translate-y-6 overflow-hidden rounded-2xl shadow-lift ring-1 ring-white/20">
-            <ProductImage src="https://picsum.photos/seed/P007/600/800" name="大衣" />
+            <ProductImage category="外套" color="燕麦色" name="燕麦色羊毛混纺大衣" />
           </div>
           <div className="h-72 w-44 -translate-y-4 overflow-hidden rounded-2xl shadow-lift ring-1 ring-white/20">
-            <ProductImage src="https://picsum.photos/seed/P013/600/800" name="衬衫" />
+            <ProductImage category="上衣" color="雾蓝" name="云感真丝衬衫" />
           </div>
           <div className="hidden h-56 w-36 translate-y-10 overflow-hidden rounded-2xl shadow-lift ring-1 ring-white/20 2xl:block">
-            <ProductImage src="https://picsum.photos/seed/P002/600/800" name="裙" />
+            <ProductImage category="连衣裙" color="蓝底白花" name="法式碎花茶歇裙" />
           </div>
         </div>
       </div>

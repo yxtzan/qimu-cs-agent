@@ -4,8 +4,8 @@
  * - 类型一律来自 lib/types.ts。
  * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 强制使用本地 mock；设为 "0" 强制走真实后端；
  *   不设置时默认使用 mock（后端接口就绪前的过渡约定，后端合并后请在 .env.local 里设 NEXT_PUBLIC_USE_MOCK=0）。
- * - 商城部分（CONTRACTS §1）和卖家会话部分（CONTRACTS §3，T11）已实现（mock + 真实 fetch）；
- *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务（T12/T13/T14…）填实现。
+ * - 商城（CONTRACTS §1）、买家聊天（§2，T12）和卖家会话（§3，T11）已实现（mock + 真实 fetch）；
+ *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务（T13/T14…）填实现。
  * - 失败统一抛 `ApiError`（带 code / status，message 为中文，可直接展示）。
  */
 import type {
@@ -37,6 +37,7 @@ import {
   mockGetProduct,
   mockGetProducts,
 } from "@/lib/mock";
+import { mockGetConversationMessages, mockGetLatestConversation, mockSendChat } from "@/lib/mock/chat";
 import {
   mockClose,
   mockGetConversationDetail,
@@ -182,12 +183,12 @@ export function getCoupons(buyerId: string): Promise<Coupon[]> {
   return http<Coupon[]>(`/api/coupons${qs({ buyerId })}`);
 }
 
-// ───────────────────────── 2. 客服聊天（买家端）— T12 实现 ─────────────────────────
+// ───────────────────────── 2. 客服聊天（买家端）— T12 已实现（mock + 真实 fetch） ─────────────────────────
 
 /** POST /api/chat */
 export function sendChat(req: ChatRequest): Promise<ChatResponse> {
-  void req;
-  return notImplemented("sendChat");
+  if (USE_MOCK) return viaMock(() => mockSendChat(req));
+  return http<ChatResponse>("/api/chat", { method: "POST", body: JSON.stringify(req) });
 }
 
 /** GET /api/conversations/:id/messages?after= */
@@ -195,17 +196,16 @@ export function getConversationMessages(
   conversationId: string,
   after?: string,
 ): Promise<{ messages: ChatMessage[]; conversation: Conversation }> {
-  void conversationId;
-  void after;
-  return notImplemented("getConversationMessages");
+  if (USE_MOCK) return viaMock(() => mockGetConversationMessages(conversationId, after));
+  return http(`/api/conversations/${encodeURIComponent(conversationId)}/messages${qs({ after })}`);
 }
 
 /** GET /api/conversations/latest?buyerId= */
 export function getLatestConversation(
   buyerId: string,
 ): Promise<{ conversation: Conversation | null; messages: ChatMessage[] }> {
-  void buyerId;
-  return notImplemented("getLatestConversation");
+  if (USE_MOCK) return viaMock(() => mockGetLatestConversation(buyerId));
+  return http(`/api/conversations/latest${qs({ buyerId })}`);
 }
 
 // ───────────────────────── 3. 卖家端 — 会话部分 T11 已实现（mock + 真实 fetch） ─────────────────────────

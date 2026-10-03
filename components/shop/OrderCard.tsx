@@ -12,7 +12,7 @@ export function OrderItemRow({ item, linkToProduct = true }: { item: OrderItem; 
   const body = (
     <>
       <div className="h-24 w-[72px] shrink-0 overflow-hidden rounded-lg bg-[#ece7dc]">
-        <ProductImage src={item.image} name={item.productName} />
+        <ProductImage color={item.color} name={item.productName} />
       </div>
       <div className="min-w-0 flex-1">
         <div className="truncate text-[15px] font-medium text-foreground">{item.productName}</div>

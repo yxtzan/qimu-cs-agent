@@ -78,7 +78,7 @@ const emptyState = (): DialogState => ({
   riskFlags: [],
 });
 
-interface Seed {
+export interface Seed {
   conversation: Conversation;
   messages: ChatMessage[];
   traces: RouteTrace[];
@@ -824,6 +824,11 @@ export async function mockMarkMisfire(traceId: string): Promise<RouteTrace> {
     if (t) return clone(t);
   }
   throw new MockApiError("NOT_FOUND", "没有找到这条路由记录", 404);
+}
+
+/** 买家端聊天 mock（lib/mock/chat.ts）与卖家端共用同一份内存会话：买家新建的会话会出现在卖家会话列表里，卖家接管 / 回复买家端也能收到。 */
+export function mockSellerStore(): Seed[] {
+  return store;
 }
 
 /** 测试 / 演示用：重置卖家端 mock 数据。 */

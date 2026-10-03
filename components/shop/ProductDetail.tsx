@@ -61,7 +61,6 @@ function Detail({ product }: { product: Product }) {
   const [size, setSize] = useState<Size | null>(
     () => product.sizes.find((s) => (skuOf(product.colors[0], s)?.stock ?? 0) > 0) ?? null,
   );
-  const [activeImage, setActiveImage] = useState(0);
   const [notice, setNotice] = useState(false);
 
   const sku = size ? skuOf(color, size) : undefined;
@@ -85,22 +84,23 @@ function Detail({ product }: { product: Product }) {
         {/* 图片 */}
         <div className="col-span-6 flex gap-4">
           <div className="flex w-20 shrink-0 flex-col gap-3">
-            {product.images.map((src, i) => (
+            {product.colors.map((c) => (
               <button
-                key={src}
+                key={c}
                 type="button"
-                onClick={() => setActiveImage(i)}
-                aria-label={`查看第 ${i + 1} 张图`}
+                onClick={() => setColor(c)}
+                aria-label={`查看${c}`}
+                aria-pressed={c === color}
                 className={`aspect-[3/4] overflow-hidden rounded-lg bg-[#ece7dc] ring-2 transition ${
-                  i === activeImage ? "ring-brand" : "ring-transparent opacity-70 hover:opacity-100"
+                  c === color ? "ring-brand" : "ring-transparent opacity-70 hover:opacity-100"
                 }`}
               >
-                <ProductImage src={src} name={product.name} />
+                <ProductImage category={product.category} color={c} name={product.name} />
               </button>
             ))}
           </div>
           <div className="aspect-[3/4] flex-1 overflow-hidden rounded-card bg-[#ece7dc] shadow-card">
-            <ProductImage src={product.images[activeImage]} name={product.name} />
+            <ProductImage category={product.category} color={color} name={product.name} />
           </div>
         </div>
 

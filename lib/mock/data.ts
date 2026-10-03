@@ -18,8 +18,7 @@ import type {
 
 // ───────────────────────── helpers ─────────────────────────
 
-const img = (seed: string) => `https://picsum.photos/seed/${seed}/600/800`;
-const productImages = (id: string) => [img(id), img(`${id}-b`), img(`${id}-c`)];
+// 商品图由前端按「类别 + 颜色」生成 SVG 剪影（PRD §4.1），images 留空数组。
 
 interface ColorDef {
   color: string;
@@ -101,7 +100,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "经典的 H 型廓形，面料柔软挺括，肩线自然落下，内搭针织或衬衫都很利落。双面呢工艺让大衣没有扎手感，通勤和周末都能穿。",
     highlights: ["双面呢工艺，柔软不扎手", "H 型廓形，修饰肩线", "暗扣设计，线条干净", "全衬里，保暖不闷"],
-    images: productImages("P007"),
+    images: [],
     sales: 1286,
     rating: 4.8,
     skus: makeSkus("P007", P007_COLORS, ["S", "M", "L", "XL"], {
@@ -123,7 +122,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "92% 桑蚕丝，上身有云朵般的轻盈垂坠感。宽松版型不挑身材，扣子到顶是通勤，解开两颗是约会。",
     highlights: ["92% 桑蚕丝，亲肤透气", "宽松版型，不挑身材", "贝母扣，细节精致"],
-    images: productImages("P013"),
+    images: [],
     sales: 934,
     rating: 4.7,
     skus: makeSkus("P013", P013_COLORS, ["S", "M", "L", "XL"]),
@@ -142,7 +141,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "高腰直筒，垂坠不易起皱，腿型显直显长。有一点弹力，久坐也不勒。",
     highlights: ["高腰设计，拉长腿部线条", "垂坠感好，不易起皱", "4% 氨纶，舒适有弹性"],
-    images: productImages("P021"),
+    images: [],
     sales: 2105,
     rating: 4.6,
     skus: makeSkus("P021", P021_COLORS, ["S", "M", "L", "XL"]),
@@ -162,7 +161,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "收腰方领茶歇裙，裙摆自然蓬起，走路带风。选用细腻的粘胶面料，贴身穿着凉爽顺滑。",
     highlights: ["收腰设计，显腰身", "方领，修饰锁骨", "粘胶面料，顺滑凉爽"],
-    images: productImages("P002"),
+    images: [],
     sales: 1572,
     rating: 4.5,
     skus: makeSkus("P002", P002_COLORS, ["XS", "S", "M", "L"]),
@@ -181,7 +180,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "软糯亲肤的圆领开衫，宽松的落肩版型，叠穿或单穿都很温柔。蓬松的纱线不易起球。",
     highlights: ["落肩宽松，慵懒自然", "软糯亲肤，不扎手", "珍珠扣，温柔细节"],
-    images: productImages("P030"),
+    images: [],
     sales: 1893,
     rating: 4.7,
     skus: makeSkus("P030", P030_COLORS, ["S", "M", "L", "XL"]),
@@ -200,7 +199,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "细密百褶，行走时有轻轻的律动。高腰 A 字剪裁，搭配衬衫或针织都好看。",
     highlights: ["永久定型百褶", "高腰 A 字，显瘦", "内置防走光衬裙"],
-    images: productImages("P016"),
+    images: [],
     sales: 861,
     rating: 4.4,
     skus: makeSkus("P016", P016_COLORS, ["S", "M", "L", "XL"]),
@@ -220,7 +219,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "加入 10% 羊绒，手感细腻温暖。高领设计锁住暖意，是整个秋冬最实用的单品。",
     highlights: ["含 10% 羊绒，细腻保暖", "高领设计，不勒脖", "罗纹收口，不易变形"],
-    images: productImages("P025"),
+    images: [],
     sales: 702,
     rating: 4.8,
     skus: makeSkus("P025", P025_COLORS, ["S", "M", "L", "XL"]),
@@ -239,7 +238,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "一件就能出门的极简针织连衣裙，贴身但不紧绷，侧边开衩让步伐更自在。",
     highlights: ["一件成型，出门不费脑", "侧开衩，步伐自在", "弹力好，不挑身材"],
-    images: productImages("P004"),
+    images: [],
     sales: 648,
     rating: 4.6,
     skus: makeSkus("P004", P004_COLORS, ["S", "M", "L", "XL"]),
@@ -260,7 +259,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B001",
     nickname: "林小满",
-    avatar: "https://picsum.photos/seed/avatar-B001/96/96",
+    avatar: "",
     memberLevel: "金卡",
     heightCm: 160,
     weightKg: 50,
@@ -269,7 +268,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B002",
     nickname: "周雨桐",
-    avatar: "https://picsum.photos/seed/avatar-B002/96/96",
+    avatar: "",
     memberLevel: "银卡",
     heightCm: 165,
     weightKg: 54,
@@ -278,7 +277,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B003",
     nickname: "陈思",
-    avatar: "https://picsum.photos/seed/avatar-B003/96/96",
+    avatar: "",
     memberLevel: "普通",
     heightCm: 158,
     weightKg: 47,
@@ -287,7 +286,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B004",
     nickname: "吴晓晴",
-    avatar: "https://picsum.photos/seed/avatar-B004/96/96",
+    avatar: "",
     memberLevel: "银卡",
     heightCm: 168,
     weightKg: 58,
@@ -296,7 +295,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B005",
     nickname: "郑可心",
-    avatar: "https://picsum.photos/seed/avatar-B005/96/96",
+    avatar: "",
     memberLevel: "普通",
     heightCm: 162,
     weightKg: 52,
@@ -306,7 +305,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B006",
     nickname: "孙悦然",
-    avatar: "https://picsum.photos/seed/avatar-B006/96/96",
+    avatar: "",
     memberLevel: "普通",
     heightCm: 164,
     weightKg: 53,
@@ -315,7 +314,7 @@ export const MOCK_BUYERS: Buyer[] = [
   {
     id: "B007",
     nickname: "何雅琪",
-    avatar: "https://picsum.photos/seed/avatar-B007/96/96",
+    avatar: "",
     memberLevel: "银卡",
     heightCm: 162,
     weightKg: 55,
@@ -345,7 +344,7 @@ function item(
     size,
     quantity,
     unitPrice: p.price,
-    image: p.images[0],
+    image: "",
   };
 }
 

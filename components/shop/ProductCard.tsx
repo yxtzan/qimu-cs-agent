@@ -12,7 +12,7 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-[#ece7dc]">
         <div className="h-full w-full transition duration-500 group-hover:scale-[1.03]">
-          <ProductImage src={product.images[0]} name={product.name} />
+          <ProductImage category={product.category} color={product.colors[0]} name={product.name} />
         </div>
         {product.tags[0] && (
           <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand backdrop-blur">
