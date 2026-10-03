@@ -1,10 +1,10 @@
 import type { DecideResult, IntentId } from "../../types";
 import { chatCompletion } from "../../llm/openrouter";
-import { with429Retry, withClassifierSlot } from "./limits";
+import { ClassifierBudgetError, with429Retry, withClassifierSlot } from "./limits";
 import { buildDecisionQuestions, INTENT_CRITERIA, INTENT_IDS } from "./questions";
 import type { LlmMessage } from "../../llm/openrouter";
 
-export interface LlmInput { stateForModel: unknown; message: string; model?: string; timeoutMs?: number }
+export interface LlmInput { stateForModel: unknown; message: string; model?: string; timeoutMs?: number; deadlineMs?: number }
 
 function numberInRange(value: unknown, min: number, max: number, fallback: number): number {
   const n = typeof value === "number" ? value : Number(value);
@@ -50,23 +50,36 @@ function stateText(stateForModel: unknown, message: string): string {
   return `状态：${state}\n新消息：${message}`;
 }
 
-export async function decideWithLlm(input: LlmInput): Promise<DecideResult> {
-  const questions = buildDecisionQuestions();
-  const schema = {
+export function buildClassifierSchema(): Record<string, unknown> {
+  return {
     type: "object",
     additionalProperties: false,
     properties: {
-      intent: { type: "object", properties: { id: { type: "string", enum: Object.keys(INTENT_CRITERIA) }, confidence: { type: "number" }, probabilities: { type: "object" } }, required: ["id", "confidence", "probabilities"] },
+      intent: { type: "object", additionalProperties: false, properties: { id: { type: "string", enum: Object.keys(INTENT_CRITERIA) }, confidence: { type: "number" }, probabilities: { type: "object", additionalProperties: true, maxProperties: 3 } }, required: ["id", "confidence", "probabilities"] },
       multiStep: { type: "number" },
-      risk: { type: "object", properties: { legal_threat: { type: "number" }, health_safety: { type: "number" }, fraud_security: { type: "number" }, abuse_extreme: { type: "number" }, emotion: { type: "object", properties: { score: { type: "number" }, confidence: { type: "number" } }, required: ["score", "confidence"] } }, required: ["legal_threat", "health_safety", "fraud_security", "abuse_extreme", "emotion"] },
+      risk: { type: "object", additionalProperties: false, properties: { legal_threat: { type: "number" }, health_safety: { type: "number" }, fraud_security: { type: "number" }, abuse_extreme: { type: "number" }, emotion: { type: "object", additionalProperties: false, properties: { score: { type: "number" }, confidence: { type: "number" } }, required: ["score", "confidence"] } }, required: ["legal_threat", "health_safety", "fraud_security", "abuse_extreme", "emotion"] },
     },
     required: ["intent", "multiStep", "risk"],
   };
-  const messages: LlmMessage[] = [
+}
+
+export function buildClassifierMessages(stateForModel: unknown, message: string): LlmMessage[] {
+  const questions = buildDecisionQuestions();
+  return [
     { role: "system", content: `你是栖木女装客服的意图与风险分类器。只输出 JSON，不要解释。意图必须互斥，只选一个；风险分数为 0 到 1，情绪 score 为 0 到 3。\n意图表：${JSON.stringify(INTENT_CRITERIA)}\n风险问题：${JSON.stringify(questions)}` },
-    { role: "user", content: stateText(input.stateForModel, input.message) },
+    { role: "user", content: stateText(stateForModel, message) },
   ];
-  const result = await withClassifierSlot(() => with429Retry(() => chatCompletion({ model: input.model, messages, responseFormat: { type: "json_schema", json_schema: { name: "decide_result", strict: true, schema } }, temperature: 0, maxTokens: 700, timeoutMs: input.timeoutMs })));
+}
+
+export async function decideWithLlm(input: LlmInput): Promise<DecideResult> {
+  const schema = buildClassifierSchema();
+  const messages = buildClassifierMessages(input.stateForModel, input.message);
+  const result = await withClassifierSlot(() => with429Retry(() => {
+    const remainingMs = input.deadlineMs === undefined ? undefined : input.deadlineMs - Date.now() - 25;
+    if (remainingMs !== undefined && remainingMs <= 0) throw new ClassifierBudgetError();
+    const timeoutMs = remainingMs === undefined ? input.timeoutMs : Math.max(1, Math.min(input.timeoutMs ?? 8000, remainingMs));
+    return chatCompletion({ model: input.model, messages, responseFormat: { type: "json_schema", json_schema: { name: "decide_result", strict: true, schema } }, temperature: 0, maxTokens: 700, reasoning: { enabled: false }, timeoutMs });
+  }, input.deadlineMs));
   const parsed = parseOutput(result.data.content);
   return { ...parsed, latencyMs: result.latencyMs, costUsd: result.costUsd };
 }

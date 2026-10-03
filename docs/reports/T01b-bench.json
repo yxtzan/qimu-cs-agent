@@ -1,0 +1,6088 @@
+{
+  "startedAt": "2026-10-03T18:07:46.420Z",
+  "totalCostUsd": 0.009463707599999989,
+  "stopped": false,
+  "stopReason": null,
+  "pathProbes": [
+    {
+      "name": "Decisions + provider.sort=latency",
+      "endpoint": "/alpha/decisions",
+      "status": 200,
+      "ok": true,
+      "latencyMs": 6305,
+      "costUsd": 0.000058968,
+      "bodySummary": {
+        "model": "typesafe/jev-1.13-20260917",
+        "id": "gen-dec-1791050872-VVQt2bG2v9j83Quq5Ryp",
+        "provider": "TypeSafe",
+        "answerKeys": [
+          "intent",
+          "multi_step",
+          "legal_threat",
+          "health_safety",
+          "fraud_security",
+          "abuse_extreme",
+          "emotion"
+        ]
+      }
+    },
+    {
+      "name": "TypeSafe System One",
+      "endpoint": "/v1/systemone",
+      "status": 200,
+      "ok": true,
+      "latencyMs": 383,
+      "costUsd": 0.000058968,
+      "bodySummary": {
+        "model": "typesafe/jev-1.13-20260917",
+        "id": "gen-dec-1791050873-eRKUV3lH2TnvMXUxxDMt",
+        "provider": "TypeSafe",
+        "answerKeys": [
+          "intent",
+          "multi_step",
+          "legal_threat",
+          "health_safety",
+          "fraud_security",
+          "abuse_extreme",
+          "emotion"
+        ]
+      }
+    }
+  ],
+  "samples": [
+    {
+      "config": "A",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 383,
+      "costUsd": 0.000058968,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.12
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.02
+        },
+        "emotion": {
+          "score": 0.04,
+          "confidence": 0.96
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 390,
+      "costUsd": 0.00005901,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 374,
+      "costUsd": 0.000059556,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "multi_step": {
+          "noul": 0.51
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.56,
+          "confidence": 0.56
+        },
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.9
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 378,
+      "costUsd": 0.000059052,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.14
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.07,
+          "confidence": 0.93
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 484,
+      "costUsd": 0.000058758,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        },
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 367,
+      "costUsd": 0.00005943,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.85
+        },
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 423,
+      "costUsd": 0.000058968,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.12
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.05,
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 380,
+      "costUsd": 0.00005901,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 384,
+      "costUsd": 0.000059556,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.89
+        },
+        "multi_step": {
+          "noul": 0.51
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.47,
+          "confidence": 0.51
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 379,
+      "costUsd": 0.000059052,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.15
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.07,
+          "confidence": 0.93
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 377,
+      "costUsd": 0.000058758,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        },
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 378,
+      "costUsd": 0.00005943,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.86
+        },
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 369,
+      "costUsd": 0.000058968,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.03
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.05,
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 460,
+      "costUsd": 0.00005901,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 406,
+      "costUsd": 0.000059556,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.92
+        },
+        "multi_step": {
+          "noul": 0.58
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.12
+        },
+        "emotion": {
+          "score": 2.52,
+          "confidence": 0.52
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 472,
+      "costUsd": 0.000059052,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.15
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 377,
+      "costUsd": 0.000058758,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        },
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 412,
+      "costUsd": 0.00005943,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.86
+        },
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 400,
+      "costUsd": 0.000058968,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.05,
+          "confidence": 0.95
+        },
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.13
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1047,
+      "costUsd": 0.00005901,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        },
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.07
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 383,
+      "costUsd": 0.000059556,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.92
+        },
+        "multi_step": {
+          "noul": 0.54
+        },
+        "legal_threat": {
+          "noul": 0.98
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.14
+        },
+        "emotion": {
+          "score": 2.52,
+          "confidence": 0.52
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 399,
+      "costUsd": 0.000059052,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.14
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 554,
+      "costUsd": 0.000058758,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        },
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        },
+        "multi_step": {
+          "noul": 0.05
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 386,
+      "costUsd": 0.00005943,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.85
+        },
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 374,
+      "costUsd": 0.000058968,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.12
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.03
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 406,
+      "costUsd": 0.00005901,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 413,
+      "costUsd": 0.000059556,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.92
+        },
+        "multi_step": {
+          "noul": 0.53
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.51,
+          "confidence": 0.51
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 392,
+      "costUsd": 0.000059052,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.08,
+          "confidence": 0.92
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 384,
+      "costUsd": 0.000058758,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        },
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "A",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 384,
+      "costUsd": 0.00005943,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.84
+        },
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 371,
+      "costUsd": 0.00003759,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 405,
+      "costUsd": 0.000037632,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 398,
+      "costUsd": 0.000038178,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.91
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 360,
+      "costUsd": 0.000037674,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 524,
+      "costUsd": 0.00003738,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 381,
+      "costUsd": 0.000038052,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.85
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 529,
+      "costUsd": 0.00003759,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 364,
+      "costUsd": 0.000037632,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 434,
+      "costUsd": 0.000038178,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.91
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 412,
+      "costUsd": 0.000037674,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 400,
+      "costUsd": 0.00003738,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 399,
+      "costUsd": 0.000038052,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.84
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 377,
+      "costUsd": 0.00003759,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 454,
+      "costUsd": 0.000037632,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 379,
+      "costUsd": 0.000038178,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.91
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 373,
+      "costUsd": 0.000037674,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 426,
+      "costUsd": 0.00003738,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 384,
+      "costUsd": 0.000038052,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.85
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 460,
+      "costUsd": 0.00003759,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 415,
+      "costUsd": 0.000037632,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 487,
+      "costUsd": 0.000038178,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.9
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 467,
+      "costUsd": 0.000037674,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 428,
+      "costUsd": 0.00003738,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 474,
+      "costUsd": 0.000038052,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.88
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 375,
+      "costUsd": 0.00003759,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "logistics_track",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 355,
+      "costUsd": 0.000037632,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "product_consult",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 428,
+      "costUsd": 0.000038178,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "quality_issue",
+          "confidence": 0.9
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 393,
+      "costUsd": 0.000037674,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "exchange",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 549,
+      "costUsd": 0.00003738,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "greeting",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "B",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 441,
+      "costUsd": 0.000038052,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "intent": {
+          "choice": "multi_step_complex",
+          "confidence": 0.86
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 352,
+      "costUsd": 0.000032886,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.05,
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 370,
+      "costUsd": 0.000032928,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 375,
+      "costUsd": 0.000033474,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.47
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.57,
+          "confidence": 0.57
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 385,
+      "costUsd": 0.00003297,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.15
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 370,
+      "costUsd": 0.000032676,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 383,
+      "costUsd": 0.000033348,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 361,
+      "costUsd": 0.000032886,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.05,
+          "confidence": 0.95
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 398,
+      "costUsd": 0.000032928,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.07
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 390,
+      "costUsd": 0.000033474,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.52
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.03
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.52,
+          "confidence": 0.52
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 401,
+      "costUsd": 0.00003297,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.14
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 358,
+      "costUsd": 0.000032676,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        },
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 415,
+      "costUsd": 0.000033348,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 468,
+      "costUsd": 0.000032886,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.13
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.03
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.04,
+          "confidence": 0.96
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 399,
+      "costUsd": 0.000032928,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 375,
+      "costUsd": 0.000033474,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.51
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.12
+        },
+        "emotion": {
+          "score": 2.48,
+          "confidence": 0.5
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 383,
+      "costUsd": 0.00003297,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.14
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.07,
+          "confidence": 0.93
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 412,
+      "costUsd": 0.000032676,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 381,
+      "costUsd": 0.000033348,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 367,
+      "costUsd": 0.000032886,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.12
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.04,
+          "confidence": 0.96
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 390,
+      "costUsd": 0.000032928,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 370,
+      "costUsd": 0.000033474,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.51
+        },
+        "legal_threat": {
+          "noul": 0.97
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.13
+        },
+        "emotion": {
+          "score": 2.51,
+          "confidence": 0.51
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 457,
+      "costUsd": 0.00003297,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.14
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.08,
+          "confidence": 0.92
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 374,
+      "costUsd": 0.000032676,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 368,
+      "costUsd": 0.000033348,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 392,
+      "costUsd": 0.000032886,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.12
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.04,
+          "confidence": 0.96
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 363,
+      "costUsd": 0.000032928,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.08
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 386,
+      "costUsd": 0.000033474,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.52
+        },
+        "legal_threat": {
+          "noul": 0.98
+        },
+        "health_safety": {
+          "noul": 0.98
+        },
+        "fraud_security": {
+          "noul": 0.04
+        },
+        "abuse_extreme": {
+          "noul": 0.12
+        },
+        "emotion": {
+          "score": 2.54,
+          "confidence": 0.54
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 365,
+      "costUsd": 0.00003297,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.15
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.02
+        },
+        "fraud_security": {
+          "noul": 0.01
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.06,
+          "confidence": 0.94
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 409,
+      "costUsd": 0.000032676,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.05
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0,
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "config": "C",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 371,
+      "costUsd": 0.000033348,
+      "intent": null,
+      "correct": null,
+      "detail": {
+        "multi_step": {
+          "noul": 0.95
+        },
+        "legal_threat": {
+          "noul": 0.01
+        },
+        "health_safety": {
+          "noul": 0.01
+        },
+        "fraud_security": {
+          "noul": 0.02
+        },
+        "abuse_extreme": {
+          "noul": 0.01
+        },
+        "emotion": {
+          "score": 0.01,
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 6555,
+      "costUsd": 0.000128016,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "wallMs": 6555,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "logistics_track",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.12
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.03
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.04,
+              "confidence": 0.96
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 4744,
+      "costUsd": 0.00012831,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "wallMs": 4744,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "product_consult",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.08
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1114,
+      "costUsd": 0.000132132,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "wallMs": 1114,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "quality_issue",
+              "confidence": 0.92
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.5
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.97
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.98
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.04
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.13
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 2.48,
+              "confidence": 0.51
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 961,
+      "costUsd": 0.000128604,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "wallMs": 961,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "exchange",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.14
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.02
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.07,
+              "confidence": 0.93
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 470,
+      "costUsd": 0.000126546,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "wallMs": 470,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "greeting",
+              "confidence": 0.99
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.05
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.02
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 512,
+      "costUsd": 0.00013125,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "wallMs": 512,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "multi_step_complex",
+              "confidence": 0.84
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.95
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.01,
+              "confidence": 0.99
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 408,
+      "costUsd": 0.000128016,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "wallMs": 408,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "logistics_track",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.13
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.02
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.04,
+              "confidence": 0.96
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 443,
+      "costUsd": 0.00012831,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "wallMs": 443,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "product_consult",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.08
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 396,
+      "costUsd": 0.000132132,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "wallMs": 396,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "quality_issue",
+              "confidence": 0.91
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.52
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.97
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.98
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.04
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.14
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 2.48,
+              "confidence": 0.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 450,
+      "costUsd": 0.000128604,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "wallMs": 450,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "exchange",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.14
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.02
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.08,
+              "confidence": 0.92
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 569,
+      "costUsd": 0.000126546,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "wallMs": 568,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "greeting",
+              "confidence": 0.99
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.05
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1362,
+      "costUsd": 0.00013125,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "wallMs": 1362,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "multi_step_complex",
+              "confidence": 0.84
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.95
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.01,
+              "confidence": 0.99
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 402,
+      "costUsd": 0.000128016,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "wallMs": 402,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "logistics_track",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.12
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.04,
+              "confidence": 0.96
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 425,
+      "costUsd": 0.00012831,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "wallMs": 425,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "product_consult",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.08
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 416,
+      "costUsd": 0.000132132,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "wallMs": 416,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "quality_issue",
+              "confidence": 0.9
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.53
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.97
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.98
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.04
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.13
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 2.53,
+              "confidence": 0.53
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 396,
+      "costUsd": 0.000128604,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "wallMs": 396,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "exchange",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.14
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.02
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.1,
+              "confidence": 0.9
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 735,
+      "costUsd": 0.000126546,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "wallMs": 735,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "greeting",
+              "confidence": 0.99
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.05
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 427,
+      "costUsd": 0.00013125,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "wallMs": 427,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "multi_step_complex",
+              "confidence": 0.85
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.95
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.01,
+              "confidence": 0.99
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 448,
+      "costUsd": 0.000128016,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "wallMs": 448,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "logistics_track",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.13
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.05,
+              "confidence": 0.95
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 425,
+      "costUsd": 0.00012831,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "wallMs": 425,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "product_consult",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.08
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 399,
+      "costUsd": 0.000132132,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "wallMs": 399,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "quality_issue",
+              "confidence": 0.91
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.53
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.97
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.98
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.04
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.12
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 2.48,
+              "confidence": 0.51
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 393,
+      "costUsd": 0.000128604,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "wallMs": 393,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "exchange",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.15
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.1,
+              "confidence": 0.9
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 401,
+      "costUsd": 0.000126546,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "wallMs": 401,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "greeting",
+              "confidence": 0.99
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.05
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 441,
+      "costUsd": 0.00013125,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "wallMs": 441,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "multi_step_complex",
+              "confidence": 0.83
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.95
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.01,
+              "confidence": 0.99
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 424,
+      "costUsd": 0.000128016,
+      "intent": "logistics_track",
+      "correct": true,
+      "detail": {
+        "wallMs": 423,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "logistics_track",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.13
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.04,
+              "confidence": 0.96
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 418,
+      "costUsd": 0.00012831,
+      "intent": "product_consult",
+      "correct": true,
+      "detail": {
+        "wallMs": 418,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "product_consult",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.08
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 398,
+      "costUsd": 0.000132132,
+      "intent": "quality_issue",
+      "correct": true,
+      "detail": {
+        "wallMs": 398,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "quality_issue",
+              "confidence": 0.93
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.52
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.97
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.98
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.04
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.12
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 2.52,
+              "confidence": 0.52
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 414,
+      "costUsd": 0.000128604,
+      "intent": "exchange",
+      "correct": true,
+      "detail": {
+        "wallMs": 414,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "exchange",
+              "confidence": 1
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.13
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.02
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.01
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.13,
+              "confidence": 0.87
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 552,
+      "costUsd": 0.000126546,
+      "intent": "greeting",
+      "correct": true,
+      "detail": {
+        "wallMs": 552,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "greeting",
+              "confidence": 0.99
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.05
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0,
+              "confidence": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "D",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 449,
+      "costUsd": 0.00013125,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "detail": {
+        "wallMs": 448,
+        "answers": {
+          "intent": {
+            "intent": {
+              "choice": "multi_step_complex",
+              "confidence": 0.86
+            }
+          },
+          "multi_step": {
+            "multi_step": {
+              "noul": 0.95
+            }
+          },
+          "legal_threat": {
+            "legal_threat": {
+              "noul": 0.01
+            }
+          },
+          "health_safety": {
+            "health_safety": {
+              "noul": 0.01
+            }
+          },
+          "fraud_security": {
+            "fraud_security": {
+              "noul": 0.02
+            }
+          },
+          "abuse_extreme": {
+            "abuse_extreme": {
+              "noul": 0.01
+            }
+          },
+          "emotion": {
+            "emotion": {
+              "score": 0.01,
+              "confidence": 0.99
+            }
+          }
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": false,
+      "latencyMs": 4900,
+      "costUsd": 0,
+      "intent": null,
+      "correct": false,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"logistics_track\",\n    \"confidence\": 0.98,\n    \"probabilities\": {\n      \"product_consult\": 0.01,\n      \"size_recommend\": 0.0,\n      \"stock_check\": 0.0156250000000000035479719073651708882152116298675537109375000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "error",
+        "usage": {
+          "promptTokens": 1423,
+          "completionTokens": 185
+        }
+      },
+      "error": "intent parse failed"
+    },
+    {
+      "config": "E",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2147,
+      "costUsd": 0.00005015,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"product_consult\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"product_consult\": 0.95,\n      \"other\": 0.05\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  \t{\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\":  \t{\n      \"score\": 0,\n      \"confidence\": 0.98\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 987,
+          "completionTokens": 158
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 7997,
+      "costUsd": 0.00005159,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"quality_issue\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"quality_issue\": 0.95,\n      \"refund_apply\": 0.03,\n      \"human_request\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"legal_threat\": 1,\n    \"health_safety\": 1,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\": \n  \t{\n    \"score\": 3,\n    \"confidence\": 0.98\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 996,
+          "completionTokens": 167
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2026,
+      "costUsd": 0.000031826,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"exchange\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.05,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":        {\"score\": 0.1, \"confidence\": 0.98}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 989,
+          "completionTokens": 182
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2132,
+      "costUsd": 0.00005302,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"greeting\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.0,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0,\n    \"emotion\":        {\"score\": 0.0, \"confidence\": 0.98}\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 983,
+          "completionTokens": 181
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2137,
+      "costUsd": 0.000030486,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"multi_step_complex\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.0,\n    \"size_recommend\": 0.0,\n    \"stock_check\": 0.05\n  }\n}\n,\n  \"multiStep\": 1,\n  \"risk\": {\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\": \n  \n  \n{\n  \"score\": 1,\n  \"confidence\": 0.9\n}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 992,
+          "completionTokens": 171
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2013,
+      "costUsd": 0.00005009,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"logistics_track\",\n    \"confidence\": 0.98,\n    \"probabilities\": {\n      \"logistics_track\": 0.98,\n      \"order_status\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  \t{\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\": \t{\n      \"score\": 1,\n      \"confidence\": 0.95\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 985,
+          "completionTokens": 158
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2063,
+      "costUsd": 0.000028776,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"product_consult\",\n    \"confidence\": 0.98\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.98,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n},\n  \"multiStep\": 0,\n  \"risk\":        {\"legal_threat\": 0, \"health_safety\": 0, \"fraud_security\": 0, \"abuse_extreme\": 0, \"emotion\":   {\"score\": 0, \"confidence\": 0.95}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 987,
+          "completionTokens": 159
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1964,
+      "costUsd": 0.000029176,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"quality_issue\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"quality_issue\": 0.95,\n      \"refund_apply\": 0.03,\n      \"human_request\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  {\n    \"legal_threat\": 1,\n    \"health_safety\": 1,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\":   {\"score\": 3, \"confidence\": 0.98}\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 996,
+          "completionTokens": 160
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2262,
+      "costUsd": 0.000032216,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"exchange\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.015\n  }\n}\n,\n  \"multiStep\": 0.05,\n  \"risk\":        {\"legal_threat\": 0.0,\n  \"health_safety\": 0.0,\n  \"fraud_security\": 0.0,\n  \"abuse_extreme\": 0.0,\n  \"emotion\":    {\"score\": 0.5,\n    \"confidence\": 0.85\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 989,
+          "completionTokens": 185
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2236,
+      "costUsd": 0.000031646,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"greeting\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.0,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":        {\"score\": 0.0, \"confidence\": 0.98}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 983,
+          "completionTokens": 182
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2253,
+      "costUsd": 0.000030096,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"multi_step_complex\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"modify_order\": 0.45,\n      \"promotion\": 0.45,\n      \"exchange\": 0.1\n    }\n  },\n  \"multiStep\": 0.85,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0,\n    \"emotion\":  {\"score\": 0.2, \"confidence\": 0.9}\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 992,
+          "completionTokens": 168
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2828,
+      "costUsd": 0.000037036,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"logistics_track\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.0,\n    \"size_recommend\": 0.0,\n    \"stock_check\": 0.01250000000000000173472347597680466057570705413818359375\n  }\n}\n  ,\n  \"multiStep\": 0.0,\n  \"risk\":        {\"legal_threat\": 0.0, \"health_safety\": 0.0, \"fraud_security\": 0.0, \"abuse_extreme\": 0.0, \"emotion\":   {\"score\": 0.0, \"confidence\": 0.95}}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 985,
+          "completionTokens": 223
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1994,
+      "costUsd": 0.00004859,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"product_consult\",\n    \"confidence\": 0.98\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.98,\n    \"other\": 0.02\n  }\n},\n  \"multiStep\": 0,\n  \"risk\":        {\"legal_threat\": 0, \"health_safety\": 0, \"fraud_security\": 0, \"abuse_extreme\": 0, \"emotion\":   {\"score\": 0, \"confidence\": 0.95}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 987,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": false,
+      "latencyMs": 3777,
+      "costUsd": 0,
+      "intent": null,
+      "correct": false,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"quality_issue\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"product_consult\": 0.01,\n      \"size_recommend\": 0.0,\n      \"stock_check\": 0.0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "error",
+        "usage": {
+          "promptTokens": 1432,
+          "completionTokens": 170
+        }
+      },
+      "error": "intent parse failed"
+    },
+    {
+      "config": "E",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2205,
+      "costUsd": 0.00005346,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"exchange\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.05,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":  \t{\n    \"score\": 0.8,\n    \"confidence\": 0.9\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 989,
+          "completionTokens": 183
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2123,
+      "costUsd": 0.000031906,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"greeting\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.0,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":  \t{\n    \"score\": 0.0,\n    \"confidence\": 0.98\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 983,
+          "completionTokens": 184
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2161,
+      "costUsd": 0.000032306,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"multi_step_complex\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.03\n  }\n}\n,\n  \"multiStep\": 0.85,\n  \"risk\": {\n    \"legal_threat\": 0.01,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":  \t{\n    \"score\": 0.1,\n    \"confidence\": 0.9\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 992,
+          "completionTokens": 185
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2099,
+      "costUsd": 0.00005165,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"logistics_track\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"product_consult\": 0.01,\n      \"size_recommend\": 0.01,\n      \"stock_check\": 0.01\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  \t{\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\":  \t{\n      \"score\": 0,\n      \"confidence\": 0.9\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 985,
+          "completionTokens": 170
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2020,
+      "costUsd": 0.000028906,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"product_consult\",\n    \"confidence\": 0.95\n  ,\n    \"probabilities\": {\n      \"product_consult\": 0.95,\n      \"other\": 0.05\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  \t{\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0\n  ,\n    \"emotion\": \t{\n      \"score\": 1,\n      \"confidence\": 0.9\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 987,
+          "completionTokens": 160
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1924,
+      "costUsd": 0.000029176,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"quality_issue\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"quality_issue\": 0.95,\n      \"refund_apply\": 0.03,\n      \"human_request\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"legal_threat\": 1,\n    \"health_safety\": 1,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\": \n  \t\n\t\n{\"score\": 3, \"confidence\": 0.98}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 996,
+          "completionTokens": 160
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2124,
+      "costUsd": 0.00005164,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"exchange\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.05,\n  \"risk\":        {\"legal_threat\": 0.0, \"health_safety\": 0.0, \"fraud_security\": 0.0, \"abuse_extreme\": 0.0, \"emotion\":   {\"score\": 0.5, \"confidence\": 0.8}}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 989,
+          "completionTokens": 169
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2416,
+      "costUsd": 0.000032036,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"greeting\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n  ,\n  \"multiStep\": 0.02,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":  \t{\n    \"score\": 0.0,\n    \"confidence\": 0.98\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 983,
+          "completionTokens": 185
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2473,
+      "costUsd": 0.000034256,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"multi_step_complex\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.0,\n    \"size_recommend\": 0.0,\n    \"stock_check\": 0.056250000000000014\n  }\n}\n\n,\n  \"multiStep\": 0.0,\n  \"risk\":  \t{\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0,\n    \"emotion\":  \t{\n      \"score\": 0.0,\n      \"confidence\": 0.95\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 992,
+          "completionTokens": 200
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2155,
+      "costUsd": 0.0000523,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"logistics_track\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"product_consult\": 0.01,\n      \"size_recommend\": 0.01,\n      \"stock_check\": 0.01\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\":  \t\t\t  \t{\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\":  \t\t\t  \t{\n      \"score\": 0,\n      \"confidence\": 0.95\n    }\n  }\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 985,
+          "completionTokens": 175
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2195,
+      "costUsd": 0.00005379,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"product_consult\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.95,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n,\n  \"multiStep\": 0.02,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":  \t{\n    \"score\": 0.1,\n    \"confidence\": 0.98\n  }\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 987,
+          "completionTokens": 186
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": false,
+      "latencyMs": 4456,
+      "costUsd": 0,
+      "intent": null,
+      "correct": false,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"quality_issue\",\n    \"confidence\": 0.95,\n    \"probabilities\": {\n      \"product_consult\": 0.01,\n      \"size_recommend\": 0.0,\n      \"stock_check\": 0.01250000000000000173472347597680703125e-350000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "error",
+        "usage": {
+          "promptTokens": 1432,
+          "completionTokens": 181
+        }
+      },
+      "error": "intent parse failed"
+    },
+    {
+      "config": "E",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1995,
+      "costUsd": 0.000028316,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"exchange\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.02,\n    \"stock_check\": 0.01\n  }\n},\n  \"multiStep\": 0,\n  \"risk\":        {\"legal_threat\": 0, \"health_safety\": 0, \"fraud_security\": 0, \"abuse_extreme\": 0, \"emotion\":   {\"score\": 0, \"confidence\": 0.9}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 989,
+          "completionTokens": 155
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2291,
+      "costUsd": 0.000031646,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"greeting\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.01,\n    \"size_recommend\": 0.01,\n    \"stock_check\": 0.01\n  }\n}\n,\n  \"multiStep\": 0.02,\n  \"risk\": {\n    \"legal_threat\": 0.0,\n    \"health_safety\": 0.0,\n    \"fraud_security\": 0.0,\n    \"abuse_extreme\": 0.0\n  ,\n  \"emotion\":        {\"score\": 0.1, \"confidence\": 0.98}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 983,
+          "completionTokens": 182
+        }
+      }
+    },
+    {
+      "config": "E",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2284,
+      "costUsd": 0.00005225,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"id\": \"multi_step_complex\",\n    \"confidence\": 0.95\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.0,\n    \"size_recommend\": 0.0,\n    \"stock_check\": 0.05\n  }\n}\n,\n  \"multiStep\": 1,\n  \"risk\": {\n    \"legal_threat\": 0,\n    \"health_safety\": 0,\n    \"fraud_security\": 0,\n    \"abuse_extreme\": 0,\n    \"emotion\": \n  \n  \n{\n  \"score\": 0.2,\n  \"confidence\": 0.9\n}\n}\n}",
+      "detail": {
+        "model": "qwen/qwen3.7-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 992,
+          "completionTokens": 173
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2822,
+      "costUsd": 0.000036092,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"logistics_track\", \"probabilities\": {\"logistics_track\": 0.95, \"order_status\": 0.03, \"other\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1049,
+          "completionTokens": 120
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2559,
+      "costUsd": 0.0000134064,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"product_consult\", \"probabilities\": {\"product_consult\": 0.95, \"size_recommend\": 0.01, \"stock_check\": 0.01}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.98, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1050,
+          "completionTokens": 124
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2604,
+      "costUsd": 0.0000134624,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\"confidence\": 0.95, \"id\": \"quality_issue\", \"probabilities\": {\"quality_issue\": 0.95, \"refund_apply\": 0.03, \"other\": 0.02}},\n  \"multiStep\": 0,\n  \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 2}, \"fraud_security\": 0, \"health_safety\": 1, \"legal_threat\": 1}\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1056,
+          "completionTokens": 122
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2437,
+      "costUsd": 0.0000129584,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"exchange\", \"probabilities\": {\"exchange\": 0.95, \"size_recommend\": 0.03, \"other\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1052,
+          "completionTokens": 115
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2386,
+      "costUsd": 0.0000141904,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.9,\n    \"id\": \"greeting\",\n    \"probabilities\": {\n      \"greeting\": 0.9,\n      \"other\": 0.1\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":  {\n      \"confidence\": 0.95,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1046,
+          "completionTokens": 140
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 2482,
+      "costUsd": 0.0000147784,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"multi_step_complex\",\n    \"probabilities\": {\n      \"exchange\": 0.45,\n      \"promotion\": 0.35,\n      \"multi_step_complex\": 0.15\n    }\n  },\n  \"multiStep\": 1,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1055,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2504,
+      "costUsd": 0.0000132664,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"logistics_track\", \"probabilities\": {\"logistics_track\": 0.95, \"order_status\": 0.03, \"other\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1049,
+          "completionTokens": 122
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2466,
+      "costUsd": 0.0000133504,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"product_consult\", \"probabilities\": {\"product_consult\": 0.95, \"size_recommend\": 0.0, \"stock_check\": 0.0}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.95, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1050,
+          "completionTokens": 123
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2745,
+      "costUsd": 0.0000148064,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"quality_issue\",\n    \"probabilities\": {\n      \"quality_issue\": 0.95,\n      \"refund_apply\": 0.03,\n      \"other\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 2\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 1,\n    \"legal_threat\": 1\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1056,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2431,
+      "costUsd": 0.0000146944,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"exchange\",\n    \"probabilities\": {\n      \"exchange\": 0.95,\n      \"size_recommend\": 0.03,\n      \"return_policy\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":   {\n      \"confidence\": 0.9,\n      \"score\": 1\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1052,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2899,
+      "costUsd": 0.0000141344,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.9,\n    \"id\": \"greeting\",\n    \"probabilities\": {\n      \"greeting\": 0.9,\n      \"other\": 0.1\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.95,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1046,
+          "completionTokens": 139
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 2678,
+      "costUsd": 0.0000151144,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"multi_step_complex\",\n    \"probabilities\": {\n      \"exchange\": 0.5,\n      \"promotion\": 0.5,\n      \"multi_step_complex\": 1.0\n    }\n  },\n  \"multiStep\": 1,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1055,
+          "completionTokens": 152
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2410,
+      "costUsd": 0.0000133224,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"logistics_track\", \"probabilities\": {\"logistics_track\": 0.95, \"order_status\": 0.03, \"other\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1049,
+          "completionTokens": 123
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2439,
+      "costUsd": 0.0000133504,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"product_consult\", \"probabilities\": {\"product_consult\": 0.95, \"size_recommend\": 0.01, \"stock_check\": 0.01}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.95, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1050,
+          "completionTokens": 123
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2227,
+      "costUsd": 0.0000139104,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\"confidence\": 0.95, \"id\": \"quality_issue\", \"probabilities\": {\"quality_issue\": 0.95, \"refund_apply\": 0.03, \"other\": 0.02}},\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\"confidence\": 0.9, \"score\": 2},\n    \"fraud_security\": 0,\n    \"health_safety\": 1,\n    \"legal_threat\": 1\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1056,
+          "completionTokens": 130
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2600,
+      "costUsd": 0.0000144704,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"exchange\",\n    \"probabilities\": {\n      \"exchange\": 0.95,\n      \"size_recommend\": 0.03,\n      \"other\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 1\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1052,
+          "completionTokens": 142
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 3027,
+      "costUsd": 0.0000137984,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"greeting\",\n    \"probabilities\": {\n      \"greeting\": 0.95,\n      \"other\": 0.05\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":  {\n      \"confidence\": 0.98,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1046,
+          "completionTokens": 133
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2778,
+      "costUsd": 0.0000151144,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"multi_step_complex\",\n    \"probabilities\": {\n      \"exchange\": 0.4,\n      \"promotion\": 0.3,\n      \"multi_step_complex\": 0.3\n    }\n  },\n  \"multiStep\": 1,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":  {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1055,
+          "completionTokens": 152
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2791,
+      "costUsd": 0.0000133224,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"logistics_track\", \"probabilities\": {\"logistics_track\": 0.95, \"order_status\": 0.03, \"other\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1049,
+          "completionTokens": 123
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 4183,
+      "costUsd": 0.0000134064,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"product_consult\", \"probabilities\": {\"product_consult\": 0.95, \"size_recommend\": 0.0, \"stock_check\": 0.0}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.95, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1050,
+          "completionTokens": 124
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2974,
+      "costUsd": 0.0000154784,
+      "intent": "quality_issue",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"quality_issue\"\n  ,\n  \"probabilities\": {\n    \"product_consult\": 0.0,\n    \"size_recommend\": 0.0,\n    \"stock_check\": 0.0\n  }\n}  ,\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":  {\n      \"confidence\": 0.9,\n      \"score\": 2\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 1,\n    \"legal_threat\": 1\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1056,
+          "completionTokens": 158
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2362,
+      "costUsd": 0.0000133504,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"exchange\", \"probabilities\": {\"exchange\": 0.95, \"size_recommend\": 0.03, \"return_policy\": 0.02}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.9, \"score\": 0.5}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1052,
+          "completionTokens": 122
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2533,
+      "costUsd": 0.0000125664,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"greeting\", \"probabilities\": {\"greeting\": 0.95, \"other\": 0.05}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\":  {\"confidence\": 0.99, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1046,
+          "completionTokens": 111
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 2796,
+      "costUsd": 0.0000147784,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"multi_step_complex\",\n    \"probabilities\": {\n      \"exchange\": 0.5,\n      \"promotion\": 0.5,\n      \"multi_step_complex\": 1.0\n    }\n  },\n  \"multiStep\": 1,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1055,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 4685,
+      "costUsd": 0.0000133784,
+      "intent": "logistics_track",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"logistics_track\", \"probabilities\": {\"product_consult\": 0.01, \"size_recommend\": 0.01, \"stock_check\": 0.01}},\"multiStep\": 0,\"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.95, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1049,
+          "completionTokens": 124
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2325,
+      "costUsd": 0.0000133504,
+      "intent": "product_consult",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\"intent\": {\"confidence\": 0.95, \"id\": \"product_consult\", \"probabilities\": {\"product_consult\": 0.95, \"size_recommend\": 0.01, \"stock_check\": 0.01}}, \"multiStep\": 0, \"risk\": {\"abuse_extreme\": 0, \"emotion\": {\"confidence\": 0.95, \"score\": 0}, \"fraud_security\": 0, \"health_safety\": 0, \"legal_threat\": 0}}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1050,
+          "completionTokens": 123
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": false,
+      "latencyMs": 7218,
+      "costUsd": 0.0000458304,
+      "intent": null,
+      "correct": false,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"quality_issue\"\n  ,\n  \"probabilities\": {\n    \"quality_issue\": 0.95,\n    \"other\": 0.05\n  ,\n  \"multi_step\": {\n    \"criterion\": false,\n    \"explanation\": \"单一诉求：反映质量问题并附带威胁\"\n  ,\n  \"legal_threat\": {\n    \"criterion\": true,\n    \"explanation\": \"明确威胁向12315投诉\"\n  ,\n  \"health_safety\": {\n    \"criterion\": true,\n    \"explanation\": \"提到商品引起全身起红疹，属于健康安全问题\"\n  ,\n  \"fraud_security\": {\n    \"criterion\": false,\n    \"explanation\": \"未涉及账号安全或诈骗\"\n  ,\n  \"abuse_extreme\": {\n    \"criterion\": false,\n    \"explanation\": \"没有辱骂或人身攻击\"\n  ,\n  \"emotion\": {\n    \"score\": 2,\n    \"explanation\": \"有些不满，带有威胁语气但未达到非常愤怒\"\n  ,\n  \"risk_score\": 0.7,\n  \"explanation\": \"涉及健康安全问题和法律威胁，风险较高\"\n}  }  }  }  }  }  }  }  \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n \t\n ",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 1056,
+          "completionTokens": 700
+        }
+      },
+      "error": "intent parse failed"
+    },
+    {
+      "config": "F",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2699,
+      "costUsd": 0.0000145824,
+      "intent": "exchange",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"exchange\",\n    \"probabilities\": {\n      \"exchange\": 0.95,\n      \"size_recommend\": 0.03,\n      \"other\": 0.02\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\":  {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1052,
+          "completionTokens": 144
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2704,
+      "costUsd": 0.0000140784,
+      "intent": "greeting",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"greeting\",\n    \"probabilities\": {\n      \"greeting\": 0.95,\n      \"other\": 0.05\n    }\n  },\n  \"multiStep\": 0,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.99,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1046,
+          "completionTokens": 138
+        }
+      }
+    },
+    {
+      "config": "F",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 2497,
+      "costUsd": 0.0000147784,
+      "intent": "multi_step_complex",
+      "correct": true,
+      "reasoningPresent": false,
+      "output": "{\n  \"intent\": {\n    \"confidence\": 0.95,\n    \"id\": \"multi_step_complex\",\n    \"probabilities\": {\n      \"exchange\": 0.5,\n      \"promotion\": 0.5,\n      \"multi_step_complex\": 0.95\n    }\n  },\n  \"multiStep\": 1,\n  \"risk\": {\n    \"abuse_extreme\": 0,\n    \"emotion\": {\n      \"confidence\": 0.9,\n      \"score\": 0\n    },\n    \"fraud_security\": 0,\n    \"health_safety\": 0,\n    \"legal_threat\": 0\n  }\n}",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1055,
+          "completionTokens": 146
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1693,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1562,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1277,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1549,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1565,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 1,
+      "ok": true,
+      "latencyMs": 1478,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1750,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1301,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1374,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1825,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1269,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！👋",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 2,
+      "ok": true,
+      "latencyMs": 1340,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1408,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1631,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1275,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1623,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 2004,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 3,
+      "ok": true,
+      "latencyMs": 1577,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1582,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1367,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！👋",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1572,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1870,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1300,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！👋",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 4,
+      "ok": true,
+      "latencyMs": 1595,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "我的快递到哪了",
+      "expectedIntent": "logistics_track",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1169,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "这件大衣能机洗吗",
+      "expectedIntent": "product_consult",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1651,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "衣服穿了全身起红疹，不处理就去12315",
+      "expectedIntent": "quality_issue",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1760,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！😊",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "M码有点紧能换L吗",
+      "expectedIntent": "exchange",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1492,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "在吗",
+      "expectedIntent": "greeting",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1583,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好！很高兴见到你",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    },
+    {
+      "config": "G",
+      "phrase": "上周买的外套换成L，顺便看看有没有券",
+      "expectedIntent": "multi_step_complex",
+      "round": 5,
+      "ok": true,
+      "latencyMs": 1635,
+      "costUsd": 0.0000010738,
+      "intent": null,
+      "correct": null,
+      "reasoningPresent": false,
+      "output": "你好呀！很高兴见到",
+      "detail": {
+        "model": "deepseek/deepseek-v4-flash",
+        "finishReason": "length",
+        "usage": {
+          "promptTokens": 5,
+          "completionTokens": 5
+        }
+      }
+    }
+  ]
+}
