@@ -589,6 +589,8 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
         aria-hidden={!open}
         inert={!open}
         data-testid="chat-drawer"
+        data-conversation-id={conversation?.id}
+        data-status={status}
         className={`fixed right-0 top-0 z-50 flex h-dvh w-[420px] max-w-full flex-col bg-cream shadow-lift transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}

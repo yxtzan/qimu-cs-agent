@@ -23,3 +23,9 @@ data/runtime/
 *.pem
 npm-debug.log*
 .vercel
+
+# e2e (T18)
+e2e/artifacts/
+e2e/test-results/
+e2e/report/
+playwright-report/
