@@ -14,8 +14,8 @@
 | T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | done |
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
-| T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | doing |
-| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | todo |
+| T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | done |
+| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | doing |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 | Codex | T04 | 3 | 2.5h | todo |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
@@ -236,6 +236,11 @@
 7. `lib/brain/trace.ts`：通过 `lib/store/conversations.ts`（T16 提供）写 RouteTrace；每写一条 trace 同时更新 `Conversation.lastLayer`。**会话、消息、trace 的读写一律用 T16 的数据层，不要自己另建存储。**
 8. API：`POST /api/chat`。（`/messages`、`/latest` 已由 T16 实现。）
 8b. `lib/brain/decide/warmup.ts`：Jev 预热与保温（ARCHITECTURE §4.3、D010）。服务端第一次处理请求时异步发一次预热调用（不阻塞这次请求），之后每 `JEV_KEEPALIVE_MS` 发一次最小请求；`0` 表示关闭；预热调用不写 RouteTrace，成本记在日志里；没有 key 或 provider 不是 jev 时不启动。
+8c. **接线须知（来自 T03 / T16 交接）**：
+   - 工具一律通过 `runTool(name, args, ctx)` 调用，读 `result.data`；`ctx.buyerId` / `ctx.conversationId` 来自请求和会话，**永远不从模型参数读**。确认 / 取消用 `confirmPendingAction(id, ctx)` / `cancelPendingAction(id, ctx)`，成功返回 `{ pendingAction, card? }`，直接用 card 生成结果消息。
+   - `create_handoff` 只返回 `{ handoff: true, reason }` 指令，由流水线调用 T16 数据层真正切换会话（T05 再补摘要）。
+   - 会话 / 消息 / trace 用 `@/lib/store/conversations` 的函数（签名见 `docs/handoff/T16.md`）：`appendTrace` 会自动更新 `lastLayer`；转人工那一轮要自己写 `unreadForSeller`、`handoffAt`、`status`、`mode`。
+   - RAG 用 `searchKnowledgeWithMetrics()`，把检索耗时和成本记进 trace。**在线查询的 embedding 超时改为 2 秒**（T03 默认 8 秒），超时直接用 bigram 结果，保证 L2 咨询类回复整体在 1.5 秒左右（PRD §6）；这条改动在 `lib/rag/` 里，属于你的目录。
 9. `scripts/chat-cli.ts`：命令行和客服对话（可选买家、可选 context），每轮打印回复和 trace 摘要，方便不打开前端就验证。
 
 **验收标准**（用 chat-cli 验证，交接文件贴对话记录）
