@@ -62,6 +62,14 @@
 ```
 人工模式下：`messages` 只含买家消息本身（AI 不回复），卖家回复通过轮询获取。
 
+**补充约定（2026-10-04，见 `docs/questions/T12-1.md`、`T12-2.md`）**
+
+1. **动作也生成一条买家消息**：`action` 请求同样落一条 `role="buyer"` 的消息，`text` 用人能读懂的文字：quick_action → 按钮名（「查物流」「退款进度」「尺码推荐」「转人工」）；confirm → 「确认办理」/「取消办理」；select_option → 所选项的 `label`；text → 原文。这样卖家端的聊天记录和喂给模型的「最近对话」都是完整的。
+2. **确认卡片状态以服务端为准**：`PendingAction` 的 `status` / `result` / `resolvedAt` 由后端持久化。所有返回消息的接口（`/api/chat`、`/messages`、`/latest`、会话详情）在返回带 `confirm` 卡片的消息时，`card.pendingAction` 必须是**当前**状态（读取时从 pending_actions 回填即可），刷新页面后已处理的卡片不会变回"待确认"。
+3. **一轮可以返回多条 AI 消息**：按时间正序，例如「已为您提交」文字 + `aftersale` 卡片 + 优惠券卡片。同一轮的所有 AI / system 消息**共用同一个 `traceId`**，前端把调试信息挂在这一轮的最后一条下面。
+4. **转人工的状态**：转人工时 `mode="human"`、`status="waiting_human"`、写 `handoffAt`；卖家接管后 `status="human_active"`；交还 AI 后 `mode="ai"`、`status="ai_active"`、清空 `handoffAt`。
+5. **商品图片**：`Product.images` 可以是空数组，前端按类别和颜色自己画剪影，不读这个字段。
+
 ### `GET /api/conversations/:id/messages?after=<messageId>` → `{ messages: ChatMessage[]; conversation: Conversation }`
 买家端人工模式时每 2 秒轮询；卖家端会话详情也用它轮询。`after` 不传则返回全部。
 

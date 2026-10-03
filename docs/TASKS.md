@@ -16,9 +16,9 @@
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 | 2 | 5h | todo |
-| T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | doing |
+| T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
-| T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | todo |
+| T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | doing |
 | T06 | 种子流量 + 看板 API + 评测脚本 | Codex | T05 | 4 | 3h | todo |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | todo |
 | T15 | 前后端联调 + 打磨 | Cursor | T05 T14 | 5 | 3h | todo |
@@ -225,7 +225,7 @@
 3. `lib/brain/rules.ts`：L1 匹配（quick_action 优先 → 正则 + maxLen），命中计数落盘；否定反馈时给上一条 L1 规则 `misfireCount++`。
 4. `lib/brain/handlers/`：ARCHITECTURE §4.5 全部意图。缺槽位按"状态 → 唯一订单自动选 → options 卡片 → 追问"补全。咨询类走 RAG + `GENERATION_MODEL`，回复附 `sources` 卡片。
 5. `lib/brain/pipeline.ts`：`handleMessage()` 实现 §1 的 ①–⑥ 和 ⑧（L3 先放一个占位：返回"这个问题我需要再确认一下"并 `unresolvedTurns++`，T05 替换）。**L1 命中时不等 decide()**：先同步跑硬关键词风险检查，未命中就立即回复，decide() 在后台继续跑，若模型风险分超阈值再追加转人工（见 ARCHITECTURE §1、D001 修订）。L2/L3 的具体模型配置以 T01b 报告后 Claude 的决定为准。
-6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。
+6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。**务必遵守 CONTRACTS §2「补充约定」五条**（动作落买家消息、确认卡片状态回填、同一轮共用 traceId、转人工状态流转、images 可为空）。
 7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`；每写一条 trace 同时更新 `Conversation.lastLayer`。
 8. API：`POST /api/chat`、`GET /api/conversations/:id/messages`、`GET /api/conversations/latest`。
 9. `scripts/chat-cli.ts`：命令行和客服对话（可选买家、可选 context），每轮打印回复和 trace 摘要，方便不打开前端就验证。
