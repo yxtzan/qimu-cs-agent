@@ -4,8 +4,8 @@
  * - 类型一律来自 lib/types.ts。
  * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 强制使用本地 mock；设为 "0" 强制走真实后端；
  *   不设置时默认使用 mock（后端接口就绪前的过渡约定，后端合并后请在 .env.local 里设 NEXT_PUBLIC_USE_MOCK=0）。
- * - 商城部分（CONTRACTS §1）已实现（mock + 真实 fetch）；其余接口只写好了签名，调用会抛
- *   `Error("not implemented: <函数名>")`，由后续任务（T11/T12/T13…）填实现。
+ * - 商城部分（CONTRACTS §1）和卖家会话部分（CONTRACTS §3，T11）已实现（mock + 真实 fetch）；
+ *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务（T12/T13/T14…）填实现。
  * - 失败统一抛 `ApiError`（带 code / status，message 为中文，可直接展示）。
  */
 import type {
@@ -37,6 +37,15 @@ import {
   mockGetProduct,
   mockGetProducts,
 } from "@/lib/mock";
+import {
+  mockClose,
+  mockGetConversationDetail,
+  mockListConversations,
+  mockMarkMisfire,
+  mockReply,
+  mockRelease,
+  mockTakeover,
+} from "@/lib/mock/seller";
 
 // ───────────────────────── 基础设施 ─────────────────────────
 
@@ -199,49 +208,53 @@ export function getLatestConversation(
   return notImplemented("getLatestConversation");
 }
 
-// ───────────────────────── 3. 卖家端 — T11/T14/T15 实现 ─────────────────────────
+// ───────────────────────── 3. 卖家端 — 会话部分 T11 已实现（mock + 真实 fetch） ─────────────────────────
 
 /** GET /api/conversations?status=&includeSimulated= */
 export function listConversations(params: { status?: ConversationStatus; includeSimulated?: boolean } = {}): Promise<Conversation[]> {
-  void params;
-  return notImplemented("listConversations");
+  if (USE_MOCK) return viaMock(() => mockListConversations(params));
+  return http<Conversation[]>(
+    `/api/conversations${qs({ status: params.status, includeSimulated: params.includeSimulated ? 1 : undefined })}`,
+  );
 }
 
 /** GET /api/conversations/:id （读取后 unreadForSeller 归零） */
 export function getConversationDetail(id: string): Promise<ConversationDetail> {
-  void id;
-  return notImplemented("getConversationDetail");
+  if (USE_MOCK) return viaMock(() => mockGetConversationDetail(id));
+  return http<ConversationDetail>(`/api/conversations/${encodeURIComponent(id)}`);
 }
 
 /** POST /api/conversations/:id/takeover */
 export function takeoverConversation(id: string): Promise<Conversation> {
-  void id;
-  return notImplemented("takeoverConversation");
+  if (USE_MOCK) return viaMock(() => mockTakeover(id));
+  return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/takeover`, { method: "POST" });
 }
 
 /** POST /api/conversations/:id/reply */
 export function replyConversation(id: string, text: string): Promise<ChatMessage> {
-  void id;
-  void text;
-  return notImplemented("replyConversation");
+  if (USE_MOCK) return viaMock(() => mockReply(id, text));
+  return http<ChatMessage>(`/api/conversations/${encodeURIComponent(id)}/reply`, {
+    method: "POST",
+    body: JSON.stringify({ text }),
+  });
 }
 
 /** POST /api/conversations/:id/release */
 export function releaseConversation(id: string): Promise<Conversation> {
-  void id;
-  return notImplemented("releaseConversation");
+  if (USE_MOCK) return viaMock(() => mockRelease(id));
+  return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/release`, { method: "POST" });
 }
 
 /** POST /api/conversations/:id/close */
 export function closeConversation(id: string): Promise<Conversation> {
-  void id;
-  return notImplemented("closeConversation");
+  if (USE_MOCK) return viaMock(() => mockClose(id));
+  return http<Conversation>(`/api/conversations/${encodeURIComponent(id)}/close`, { method: "POST" });
 }
 
 /** POST /api/traces/:id/misfire （P1） */
 export function markTraceMisfire(traceId: string): Promise<RouteTrace> {
-  void traceId;
-  return notImplemented("markTraceMisfire");
+  if (USE_MOCK) return viaMock(() => mockMarkMisfire(traceId));
+  return http<RouteTrace>(`/api/traces/${encodeURIComponent(traceId)}/misfire`, { method: "POST" });
 }
 
 // ───────────────────────── 4. 知识库 ─────────────────────────

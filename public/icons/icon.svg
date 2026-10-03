@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#2F4F3E"/>
+  <circle cx="256" cy="256" r="195" fill="none" stroke="#F7F4EE" stroke-opacity="0.22" stroke-width="3"/>
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central" font-family="'Songti SC','STSong','Noto Serif CJK SC',serif" font-weight="700" font-size="318" fill="#F7F4EE"></text>
+</svg>
