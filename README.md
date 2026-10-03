@@ -45,14 +45,14 @@ Claude 写任务卡(docs/TASKS.md) + 提示词
 1. **建仓库**：在 GitHub 新建一个**私有**仓库，例如 `qimu-cs-agent`（不要勾选自动生成 README）。
 2. **推送启动包**：用 Cursor 打开这个文件夹，在 Cursor 对话里说：「把这个文件夹初始化为 git 仓库，提交全部文件，推送到 <你的仓库地址> 的 main 分支」。
 3. **接上 Codex**：让 Codex 能访问这个 GitHub 仓库（Codex 云端任务可以直接开 PR）。在 Codex 的环境设置里添加环境变量 `OPENROUTER_API_KEY`（T01 要真实调用模型）。
-4. **本地密钥**：在本地仓库根目录新建 `.env.local`，写一行 `OPENROUTER_API_KEY=你的key`。这个文件已被 gitignore，不会被提交。**不要把 key 发到任何聊天里。**
+4. **本地密钥**：把 `.env.example` 复制一份命名为 `.env.local`（所有配置都在里面），只在 `OPENROUTER_API_KEY=` 后填上 key。每份本地克隆都要有一份。这个文件已被 gitignore，不会被提交。**不要把 key 发到任何聊天里。**
 5. **连上 Claude**：在 Claude 桌面端把本地仓库文件夹连接到这个 Cowork 会话，之后每次只需要说「T0X 完成」。
 6. 发出第一个提示词：`docs/prompts/T00-codex.md`。
 
 ## 本地运行
 
 ```bash
-cp .env.example .env.local     # 填入 OPENROUTER_API_KEY（只放本地，永远不要提交）
+cp .env.example .env.local     # 然后填入 OPENROUTER_API_KEY（只放本地，永远不要提交）
 npm install
 npm run seed                   # 生成/重置虚构数据
 npm run dev                    # http://localhost:3000 买家端，/seller 卖家端

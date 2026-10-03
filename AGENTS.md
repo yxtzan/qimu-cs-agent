@@ -12,6 +12,8 @@
 
 ## 2. 每个任务的标准流程
 
+**工作文件夹**：人类电脑上有两份独立克隆——`客服 agent/` 归 Codex，`qimu-frontend/` 归 Cursor。只在自己的文件夹里操作，不要去另一个文件夹切分支或改文件；两边通过 GitHub 的 main 分支同步。
+
 ```bash
 git checkout main && git pull origin main
 git checkout -b t<编号>-<短名>        # 例：t05-brain-pipeline
