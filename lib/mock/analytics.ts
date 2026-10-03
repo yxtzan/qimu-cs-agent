@@ -108,7 +108,7 @@ export async function mockGetRoutingAnalytics(range: "today" | "7d", includeSimu
 
   // 低置信度样本（最近的在前）
   const lowConfidence: RoutingAnalytics["lowConfidence"] = rows
-    .filter((r) => r.trace.layer !== "L1" && r.trace.confidence !== undefined && r.trace.confidence < LOW_CONFIDENCE)
+    .filter((r) => (r.trace.layer === "L2" || r.trace.layer === "L3") && r.trace.confidence !== undefined && r.trace.confidence < LOW_CONFIDENCE)
     .sort((a, b) => Date.parse(b.trace.at) - Date.parse(a.trace.at))
     .slice(0, 10)
     .map((r) => ({
