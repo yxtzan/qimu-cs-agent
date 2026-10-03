@@ -1,0 +1,67 @@
+[
+  {
+    "size": "XS",
+    "heightCm": [
+      150,
+      154
+    ],
+    "weightKg": [
+      40,
+      44
+    ],
+    "bustCm": 80,
+    "waistCm": 62
+  },
+  {
+    "size": "S",
+    "heightCm": [
+      155,
+      159
+    ],
+    "weightKg": [
+      45,
+      49
+    ],
+    "bustCm": 84,
+    "waistCm": 66
+  },
+  {
+    "size": "M",
+    "heightCm": [
+      160,
+      164
+    ],
+    "weightKg": [
+      50,
+      54
+    ],
+    "bustCm": 88,
+    "waistCm": 70
+  },
+  {
+    "size": "L",
+    "heightCm": [
+      165,
+      169
+    ],
+    "weightKg": [
+      55,
+      61
+    ],
+    "bustCm": 92,
+    "waistCm": 74
+  },
+  {
+    "size": "XL",
+    "heightCm": [
+      170,
+      175
+    ],
+    "weightKg": [
+      62,
+      70
+    ],
+    "bustCm": 96,
+    "waistCm": 78
+  }
+]

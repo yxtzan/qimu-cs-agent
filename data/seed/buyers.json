@@ -1,0 +1,170 @@
+[
+  {
+    "id": "B001",
+    "nickname": "林小满",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 160,
+    "weightKg": 50,
+    "defaultAddress": {
+      "name": "林小满",
+      "phone": "138****1001",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路1号虚构小区1室（演示地址）"
+    }
+  },
+  {
+    "id": "B002",
+    "nickname": "周雨桐",
+    "avatar": "",
+    "memberLevel": "银卡",
+    "heightCm": 165,
+    "weightKg": 54,
+    "defaultAddress": {
+      "name": "周雨桐",
+      "phone": "138****1002",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路2号虚构小区2室（演示地址）"
+    }
+  },
+  {
+    "id": "B003",
+    "nickname": "陈思",
+    "avatar": "",
+    "memberLevel": "普通",
+    "heightCm": 158,
+    "weightKg": 47,
+    "defaultAddress": {
+      "name": "陈思",
+      "phone": "138****1003",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路3号虚构小区3室（演示地址）"
+    }
+  },
+  {
+    "id": "B004",
+    "nickname": "赵可心",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 163,
+    "weightKg": 59,
+    "defaultAddress": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    }
+  },
+  {
+    "id": "B005",
+    "nickname": "许安宁",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 151,
+    "weightKg": 40,
+    "defaultAddress": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    }
+  },
+  {
+    "id": "B006",
+    "nickname": "李沐晴",
+    "avatar": "",
+    "memberLevel": "银卡",
+    "heightCm": 152,
+    "weightKg": 62,
+    "defaultAddress": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    }
+  },
+  {
+    "id": "B007",
+    "nickname": "宋佳禾",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 164,
+    "weightKg": 68,
+    "defaultAddress": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    }
+  },
+  {
+    "id": "B008",
+    "nickname": "何知夏",
+    "avatar": "",
+    "memberLevel": "普通",
+    "heightCm": 171,
+    "weightKg": 70,
+    "defaultAddress": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    }
+  },
+  {
+    "id": "B009",
+    "nickname": "沈亦宁",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 158,
+    "weightKg": 63,
+    "defaultAddress": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    }
+  },
+  {
+    "id": "B010",
+    "nickname": "温晓晴",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 150,
+    "weightKg": 43,
+    "defaultAddress": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    }
+  },
+  {
+    "id": "B011",
+    "nickname": "顾南枝",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 163,
+    "weightKg": 56,
+    "defaultAddress": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    }
+  },
+  {
+    "id": "B012",
+    "nickname": "郑悦",
+    "avatar": "",
+    "memberLevel": "金卡",
+    "heightCm": 153,
+    "weightKg": 69,
+    "defaultAddress": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    }
+  }
+]

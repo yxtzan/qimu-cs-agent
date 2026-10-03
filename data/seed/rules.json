@@ -1,0 +1,97 @@
+[
+  {
+    "id": "R001",
+    "name": "转人工",
+    "pattern": "人工|真人|转客服",
+    "intent": "human_request",
+    "maxLen": 12,
+    "enabled": true,
+    "hitCount": 41,
+    "misfireCount": 0,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-10-04T10:00:00.000+08:00"
+  },
+  {
+    "id": "R002",
+    "name": "查物流",
+    "pattern": "^(到哪了|物流|查物流|快递到哪了?|发货了吗)[?？!！。]*$",
+    "intent": "logistics_track",
+    "maxLen": 10,
+    "enabled": true,
+    "hitCount": 63,
+    "misfireCount": 2,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-10-03T10:00:00.000+08:00"
+  },
+  {
+    "id": "R003",
+    "name": "退款进度",
+    "pattern": "退款(进度|到哪|到账|什么时候到)",
+    "intent": "refund_progress",
+    "maxLen": 12,
+    "enabled": true,
+    "hitCount": 37,
+    "misfireCount": 1,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-10-02T10:00:00.000+08:00"
+  },
+  {
+    "id": "R004",
+    "name": "打招呼",
+    "pattern": "^(你好|您好|在吗|在不在|hi|hello)[?？!！~。]*$",
+    "intent": "greeting",
+    "maxLen": 8,
+    "enabled": true,
+    "hitCount": 88,
+    "misfireCount": 0,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-10-01T10:00:00.000+08:00"
+  },
+  {
+    "id": "R005",
+    "name": "发票",
+    "pattern": "发票",
+    "intent": "invoice",
+    "maxLen": 10,
+    "enabled": true,
+    "hitCount": 12,
+    "misfireCount": 1,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-09-30T10:00:00.000+08:00"
+  },
+  {
+    "id": "R006",
+    "name": "运费险",
+    "pattern": "运费险",
+    "intent": "return_policy",
+    "maxLen": 12,
+    "enabled": true,
+    "hitCount": 9,
+    "misfireCount": 0,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-09-29T10:00:00.000+08:00"
+  },
+  {
+    "id": "R007",
+    "name": "尺码（宽泛）",
+    "pattern": "尺码",
+    "intent": "size_recommend",
+    "maxLen": 20,
+    "enabled": true,
+    "hitCount": 23,
+    "misfireCount": 9,
+    "createdAt": "2026-09-01T10:00:00+08:00",
+    "lastHitAt": "2026-10-04T10:00:00.000+08:00"
+  },
+  {
+    "id": "R008",
+    "name": "优惠码",
+    "pattern": "优惠码",
+    "intent": "promotion",
+    "maxLen": 10,
+    "enabled": true,
+    "hitCount": 0,
+    "misfireCount": 0,
+    "createdAt": "2026-09-01T10:00:00+08:00"
+  }
+]
