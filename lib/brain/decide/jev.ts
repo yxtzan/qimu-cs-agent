@@ -1,14 +1,19 @@
 import type { DecideResult, IntentId } from "../../types";
 import { decisions, type DecisionAnswer } from "../../llm/openrouter";
 import { buildDecisionQuestions, INTENT_IDS } from "./questions";
-import { with429Retry, withClassifierSlot } from "./limits";
+import { ClassifierBudgetError, with429Retry, withClassifierSlot } from "./limits";
 
 export interface JevInput {
   stateForModel: unknown;
   message: string;
   model?: string;
   timeoutMs?: number;
+  deadlineMs?: number;
 }
+
+// Keep an unhealthy Jev route from consuming the whole shared fallback budget.
+// Normal Jev calls in the T01b benchmark are well below this ceiling.
+const DEFAULT_JEV_ATTEMPT_TIMEOUT_MS = 3000;
 
 function modelState(stateForModel: unknown, message: string): Record<string, unknown> {
   if (stateForModel && typeof stateForModel === "object" && !Array.isArray(stateForModel)) {
@@ -49,14 +54,19 @@ function emotion(answers: Record<string, DecisionAnswer>): { score: number; conf
 
 export async function decideWithJev(input: JevInput): Promise<DecideResult> {
   const result = await withClassifierSlot(() =>
-    with429Retry(() =>
-      decisions({
+    with429Retry(() => {
+      const remainingMs = input.deadlineMs === undefined ? undefined : input.deadlineMs - Date.now() - 25;
+      if (remainingMs !== undefined && remainingMs <= 0) throw new ClassifierBudgetError();
+      const timeoutMs = remainingMs === undefined
+        ? input.timeoutMs
+        : Math.max(1, Math.min(input.timeoutMs ?? DEFAULT_JEV_ATTEMPT_TIMEOUT_MS, DEFAULT_JEV_ATTEMPT_TIMEOUT_MS, remainingMs));
+      return decisions({
         model: input.model,
         state: modelState(input.stateForModel, input.message),
         questions: buildDecisionQuestions(),
-        timeoutMs: input.timeoutMs,
-      }),
-    ),
+        timeoutMs,
+      });
+    }, input.deadlineMs),
   );
   const answers = result.data.answers;
   return {

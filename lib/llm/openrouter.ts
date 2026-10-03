@@ -133,6 +133,8 @@ export interface LlmMessage {
     type: "function";
     function: { name: string; arguments: string };
   }[];
+  reasoning?: unknown;
+  reasoning_details?: unknown;
   tool_call_id?: string;
   name?: string;
 }
@@ -165,6 +167,8 @@ export interface ChatCompletionParams {
   maxTokens?: number;
   /** Passed through as OpenRouter `reasoning` (e.g. `{ enabled: false }` to skip thinking). */
   reasoning?: Record<string, unknown>;
+  /** Optional OpenRouter provider routing preferences (e.g. { sort: "latency" }). */
+  provider?: Record<string, unknown>;
   timeoutMs?: number;
 }
 
@@ -177,12 +181,20 @@ export interface ChatCompletionData {
   /** The assistant message, ready to append to `messages` for the next tool-calling round. */
   message: LlmMessage;
   usage: { promptTokens: number; completionTokens: number };
+  /** Raw reasoning fields when a provider returns them; absent when reasoning is disabled. */
+  reasoning?: unknown;
+  reasoningDetails?: unknown;
 }
 
 interface RawUsage {
   prompt_tokens?: number;
   completion_tokens?: number;
   cost?: number;
+}
+
+function defaultReasoning(): Record<string, unknown> | undefined {
+  const setting = process.env.LLM_REASONING?.trim().toLowerCase();
+  return setting === "on" ? { enabled: true } : { enabled: false };
 }
 
 export async function chatCompletion(
@@ -201,7 +213,9 @@ export async function chatCompletion(
   if (params.responseFormat) body.response_format = params.responseFormat;
   if (params.temperature !== undefined) body.temperature = params.temperature;
   if (params.maxTokens !== undefined) body.max_tokens = params.maxTokens;
-  if (params.reasoning) body.reasoning = params.reasoning;
+  const reasoning = params.reasoning ?? defaultReasoning();
+  if (reasoning) body.reasoning = reasoning;
+  if (params.provider) body.provider = params.provider;
 
   const { json, latencyMs } = await postJson(
     "/v1/chat/completions",
@@ -216,6 +230,8 @@ export async function chatCompletion(
       message?: {
         content?: string | null;
         tool_calls?: { id: string; function: { name: string; arguments: string } }[];
+        reasoning?: unknown;
+        reasoning_details?: unknown;
       };
     }[];
     usage?: RawUsage;
@@ -265,6 +281,8 @@ export async function chatCompletion(
           : {}),
       },
       usage: { promptTokens, completionTokens },
+      reasoning: choice.message.reasoning,
+      reasoningDetails: choice.message.reasoning_details,
     },
     latencyMs,
     costUsd,
