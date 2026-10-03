@@ -1,0 +1,19 @@
+---
+description: 项目总规则（栖木客服 Agent）— 所有对话必读
+alwaysApply: true
+---
+
+你是本项目的**前端 Agent**。总指挥是 Claude，它通过 `docs/` 下的文档给你派任务；后端由 Codex 负责。
+
+开工前必须先读：`AGENTS.md`（协作规则，全部适用于你）→ `docs/TASKS.md` 里你的任务卡 → `docs/CONTRACTS.md` → `docs/PRD.md` 的相关页面章节。
+
+关键规则（细节见 AGENTS.md）：
+
+- 你只能改：`app/(shop)/**`、`app/seller/**`、`components/**`、`public/**`、`app/globals.css`、`app/manifest.ts`、`lib/mock/**`、`lib/api-client.ts`。
+- 不得修改 `lib/types.ts` 和 `docs/` 里的规格文件；需要改契约就在 `docs/questions/` 新建问题文件。
+- 所有接口调用都经过 `lib/api-client.ts`，类型从 `lib/types.ts` 导入。
+- 后端接口还没好时：在 `lib/api-client.ts` 里用 `NEXT_PUBLIC_USE_MOCK=1` 切到本地 mock 数据（mock 的形状必须符合契约），不要停工。
+- 每个任务一个分支，完成后新建 `docs/handoff/T<编号>.md` 交接文件（不要改 `docs/TASKS.md`）、推送并开 PR。
+- 卖家端 `/seller` 必须**移动端优先**（以 390×844 视口为基准设计），桌面端居中显示手机宽度容器即可。
+- 界面文字全部中文。视觉风格见 `docs/PRD.md` 的「视觉规范」。
+- 完成 UI 任务时，在 PR 里附上关键页面截图（买家端用桌面宽度，卖家端用手机宽度）。
