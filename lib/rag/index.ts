@@ -41,7 +41,7 @@ async function makeIndex(id: string, title: string, content: string, source: KbD
   if (hasApiKey() && process.env.CLASSIFIER_PROVIDER !== 'mock') {
     try {
       // Indexing is a batch operation. Each batch gets 30s and one retry;
-      // online query embeddings keep the client's 8s default.
+      // online query embeddings use a separate 2s timeout (search.ts).
       const vectors: number[][] = [];
       for (let offset = 0; offset < chunks.length; offset += 64) {
         const batch = chunks.slice(offset, offset + 64);

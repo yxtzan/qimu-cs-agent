@@ -5,7 +5,7 @@ import { bigramScore, cosineSimilarity } from './chunk';
 import { readKnowledgeIndex, validVectors } from './index';
 
 export interface SearchMetrics { latencyMs: number; costUsd: number; estimated: boolean; mode: 'embedding' | 'bigram' | 'mixed'; fallback?: string }
-export async function searchKnowledgeWithMetrics(query: string, topK = 4): Promise<{ hits: KbSearchHit[]; metrics: SearchMetrics }> {
+export async function searchKnowledgeWithMetrics(query: string, topK = 4, options: { deadlineMs?: number } = {}): Promise<{ hits: KbSearchHit[]; metrics: SearchMetrics }> {
   if (typeof query !== 'string' || !query.trim() || query.length > 2000) throw new ApiError('BAD_REQUEST', '请输入 1–2000 字的搜索问题', 400);
   if (!Number.isInteger(topK) || topK < 1 || topK > 20) throw new ApiError('BAD_REQUEST', 'topK 必须是 1–20 的整数', 400);
   const started = Date.now();
@@ -15,8 +15,10 @@ export async function searchKnowledgeWithMetrics(query: string, topK = 4): Promi
   const queryVectors = new Map<string, number[]>();
   if (hasApiKey() && process.env.CLASSIFIER_PROVIDER !== 'mock') {
     for (const model of models) {
+      const remainingMs = options.deadlineMs === undefined ? 2000 : options.deadlineMs - Date.now() - 50;
+      if (remainingMs <= 0) { metrics.fallback = '本轮时间预算已用尽，已使用 bigram'; break; }
       try {
-        const result = await embed({ model, input: [query.trim()] });
+        const result = await embed({ model, input: [query.trim()], timeoutMs: Math.min(2000, remainingMs) });
         metrics.costUsd += result.costUsd;
         metrics.estimated ||= result.estimated;
         if (!validVectors(result.data, 1)) throw new Error('Invalid query embedding');

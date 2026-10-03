@@ -72,7 +72,7 @@ async function main() {
     // Query must use the model that built each stored index, even after env changes.
     process.env.EMBEDDING_MODEL = 'different/model'; await searchKnowledge('真丝怎么洗');
     process.env.EMBEDDING_MODEL = 'fixture/embedding';
-    assert(timeouts.includes(8000), '在线查询仍为 8 秒');
+    assert(timeouts.includes(2000), '在线查询为 2 秒');
     let failedRequests = 0;
     globalThis.fetch = async () => { failedRequests++; throw new Error('simulated network failure'); };
     const fallback = await searchKnowledgeWithMetrics('真丝怎么洗'); assert.equal(fallback.metrics.mode, 'bigram'); assert.equal(fallback.hits[0].chunk.heading, '真丝'); assert(fallback.metrics.fallback);
@@ -81,7 +81,7 @@ async function main() {
     globalThis.fetch = async () => Response.json({ data: [{ index: 0, embedding: [0, 0] }], usage: { cost: 0.000001 } });
     const invalid = await importKnowledgeDoc('坏向量文档', '## 羊绒\n羊绒要阴干。'); assert.equal(invalid.indexMode, 'bigram');
     globalThis.fetch = originalFetch; process.env.OPENROUTER_API_KEY = ''; const offline = await searchKnowledgeWithMetrics('真丝怎么洗'); assert.equal(offline.hits[0].chunk.heading, '真丝'); assert.equal(offline.metrics.mode, 'bigram');
-    console.log('PASS embedding 传输夹具（非真实模型）：索引 30 秒+重试 1 次，查询 8 秒；向量解析/余弦/成本/原索引模型；查询失败、导入失败、无效向量及移除 key 自动降到 bigram');
+    console.log('PASS embedding 传输夹具（非真实模型）：索引 30 秒+重试 1 次，查询 2 秒；向量解析/余弦/成本/原索引模型；查询失败、导入失败、无效向量及移除 key 自动降到 bigram');
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.setTimeout = originalTimer;

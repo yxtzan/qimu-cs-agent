@@ -1,10 +1,10 @@
 import type { DecideResult, IntentId } from "../../types";
 
 const intentKeywords: [IntentId, string[]][] = [
-  ["logistics_track", ["到哪", "物流", "快递", "包裹", "运单", "配送", "送到"]],
   ["refund_progress", ["退款进度", "退款到哪", "钱何时", "到账"]],
+  ["logistics_track", ["到哪", "物流", "快递", "包裹", "运单", "配送", "送到"]],
   ["refund_apply", ["退款", "退货"]],
-  ["exchange", ["换码", "换尺码", "换颜色", "换货"]],
+  ["exchange", ["换码", "换尺码", "换颜色", "换货", "能换", "想换", "换成"]],
   ["size_recommend", ["尺码", "多大码", "穿什么码", "身高", "体重", "公斤", "斤"]],
   ["stock_check", ["有货", "库存", "补货"]],
   ["promotion", ["优惠", "折扣", "优惠券", "满减", "会员价"]],
