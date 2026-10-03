@@ -1,8 +1,8 @@
-import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { generateSeed } from './seed-data';
 import { checkSeed } from './check-seed';
-import { clearStoreCache } from '../lib/store';
+import { resetDemoData as resetRuntimeData } from '../lib/store/reset';
 
 const seedDir = join(process.cwd(), 'data/seed');
 const runtimeDir = join(process.cwd(), 'data/runtime');
@@ -19,12 +19,7 @@ export async function resetDemoData(): Promise<void> {
   }
   // Validate before replacing runtime: a broken seed must not destroy a running demo.
   checkSeed(seedDir);
-  rmSync(runtimeDir, { recursive: true, force: true });
-  mkdirSync(runtimeDir, { recursive: true });
-  for (const file of readdirSync(seedDir).filter(f => f.endsWith('.json'))) {
-    copyFileSync(join(seedDir, file), join(runtimeDir, file));
-  }
-  clearStoreCache();
+  await resetRuntimeData(); // T16: seed → runtime + registered reset hooks (lib/store/reset.ts)
   await buildKnowledgeIndex();
   await generateSeedTraffic();
   checkSeed(runtimeDir, join(seedDir, 'kb'));
