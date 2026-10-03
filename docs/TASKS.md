@@ -18,9 +18,9 @@
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 | 2 | 5h | todo |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
-| T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | doing |
+| T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
 | T06 | 种子流量 + 看板 API + 评测脚本 | Codex | T05 | 4 | 3h | todo |
-| T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | todo |
+| T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | doing |
 | T15 | 前后端联调 + 打磨 | Cursor | T05 T14 | 5 | 3h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
@@ -375,7 +375,7 @@
 **要做**
 
 1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。关闭 mock（`NEXT_PUBLIC_USE_MOCK=0`），按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
-2. 加载态、空状态、错误态全部检查一遍。
+2. 加载态、空状态、错误态全部检查一遍；顺手修掉买家端首页开发模式下的 hydration 提示（`components/shop/TopBar.tsx` 的 `CategoryNav`，T13 交接里提到）。
 3. 卖家端加一个「设置」入口（会话 Tab 右上角齿轮）：「重置演示数据」按钮，调用 `POST /api/admin/reset`，成功后刷新页面。
 4. 买家端首页加一个不显眼的「演示指南」浮层入口，列出剧本的 6 步和对应可点击的快捷入口（如"以 B001 身份打开订单 QM2026100201"）。
 
