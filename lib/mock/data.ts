@@ -302,6 +302,25 @@ export const MOCK_BUYERS: Buyer[] = [
     weightKg: 52,
     defaultAddress: addr("郑可心", "13500135005", "四川省 成都市 锦江区", "东大街 99 号 5 栋 1503"),
   },
+  // B006/B007 仅用于卖家端会话 mock（没有订单数据）
+  {
+    id: "B006",
+    nickname: "孙悦然",
+    avatar: "https://picsum.photos/seed/avatar-B006/96/96",
+    memberLevel: "普通",
+    heightCm: 164,
+    weightKg: 53,
+    defaultAddress: addr("孙悦然", "13300133006", "江苏省 苏州市 姑苏区", "观前街 36 号 4 幢 702"),
+  },
+  {
+    id: "B007",
+    nickname: "何雅琪",
+    avatar: "https://picsum.photos/seed/avatar-B007/96/96",
+    memberLevel: "银卡",
+    heightCm: 162,
+    weightKg: 55,
+    defaultAddress: addr("何雅琪", "13200132007", "湖北省 武汉市 武昌区", "中南路 12 号 3 单元 1101"),
+  },
 ];
 
 // ───────────────────────── orders ─────────────────────────
