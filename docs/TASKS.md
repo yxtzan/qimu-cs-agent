@@ -22,8 +22,8 @@
 | T06 | 评测脚本 + 评测 API | Codex | T05 | 4 | 1.5h | todo |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
-| T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | doing |
-| T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | todo |
+| T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
+| T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | doing |
 | T15 | 前后端联调 | Cursor | T05 T17 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
@@ -204,7 +204,7 @@
 2. 实现 CONTRACTS §9 的全部工具。读工具做归属校验；写工具**只创建 `PendingAction`**（存 `data/runtime/pending_actions.json`），并校验 DATA_SPEC §6 的业务规则，不满足时返回 `{ ok: false, reason: "中文原因" }`。
 3. `lib/tools/execute-pending.ts`：`confirmPendingAction(id)` 真正修改订单 / 新建售后单（含 timeline），`cancelPendingAction(id)`。
 4. `recommend_size`：DATA_SPEC §4 确定性算法，返回 `{ size, basis }`（basis 是中文解释）。写单元测试覆盖：160/50→M、158/47→S、斤换算、宽松版型、超出范围。
-5. `lib/rag/`：`chunk.ts`、`index.ts`（embedding 或 bigram 两种模式，自动选择）、`search.ts`。索引存 `data/runtime/kb_index.json`。`npm run seed` 时为初始知识库建索引。重置演示数据时也要重建索引：如果 `lib/store/reset.ts`（Cursor 的 T16）已合并，用 `registerResetHook("kb-index", …)` 注册；还没合并就先在 `scripts/seed.ts` 里直接调用，交接文件里注明，T16 合并后再改。PendingAction 的集合名固定为 `pending_actions`（T16 会读它）。
+5. `lib/rag/`：`chunk.ts`、`index.ts`（embedding 或 bigram 两种模式，自动选择）、`search.ts`。索引存 `data/runtime/kb_index.json`。`npm run seed` 时为初始知识库建索引。重置演示数据时也要重建索引：T16 已合并，用 `registerResetHook("kb-index", …)` 注册；然后把注册钩子的模块登记到 `lib/store/reset-hooks.ts`（加一行 import；文件若还不存在就新建，只放 import 行），**不要**在 `app/api/admin/reset/route.ts` 或 `scripts/seed.ts` 里直接 import。T16 的数据层函数签名见 `docs/handoff/T16.md`。PendingAction 的集合名固定为 `pending_actions`（T16 会读它）。
 6. 知识库 API：CONTRACTS §4 全部接口。
 7. `scripts/try-tools.ts`：命令行逐个调用工具打印结果，便于人类验证。
 8. 顺手修一处知识库内容：`data/seed/kb/退换货政策.md` 里写了「燕麦色 L 码目前有 3 件」这类**具体库存数字**。库存是会变的（演示里一换货就变成 2 件），知识库只写规则，不写实时数据；改成「是否有货以客服实时查询为准」。其他文档如有类似写法一并改掉，改完重跑 `npm run check-seed`。
@@ -434,8 +434,9 @@
 1. `lib/analytics/gen-traffic.ts` + `scripts/gen-traffic.ts`：ARCHITECTURE §7。生成约 60 个历史会话、约 300 条买家消息及对应 AI 回复和 RouteTrace（全部 `isSimulated: true`），写入 T16 的数据层。消息文本要像真实买家（复用各意图的多种说法）；分布：层级占比约 风险 4% / L1 22% / L2 56% / L3 12% / 人工 6%；延迟 L1 20–50ms、L2 300–600ms（Jev 热状态实测 p50 384ms）、L3 2–7s；成本 L2 按 Jev 实测 $0.000059/条，L3 按 $0.002–0.005/条；约 10 条低置信度样本、约 12 条风险命中；时间分布在 DEMO_NOW 前 7 天，白天多、夜里少。固定随机种子，可复现。通过 `registerResetHook("traffic", …)` 注册到 reset。你在 `lib/mock/traffic.ts` 里写过类似逻辑，可以复用思路。
 2. `lib/analytics/routing.ts` + `GET /api/analytics/routing`：严格按 CONTRACTS §6「统计口径」七条聚合；`latestEval` 读 `data/runtime/eval_latest.json`（T06 产出，没有就省略）。
 3. 前端看板在 `NEXT_PUBLIC_USE_MOCK=0` 下对接真实接口，核对数字和 mock 口径一致。
+4. 新建 `lib/store/reset-hooks.ts`（见 `docs/questions/T16-1.md` 答复）：只含若干 `import "…"` 行，登记所有重置钩子模块（你的种子流量；T03 的知识库索引若已合并也加上）。`app/api/admin/reset/route.ts` 和 `scripts/seed.ts` 改为只 import 这一个文件。验收：网页上点「重置演示数据」后，看板的模拟历史数据会重新生成。
 
-**目录归属（本任务特批）**：`lib/analytics/**`、`app/api/analytics/**`、`scripts/gen-traffic.ts`。
+**目录归属（本任务特批）**：`lib/analytics/**`、`app/api/analytics/**`、`scripts/gen-traffic.ts`、`lib/store/reset-hooks.ts`，以及 `scripts/seed.ts` 里的那一行 import。
 
 **验收标准**
 

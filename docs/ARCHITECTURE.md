@@ -223,7 +223,7 @@ scripts/
 - 快捷按钮 payload（`action.type = "quick_action"`）：100% 命中，置信度 1.0。
 - 关键词/正则规则带 `maxLen`（默认 12 个字）：「到哪了」命中物流；「到哪了，另外我想退另一件」超长 → 不走 L1，交给 L2/L3。**这就是"做减法"：宁可漏给下一层，也不要误吞。**
 - 每次命中 `hitCount++`；误判计数 `misfireCount++` 的条件：L1 处理后买家下一条消息被识别为否定反馈（「不是」「不对」「答非所问」「我问的是」），或卖家在会话详情里手动标记误判（P1）。
-- 卖家端「建议删除」：`hitCount ≥ 5 且 misfireCount / hitCount ≥ 30%`，或「`createdAt` 已满 7 天且近 7 天没有命中（`lastHitAt` 为空或早于 7 天前）」。创建不满 7 天的新规则一律 `keep`。理由文案由前端用 `hitCount / misfireCount / lastHitAt` 拼，后端只返回 `suggestion`。
+- 卖家端「建议删除」：`hitCount ≥ 5 且 misfireCount / hitCount ≥ 30%`，或「`createdAt` 已满 7 天且近 7 天没有命中（`lastHitAt` 为空或早于 7 天前）」。另有 `review` 档：`hitCount ≥ 5 且误判率 ≥ 15%`（未到 30%），卖家端显示「建议复查」。创建不满 7 天的新规则一律 `keep`。理由文案由前端用 `hitCount / misfireCount / lastHitAt` 拼，后端只返回 `suggestion`。
 
 ### 4.5 handler（执行层）
 

@@ -96,6 +96,7 @@
 交还 AI：`mode="ai"`, `status="ai_active"`；插入系统消息「已切换回智能客服」；`unresolvedTurns` 归零。
 
 ### `POST /api/conversations/:id/close` → `Conversation`
+`status="closed"`，`mode` 置回 `"ai"`（买家再发消息时由 AI 接待）。`/messages?after=` 的 `after` 找不到时返回全部消息。
 
 ### `POST /api/traces/:id/misfire` → `RouteTrace`（P1）
 卖家标记该条路由为误判；若是 L1 规则命中则对应规则 `misfireCount++`。
@@ -154,7 +155,7 @@
 ## 7. 演示管理
 
 ### `POST /api/admin/reset` → `{ ok: true }`
-重置演示数据（等同 `npm run seed` 的复制 + 索引 + 种子流量步骤）。卖家端设置页调用。由 Codex 在 T05 实现。
+重置演示数据（等同 `npm run seed` 的复制 + 索引 + 种子流量步骤）。卖家端设置页调用。由 Cursor 在 T16 实现（`lib/store/reset.ts`）；各模块的重置钩子统一登记在 `lib/store/reset-hooks.ts`。
 
 ## 8. 店铺 AI 助手（P1）
 
