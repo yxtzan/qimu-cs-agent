@@ -13,10 +13,10 @@
 | T01b | Jev 延迟排查 + 兜底提速 | Codex | T01 | 1 | 45m | doing |
 | T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | todo |
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
-| T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | doing |
+| T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 | 2 | 5h | todo |
-| T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | todo |
+| T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | doing |
 | T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | todo |
 | T06 | 种子流量 + 看板 API + 评测脚本 | Codex | T05 | 4 | 3h | todo |
@@ -174,7 +174,7 @@
 **要做**
 
 1. `/seller` 布局：移动端优先（基准 390×844）；桌面端居中显示 430px 宽的"手机容器"，背景浅灰。底部 Tab：会话 / 看板 / 知识库 / 规则。
-2. `/seller` 会话列表：三组（待人工 / AI 处理中 / 已结束），每项显示头像、昵称、最后一句、相对时间、风险标签（橙色）、等待时长（待人工组）、未读红点。mock 数据至少 6 个会话覆盖三种状态。
+2. `/seller` 会话列表：四组（待人工 / 人工处理中 / AI 处理中 / 已结束；T11 时改为四组），每项显示头像、昵称、最后一句、相对时间、风险标签（橙色）、等待时长（待人工组）、未读红点。mock 数据至少 6 个会话覆盖三种状态。
 3. `/seller/c/[id]` 会话详情：消息流（买家 / AI / 卖家 / 系统 四种样式）、顶部「接管」「交还 AI」按钮（先只改本地状态）、可折叠的「AI 上下文」面板（展示 DialogState：当前任务、槽位、最近动作、风险标签、转人工原因与摘要）。
 4. 其余三个 Tab 先放标题占位。
 5. PWA：`app/manifest.ts`（name「栖木商家」、short_name「栖木」、`start_url: /seller`、`display: standalone`、主题色 `#2F4F3E`）、图标（可以用 SVG 生成的 192/512 PNG，内容为「栖」字）、iOS `apple-touch-icon` 和 `apple-mobile-web-app-capable` meta。
@@ -226,7 +226,7 @@
 4. `lib/brain/handlers/`：ARCHITECTURE §4.5 全部意图。缺槽位按"状态 → 唯一订单自动选 → options 卡片 → 追问"补全。咨询类走 RAG + `GENERATION_MODEL`，回复附 `sources` 卡片。
 5. `lib/brain/pipeline.ts`：`handleMessage()` 实现 §1 的 ①–⑥ 和 ⑧（L3 先放一个占位：返回"这个问题我需要再确认一下"并 `unresolvedTurns++`，T05 替换）。**L1 命中时不等 decide()**：先同步跑硬关键词风险检查，未命中就立即回复，decide() 在后台继续跑，若模型风险分超阈值再追加转人工（见 ARCHITECTURE §1、D001 修订）。L2/L3 的具体模型配置以 T01b 报告后 Claude 的决定为准。
 6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。
-7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`。
+7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`；每写一条 trace 同时更新 `Conversation.lastLayer`。
 8. API：`POST /api/chat`、`GET /api/conversations/:id/messages`、`GET /api/conversations/latest`。
 9. `scripts/chat-cli.ts`：命令行和客服对话（可选买家、可选 context），每轮打印回复和 trace 摘要，方便不打开前端就验证。
 
@@ -280,7 +280,7 @@
 
 1. `lib/brain/agent.ts`：ARCHITECTURE §4.6。系统提示词写在 `lib/brain/prompts/agent.ts`，中文；把服务原则写清楚（只基于工具结果回答、写操作必须生成确认、不确定就 `create_handoff`、不承诺政策以外的东西）。替换 T04 的 L3 占位。
 2. 无 key / mock 模式下的 L3：返回"这个问题比较复杂，我帮您转接人工客服"并转人工（保证流程不断）。
-3. `lib/brain/handoff.ts`：§4.7。一句话摘要用 `GENERATION_MODEL` 生成（mock 用模板：`买家{昵称}，{意图中文}，{原因}`）。
+3. `lib/brain/handoff.ts`：§4.7。进入 `waiting_human` 时写 `Conversation.handoffAt`，`release` 时清空。一句话摘要用 `GENERATION_MODEL` 生成（mock 用模板：`买家{昵称}，{意图中文}，{原因}`）。
 4. 卖家会话 API：CONTRACTS §3 全部接口（包括 `takeover / reply / release / close`、可选的 `misfire`）。
 5. 规则 API：CONTRACTS §5；`suggestion` 按 ARCHITECTURE §4.4 计算。
 6. 人工模式下买家消息：不自动回复，`unreadForSeller++`。
@@ -303,6 +303,7 @@
 
 **要做**
 
+0. 用上新字段：会话列表的等待时长改用 `handoffAt`，列表行加 `LayerBadge`（`lastLayer`）；mock 数据补上这两个字段。另外在真实浏览器 390×844 下确认右侧没有被裁切（T10、T11 的截图右侧都像被截掉一块，可能只是截图工具的问题，需要人眼确认）。
 1. 会话详情接上真实 API（mock 模式仍可用）：接管 / 交还 AI / 回复 / 结束；每 2 秒轮询新消息；「AI 上下文」面板里增加**路由轨迹**：每条买家消息对应一行（层级徽标 + 意图 + 置信度 + 耗时），点击展开风险分数和工具调用。
 2. 会话列表每 3 秒刷新；待人工会话有新消息时红点 + 列表顶部一条横幅「有 1 位买家等待人工」。
 3. `/seller/kb`：文档列表；导入（上传 .md/.txt 或粘贴文本，导入中显示进度状态）；点击文档看分块；「试搜一下」输入框显示命中分块和分数。

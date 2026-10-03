@@ -263,6 +263,8 @@ export interface Conversation {
   assignee?: string; // 人工客服名，如 "阿栖"
   handoffReason?: string; // 例 "风险闸门：health_safety 0.93；legal_threat 0.88"
   handoffSummary?: string; // AI 生成的一句话摘要
+  handoffAt?: string; // 最近一次进入 waiting_human 的时间；交还 AI 后清空（2026-10-04 加，见 docs/questions/T11-1.md）
+  lastLayer?: Layer; // 最近一条买家消息最终由哪一层接住（每写一条 RouteTrace 就更新）
   riskFlags: RiskKey[];
   tags: string[];
   state: DialogState;

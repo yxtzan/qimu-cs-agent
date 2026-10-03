@@ -73,7 +73,7 @@
 ## 3. 卖家端
 
 ### `GET /api/conversations?status=` → `Conversation[]`
-`status` 可选（`ConversationStatus`）。排序：`waiting_human` 在最前（按等待时长倒序），其余按 `updatedAt` 倒序。默认**不含** `isSimulated` 会话，`?includeSimulated=1` 时包含。
+`status` 可选（`ConversationStatus`）。排序：`waiting_human` 在最前（按 `handoffAt` 升序，即等得最久的在最上），其次 `human_active`，其余按 `updatedAt` 倒序。默认**不含** `isSimulated` 会话，`?includeSimulated=1` 时包含。
 
 ### `GET /api/conversations/:id` → `{ conversation: Conversation; messages: ChatMessage[]; traces: RouteTrace[]; pendingActions: PendingAction[] }`
 会话详情 / 人工接管台。读取后 `unreadForSeller` 归零。
