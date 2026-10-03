@@ -1,3 +1,5 @@
+import { GuideLink } from "./GuideLink";
+
 export function Footer() {
   return (
     <footer className="mt-20 border-t border-line">
@@ -11,7 +13,7 @@ export function Footer() {
           <span>7 天无理由退换</span>
           <span>智能客服 24 小时 · 人工客服 9:00–23:00</span>
         </div>
-        <div className="text-xs">演示商城 · 所有商品与订单均为虚构数据</div>
+        <div className="text-xs">演示商城 · 所有商品与订单均为虚构数据 · <GuideLink /></div>
       </div>
     </footer>
   );

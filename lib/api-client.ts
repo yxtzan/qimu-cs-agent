@@ -5,7 +5,7 @@
  * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 强制使用本地 mock；设为 "0" 强制走真实后端；
  *   不设置时默认使用 mock（后端接口就绪前的过渡约定，后端合并后请在 .env.local 里设 NEXT_PUBLIC_USE_MOCK=0）。
  * - 商城（CONTRACTS §1）、买家聊天（§2，T12）、卖家会话（§3，T11）、知识库（§4）和规则（§5）（T13）、看板 / 评测（§6，T14）已实现（mock + 真实 fetch）；
- *   其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务填实现。
+ *   演示管理 resetDemo（设置页）也已实现；其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务填实现。
  * - 失败统一抛 `ApiError`（带 code / status，message 为中文，可直接展示）。
  */
 import type {
@@ -49,7 +49,7 @@ import {
   mockUpdateRule,
 } from "@/lib/mock/admin";
 import { mockGetLatestEval, mockGetRoutingAnalytics } from "@/lib/mock/analytics";
-import { mockRead, mockReadClearingUnread, mockWrite } from "@/lib/mock/sync";
+import { mockRead, mockReadClearingUnread, mockWrite, resetMockData } from "@/lib/mock/sync";
 import { mockGetConversationMessages, mockGetLatestConversation, mockSendChat } from "@/lib/mock/chat";
 import {
   mockClose,
@@ -362,7 +362,14 @@ export function getLatestEval(): Promise<EvalReport | null> {
 
 /** POST /api/admin/reset */
 export function resetDemo(): Promise<{ ok: true }> {
-  return notImplemented("resetDemo");
+  if (USE_MOCK) {
+    return viaMock(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 400)); // 让「重置中…」状态能被看到
+      resetMockData();
+      return { ok: true as const };
+    });
+  }
+  return http<{ ok: true }>("/api/admin/reset", { method: "POST" });
 }
 
 // ───────────────────────── 8. 店铺 AI 助手（P1） ─────────────────────────

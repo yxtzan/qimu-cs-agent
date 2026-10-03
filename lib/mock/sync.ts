@@ -11,7 +11,7 @@
  * - 订单、知识库不同步（只在各自标签页内有效）。
  * - 两个标签页恰好同时修改同一份数据时，后写入的会覆盖先写入的（真实后端不存在这个问题）。
  */
-import { exportRules, importRules, type RuleSeed } from "./admin";
+import { exportRules, importRules, resetAdminMock, type RuleSeed } from "./admin";
 import { exportChatMeta, importChatMeta } from "./chat";
 import { mockSellerStore, replaceSellerStore, resetSellerMock, type Seed } from "./seller";
 
@@ -93,6 +93,17 @@ export async function mockReadClearingUnread<T>(conversationId: string, fn: () =
   syncIn();
   const hadUnread = (mockSellerStore().find((s) => s.conversation.id === conversationId)?.conversation.unreadForSeller ?? 0) > 0;
   return hadUnread ? mockWrite(fn) : fn();
+}
+
+/**
+ * 重置演示数据（设置页「重置演示数据」，等价于后端的 POST /api/admin/reset）：
+ * 卖家会话、规则恢复种子数据，并立刻写回一份新快照，其他已打开的标签页下次请求时会自动同步成重置后的数据。
+ * 订单、知识库不跨标签页同步，调用方随后应刷新本页（其他标签页手动刷新即可）。
+ */
+export function resetMockData() {
+  resetSellerMock();
+  resetAdminMock();
+  syncOut();
 }
 
 export function resetMockSync() {

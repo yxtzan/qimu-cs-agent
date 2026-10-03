@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { getProduct } from "@/lib/api-client";
+import { ApiError, getProduct } from "@/lib/api-client";
 import type { Product, Size } from "@/lib/types";
 import { COLOR_SWATCH, SIZE_CHART } from "./labels";
 import { formatSales, money } from "./format";
 import { ProductImage } from "./ProductImage";
 import { PlainBadge } from "./StatusBadge";
 import { useShop } from "./ShopProvider";
+import { ErrorState, friendlyError } from "./states";
 import { useAsync } from "./useAsync";
 
 function Stars({ rating }: { rating: number }) {
@@ -327,15 +328,18 @@ function DetailSkeleton() {
 }
 
 export function ProductDetail({ id }: { id: string }) {
-  const { data, error, loading } = useAsync(() => getProduct(id), [id]);
+  const { data, error, loading, reload } = useAsync(() => getProduct(id), [id]);
   if (loading && !data) return <DetailSkeleton />;
   if (error || !data) {
+    const missing = error instanceof ApiError && error.status === 404;
     return (
-      <main className="mx-auto flex w-full max-w-[1280px] flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
-        <p className="text-lg text-foreground">{error?.message ?? "没有找到这件商品"}</p>
-        <Link href="/" className="rounded-full bg-brand px-6 py-2.5 text-sm text-white hover:bg-brand-dark">
-          回首页逛逛
-        </Link>
+      <main className="mx-auto w-full max-w-[640px] flex-1 px-6 py-20">
+        <ErrorState
+          message={missing || !error ? "没有找到这件商品" : friendlyError(error, "商品暂时没加载出来")}
+          onRetry={missing || !error ? undefined : reload}
+          backHref="/"
+          backLabel="回首页逛逛"
+        />
       </main>
     );
   }

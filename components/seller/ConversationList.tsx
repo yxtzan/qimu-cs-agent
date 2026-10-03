@@ -6,7 +6,8 @@ import type { Buyer, Conversation, ConversationStatus } from "@/lib/types";
 import { intentLabel } from "./labels";
 import { useSeller } from "./SellerProvider";
 import { waitText } from "./time";
-import { Avatar, LayerBadge, MemberBadge, PageHeader, RiskChip } from "./ui";
+import { friendlyError } from "@/components/shop/states";
+import { Avatar, EmptyCard, ErrorCard, LayerBadge, MemberBadge, PageHeader, RiskChip } from "./ui";
 
 interface Group {
   status: ConversationStatus;
@@ -106,7 +107,7 @@ function Skeleton() {
 }
 
 export function ConversationList() {
-  const { conversations, error, buyers, waitingCount } = useSeller();
+  const { conversations, error, buyers, waitingCount, refresh } = useSeller();
 
   return (
     <>
@@ -114,16 +115,28 @@ export function ConversationList() {
         title="会话"
         subtitle="栖木商家 · 阿栖 在线"
         right={
-          waitingCount > 0 ? (
-            <span className="inline-flex min-h-8 items-center gap-1.5 rounded-full bg-red-50 px-3 text-xs font-semibold text-red-700 ring-1 ring-red-200">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-600" />
-              {waitingCount} 个待人工
-            </span>
-          ) : (
-            <span className="inline-flex min-h-8 items-center rounded-full bg-brand-soft px-3 text-xs font-medium text-brand">
-              暂无待人工
-            </span>
-          )
+          <div className="flex items-center gap-1">
+            {waitingCount > 0 ? (
+              <span className="inline-flex min-h-8 items-center gap-1.5 rounded-full bg-red-50 px-3 text-xs font-semibold text-red-700 ring-1 ring-red-200">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-600" />
+                {waitingCount} 个待人工
+              </span>
+            ) : (
+              <span className="inline-flex min-h-8 items-center rounded-full bg-brand-soft px-3 text-xs font-medium text-brand">
+                暂无待人工
+              </span>
+            )}
+            <Link
+              href="/seller/settings"
+              aria-label="设置"
+              className="-mr-2 flex h-11 w-11 items-center justify-center rounded-full text-warm active:bg-stone-200"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z" />
+              </svg>
+            </Link>
+          </div>
         }
       />
 
@@ -146,12 +159,26 @@ export function ConversationList() {
         {conversations === null && !error ? <Skeleton /> : null}
 
         {error && conversations === null ? (
-          <div className="m-4 rounded-card bg-white p-4 text-sm text-warm shadow-card">
-            会话加载失败：{error.message}
+          <div className="m-4">
+            <ErrorCard title="会话暂时没加载出来" message={friendlyError(error, "网络好像不太稳定")} onRetry={refresh} />
           </div>
         ) : null}
 
-        {conversations
+        {conversations && conversations.length === 0 ? (
+          <div className="m-4">
+            <EmptyCard title="还没有买家来咨询" hint="买家在商城里点「联系客服」发来消息后，会话就会出现在这里。">
+              <Link
+                href="/"
+                target="_blank"
+                className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-sm font-semibold text-white active:bg-brand-dark"
+              >
+                打开买家端 ↗
+              </Link>
+            </EmptyCard>
+          </div>
+        ) : null}
+
+        {conversations && conversations.length > 0
           ? GROUPS.map((g) => {
               const list = conversations.filter((c) => c.status === g.status);
               if (list.length === 0 && g.status !== "waiting_human") return null;
