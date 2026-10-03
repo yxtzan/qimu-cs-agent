@@ -21,8 +21,8 @@
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
 | T06 | 评测脚本 + 评测 API | Codex | T05 | 4 | 1.5h | todo |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
-| T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | doing |
-| T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | todo |
+| T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
+| T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | doing |
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | todo |
 | T15 | 前后端联调 | Cursor | T05 T17 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
@@ -453,7 +453,8 @@
 **要做**
 
 1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。`.env.local` 设 `NEXT_PUBLIC_USE_MOCK=0`，按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
-2. 逐项核对 T12–T14 交接里列出的「待联调」项：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
+2. 演示指南每一步点「开始」时**新开一个会话**（前端不带 `conversationId`，后端会新建），避免第 1、2 步的上下文干扰第 3 步的 L3 多步流程（T15a 交接里提到的风险）。
+3. 逐项核对 T12–T15a 交接里列出的「待联调」项（含 `POST /api/admin/reset`）：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
 
 **验收标准**
 
