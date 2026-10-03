@@ -38,6 +38,7 @@ npm run typecheck && npm run lint     # 必须通过
 | `app/(shop)/**` `app/seller/**` `components/**` `public/**` `app/globals.css` `app/manifest.ts` `lib/mock/**` | Cursor |
 | `lib/types.ts` `docs/PRD.md` `docs/ARCHITECTURE.md` `docs/CONTRACTS.md` `docs/DATA_SPEC.md` `docs/TASKS.md` `docs/DECISIONS.md` `data/eval/**` | **Claude（总指挥）** — Agent 不得修改 |
 | `lib/api-client.ts` | Cursor（前端调用 API 的唯一入口） |
+| `lib/store/conversations.ts` `lib/store/reset.ts` `lib/rules/**` `lib/analytics/**` `app/api/conversations/**` `app/api/rules/**` `app/api/traces/**` `app/api/admin/**` `app/api/analytics/**` `scripts/gen-traffic.ts` `scripts/try-conversation-api.ts` | **Cursor**（2026-10-04 重排，T16 / T17）。Codex 只调用、不修改 |
 | `package.json` | 谁需要谁加依赖，PR 里写明新增了哪些包 |
 | `docs/handoff/T<编号>.md` `docs/questions/T<编号>-*.md` | 该任务的负责 Agent（只新建自己的文件） |
 

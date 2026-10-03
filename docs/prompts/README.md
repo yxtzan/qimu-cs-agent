@@ -19,4 +19,6 @@
 | T13 人工接管台 + 知识库页 + 规则页 | Cursor | [T13-cursor.md](T13-cursor.md) |
 | T14 路由看板页 | Cursor | [T14-cursor.md](T14-cursor.md) |
 | T15a 不依赖后端的打磨 | Cursor | [T15a-cursor.md](T15a-cursor.md) |
+| T16 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | [T16-cursor.md](T16-cursor.md) |
+| T17 种子流量 + 看板 API | Cursor | [T17-cursor.md](T17-cursor.md) |
 | T15 前后端联调 | Cursor | [T15-cursor.md](T15-cursor.md) |

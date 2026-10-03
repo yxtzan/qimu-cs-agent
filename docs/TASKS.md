@@ -15,16 +15,20 @@
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
-| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 | 2 | 5h | todo |
+| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | todo |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
-| T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
+| T05 | L3 Agent + 转人工 | Codex | T04 | 3 | 2.5h | todo |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
-| T06 | 种子流量 + 看板 API + 评测脚本 | Codex | T05 | 4 | 3h | todo |
+| T06 | 评测脚本 + 评测 API | Codex | T05 | 4 | 1.5h | todo |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | doing |
-| T15 | 前后端联调 | Cursor | T05 T15a | 5 | 2h | todo |
+| T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | todo |
+| T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | todo |
+| T15 | 前后端联调 | Cursor | T05 T17 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
+
+**2026-10-04 重排**：后端是关键路径，把不依赖流水线的后端活（会话数据层、卖家会话 / 规则 / 重置 API、种子流量、看板 API）从 Codex 的 T04–T06 里拆出来，交给 Cursor 做 T16、T17。Cursor 写过这些接口的 mock，对契约最熟。Codex 的关键路径 T03 → T04 → T05 → T06 因此缩短约 3.5 小时。
 
 **并行规则**：同一波次里 Codex 和 Cursor 的任务可以同时进行（目录不重叠）。**两个 Agent 各用一份独立的本地克隆**（见 AGENTS.md §2），同一份克隆里同一时间只跑一个 Agent，所以 Codex 的 T01、T02 依次做。前端在后端接口完成前一律用 `NEXT_PUBLIC_USE_MOCK=1` 开发。
 
@@ -200,7 +204,7 @@
 2. 实现 CONTRACTS §9 的全部工具。读工具做归属校验；写工具**只创建 `PendingAction`**（存 `data/runtime/pending_actions.json`），并校验 DATA_SPEC §6 的业务规则，不满足时返回 `{ ok: false, reason: "中文原因" }`。
 3. `lib/tools/execute-pending.ts`：`confirmPendingAction(id)` 真正修改订单 / 新建售后单（含 timeline），`cancelPendingAction(id)`。
 4. `recommend_size`：DATA_SPEC §4 确定性算法，返回 `{ size, basis }`（basis 是中文解释）。写单元测试覆盖：160/50→M、158/47→S、斤换算、宽松版型、超出范围。
-5. `lib/rag/`：`chunk.ts`、`index.ts`（embedding 或 bigram 两种模式，自动选择）、`search.ts`。索引存 `data/runtime/kb_index.json`。`npm run seed` 时为初始知识库建索引。
+5. `lib/rag/`：`chunk.ts`、`index.ts`（embedding 或 bigram 两种模式，自动选择）、`search.ts`。索引存 `data/runtime/kb_index.json`。`npm run seed` 时为初始知识库建索引。重置演示数据时也要重建索引：如果 `lib/store/reset.ts`（Cursor 的 T16）已合并，用 `registerResetHook("kb-index", …)` 注册；还没合并就先在 `scripts/seed.ts` 里直接调用，交接文件里注明，T16 合并后再改。PendingAction 的集合名固定为 `pending_actions`（T16 会读它）。
 6. 知识库 API：CONTRACTS §4 全部接口。
 7. `scripts/try-tools.ts`：命令行逐个调用工具打印结果，便于人类验证。
 
@@ -227,8 +231,8 @@
 4. `lib/brain/handlers/`：ARCHITECTURE §4.5 全部意图。缺槽位按"状态 → 唯一订单自动选 → options 卡片 → 追问"补全。咨询类走 RAG + `GENERATION_MODEL`，回复附 `sources` 卡片。
 5. `lib/brain/pipeline.ts`：`handleMessage()` 实现 §1 的 ①–⑥ 和 ⑧（L3 先放一个占位：返回"这个问题我需要再确认一下"并 `unresolvedTurns++`，T05 替换）。**L1 命中时不等 decide()**：先同步跑硬关键词风险检查，未命中就立即回复，decide() 在后台继续跑，若模型风险分超阈值再追加转人工（见 ARCHITECTURE §1、D001 修订）。L2/L3 的具体模型配置以 T01b 报告后 Claude 的决定为准。
 6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。**务必遵守 CONTRACTS §2「补充约定」五条**（动作落买家消息、确认卡片状态回填、同一轮共用 traceId、转人工状态流转、images 可为空）。
-7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`；每写一条 trace 同时更新 `Conversation.lastLayer`。
-8. API：`POST /api/chat`、`GET /api/conversations/:id/messages`、`GET /api/conversations/latest`。
+7. `lib/brain/trace.ts`：通过 `lib/store/conversations.ts`（T16 提供）写 RouteTrace；每写一条 trace 同时更新 `Conversation.lastLayer`。**会话、消息、trace 的读写一律用 T16 的数据层，不要自己另建存储。**
+8. API：`POST /api/chat`。（`/messages`、`/latest` 已由 T16 实现。）
 8b. `lib/brain/decide/warmup.ts`：Jev 预热与保温（ARCHITECTURE §4.3、D010）。服务端第一次处理请求时异步发一次预热调用（不阻塞这次请求），之后每 `JEV_KEEPALIVE_MS` 发一次最小请求；`0` 表示关闭；预热调用不写 RouteTrace，成本记在日志里；没有 key 或 provider 不是 jev 时不启动。
 9. `scripts/chat-cli.ts`：命令行和客服对话（可选买家、可选 context），每轮打印回复和 trace 摘要，方便不打开前端就验证。
 
@@ -272,28 +276,26 @@
 
 ---
 
-## T05 L3 Agent + 转人工 + 卖家会话 API + 规则 API — Codex
+## T05 L3 Agent + 转人工 — Codex
 
 - 分支：`t05-agent-handoff`
 - 依赖：T04
-- 必读：`docs/ARCHITECTURE.md` §4.4 §4.6 §4.7、`docs/CONTRACTS.md` §3 §5 §7
+- 必读：`docs/ARCHITECTURE.md` §4.6 §4.7、`docs/CONTRACTS.md` §2「补充约定」
+- 说明：卖家会话 API、规则 API、重置 API 已改由 Cursor 在 T16 完成，本任务只做大脑部分。
 
 **要做**
 
-1. `lib/brain/agent.ts`：ARCHITECTURE §4.6。系统提示词写在 `lib/brain/prompts/agent.ts`，中文；把服务原则写清楚（只基于工具结果回答、写操作必须生成确认、不确定就 `create_handoff`、不承诺政策以外的东西）。替换 T04 的 L3 占位。
+1. `lib/brain/agent.ts`：ARCHITECTURE §4.6。系统提示词写在 `lib/brain/prompts/agent.ts`，中文；把服务原则写清楚（只基于工具结果回答、写操作必须生成确认、不确定就 `create_handoff`、不承诺政策以外的东西）。替换 T04 的 L3 占位。L3 可单独打开思考模式（环境变量 `AGENT_REASONING=on|off`，默认 off，先测 off 的效果）。
 2. 无 key / mock 模式下的 L3：返回"这个问题比较复杂，我帮您转接人工客服"并转人工（保证流程不断）。
-3. `lib/brain/handoff.ts`：§4.7。进入 `waiting_human` 时写 `Conversation.handoffAt`，`release` 时清空。一句话摘要用 `GENERATION_MODEL` 生成（mock 用模板：`买家{昵称}，{意图中文}，{原因}`）。
-4. 卖家会话 API：CONTRACTS §3 全部接口（包括 `takeover / reply / release / close`、可选的 `misfire`）。
-5. 规则 API：CONTRACTS §5；`suggestion` 按 ARCHITECTURE §4.4 计算。
-6. 人工模式下买家消息：不自动回复，`unreadForSeller++`。
-7. 演示重置：`POST /api/admin/reset`（CONTRACTS §7）。
+3. `lib/brain/handoff.ts`：§4.7 + CONTRACTS §2 补充约定第 4 条。进入 `waiting_human` 时写 `handoffAt`。一句话摘要用 `GENERATION_MODEL` 生成（mock 用模板：`买家{昵称}，{意图中文}，{原因}`）。
+4. 人工模式下买家消息：不自动回复，`unreadForSeller++`（在 `POST /api/chat` 的流水线入口处理）。
 
 **验收标准**（chat-cli + curl，交接文件贴记录）
 
 - [ ] B001「上周买的那件外套换成L码，顺便帮我看看有没有能用的券」→ L3，trace 中工具调用依次包含 list_orders / check_stock / request_exchange / list_coupons，回复带确认卡片和券信息；过期券不出现
 - [ ] B003「两个订单都帮我处理下：没付款的取消，已经付了的改地址到…」→ L3 生成两个确认（或依次确认）
-- [ ] 转人工 → `GET /api/conversations` 中该会话排在最前；`reply` 后买家端 `/messages?after=` 能取到卖家消息；`release` 后 AI 恢复回复
-- [ ] `GET /api/rules` 中 R007、R008 的 `suggestion` 为 `delete`
+- [ ] 转人工后 `GET /api/conversations`（T16）里该会话排在最前、`handoffAt` 有值；卖家 `reply` 后买家端 `/messages?after=` 能取到；`release` 后 AI 恢复回复
+- [ ] L3 单条平均延迟和成本写进交接文件
 
 ---
 
@@ -320,23 +322,21 @@
 
 ---
 
-## T06 种子流量 + 看板 API + 评测脚本 — Codex
+## T06 评测脚本 + 评测 API — Codex
 
 - 分支：`t06-analytics-eval`
 - 依赖：T05
-- 必读：`docs/ARCHITECTURE.md` §6 §7、`docs/CONTRACTS.md` §6、`data/eval/cases.json`
+- 必读：`docs/CONTRACTS.md` §6、`data/eval/cases.json`
+- 说明：种子流量和看板 API 已改由 Cursor 在 T17 完成，本任务只做评测。
 
 **要做**
 
-1. `scripts/gen-traffic.ts`：ARCHITECTURE §7。生成约 60 个历史会话、约 300 条买家消息及对应 AI 回复和 RouteTrace（`isSimulated: true`）。消息文本要像真实买家（复用各意图的多种说法），层级、意图、置信度、延迟、成本的分布合理（L1 20–50ms、L2 150–600ms、L3 2–7s；成本按 T01 交接文件记录的 Jev 实测单价）。包含约 10 条低置信度样本和约 12 条风险命中。`npm run seed` 末尾调用。
-2. `GET /api/analytics/routing`：CONTRACTS §6，按 `range` 聚合，**严格遵守 §6「统计口径」七条**（前端看板已按此实现）。
-3. `scripts/eval.ts`（`npm run eval`）：按 `cases.json` 说明逐条执行（每条前重置 runtime），统计意图准确率、路由准确率、风险召回率、风险误报率、平均延迟，失败用例列表；结果写 `data/runtime/eval_latest.json`（并复制到 `data/seed/eval_latest.json` 以便看板默认展示）和 `docs/reports/T06-eval.md`。
-4. `GET /api/eval/latest`。
-5. 用默认配置（Jev）跑一次 eval，在交接文件里贴结果；分别在 R007 开启 / 关闭时跑 E58，记录差异（这是"规则层做减法"的证据）。
+1. `scripts/eval.ts`（`npm run eval`）：按 `cases.json` 说明逐条执行（每条前调用 `lib/store/reset.ts` 的 `resetDemoData()` 重置，T16 提供），统计意图准确率、路由准确率、风险召回率、风险误报率、平均延迟，失败用例列表；结果写 `data/runtime/eval_latest.json`（并复制到 `data/seed/eval_latest.json` 以便看板默认展示）和 `docs/reports/T06-eval.md`。
+2. `GET /api/eval/latest`。
+3. 用默认配置（Jev）跑一次 eval，在交接文件里贴结果；分别在 R007 开启 / 关闭时跑 E58，记录差异（这是"规则层做减法"的证据）。
 
 **验收标准**
 
-- [ ] `npm run seed` 后看板 API 返回非空数据，各层占比接近 ARCHITECTURE §7
 - [ ] `npm run eval` 跑完 60 条并生成报告
 - [ ] 报告中失败用例逐条给出原因分析（分类错 / 槽位没补全 / 规则误吞 / 风险漏判）
 - [ ] 报告包含 **Jev 中文表现**一节（代替原先取消的前置测试）：L2 用例上 Jev 的意图准确率、置信度分桶（<0.5 / 0.5–0.7 / 0.7–0.85 / ≥0.85）的数量和准确率、风险各项召回率与误报率，并给出 `L2_CONFIDENCE_THRESHOLD` 的调整建议（选使"被 L2 接下的消息准确率 ≥ 95%"的最低置信度）
@@ -391,10 +391,63 @@
 
 ---
 
+## T16 会话数据层 + 卖家会话 / 规则 / 重置 API — Cursor
+
+- 分支：`t16-conversation-api`
+- 依赖：T02（`lib/store` 和规则数据）、T15a
+- 必读：`docs/CONTRACTS.md` §2（含「补充约定」）§3 §5 §7、`docs/ARCHITECTURE.md` §4.4 §4.7、`lib/store/index.ts`、`docs/handoff/T02.md`
+- 说明：这是你第一次写后端。你在 `lib/mock/` 里已经实现过这些接口的全部行为，这次是把它们搬到服务端、存进 JSON 文件。Codex 的 T04 会直接用你写的数据层，所以**接口要稳、函数命名要清楚**。
+
+**要做**
+
+1. `lib/store/conversations.ts`：会话、消息、RouteTrace 三个集合的类型化读写（基于 `lib/store/index.ts` 的 `readCollection / writeCollection`）。至少提供：`createConversation(buyerId)`、`getConversation(id)`、`updateConversation(id, patch)`、`listConversations({ status?, includeSimulated? })`（排序按 CONTRACTS §3）、`getLatestOpenConversation(buyerId)`、`appendMessages(conversationId, messages)`、`listMessages(conversationId, { after? })`、`appendTrace(trace)`、`listTraces({ conversationId?, since?, includeSimulated? })`。每个函数写一行中文注释。
+2. 消息里确认卡片的回填（CONTRACTS §2 补充约定第 2 条）：`listMessages` 返回前，把 `card.kind === "confirm"` 的 `pendingAction` 用 `readCollection("pending_actions")` 里的最新状态替换（pending_actions 由 Codex 的 T03 写入；集合不存在时原样返回）。
+3. `lib/store/reset.ts`：`resetDemoData()` = 把 `data/seed/*.json` 复制到 `data/runtime/`、清空进程内缓存，然后依次执行通过 `registerResetHook(name, fn)` 注册的钩子（T03 会注册知识库索引，T17 注册种子流量）。`npm run seed` 也应改为调用它——这一步在 `scripts/seed.ts` 里只改一行调用，属于允许的跨目录改动，交接文件里写明。
+4. `lib/rules/suggestion.ts`：按 ARCHITECTURE §4.4 计算 `suggestion`（含「创建满 7 天」口径）。
+5. API（都只做参数校验 + 调数据层）：
+   - 聊天读取：`GET /api/conversations/:id/messages?after=`、`GET /api/conversations/latest?buyerId=`
+   - 卖家会话：CONTRACTS §3 全部（列表、详情、takeover、reply、release、close、traces misfire）；状态流转按 CONTRACTS §2 补充约定第 4 条，release 时清空 `handoffAt`、`unreadForSeller` 和 `state.unresolvedTurns` 归零，并插入对应系统消息。
+   - 规则：CONTRACTS §5 全部，`pattern` 非法返回 400。misfire 接口若对应 trace 有 `ruleId`，该规则 `misfireCount++`。
+   - 重置：`POST /api/admin/reset` → `resetDemoData()`。
+6. `scripts/try-conversation-api.ts`：用 fetch 依次调用以上接口（需要先 `npm run dev`），打印结果，方便人类验证。
+7. 把前端 `lib/api-client.ts` 里这些接口的真实路径和你的实现对一遍，有出入以契约为准改一边。
+
+**目录归属（本任务特批）**：`lib/store/conversations.ts`、`lib/store/reset.ts`、`lib/rules/**`、`app/api/conversations/**`、`app/api/rules/**`、`app/api/traces/**`、`app/api/admin/**`、`scripts/try-conversation-api.ts`。其他后端目录不要动。
+
+**验收标准**
+
+- [ ] `npm run typecheck && npm run lint` 通过
+- [ ] `scripts/try-conversation-api.ts` 跑通：新建会话 → 追加消息 → takeover → reply → `/messages?after=` 取到卖家消息 → release → close；规则增删改查；R007、R008 `suggestion=delete`；非法正则返回 400；reset 后数据恢复
+- [ ] 卖家端在 `NEXT_PUBLIC_USE_MOCK=0` 下能打开会话列表和规则页（会话列表可以是空的，因为聊天接口要等 T04）
+
+---
+
+## T17 种子流量 + 看板 API — Cursor
+
+- 分支：`t17-analytics-api`
+- 依赖：T16
+- 必读：`docs/ARCHITECTURE.md` §6 §7、`docs/CONTRACTS.md` §6（含「统计口径」七条）、`docs/handoff/T01b.md`（Jev 实测延迟和单价）
+
+**要做**
+
+1. `lib/analytics/gen-traffic.ts` + `scripts/gen-traffic.ts`：ARCHITECTURE §7。生成约 60 个历史会话、约 300 条买家消息及对应 AI 回复和 RouteTrace（全部 `isSimulated: true`），写入 T16 的数据层。消息文本要像真实买家（复用各意图的多种说法）；分布：层级占比约 风险 4% / L1 22% / L2 56% / L3 12% / 人工 6%；延迟 L1 20–50ms、L2 300–600ms（Jev 热状态实测 p50 384ms）、L3 2–7s；成本 L2 按 Jev 实测 $0.000059/条，L3 按 $0.002–0.005/条；约 10 条低置信度样本、约 12 条风险命中；时间分布在 DEMO_NOW 前 7 天，白天多、夜里少。固定随机种子，可复现。通过 `registerResetHook("traffic", …)` 注册到 reset。你在 `lib/mock/traffic.ts` 里写过类似逻辑，可以复用思路。
+2. `lib/analytics/routing.ts` + `GET /api/analytics/routing`：严格按 CONTRACTS §6「统计口径」七条聚合；`latestEval` 读 `data/runtime/eval_latest.json`（T06 产出，没有就省略）。
+3. 前端看板在 `NEXT_PUBLIC_USE_MOCK=0` 下对接真实接口，核对数字和 mock 口径一致。
+
+**目录归属（本任务特批）**：`lib/analytics/**`、`app/api/analytics/**`、`scripts/gen-traffic.ts`。
+
+**验收标准**
+
+- [ ] `npm run seed` 后 `curl localhost:3000/api/analytics/routing?range=7d` 返回非空，各层占比接近上面的分布，没数据的时间格补 0
+- [ ] 真实接口下看板页渲染正常，PR 附截图
+- [ ] 同一个随机种子跑两次结果一致
+
+---
+
 ## T15 前后端联调 — Cursor
 
 - 分支：`t15-integration`
-- 依赖：T05、T15a
+- 依赖：T05、T17
 
 **要做**
 

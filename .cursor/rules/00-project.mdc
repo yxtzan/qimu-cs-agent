@@ -9,7 +9,7 @@ alwaysApply: true
 
 关键规则（细节见 AGENTS.md）：
 
-- 你只能改：`app/(shop)/**`、`app/seller/**`、`components/**`、`public/**`、`app/globals.css`、`app/manifest.ts`、`lib/mock/**`、`lib/api-client.ts`。
+- 你只能改：`app/(shop)/**`、`app/seller/**`、`components/**`、`public/**`、`app/globals.css`、`app/manifest.ts`、`lib/mock/**`、`lib/api-client.ts`；以及 T16 / T17 特批的后端文件（见 AGENTS.md §3 和任务卡）。
 - 不得修改 `lib/types.ts` 和 `docs/` 里的规格文件；需要改契约就在 `docs/questions/` 新建问题文件。
 - 所有接口调用都经过 `lib/api-client.ts`，类型从 `lib/types.ts` 导入。
 - 后端接口还没好时：在 `lib/api-client.ts` 里用 `NEXT_PUBLIC_USE_MOCK=1` 切到本地 mock 数据（mock 的形状必须符合契约），不要停工。
