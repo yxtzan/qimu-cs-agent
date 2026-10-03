@@ -11,10 +11,10 @@
 | T00 | 项目脚手架 | Codex | — | 0 | 1h | done |
 | T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | done |
 | T01b | Jev 延迟排查 + 兜底提速 | Codex | T01 | 1 | 45m | done |
-| T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | doing |
+| T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | done |
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
-| T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
+| T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | doing |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | todo |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 | Codex | T04 | 3 | 2.5h | todo |
@@ -207,6 +207,7 @@
 5. `lib/rag/`：`chunk.ts`、`index.ts`（embedding 或 bigram 两种模式，自动选择）、`search.ts`。索引存 `data/runtime/kb_index.json`。`npm run seed` 时为初始知识库建索引。重置演示数据时也要重建索引：如果 `lib/store/reset.ts`（Cursor 的 T16）已合并，用 `registerResetHook("kb-index", …)` 注册；还没合并就先在 `scripts/seed.ts` 里直接调用，交接文件里注明，T16 合并后再改。PendingAction 的集合名固定为 `pending_actions`（T16 会读它）。
 6. 知识库 API：CONTRACTS §4 全部接口。
 7. `scripts/try-tools.ts`：命令行逐个调用工具打印结果，便于人类验证。
+8. 顺手修一处知识库内容：`data/seed/kb/退换货政策.md` 里写了「燕麦色 L 码目前有 3 件」这类**具体库存数字**。库存是会变的（演示里一换货就变成 2 件），知识库只写规则，不写实时数据；改成「是否有货以客服实时查询为准」。其他文档如有类似写法一并改掉，改完重跑 `npm run check-seed`。
 
 **验收标准**
 
