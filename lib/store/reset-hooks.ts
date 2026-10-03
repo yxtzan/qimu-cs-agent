@@ -6,4 +6,5 @@
  * Codex 和 Cursor 都可以往这里加 import 行（只允许加 import 行）。
  */
 import "../analytics/gen-traffic"; // T17：种子流量（模拟历史数据）
+import '../rag/reset-hook';
 // import "../rag/<知识库索引钩子模块>"; // T03：合并后由 T03 补这一行
