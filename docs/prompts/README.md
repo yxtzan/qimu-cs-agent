@@ -18,4 +18,5 @@
 | T12 买家客服聊天窗 | Cursor | [T12-cursor.md](T12-cursor.md) |
 | T13 人工接管台 + 知识库页 + 规则页 | Cursor | [T13-cursor.md](T13-cursor.md) |
 | T14 路由看板页 | Cursor | [T14-cursor.md](T14-cursor.md) |
-| T15 前后端联调 + 打磨 | Cursor | [T15-cursor.md](T15-cursor.md) |
+| T15a 不依赖后端的打磨 | Cursor | [T15a-cursor.md](T15a-cursor.md) |
+| T15 前后端联调 | Cursor | [T15-cursor.md](T15-cursor.md) |
