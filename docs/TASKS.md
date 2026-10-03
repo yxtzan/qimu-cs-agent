@@ -24,7 +24,7 @@
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
 | T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
-| T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | doing |
+| T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
 | T15 | 前后端联调 | Cursor | T05 T18 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
@@ -248,6 +248,7 @@
 - [ ] B001 发「退款进度 再拖我就找律师」→ 风险闸门优先于 L1
 - [ ] `CLASSIFIER_PROVIDER=mock` 且无 key 时以上流程都能走通（回复质量可以差）
 - [ ] 每条消息都有 RouteTrace，字段齐全
+- [ ] 用真实后端跑演示冒烟测试（T18）：`NEXT_PUBLIC_USE_MOCK=0 npm run e2e`，第 1、2、4 步必须通过（第 3、5 步依赖 T05，失败可以接受），交接文件贴结果。第一次运行前先 `npx playwright install chromium`
 
 ---
 
@@ -298,6 +299,7 @@
 - [ ] B003「两个订单都帮我处理下：没付款的取消，已经付了的改地址到…」→ L3 生成两个确认（或依次确认）
 - [ ] 转人工后 `GET /api/conversations`（T16）里该会话排在最前、`handoffAt` 有值；卖家 `reply` 后买家端 `/messages?after=` 能取到；`release` 后 AI 恢复回复
 - [ ] L3 单条平均延迟和成本写进交接文件
+- [ ] `NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 6 步全部通过（第 3 步 L3 超时上限 30 秒，不够可以在交接文件里说明实测耗时）
 
 ---
 
