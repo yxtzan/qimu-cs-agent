@@ -11,8 +11,8 @@
 | T00 | 项目脚手架 | Codex | — | 0 | 1h | done |
 | T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | doing |
 | T02 | 虚构数据 + seed + 商城只读 API | Codex | T00 | 1 | 3h | todo |
-| T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | doing |
-| T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | todo |
+| T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
+| T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | doing |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01 T03 | 2 | 5h | todo |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | todo |
@@ -91,7 +91,7 @@
 
 **要做**
 
-1. `scripts/seed.ts`：按 DATA_SPEC 生成 `data/seed/*.json`（固定随机种子，可复现）。英雄数据（§3）以常量手写，必须与表格**逐项一致**。
+1. `scripts/seed.ts`：按 DATA_SPEC 生成 `data/seed/*.json`（固定随机种子，可复现）。商品 `images` 字段填空数组 `[]`（前端按类别和颜色自己画图，见 PRD §4.1）。英雄数据（§3）以常量手写，必须与表格**逐项一致**。
 2. 写 10 篇知识库 `data/seed/kb/*.md`（§7），内容与业务规则（§6）、尺码表（§4）一致。
 3. `npm run seed`：生成 seed（如不存在）→ 复制到 `data/runtime/`（覆盖，即"重置演示数据"）。知识库索引和种子流量留给 T03 / T06，这里先留钩子函数。
 4. `lib/store/`：为 products / buyers / orders / coupons / rules 提供类型化的读写函数（如 `getOrder(id)`、`listOrders(buyerId, status?)`、`updateOrder()`）。
@@ -121,7 +121,7 @@
 2. 全局布局：顶栏（店铺 logo 文字「栖木 QIMU」、分类导航、「我的订单」、**买家切换器**下拉）。当前买家存在 React Context + localStorage（try/catch 包裹）。
 3. 页面：`/` 首页、`/product/[id]` 详情、`/orders` 订单列表（状态 Tab）、`/orders/[id]` 订单详情（物流时间线、售后状态）。
 4. 「问客服」「联系客服」按钮：先调用一个全局 `openChat({ productId?, orderId? })`（放在 Context 里，T12 实现聊天窗，这里先 `console.log`）。
-5. 视觉遵守 PRD §7；商品图用 `https://picsum.photos/seed/<productId>/600/800`，加载失败时显示纯色块 + 商品名首字。
+5. 视觉遵守 PRD §7；商品图见 PRD §4.1（T10 完成时用的是 picsum 随机图，已在 T12 改为服装剪影）。
 
 **验收标准**
 
@@ -217,6 +217,7 @@
 
 **要做**
 
+0. **先修一个视觉问题**：T10 的商品图用了 picsum 随机风景照（路灯、咖啡、山景），和女装店不搭，演示时很出戏。改为在 `components/shop/ProductImage.tsx` 里按 PRD §4.1 生成 SVG 服装剪影，商城页面和聊天里的商品卡片共用。
 1. 右下角悬浮按钮 → 右侧抽屉（420px）。实现 T10 留下的 `openChat({ productId?, orderId? })`。
 2. 打开时调用 `GET /api/conversations/latest` 恢复会话。
 3. 输入框 + 快捷按钮（查物流 / 退款进度 / 尺码推荐 / 转人工）+ 上下文条（可关闭）。
@@ -338,7 +339,7 @@
 
 **要做**
 
-1. 关闭 mock（`NEXT_PUBLIC_USE_MOCK=0`），按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
+1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。关闭 mock（`NEXT_PUBLIC_USE_MOCK=0`），按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
 2. 加载态、空状态、错误态全部检查一遍。
 3. 卖家端加一个「设置」入口（会话 Tab 右上角齿轮）：「重置演示数据」按钮，调用 `POST /api/admin/reset`，成功后刷新页面。
 4. 买家端首页加一个不显眼的「演示指南」浮层入口，列出剧本的 6 步和对应可点击的快捷入口（如"以 B001 身份打开订单 QM2026100201"）。
