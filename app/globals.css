@@ -1,21 +1,58 @@
 @import "tailwindcss";
 
+/* 视觉规范：docs/PRD.md §7 —— 墨绿 / 米白 / 暖灰，圆角 12px，轻阴影 */
 :root {
-  --background: #faf8f4;
-  --foreground: #2b2b2b;
+  --background: #f7f4ee;
+  --foreground: #2b2a27;
   --brand: #2f4f3e;
+  --brand-dark: #243d30;
+  --brand-soft: #e6ece7;
+  --warm: #8a8378;
+  --line: #e7e2d8;
+  --risk: #c2410c;
+  --success: #15803d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
-  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui,
-    -apple-system, "Segoe UI", sans-serif;
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
+  --color-cream: #f7f4ee;
+  --color-warm: var(--warm);
+  --color-line: var(--line);
+  --color-risk: var(--risk);
+  --color-success: var(--success);
+  --radius-card: 12px;
+  --shadow-card: 0 1px 2px rgba(47, 79, 62, 0.04), 0 4px 16px rgba(47, 79, 62, 0.06);
+  --shadow-lift: 0 2px 4px rgba(47, 79, 62, 0.05), 0 12px 32px rgba(47, 79, 62, 0.12);
+  --font-sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui,
+    "Segoe UI", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--brand-soft);
+}
+
+@keyframes qimu-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: qimu-fade-up 0.35s ease-out both;
 }
