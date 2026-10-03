@@ -14,6 +14,7 @@ import {
   mkdirSync,
   readFileSync,
   renameSync,
+  statSync,
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
@@ -38,8 +39,15 @@ function runtimeFile(name: string): string {
 }
 
 // Keep the cache on globalThis so Next.js dev-mode module reloads don't lose writes.
-const g = globalThis as unknown as { __qimuStoreCache?: Map<string, unknown> };
+const g = globalThis as unknown as { __qimuStoreCache?: Map<string, unknown>; __qimuStoreVersions?: Map<string, string> };
 const cache: Map<string, unknown> = (g.__qimuStoreCache ??= new Map());
+const versions = (g.__qimuStoreVersions ??= new Map<string, string>());
+
+function fileVersion(file: string): string {
+  if (!existsSync(file)) return '';
+  const stat = statSync(file);
+  return `${stat.ino}:${stat.mtimeMs}:${stat.ctimeMs}:${stat.size}`;
+}
 
 function assertName(name: string): void {
   if (!NAME_RE.test(name)) throw new StoreError(`Invalid collection name: "${name}"`);
@@ -48,10 +56,11 @@ function assertName(name: string): void {
 /** Read a whole collection. Copies seed → runtime on first use. */
 export function readCollection<T>(name: string): T[] {
   assertName(name);
-  const cached = cache.get(name);
-  if (cached) return cached as T[];
-
   const rt = runtimeFile(name);
+  const cached = cache.get(name);
+  // A CLI reset happens in another process; refresh cached collections after disk changes.
+  if (cached && versions.get(name) === fileVersion(rt)) return cached as T[];
+
   if (!existsSync(rt)) {
     const seed = seedFile(name);
     if (!existsSync(seed)) {
@@ -75,6 +84,7 @@ export function readCollection<T>(name: string): T[] {
     throw new StoreError(`data/runtime/${name}.json must contain a JSON array`);
   }
   cache.set(name, parsed);
+  versions.set(name, fileVersion(rt));
   return parsed as T[];
 }
 
@@ -87,9 +97,11 @@ export function writeCollection<T>(name: string, data: T[]): void {
   writeFileSync(tmp, JSON.stringify(data, null, 2) + "\n", "utf8");
   renameSync(tmp, rt);
   cache.set(name, data);
+  versions.set(name, fileVersion(rt));
 }
 
 /** Drop the in-memory cache (next read goes back to disk). Used by `npm run seed` and tests. */
 export function clearStoreCache(): void {
   cache.clear();
+  versions.clear();
 }

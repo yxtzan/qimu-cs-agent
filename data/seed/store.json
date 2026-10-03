@@ -1,0 +1,16 @@
+{
+  "name": "栖木 QIMU",
+  "slogan": "慢一点，穿久一点",
+  "audience": "25–35 岁通勤 / 日常女装",
+  "priceRange": [
+    129,
+    899
+  ],
+  "humanServiceHours": "9:00–23:00",
+  "aiServiceHours": 24,
+  "agentName": "阿栖",
+  "freeShippingThreshold": 99,
+  "defaultCarrier": "中通快递",
+  "goldCarrier": "顺丰速运",
+  "shippingWithinHours": 48
+}

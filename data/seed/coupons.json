@@ -1,0 +1,302 @@
+[
+  {
+    "id": "CP001",
+    "buyerId": "B001",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP002",
+    "buyerId": "B001",
+    "title": "满 199 减 20",
+    "threshold": 199,
+    "discount": 20,
+    "scope": "外套",
+    "expiresAt": "2026-10-15T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP003",
+    "buyerId": "B001",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "全店",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP004",
+    "buyerId": "B004",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": true
+  },
+  {
+    "id": "CP005",
+    "buyerId": "B005",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP006",
+    "buyerId": "B006",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP007",
+    "buyerId": "B007",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP008",
+    "buyerId": "B008",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP009",
+    "buyerId": "B009",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP010",
+    "buyerId": "B010",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "全店",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP011",
+    "buyerId": "B011",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": true
+  },
+  {
+    "id": "CP012",
+    "buyerId": "B012",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP013",
+    "buyerId": "B004",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP014",
+    "buyerId": "B005",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP015",
+    "buyerId": "B006",
+    "title": "满 199 减 20",
+    "threshold": 199,
+    "discount": 20,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP016",
+    "buyerId": "B007",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP017",
+    "buyerId": "B008",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP018",
+    "buyerId": "B009",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": true
+  },
+  {
+    "id": "CP019",
+    "buyerId": "B010",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP020",
+    "buyerId": "B011",
+    "title": "满 199 减 20",
+    "threshold": 199,
+    "discount": 20,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP021",
+    "buyerId": "B012",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP022",
+    "buyerId": "B004",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP023",
+    "buyerId": "B005",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP024",
+    "buyerId": "B006",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "外套",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP025",
+    "buyerId": "B007",
+    "title": "满 199 减 20",
+    "threshold": 199,
+    "discount": 20,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": true
+  },
+  {
+    "id": "CP026",
+    "buyerId": "B008",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP027",
+    "buyerId": "B009",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP028",
+    "buyerId": "B010",
+    "title": "满 99 减 10",
+    "threshold": 99,
+    "discount": 10,
+    "scope": "针织衫",
+    "expiresAt": "2026-09-30T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP029",
+    "buyerId": "B011",
+    "title": "满 199 减 20",
+    "threshold": 199,
+    "discount": 20,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  },
+  {
+    "id": "CP030",
+    "buyerId": "B012",
+    "title": "满 299 减 30",
+    "threshold": 299,
+    "discount": 30,
+    "scope": "全店",
+    "expiresAt": "2026-10-31T23:59:59+08:00",
+    "used": false
+  }
+]

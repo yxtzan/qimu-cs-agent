@@ -1,0 +1,6899 @@
+[
+  {
+    "id": "QM2026092801",
+    "buyerId": "B001",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092801-1",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C1-M",
+        "color": "燕麦色",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      }
+    ],
+    "totalAmount": 599,
+    "discount": 0,
+    "payAmount": 599,
+    "createdAt": "2026-09-26T10:00:00+08:00",
+    "paidAt": "2026-09-26T10:05:00+08:00",
+    "shippedAt": "2026-09-28T10:00:00+08:00",
+    "deliveredAt": "2026-09-30T14:00:00+08:00",
+    "address": {
+      "name": "林小满",
+      "phone": "138****1001",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路1号虚构小区1室（演示地址）"
+    },
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "SF0002026092801",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+      "events": [
+        {
+          "at": "2026-09-30T14:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-28T21:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到达配送站，等待安排派送"
+        },
+        {
+          "at": "2026-09-28T19:00:00+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-28T15:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "已发往上海转运中心"
+        },
+        {
+          "at": "2026-09-28T12:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-28T10:00:00+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100201",
+    "buyerId": "B001",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100201-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-S",
+        "color": "黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100201-2",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C1-M",
+        "color": "奶白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 598,
+    "discount": 0,
+    "payAmount": 598,
+    "createdAt": "2026-10-02T10:00:00+08:00",
+    "paidAt": "2026-10-02T10:05:00+08:00",
+    "shippedAt": "2026-10-03T10:00:00+08:00",
+    "address": {
+      "name": "林小满",
+      "phone": "138****1001",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路1号虚构小区1室（演示地址）"
+    },
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "SF0002026100201",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T21:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到达配送站，等待安排派送"
+        },
+        {
+          "at": "2026-10-03T19:00:00+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T15:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "已发往上海转运中心"
+        },
+        {
+          "at": "2026-10-03T12:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T10:00:00+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026091501",
+    "buyerId": "B001",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091501-1",
+        "productId": "P002",
+        "productName": "法式碎花茶歇裙",
+        "skuId": "P002-C1-M",
+        "color": "蓝底白花",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      }
+    ],
+    "totalAmount": 389,
+    "discount": 0,
+    "payAmount": 389,
+    "createdAt": "2026-09-15T10:00:00+08:00",
+    "paidAt": "2026-09-15T10:05:00+08:00",
+    "shippedAt": "2026-09-16T10:00:00+08:00",
+    "deliveredAt": "2026-09-18T14:00:00+08:00",
+    "address": {
+      "name": "林小满",
+      "phone": "138****1001",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路1号虚构小区1室（演示地址）"
+    },
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "SF0002026091501",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+      "events": [
+        {
+          "at": "2026-09-18T14:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-16T21:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到达配送站，等待安排派送"
+        },
+        {
+          "at": "2026-09-16T19:00:00+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-16T15:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "已发往上海转运中心"
+        },
+        {
+          "at": "2026-09-16T12:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-16T10:00:00+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    },
+    "afterSales": [
+      {
+        "id": "AS20260920001",
+        "orderId": "QM2026091501",
+        "itemId": "QM2026091501-1",
+        "type": "return_refund",
+        "reason": "腰有点紧",
+        "amount": 389,
+        "status": "refunding",
+        "createdAt": "2026-09-20T10:00:00+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-20T10:00:00+08:00",
+            "status": "pending_review",
+            "note": "申请退货退款，腰有点紧"
+          },
+          {
+            "at": "2026-09-20T15:00:00+08:00",
+            "status": "approved",
+            "note": "已同意退货，请寄回商品"
+          },
+          {
+            "at": "2026-09-29T10:00:00+08:00",
+            "status": "returning",
+            "note": "买家已寄回，退件运输中"
+          },
+          {
+            "at": "2026-10-03T10:00:00+08:00",
+            "status": "refunding",
+            "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "QM2026092902",
+    "buyerId": "B002",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092902-1",
+        "productId": "P013",
+        "productName": "云感真丝衬衫",
+        "skuId": "P013-C1-M",
+        "color": "象牙白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 459,
+    "discount": 0,
+    "payAmount": 459,
+    "createdAt": "2026-09-29T10:00:00+08:00",
+    "paidAt": "2026-09-29T10:05:00+08:00",
+    "shippedAt": "2026-09-30T10:00:00+08:00",
+    "deliveredAt": "2026-10-01T14:00:00+08:00",
+    "address": {
+      "name": "周雨桐",
+      "phone": "138****1002",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路2号虚构小区2室（演示地址）"
+    },
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "SF0002026092902",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-01T14:00:00+08:00",
+      "events": [
+        {
+          "at": "2026-10-01T14:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-30T21:00:00+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到达配送站，等待安排派送"
+        },
+        {
+          "at": "2026-09-30T19:00:00+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-30T15:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "已发往上海转运中心"
+        },
+        {
+          "at": "2026-09-30T12:00:00+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-30T10:00:00+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100401",
+    "buyerId": "B003",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100401-1",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C3-S",
+        "color": "雾粉",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 269,
+    "discount": 0,
+    "payAmount": 269,
+    "createdAt": "2026-10-04T20:55:00+08:00",
+    "paidAt": "2026-10-04T21:00:00+08:00",
+    "address": {
+      "name": "陈思",
+      "phone": "138****1003",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路3号虚构小区3室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100402",
+    "buyerId": "B003",
+    "status": "pending_payment",
+    "items": [
+      {
+        "itemId": "QM2026100402-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C2-S",
+        "color": "卡其",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      }
+    ],
+    "totalAmount": 329,
+    "discount": 0,
+    "payAmount": 329,
+    "createdAt": "2026-10-05T09:30:00+08:00",
+    "address": {
+      "name": "陈思",
+      "phone": "138****1003",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路3号虚构小区3室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026091710",
+    "buyerId": "B004",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091710-1",
+        "productId": "P014",
+        "productName": "小圆领棉衬衫",
+        "skuId": "P014-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091710-2",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-L",
+        "color": "黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091710-3",
+        "productId": "P022",
+        "productName": "侧褶通勤裤",
+        "skuId": "P022-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 627,
+    "discount": 0,
+    "payAmount": 627,
+    "createdAt": "2026-09-17T06:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260921010",
+        "orderId": "QM2026091710",
+        "itemId": "QM2026091710-1",
+        "type": "return_refund",
+        "reason": "腰太紧了",
+        "amount": 149,
+        "status": "pending_review",
+        "createdAt": "2026-09-21T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-21T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-17T06:05:00.000+08:00",
+    "shippedAt": "2026-09-18T06:05:00.000+08:00",
+    "deliveredAt": "2026-09-20T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026091710",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-20T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-20T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-18T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-18T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-18T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-18T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-18T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082411",
+    "buyerId": "B005",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082411-1",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C2-M",
+        "color": "墨黑",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082411-2",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      }
+    ],
+    "totalAmount": 438,
+    "discount": 0,
+    "payAmount": 438,
+    "createdAt": "2026-08-24T04:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260828011",
+        "orderId": "QM2026082411",
+        "itemId": "QM2026082411-1",
+        "type": "return_refund",
+        "reason": "M 码偏小，坐下有点勒",
+        "amount": 279,
+        "status": "approved",
+        "createdAt": "2026-08-28T04:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-28T04:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-28T05:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-24T04:05:00.000+08:00",
+    "shippedAt": "2026-08-25T04:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T04:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082411",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T04:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T04:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T15:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T13:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T06:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T04:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082012",
+    "buyerId": "B006",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082012-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-XS",
+        "color": "雾蓝",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      }
+    ],
+    "totalAmount": 819,
+    "discount": 0,
+    "payAmount": 819,
+    "createdAt": "2026-08-20T03:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260824012",
+        "orderId": "QM2026082012",
+        "itemId": "QM2026082012-1",
+        "type": "return_refund",
+        "reason": "比想象中短",
+        "amount": 819,
+        "status": "returning",
+        "createdAt": "2026-08-24T03:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-24T03:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-24T04:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-25T03:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-20T03:05:00.000+08:00",
+    "shippedAt": "2026-08-21T03:05:00.000+08:00",
+    "deliveredAt": "2026-08-23T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026082012",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-23T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-23T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-21T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-21T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-21T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-21T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-21T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090413",
+    "buyerId": "B007",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090413-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C2-L",
+        "color": "卡其",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090413-2",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090413-3",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C2-M",
+        "color": "卡其",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1007,
+    "discount": 30,
+    "payAmount": 977,
+    "createdAt": "2026-09-04T05:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260908013",
+        "orderId": "QM2026090413",
+        "itemId": "QM2026090413-1",
+        "type": "return_refund",
+        "reason": "颜色和图片差好多",
+        "amount": 299,
+        "status": "refunding",
+        "createdAt": "2026-09-08T05:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-08T05:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-08T06:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-09T05:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-11T05:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-04T05:05:00.000+08:00",
+    "shippedAt": "2026-09-05T05:05:00.000+08:00",
+    "deliveredAt": "2026-09-07T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090413",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-07T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-07T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-05T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-05T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-05T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-05T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-05T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082814",
+    "buyerId": "B008",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082814-1",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C2-XS",
+        "color": "墨黑",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082814-2",
+        "productId": "P018",
+        "productName": "褶边领衬衫",
+        "skuId": "P018-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082814-3",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1467,
+    "discount": 0,
+    "payAmount": 1467,
+    "createdAt": "2026-08-28T03:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260901014",
+        "orderId": "QM2026082814",
+        "itemId": "QM2026082814-1",
+        "type": "return_refund",
+        "reason": "洗了一次就起球",
+        "amount": 609,
+        "status": "refunded",
+        "createdAt": "2026-09-01T03:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-01T03:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-01T04:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-02T03:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-04T03:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          },
+          {
+            "at": "2026-09-05T03:05:00.000+08:00",
+            "status": "refunded",
+            "note": "退款已到账"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-28T03:05:00.000+08:00",
+    "shippedAt": "2026-08-29T03:05:00.000+08:00",
+    "deliveredAt": "2026-08-31T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026082814",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-31T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-31T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-29T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-29T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-29T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-29T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-29T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026080915",
+    "buyerId": "B009",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026080915-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C2-M",
+        "color": "墨黑",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080915-2",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C2-S",
+        "color": "卡其",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      }
+    ],
+    "totalAmount": 788,
+    "discount": 30,
+    "payAmount": 758,
+    "createdAt": "2026-08-09T03:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260813015",
+        "orderId": "QM2026080915",
+        "itemId": "QM2026080915-1",
+        "type": "exchange",
+        "reason": "不喜欢了",
+        "amount": 429,
+        "newSize": "S",
+        "newColor": "米白",
+        "status": "exchange_shipped",
+        "createdAt": "2026-08-13T03:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-13T03:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-13T04:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-14T03:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-08-16T03:05:00.000+08:00",
+            "status": "exchange_shipped",
+            "note": "已收到退件，换货新件已发出"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-09T03:05:00.000+08:00",
+    "shippedAt": "2026-08-10T03:05:00.000+08:00",
+    "deliveredAt": "2026-08-12T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026080915",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-12T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-12T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-10T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-10T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-10T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-10T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-10T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026081116",
+    "buyerId": "B010",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026081116-1",
+        "productId": "P027",
+        "productName": "短款扣式开衫",
+        "skuId": "P027-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 259,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081116-2",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081116-3",
+        "productId": "P006",
+        "productName": "垂感背心长裙",
+        "skuId": "P006-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1347,
+    "discount": 0,
+    "payAmount": 1347,
+    "createdAt": "2026-08-11T02:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260815016",
+        "orderId": "QM2026081116",
+        "itemId": "QM2026081116-1",
+        "type": "return_refund",
+        "reason": "肩膀那里有点窄",
+        "amount": 259,
+        "status": "rejected",
+        "createdAt": "2026-08-15T02:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-15T02:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-15T03:05:00.000+08:00",
+            "status": "rejected",
+            "note": "照片暂无法确认问题，已说明原因，可补充材料"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-11T02:05:00.000+08:00",
+    "shippedAt": "2026-08-12T02:05:00.000+08:00",
+    "deliveredAt": "2026-08-14T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026081116",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-14T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-14T02:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-12T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-12T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-12T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-12T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-12T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082417",
+    "buyerId": "B011",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082417-1",
+        "productId": "P026",
+        "productName": "落肩V领针织",
+        "skuId": "P026-C1-S",
+        "color": "米白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 219,
+        "image": ""
+      }
+    ],
+    "totalAmount": 219,
+    "discount": 0,
+    "payAmount": 219,
+    "createdAt": "2026-08-24T09:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260828017",
+        "orderId": "QM2026082417",
+        "itemId": "QM2026082417-1",
+        "type": "return_refund",
+        "reason": "想换个颜色试试",
+        "amount": 219,
+        "status": "closed",
+        "createdAt": "2026-08-28T09:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-28T09:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-28T10:05:00.000+08:00",
+            "status": "closed",
+            "note": "买家撤回申请，售后已关闭"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-24T09:05:00.000+08:00",
+    "shippedAt": "2026-08-25T09:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T09:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082417",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T09:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T09:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T20:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T18:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T14:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T09:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082318",
+    "buyerId": "B012",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082318-1",
+        "productId": "P026",
+        "productName": "落肩V领针织",
+        "skuId": "P026-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 219,
+        "image": ""
+      }
+    ],
+    "totalAmount": 219,
+    "discount": 0,
+    "payAmount": 219,
+    "createdAt": "2026-08-23T06:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260827018",
+        "orderId": "QM2026082318",
+        "itemId": "QM2026082318-1",
+        "type": "return_refund",
+        "reason": "刚拆包就看到袖口开线",
+        "amount": 219,
+        "status": "pending_review",
+        "createdAt": "2026-08-27T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-27T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-23T06:05:00.000+08:00",
+    "shippedAt": "2026-08-24T06:05:00.000+08:00",
+    "deliveredAt": "2026-08-26T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082318",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-26T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-26T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-24T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-24T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-24T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-24T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-24T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026081619",
+    "buyerId": "B004",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026081619-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-L",
+        "color": "黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081619-2",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C2-XS",
+        "color": "墨黑",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081619-3",
+        "productId": "P020",
+        "productName": "棉感锥形裤",
+        "skuId": "P020-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1397,
+    "discount": 30,
+    "payAmount": 1367,
+    "createdAt": "2026-08-16T05:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260820019",
+        "orderId": "QM2026081619",
+        "itemId": "QM2026081619-1",
+        "type": "return_refund",
+        "reason": "穿上感觉太宽了",
+        "amount": 299,
+        "status": "approved",
+        "createdAt": "2026-08-20T05:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-20T05:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-20T06:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-16T05:05:00.000+08:00",
+    "shippedAt": "2026-08-17T05:05:00.000+08:00",
+    "deliveredAt": "2026-08-19T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026081619",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-19T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-19T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-17T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-17T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-17T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-17T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-17T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092520",
+    "buyerId": "B005",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026092520-1",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 369,
+    "discount": 0,
+    "payAmount": 369,
+    "createdAt": "2026-09-25T08:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260929020",
+        "orderId": "QM2026092520",
+        "itemId": "QM2026092520-1",
+        "type": "return_refund",
+        "reason": "家里已经有类似的了",
+        "amount": 369,
+        "status": "returning",
+        "createdAt": "2026-09-29T08:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-29T08:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-29T09:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-30T08:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-25T08:05:00.000+08:00",
+    "shippedAt": "2026-09-26T08:05:00.000+08:00",
+    "deliveredAt": "2026-09-28T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092520",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-28T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-28T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-26T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-26T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-26T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-26T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-26T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026080821",
+    "buyerId": "B006",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026080821-1",
+        "productId": "P019",
+        "productName": "垂感阔腿长裤",
+        "skuId": "P019-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 339,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080821-2",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-S",
+        "color": "黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      }
+    ],
+    "totalAmount": 668,
+    "discount": 0,
+    "payAmount": 668,
+    "createdAt": "2026-08-08T06:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260812021",
+        "orderId": "QM2026080821",
+        "itemId": "QM2026080821-1",
+        "type": "return_refund",
+        "reason": "裤脚一边长一边短",
+        "amount": 339,
+        "status": "refunding",
+        "createdAt": "2026-08-12T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-12T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-12T07:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-13T06:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-08-15T06:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-08T06:05:00.000+08:00",
+    "shippedAt": "2026-08-09T06:05:00.000+08:00",
+    "deliveredAt": "2026-08-11T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026080821",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-11T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-11T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-09T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-09T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-09T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-09T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-09T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026081322",
+    "buyerId": "B007",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026081322-1",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-M",
+        "color": "浅灰",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081322-2",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C1-XS",
+        "color": "米白",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081322-3",
+        "productId": "P003",
+        "productName": "柔光收腰连衣裙",
+        "skuId": "P003-C2-M",
+        "color": "浅灰",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1207,
+    "discount": 0,
+    "payAmount": 1207,
+    "createdAt": "2026-08-13T08:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260817022",
+        "orderId": "QM2026081322",
+        "itemId": "QM2026081322-1",
+        "type": "return_refund",
+        "reason": "腰太紧了",
+        "amount": 349,
+        "status": "refunded",
+        "createdAt": "2026-08-17T08:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-17T08:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-17T09:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-18T08:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-08-20T08:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          },
+          {
+            "at": "2026-08-21T08:05:00.000+08:00",
+            "status": "refunded",
+            "note": "退款已到账"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-13T08:05:00.000+08:00",
+    "shippedAt": "2026-08-14T08:05:00.000+08:00",
+    "deliveredAt": "2026-08-16T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026081322",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-16T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-16T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-14T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-14T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-14T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-14T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-14T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082623",
+    "buyerId": "B008",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082623-1",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C1-S",
+        "color": "米白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      }
+    ],
+    "totalAmount": 279,
+    "discount": 0,
+    "payAmount": 279,
+    "createdAt": "2026-08-26T06:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260830023",
+        "orderId": "QM2026082623",
+        "itemId": "QM2026082623-1",
+        "type": "exchange",
+        "reason": "M 码偏小，坐下有点勒",
+        "amount": 279,
+        "newSize": "L",
+        "newColor": "米白",
+        "status": "exchange_shipped",
+        "createdAt": "2026-08-30T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-30T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-30T07:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-31T06:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-02T06:05:00.000+08:00",
+            "status": "exchange_shipped",
+            "note": "已收到退件，换货新件已发出"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-26T06:05:00.000+08:00",
+    "shippedAt": "2026-08-27T06:05:00.000+08:00",
+    "deliveredAt": "2026-08-29T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026082623",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-29T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-29T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-27T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-27T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-27T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-27T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-27T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082824",
+    "buyerId": "B009",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082824-1",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C1-L",
+        "color": "米白",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082824-2",
+        "productId": "P029",
+        "productName": "纹理针织背心",
+        "skuId": "P029-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 169,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082824-3",
+        "productId": "P002",
+        "productName": "法式碎花茶歇裙",
+        "skuId": "P002-C2-L",
+        "color": "黑底黄花",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      }
+    ],
+    "totalAmount": 927,
+    "discount": 0,
+    "payAmount": 927,
+    "createdAt": "2026-08-28T07:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260901024",
+        "orderId": "QM2026082824",
+        "itemId": "QM2026082824-1",
+        "type": "return_refund",
+        "reason": "比想象中短",
+        "amount": 369,
+        "status": "rejected",
+        "createdAt": "2026-09-01T07:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-01T07:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-01T08:05:00.000+08:00",
+            "status": "rejected",
+            "note": "照片暂无法确认问题，已说明原因，可补充材料"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-28T07:05:00.000+08:00",
+    "shippedAt": "2026-08-29T07:05:00.000+08:00",
+    "deliveredAt": "2026-08-31T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082824",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-31T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-31T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-29T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-29T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-29T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-29T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-29T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082425",
+    "buyerId": "B010",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082425-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082425-2",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082425-3",
+        "productId": "P011",
+        "productName": "柔软短夹克",
+        "skuId": "P011-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 449,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1407,
+    "discount": 0,
+    "payAmount": 1407,
+    "createdAt": "2026-08-24T03:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260828025",
+        "orderId": "QM2026082425",
+        "itemId": "QM2026082425-1",
+        "type": "return_refund",
+        "reason": "颜色和图片差好多",
+        "amount": 819,
+        "status": "closed",
+        "createdAt": "2026-08-28T03:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-28T03:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-28T04:05:00.000+08:00",
+            "status": "closed",
+            "note": "买家撤回申请，售后已关闭"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-24T03:05:00.000+08:00",
+    "shippedAt": "2026-08-25T03:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082425",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082426",
+    "buyerId": "B011",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082426-1",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C2-XL",
+        "color": "燕麦",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082426-2",
+        "productId": "P010",
+        "productName": "落肩西装外套",
+        "skuId": "P010-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082426-3",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C1-S",
+        "color": "米白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1547,
+    "discount": 0,
+    "payAmount": 1547,
+    "createdAt": "2026-08-24T02:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260828026",
+        "orderId": "QM2026082426",
+        "itemId": "QM2026082426-1",
+        "type": "return_refund",
+        "reason": "洗了一次就起球",
+        "amount": 269,
+        "status": "pending_review",
+        "createdAt": "2026-08-28T02:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-28T02:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-24T02:05:00.000+08:00",
+    "shippedAt": "2026-08-25T02:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082426",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T02:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082727",
+    "buyerId": "B012",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082727-1",
+        "productId": "P019",
+        "productName": "垂感阔腿长裤",
+        "skuId": "P019-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 339,
+        "image": ""
+      }
+    ],
+    "totalAmount": 339,
+    "discount": 0,
+    "payAmount": 339,
+    "createdAt": "2026-08-27T09:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260831027",
+        "orderId": "QM2026082727",
+        "itemId": "QM2026082727-1",
+        "type": "return_refund",
+        "reason": "不喜欢了",
+        "amount": 339,
+        "status": "approved",
+        "createdAt": "2026-08-31T09:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-31T09:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-31T10:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-27T09:05:00.000+08:00",
+    "shippedAt": "2026-08-28T09:05:00.000+08:00",
+    "deliveredAt": "2026-08-30T09:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082727",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-30T09:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-30T09:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-28T20:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-28T18:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-28T14:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-28T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-28T09:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026091628",
+    "buyerId": "B004",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091628-1",
+        "productId": "P017",
+        "productName": "柔软长袖打底衫",
+        "skuId": "P017-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      }
+    ],
+    "totalAmount": 319,
+    "discount": 0,
+    "payAmount": 319,
+    "createdAt": "2026-09-16T04:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260920028",
+        "orderId": "QM2026091628",
+        "itemId": "QM2026091628-1",
+        "type": "return_refund",
+        "reason": "肩膀那里有点窄",
+        "amount": 319,
+        "status": "returning",
+        "createdAt": "2026-09-20T04:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-20T04:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-20T05:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-21T04:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-16T04:05:00.000+08:00",
+    "shippedAt": "2026-09-17T04:05:00.000+08:00",
+    "deliveredAt": "2026-09-19T04:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026091628",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-19T04:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-19T04:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-17T15:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-17T13:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-17T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-17T06:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-17T04:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090729",
+    "buyerId": "B005",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090729-1",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090729-2",
+        "productId": "P014",
+        "productName": "小圆领棉衬衫",
+        "skuId": "P014-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 308,
+    "discount": 0,
+    "payAmount": 308,
+    "createdAt": "2026-09-07T05:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260911029",
+        "orderId": "QM2026090729",
+        "itemId": "QM2026090729-1",
+        "type": "return_refund",
+        "reason": "想换个颜色试试",
+        "amount": 159,
+        "status": "refunding",
+        "createdAt": "2026-09-11T05:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-11T05:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-11T06:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-12T05:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-14T05:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-07T05:05:00.000+08:00",
+    "shippedAt": "2026-09-08T05:05:00.000+08:00",
+    "deliveredAt": "2026-09-10T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090729",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-10T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-10T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-08T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-08T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-08T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-08T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-08T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090530",
+    "buyerId": "B006",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090530-1",
+        "productId": "P010",
+        "productName": "落肩西装外套",
+        "skuId": "P010-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090530-2",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1168,
+    "discount": 30,
+    "payAmount": 1138,
+    "createdAt": "2026-09-05T07:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260909030",
+        "orderId": "QM2026090530",
+        "itemId": "QM2026090530-1",
+        "type": "return_refund",
+        "reason": "刚拆包就看到袖口开线",
+        "amount": 789,
+        "status": "refunded",
+        "createdAt": "2026-09-09T07:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-09T07:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-09T08:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-10T07:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-12T07:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          },
+          {
+            "at": "2026-09-13T07:05:00.000+08:00",
+            "status": "refunded",
+            "note": "退款已到账"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-05T07:05:00.000+08:00",
+    "shippedAt": "2026-09-06T07:05:00.000+08:00",
+    "deliveredAt": "2026-09-08T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026090530",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-08T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-08T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-06T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-06T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-06T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-06T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-06T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090931",
+    "buyerId": "B007",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090931-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C1-L",
+        "color": "米白",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090931-2",
+        "productId": "P017",
+        "productName": "柔软长袖打底衫",
+        "skuId": "P017-C2-XL",
+        "color": "浅灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090931-3",
+        "productId": "P010",
+        "productName": "落肩西装外套",
+        "skuId": "P010-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1597,
+    "discount": 0,
+    "payAmount": 1597,
+    "createdAt": "2026-09-09T09:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260913031",
+        "orderId": "QM2026090931",
+        "itemId": "QM2026090931-1",
+        "type": "exchange",
+        "reason": "穿上感觉太宽了",
+        "amount": 459,
+        "newSize": "S",
+        "newColor": "米白",
+        "status": "exchange_shipped",
+        "createdAt": "2026-09-13T09:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-13T09:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-13T10:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-14T09:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-16T09:05:00.000+08:00",
+            "status": "exchange_shipped",
+            "note": "已收到退件，换货新件已发出"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-09T09:05:00.000+08:00",
+    "shippedAt": "2026-09-10T09:05:00.000+08:00",
+    "deliveredAt": "2026-09-12T09:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090931",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-12T09:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-12T09:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-10T20:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-10T18:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-10T14:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-10T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-10T09:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026083032",
+    "buyerId": "B008",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026083032-1",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C3-XS",
+        "color": "雾粉",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 269,
+    "discount": 0,
+    "payAmount": 269,
+    "createdAt": "2026-08-30T07:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260903032",
+        "orderId": "QM2026083032",
+        "itemId": "QM2026083032-1",
+        "type": "return_refund",
+        "reason": "家里已经有类似的了",
+        "amount": 269,
+        "status": "rejected",
+        "createdAt": "2026-09-03T07:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-03T07:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-03T08:05:00.000+08:00",
+            "status": "rejected",
+            "note": "照片暂无法确认问题，已说明原因，可补充材料"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-30T07:05:00.000+08:00",
+    "shippedAt": "2026-08-31T07:05:00.000+08:00",
+    "deliveredAt": "2026-09-02T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026083032",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-02T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-02T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-31T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-31T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-31T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-31T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-31T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026091133",
+    "buyerId": "B009",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091133-1",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C1-L",
+        "color": "米白",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091133-2",
+        "productId": "P003",
+        "productName": "柔光收腰连衣裙",
+        "skuId": "P003-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      }
+    ],
+    "totalAmount": 858,
+    "discount": 0,
+    "payAmount": 858,
+    "createdAt": "2026-09-11T07:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260915033",
+        "orderId": "QM2026091133",
+        "itemId": "QM2026091133-1",
+        "type": "return_refund",
+        "reason": "裤脚一边长一边短",
+        "amount": 609,
+        "status": "closed",
+        "createdAt": "2026-09-15T07:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-15T07:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-15T08:05:00.000+08:00",
+            "status": "closed",
+            "note": "买家撤回申请，售后已关闭"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-11T07:05:00.000+08:00",
+    "shippedAt": "2026-09-12T07:05:00.000+08:00",
+    "deliveredAt": "2026-09-14T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026091133",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-14T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-14T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-12T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-12T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-12T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-12T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-12T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082134",
+    "buyerId": "B010",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082134-1",
+        "productId": "P017",
+        "productName": "柔软长袖打底衫",
+        "skuId": "P017-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      }
+    ],
+    "totalAmount": 319,
+    "discount": 0,
+    "payAmount": 319,
+    "createdAt": "2026-08-21T05:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260825034",
+        "orderId": "QM2026082134",
+        "itemId": "QM2026082134-1",
+        "type": "return_refund",
+        "reason": "腰太紧了",
+        "amount": 319,
+        "status": "pending_review",
+        "createdAt": "2026-08-25T05:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-25T05:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-21T05:05:00.000+08:00",
+    "shippedAt": "2026-08-22T05:05:00.000+08:00",
+    "deliveredAt": "2026-08-24T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082134",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-24T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-24T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-22T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-22T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-22T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-22T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-22T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082435",
+    "buyerId": "B011",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082435-1",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C2-XL",
+        "color": "炭灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082435-2",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082435-3",
+        "productId": "P029",
+        "productName": "纹理针织背心",
+        "skuId": "P029-C1-XS",
+        "color": "雾蓝",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 169,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1587,
+    "discount": 0,
+    "payAmount": 1587,
+    "createdAt": "2026-08-24T03:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260828035",
+        "orderId": "QM2026082435",
+        "itemId": "QM2026082435-1",
+        "type": "return_refund",
+        "reason": "M 码偏小，坐下有点勒",
+        "amount": 599,
+        "status": "approved",
+        "createdAt": "2026-08-28T03:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-28T03:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-28T04:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-24T03:05:00.000+08:00",
+    "shippedAt": "2026-08-25T03:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082435",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026081736",
+    "buyerId": "B012",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026081736-1",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C2-S",
+        "color": "浅灰",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081736-2",
+        "productId": "P023",
+        "productName": "松紧腰休闲裤",
+        "skuId": "P023-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 508,
+    "discount": 30,
+    "payAmount": 478,
+    "createdAt": "2026-08-17T07:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260821036",
+        "orderId": "QM2026081736",
+        "itemId": "QM2026081736-1",
+        "type": "return_refund",
+        "reason": "比想象中短",
+        "amount": 109,
+        "status": "returning",
+        "createdAt": "2026-08-21T07:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-21T07:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-21T08:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-22T07:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-17T07:05:00.000+08:00",
+    "shippedAt": "2026-08-18T07:05:00.000+08:00",
+    "deliveredAt": "2026-08-20T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026081736",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-20T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-20T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-18T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-18T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-18T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-18T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-18T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026091637",
+    "buyerId": "B004",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091637-1",
+        "productId": "P017",
+        "productName": "柔软长袖打底衫",
+        "skuId": "P017-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091637-2",
+        "productId": "P025",
+        "productName": "细针圆领套衫",
+        "skuId": "P025-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      }
+    ],
+    "totalAmount": 618,
+    "discount": 0,
+    "payAmount": 618,
+    "createdAt": "2026-09-16T06:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260920037",
+        "orderId": "QM2026091637",
+        "itemId": "QM2026091637-1",
+        "type": "return_refund",
+        "reason": "颜色和图片差好多",
+        "amount": 319,
+        "status": "refunding",
+        "createdAt": "2026-09-20T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-09-20T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-09-20T07:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-09-21T06:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-09-23T06:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-09-16T06:05:00.000+08:00",
+    "shippedAt": "2026-09-17T06:05:00.000+08:00",
+    "deliveredAt": "2026-09-19T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026091637",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-19T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-19T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-17T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-17T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-17T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-17T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-17T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082138",
+    "buyerId": "B005",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082138-1",
+        "productId": "P013",
+        "productName": "云感真丝衬衫",
+        "skuId": "P013-C2-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 459,
+    "discount": 0,
+    "payAmount": 459,
+    "createdAt": "2026-08-21T06:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [
+      {
+        "id": "AS20260825038",
+        "orderId": "QM2026082138",
+        "itemId": "QM2026082138-1",
+        "type": "return_refund",
+        "reason": "洗了一次就起球",
+        "amount": 459,
+        "status": "refunded",
+        "createdAt": "2026-08-25T06:05:00.000+08:00",
+        "timeline": [
+          {
+            "at": "2026-08-25T06:05:00.000+08:00",
+            "status": "pending_review",
+            "note": "申请已提交，待审核"
+          },
+          {
+            "at": "2026-08-25T07:05:00.000+08:00",
+            "status": "approved",
+            "note": "已同意，请寄回商品"
+          },
+          {
+            "at": "2026-08-26T06:05:00.000+08:00",
+            "status": "returning",
+            "note": "买家已寄回商品"
+          },
+          {
+            "at": "2026-08-28T06:05:00.000+08:00",
+            "status": "refunding",
+            "note": "已收到退件并发起原路退款"
+          },
+          {
+            "at": "2026-08-29T06:05:00.000+08:00",
+            "status": "refunded",
+            "note": "退款已到账"
+          }
+        ]
+      }
+    ],
+    "paidAt": "2026-08-21T06:05:00.000+08:00",
+    "shippedAt": "2026-08-22T06:05:00.000+08:00",
+    "deliveredAt": "2026-08-24T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082138",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-24T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-24T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-22T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-22T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-22T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-22T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-22T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026091139",
+    "buyerId": "B006",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026091139-1",
+        "productId": "P018",
+        "productName": "褶边领衬衫",
+        "skuId": "P018-C2-XS",
+        "color": "墨黑",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091139-2",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091139-3",
+        "productId": "P016",
+        "productName": "方领短袖上衣",
+        "skuId": "P016-C3-XL",
+        "color": "浅咖",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 259,
+        "image": ""
+      }
+    ],
+    "totalAmount": 877,
+    "discount": 30,
+    "payAmount": 847,
+    "createdAt": "2026-09-11T06:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-11T06:05:00.000+08:00",
+    "shippedAt": "2026-09-12T06:05:00.000+08:00",
+    "deliveredAt": "2026-09-14T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026091139",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-14T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-14T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-12T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-12T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-12T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-12T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-12T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082840",
+    "buyerId": "B007",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082840-1",
+        "productId": "P012",
+        "productName": "立领呢外套",
+        "skuId": "P012-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 889,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082840-2",
+        "productId": "P012",
+        "productName": "立领呢外套",
+        "skuId": "P012-C1-S",
+        "color": "米白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 889,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082840-3",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C2-XL",
+        "color": "炭灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      }
+    ],
+    "totalAmount": 2377,
+    "discount": 0,
+    "payAmount": 2377,
+    "createdAt": "2026-08-28T02:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-08-28T02:05:00.000+08:00",
+    "shippedAt": "2026-08-29T02:05:00.000+08:00",
+    "deliveredAt": "2026-08-31T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082840",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-31T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-31T02:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-29T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-29T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-29T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-29T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-29T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092541",
+    "buyerId": "B008",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026092541-1",
+        "productId": "P035",
+        "productName": "侧扣裹身裙",
+        "skuId": "P035-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092541-2",
+        "productId": "P026",
+        "productName": "落肩V领针织",
+        "skuId": "P026-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 219,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092541-3",
+        "productId": "P002",
+        "productName": "法式碎花茶歇裙",
+        "skuId": "P002-C1-XS",
+        "color": "蓝底白花",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      }
+    ],
+    "totalAmount": 757,
+    "discount": 0,
+    "payAmount": 757,
+    "createdAt": "2026-09-25T08:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-25T08:05:00.000+08:00",
+    "shippedAt": "2026-09-26T08:05:00.000+08:00",
+    "deliveredAt": "2026-09-28T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026092541",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-28T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-28T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-26T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-26T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-26T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-26T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-26T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090342",
+    "buyerId": "B009",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090342-1",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C1-XL",
+        "color": "雾蓝",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026090342-2",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 808,
+    "discount": 0,
+    "payAmount": 808,
+    "createdAt": "2026-09-03T04:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-03T04:05:00.000+08:00",
+    "shippedAt": "2026-09-04T04:05:00.000+08:00",
+    "deliveredAt": "2026-09-06T04:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090342",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-06T04:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-06T04:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-04T15:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-04T13:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-04T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-04T06:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-04T04:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092243",
+    "buyerId": "B010",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026092243-1",
+        "productId": "P017",
+        "productName": "柔软长袖打底衫",
+        "skuId": "P017-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      }
+    ],
+    "totalAmount": 319,
+    "discount": 30,
+    "payAmount": 289,
+    "createdAt": "2026-09-22T02:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-22T02:05:00.000+08:00",
+    "shippedAt": "2026-09-23T02:05:00.000+08:00",
+    "deliveredAt": "2026-09-25T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092243",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-25T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-25T02:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-23T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-23T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-23T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-23T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-23T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090844",
+    "buyerId": "B011",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090844-1",
+        "productId": "P010",
+        "productName": "落肩西装外套",
+        "skuId": "P010-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      }
+    ],
+    "totalAmount": 819,
+    "discount": 30,
+    "payAmount": 789,
+    "createdAt": "2026-09-08T02:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-08T02:05:00.000+08:00",
+    "shippedAt": "2026-09-09T02:05:00.000+08:00",
+    "deliveredAt": "2026-09-11T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090844",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-11T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-11T02:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-09T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-09T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-09T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-09T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-09T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026080945",
+    "buyerId": "B012",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026080945-1",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C1-XL",
+        "color": "燕麦色",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080945-2",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080945-3",
+        "productId": "P019",
+        "productName": "垂感阔腿长裤",
+        "skuId": "P019-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 339,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1097,
+    "discount": 0,
+    "payAmount": 1097,
+    "createdAt": "2026-08-09T08:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-08-09T08:05:00.000+08:00",
+    "shippedAt": "2026-08-10T08:05:00.000+08:00",
+    "deliveredAt": "2026-08-12T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026080945",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-12T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-12T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-10T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-10T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-10T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-10T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-10T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026081346",
+    "buyerId": "B004",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026081346-1",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081346-2",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C1-S",
+        "color": "奶白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081346-3",
+        "productId": "P035",
+        "productName": "侧扣裹身裙",
+        "skuId": "P035-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 577,
+    "discount": 0,
+    "payAmount": 577,
+    "createdAt": "2026-08-13T05:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-08-13T05:05:00.000+08:00",
+    "shippedAt": "2026-08-14T05:05:00.000+08:00",
+    "deliveredAt": "2026-08-16T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026081346",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-16T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-16T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-14T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-14T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-14T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-14T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-14T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026082447",
+    "buyerId": "B005",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026082447-1",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082447-2",
+        "productId": "P001",
+        "productName": "轻盈褶裥长裙",
+        "skuId": "P001-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082447-3",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C1-L",
+        "color": "燕麦色",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1597,
+    "discount": 30,
+    "payAmount": 1567,
+    "createdAt": "2026-08-24T07:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-08-24T07:05:00.000+08:00",
+    "shippedAt": "2026-08-25T07:05:00.000+08:00",
+    "deliveredAt": "2026-08-27T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026082447",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-27T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-27T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-25T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-25T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-25T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-25T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-25T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026080748",
+    "buyerId": "B006",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026080748-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080748-2",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 918,
+    "discount": 0,
+    "payAmount": 918,
+    "createdAt": "2026-08-07T08:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-08-07T08:05:00.000+08:00",
+    "shippedAt": "2026-08-08T08:05:00.000+08:00",
+    "deliveredAt": "2026-08-10T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026080748",
+      "status": "delivered",
+      "estimatedDelivery": "2026-08-10T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-08-10T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-08-08T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-08-08T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-08-08T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-08-08T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-08-08T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026090949",
+    "buyerId": "B007",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "QM2026090949-1",
+        "productId": "P020",
+        "productName": "棉感锥形裤",
+        "skuId": "P020-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 459,
+    "discount": 0,
+    "payAmount": 459,
+    "createdAt": "2026-09-09T06:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-09T06:05:00.000+08:00",
+    "shippedAt": "2026-09-10T06:05:00.000+08:00",
+    "deliveredAt": "2026-09-12T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026090949",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-12T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-12T06:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-10T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-10T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-10T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-10T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-10T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026093050",
+    "buyerId": "B008",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026093050-1",
+        "productId": "P023",
+        "productName": "松紧腰休闲裤",
+        "skuId": "P023-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026093050-2",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      }
+    ],
+    "totalAmount": 528,
+    "discount": 0,
+    "payAmount": 528,
+    "createdAt": "2026-09-30T05:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-30T05:05:00.000+08:00",
+    "shippedAt": "2026-10-01T05:05:00.000+08:00",
+    "deliveredAt": "2026-10-03T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026093050",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-03T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-10-01T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-01T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-01T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-01T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-01T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026093051",
+    "buyerId": "B009",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026093051-1",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026093051-2",
+        "productId": "P006",
+        "productName": "垂感背心长裙",
+        "skuId": "P006-C1-XS",
+        "color": "米白",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 548,
+    "discount": 0,
+    "payAmount": 548,
+    "createdAt": "2026-09-30T07:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-30T07:05:00.000+08:00",
+    "shippedAt": "2026-10-01T07:05:00.000+08:00",
+    "deliveredAt": "2026-10-03T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026093051",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-03T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-10-01T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-01T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-01T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-01T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-01T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092752",
+    "buyerId": "B010",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092752-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 459,
+    "discount": 30,
+    "payAmount": 429,
+    "createdAt": "2026-09-27T03:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-27T03:05:00.000+08:00",
+    "shippedAt": "2026-09-28T03:05:00.000+08:00",
+    "deliveredAt": "2026-09-30T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092752",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-30T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-30T03:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-28T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-28T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-28T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-28T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-28T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092953",
+    "buyerId": "B011",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092953-1",
+        "productId": "P024",
+        "productName": "九分微喇裤",
+        "skuId": "P024-C2-L",
+        "color": "墨黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092953-2",
+        "productId": "P006",
+        "productName": "垂感背心长裙",
+        "skuId": "P006-C1-XS",
+        "color": "米白",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 568,
+    "discount": 0,
+    "payAmount": 568,
+    "createdAt": "2026-09-29T07:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-29T07:05:00.000+08:00",
+    "shippedAt": "2026-09-30T07:05:00.000+08:00",
+    "deliveredAt": "2026-10-02T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092953",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-02T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-02T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-30T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-30T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-30T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-30T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-30T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092854",
+    "buyerId": "B012",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092854-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092854-2",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C2-M",
+        "color": "浅灰",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092854-3",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C2-M",
+        "color": "墨黑",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1347,
+    "discount": 0,
+    "payAmount": 1347,
+    "createdAt": "2026-09-28T08:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-28T08:05:00.000+08:00",
+    "shippedAt": "2026-09-29T08:05:00.000+08:00",
+    "deliveredAt": "2026-10-01T08:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092854",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-01T08:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-01T08:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-29T19:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-29T17:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-29T13:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-29T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-29T08:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100155",
+    "buyerId": "B004",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026100155-1",
+        "productId": "P014",
+        "productName": "小圆领棉衬衫",
+        "skuId": "P014-C3-L",
+        "color": "浅咖",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 149,
+    "discount": 0,
+    "payAmount": 149,
+    "createdAt": "2026-10-01T05:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-01T05:05:00.000+08:00",
+    "shippedAt": "2026-10-02T05:05:00.000+08:00",
+    "deliveredAt": "2026-10-04T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100155",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-04T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-04T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-10-02T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-02T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-02T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-02T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-02T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026093056",
+    "buyerId": "B005",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026093056-1",
+        "productId": "P025",
+        "productName": "细针圆领套衫",
+        "skuId": "P025-C2-S",
+        "color": "浅灰",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026093056-2",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-XL",
+        "color": "浅灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026093056-3",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 997,
+    "discount": 0,
+    "payAmount": 997,
+    "createdAt": "2026-09-30T09:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-30T09:05:00.000+08:00",
+    "shippedAt": "2026-10-01T09:05:00.000+08:00",
+    "deliveredAt": "2026-10-03T09:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026093056",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-03T09:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T09:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-10-01T20:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-01T18:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-01T14:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-01T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-01T09:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092757",
+    "buyerId": "B006",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092757-1",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C2-XL",
+        "color": "浅灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      }
+    ],
+    "totalAmount": 139,
+    "discount": 0,
+    "payAmount": 139,
+    "createdAt": "2026-09-27T05:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-27T05:05:00.000+08:00",
+    "shippedAt": "2026-09-28T05:05:00.000+08:00",
+    "deliveredAt": "2026-09-30T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026092757",
+      "status": "delivered",
+      "estimatedDelivery": "2026-09-30T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-09-30T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-28T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-28T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-28T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-28T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-28T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092858",
+    "buyerId": "B007",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092858-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-XL",
+        "color": "雾蓝",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      }
+    ],
+    "totalAmount": 819,
+    "discount": 0,
+    "payAmount": 819,
+    "createdAt": "2026-09-28T04:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-28T04:05:00.000+08:00",
+    "shippedAt": "2026-09-29T04:05:00.000+08:00",
+    "deliveredAt": "2026-10-01T04:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092858",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-01T04:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-01T04:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-29T15:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-29T13:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-29T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-29T06:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-29T04:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092959",
+    "buyerId": "B008",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092959-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-L",
+        "color": "黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092959-2",
+        "productId": "P026",
+        "productName": "落肩V领针织",
+        "skuId": "P026-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 219,
+        "image": ""
+      }
+    ],
+    "totalAmount": 548,
+    "discount": 0,
+    "payAmount": 548,
+    "createdAt": "2026-09-29T05:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-29T05:05:00.000+08:00",
+    "shippedAt": "2026-09-30T05:05:00.000+08:00",
+    "deliveredAt": "2026-10-02T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026092959",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-02T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-02T05:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-30T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-30T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-30T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-30T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-30T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026092960",
+    "buyerId": "B009",
+    "status": "delivered",
+    "items": [
+      {
+        "itemId": "QM2026092960-1",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-M",
+        "color": "浅灰",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092960-2",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092960-3",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C3-L",
+        "color": "浅咖",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1237,
+    "discount": 0,
+    "payAmount": 1237,
+    "createdAt": "2026-09-29T07:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-09-29T07:05:00.000+08:00",
+    "shippedAt": "2026-09-30T07:05:00.000+08:00",
+    "deliveredAt": "2026-10-02T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026092960",
+      "status": "delivered",
+      "estimatedDelivery": "2026-10-02T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-02T07:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "收件人已签收"
+        },
+        {
+          "at": "2026-09-30T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-09-30T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-09-30T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-09-30T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-09-30T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100361",
+    "buyerId": "B010",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100361-1",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C1-XS",
+        "color": "雾蓝",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      }
+    ],
+    "totalAmount": 139,
+    "discount": 0,
+    "payAmount": 139,
+    "createdAt": "2026-10-03T09:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-03T09:05:00.000+08:00",
+    "shippedAt": "2026-10-04T09:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100361",
+      "status": "exception",
+      "estimatedDelivery": "2026-10-06T09:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-04T20:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "包裹分拣延迟，正在重新安排配送"
+        },
+        {
+          "at": "2026-10-04T18:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-04T14:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-04T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-04T09:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100362",
+    "buyerId": "B011",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100362-1",
+        "productId": "P003",
+        "productName": "柔光收腰连衣裙",
+        "skuId": "P003-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100362-2",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 618,
+    "discount": 0,
+    "payAmount": 618,
+    "createdAt": "2026-10-03T07:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-03T07:05:00.000+08:00",
+    "shippedAt": "2026-10-04T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100362",
+      "status": "exception",
+      "estimatedDelivery": "2026-10-06T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-04T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "包裹分拣延迟，正在重新安排配送"
+        },
+        {
+          "at": "2026-10-04T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-04T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-04T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-04T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100263",
+    "buyerId": "B012",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100263-1",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100263-2",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C3-XL",
+        "color": "浅咖",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100263-3",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C2-M",
+        "color": "炭灰",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1337,
+    "discount": 0,
+    "payAmount": 1337,
+    "createdAt": "2026-10-02T03:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-02T03:05:00.000+08:00",
+    "shippedAt": "2026-10-03T03:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100263",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-05T03:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T14:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-03T12:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-03T05:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T03:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100264",
+    "buyerId": "B004",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100264-1",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 369,
+    "discount": 30,
+    "payAmount": 339,
+    "createdAt": "2026-10-02T04:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-02T04:05:00.000+08:00",
+    "shippedAt": "2026-10-03T04:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100264",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-05T04:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T15:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-03T13:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-03T06:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T04:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100265",
+    "buyerId": "B005",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100265-1",
+        "productId": "P020",
+        "productName": "棉感锥形裤",
+        "skuId": "P020-C2-L",
+        "color": "墨黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100265-2",
+        "productId": "P006",
+        "productName": "垂感背心长裙",
+        "skuId": "P006-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100265-3",
+        "productId": "P025",
+        "productName": "细针圆领套衫",
+        "skuId": "P025-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1027,
+    "discount": 30,
+    "payAmount": 997,
+    "createdAt": "2026-10-02T07:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-02T07:05:00.000+08:00",
+    "shippedAt": "2026-10-03T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100265",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-05T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-03T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-03T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100366",
+    "buyerId": "B006",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100366-1",
+        "productId": "P007",
+        "productName": "燕麦色羊毛混纺大衣",
+        "skuId": "P007-C2-XL",
+        "color": "炭灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 599,
+        "image": ""
+      }
+    ],
+    "totalAmount": 599,
+    "discount": 30,
+    "payAmount": 569,
+    "createdAt": "2026-10-03T02:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-03T02:05:00.000+08:00",
+    "shippedAt": "2026-10-04T02:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026100366",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-06T02:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-04T13:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-04T11:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-04T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-04T04:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-04T02:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100367",
+    "buyerId": "B007",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100367-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C1-S",
+        "color": "米白",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      }
+    ],
+    "totalAmount": 459,
+    "discount": 0,
+    "payAmount": 459,
+    "createdAt": "2026-10-03T05:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-03T05:05:00.000+08:00",
+    "shippedAt": "2026-10-04T05:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100367",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-06T05:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-04T16:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-04T14:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-04T10:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-04T07:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-04T05:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100268",
+    "buyerId": "B008",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100268-1",
+        "productId": "P018",
+        "productName": "褶边领衬衫",
+        "skuId": "P018-C3-XL",
+        "color": "浅咖",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100268-2",
+        "productId": "P024",
+        "productName": "九分微喇裤",
+        "skuId": "P024-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      }
+    ],
+    "totalAmount": 548,
+    "discount": 0,
+    "payAmount": 548,
+    "createdAt": "2026-10-02T06:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-02T06:05:00.000+08:00",
+    "shippedAt": "2026-10-03T06:05:00.000+08:00",
+    "logistics": {
+      "carrier": "中通快递",
+      "trackingNo": "DEMO2026100268",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-05T06:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T17:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-03T15:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T11:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-03T08:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T06:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100269",
+    "buyerId": "B009",
+    "status": "shipped",
+    "items": [
+      {
+        "itemId": "QM2026100269-1",
+        "productId": "P023",
+        "productName": "松紧腰休闲裤",
+        "skuId": "P023-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100269-2",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 718,
+    "discount": 0,
+    "payAmount": 718,
+    "createdAt": "2026-10-02T07:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-02T07:05:00.000+08:00",
+    "shippedAt": "2026-10-03T07:05:00.000+08:00",
+    "logistics": {
+      "carrier": "顺丰速运",
+      "trackingNo": "DEMO2026100269",
+      "status": "in_transit",
+      "estimatedDelivery": "2026-10-05T07:05:00.000+08:00",
+      "events": [
+        {
+          "at": "2026-10-03T18:05:00.000+08:00",
+          "location": "上海浦东配送站",
+          "description": "已到配送站"
+        },
+        {
+          "at": "2026-10-03T16:05:00.000+08:00",
+          "location": "上海转运中心",
+          "description": "到达上海转运中心"
+        },
+        {
+          "at": "2026-10-03T12:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "离开杭州，发往上海"
+        },
+        {
+          "at": "2026-10-03T09:05:00.000+08:00",
+          "location": "杭州转运中心",
+          "description": "到达杭州转运中心"
+        },
+        {
+          "at": "2026-10-03T07:05:00.000+08:00",
+          "location": "杭州仓",
+          "description": "包裹已揽收"
+        }
+      ]
+    }
+  },
+  {
+    "id": "QM2026100570",
+    "buyerId": "B010",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100570-1",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C3-XS",
+        "color": "浅咖",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 369,
+    "discount": 0,
+    "payAmount": 369,
+    "createdAt": "2026-10-05T08:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T08:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100571",
+    "buyerId": "B011",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100571-1",
+        "productId": "P004",
+        "productName": "方领泡袖裙",
+        "skuId": "P004-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 459,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100571-2",
+        "productId": "P030",
+        "productName": "软糯圆领开衫",
+        "skuId": "P030-C3-L",
+        "color": "雾粉",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      }
+    ],
+    "totalAmount": 728,
+    "discount": 0,
+    "payAmount": 728,
+    "createdAt": "2026-10-05T04:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T04:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100572",
+    "buyerId": "B012",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100572-1",
+        "productId": "P011",
+        "productName": "柔软短夹克",
+        "skuId": "P011-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 449,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100572-2",
+        "productId": "P025",
+        "productName": "细针圆领套衫",
+        "skuId": "P025-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      }
+    ],
+    "totalAmount": 748,
+    "discount": 30,
+    "payAmount": 718,
+    "createdAt": "2026-10-05T06:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T06:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100573",
+    "buyerId": "B004",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100573-1",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100573-2",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C2-XL",
+        "color": "浅灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 628,
+    "discount": 0,
+    "payAmount": 628,
+    "createdAt": "2026-10-05T05:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T05:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100574",
+    "buyerId": "B005",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100574-1",
+        "productId": "P034",
+        "productName": "棉感A字裙",
+        "skuId": "P034-C3-M",
+        "color": "浅咖",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 349,
+    "discount": 30,
+    "payAmount": 319,
+    "createdAt": "2026-10-05T04:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T04:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100575",
+    "buyerId": "B006",
+    "status": "paid",
+    "items": [
+      {
+        "itemId": "QM2026100575-1",
+        "productId": "P015",
+        "productName": "细条纹衬衫",
+        "skuId": "P015-C2-S",
+        "color": "浅灰",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      }
+    ],
+    "totalAmount": 319,
+    "discount": 0,
+    "payAmount": 319,
+    "createdAt": "2026-10-05T06:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": [],
+    "paidAt": "2026-10-05T06:05:00.000+08:00"
+  },
+  {
+    "id": "QM2026100576",
+    "buyerId": "B007",
+    "status": "pending_payment",
+    "items": [
+      {
+        "itemId": "QM2026100576-1",
+        "productId": "P001",
+        "productName": "轻盈褶裥长裙",
+        "skuId": "P001-C2-XL",
+        "color": "浅灰",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100576-2",
+        "productId": "P002",
+        "productName": "法式碎花茶歇裙",
+        "skuId": "P002-C1-S",
+        "color": "蓝底白花",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 389,
+        "image": ""
+      }
+    ],
+    "totalAmount": 778,
+    "discount": 0,
+    "payAmount": 778,
+    "createdAt": "2026-10-05T07:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100577",
+    "buyerId": "B008",
+    "status": "pending_payment",
+    "items": [
+      {
+        "itemId": "QM2026100577-1",
+        "productId": "P021",
+        "productName": "高腰直筒西装裤",
+        "skuId": "P021-C1-L",
+        "color": "黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 329,
+        "image": ""
+      }
+    ],
+    "totalAmount": 329,
+    "discount": 30,
+    "payAmount": 299,
+    "createdAt": "2026-10-05T04:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100578",
+    "buyerId": "B009",
+    "status": "pending_payment",
+    "items": [
+      {
+        "itemId": "QM2026100578-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100578-2",
+        "productId": "P012",
+        "productName": "立领呢外套",
+        "skuId": "P012-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 889,
+        "image": ""
+      }
+    ],
+    "totalAmount": 1708,
+    "discount": 0,
+    "payAmount": 1708,
+    "createdAt": "2026-10-05T02:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100579",
+    "buyerId": "B010",
+    "status": "pending_payment",
+    "items": [
+      {
+        "itemId": "QM2026100579-1",
+        "productId": "P003",
+        "productName": "柔光收腰连衣裙",
+        "skuId": "P003-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100579-2",
+        "productId": "P027",
+        "productName": "短款扣式开衫",
+        "skuId": "P027-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 259,
+        "image": ""
+      }
+    ],
+    "totalAmount": 508,
+    "discount": 0,
+    "payAmount": 508,
+    "createdAt": "2026-10-05T04:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026092080",
+    "buyerId": "B011",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026092080-1",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092080-2",
+        "productId": "P034",
+        "productName": "棉感A字裙",
+        "skuId": "P034-C3-XL",
+        "color": "浅咖",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      }
+    ],
+    "totalAmount": 488,
+    "discount": 0,
+    "payAmount": 488,
+    "createdAt": "2026-09-20T03:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026082381",
+    "buyerId": "B012",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026082381-1",
+        "productId": "P015",
+        "productName": "细条纹衬衫",
+        "skuId": "P015-C1-M",
+        "color": "雾蓝",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082381-2",
+        "productId": "P008",
+        "productName": "轻量绗缝短外套",
+        "skuId": "P008-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 609,
+        "image": ""
+      }
+    ],
+    "totalAmount": 928,
+    "discount": 0,
+    "payAmount": 928,
+    "createdAt": "2026-08-23T08:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026090882",
+    "buyerId": "B004",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026090882-1",
+        "productId": "P011",
+        "productName": "柔软短夹克",
+        "skuId": "P011-C1-L",
+        "color": "雾蓝",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 449,
+        "image": ""
+      }
+    ],
+    "totalAmount": 449,
+    "discount": 30,
+    "payAmount": 419,
+    "createdAt": "2026-09-08T07:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026080783",
+    "buyerId": "B005",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026080783-1",
+        "productId": "P009",
+        "productName": "双排扣风衣",
+        "skuId": "P009-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      }
+    ],
+    "totalAmount": 819,
+    "discount": 30,
+    "payAmount": 789,
+    "createdAt": "2026-08-07T04:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026100484",
+    "buyerId": "B006",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026100484-1",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100484-2",
+        "productId": "P028",
+        "productName": "柔软高领套衫",
+        "skuId": "P028-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 279,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026100484-3",
+        "productId": "P014",
+        "productName": "小圆领棉衬衫",
+        "skuId": "P014-C2-L",
+        "color": "墨黑",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 707,
+    "discount": 0,
+    "payAmount": 707,
+    "createdAt": "2026-10-04T04:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026080985",
+    "buyerId": "B007",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026080985-1",
+        "productId": "P031",
+        "productName": "垂感伞摆半身裙",
+        "skuId": "P031-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 349,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080985-2",
+        "productId": "P024",
+        "productName": "九分微喇裤",
+        "skuId": "P024-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 299,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026080985-3",
+        "productId": "P014",
+        "productName": "小圆领棉衬衫",
+        "skuId": "P014-C2-XL",
+        "color": "墨黑",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 797,
+    "discount": 30,
+    "payAmount": 767,
+    "createdAt": "2026-08-09T02:00:00.000+08:00",
+    "address": {
+      "name": "宋佳禾",
+      "phone": "138****1007",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路7号虚构小区7室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026082686",
+    "buyerId": "B008",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026082686-1",
+        "productId": "P010",
+        "productName": "落肩西装外套",
+        "skuId": "P010-C1-XL",
+        "color": "米白",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 819,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082686-2",
+        "productId": "P022",
+        "productName": "侧褶通勤裤",
+        "skuId": "P022-C3-S",
+        "color": "浅咖",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      }
+    ],
+    "totalAmount": 968,
+    "discount": 0,
+    "payAmount": 968,
+    "createdAt": "2026-08-26T05:00:00.000+08:00",
+    "address": {
+      "name": "何知夏",
+      "phone": "138****1008",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路8号虚构小区8室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026091587",
+    "buyerId": "B009",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026091587-1",
+        "productId": "P035",
+        "productName": "侧扣裹身裙",
+        "skuId": "P035-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026091587-2",
+        "productId": "P033",
+        "productName": "高腰直筒裙",
+        "skuId": "P033-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 139,
+        "image": ""
+      }
+    ],
+    "totalAmount": 288,
+    "discount": 0,
+    "payAmount": 288,
+    "createdAt": "2026-09-15T06:00:00.000+08:00",
+    "address": {
+      "name": "沈亦宁",
+      "phone": "138****1009",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路9号虚构小区9室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026092088",
+    "buyerId": "B010",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026092088-1",
+        "productId": "P035",
+        "productName": "侧扣裹身裙",
+        "skuId": "P035-C2-XS",
+        "color": "浅灰",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 149,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092088-2",
+        "productId": "P023",
+        "productName": "松紧腰休闲裤",
+        "skuId": "P023-C1-XL",
+        "color": "雾蓝",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026092088-3",
+        "productId": "P003",
+        "productName": "柔光收腰连衣裙",
+        "skuId": "P003-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      }
+    ],
+    "totalAmount": 767,
+    "discount": 0,
+    "payAmount": 767,
+    "createdAt": "2026-09-20T06:00:00.000+08:00",
+    "address": {
+      "name": "温晓晴",
+      "phone": "138****1010",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路10号虚构小区10室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026092489",
+    "buyerId": "B011",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026092489-1",
+        "productId": "P018",
+        "productName": "褶边领衬衫",
+        "skuId": "P018-C1-M",
+        "color": "米白",
+        "size": "M",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      }
+    ],
+    "totalAmount": 249,
+    "discount": 0,
+    "payAmount": 249,
+    "createdAt": "2026-09-24T08:00:00.000+08:00",
+    "address": {
+      "name": "顾南枝",
+      "phone": "138****1011",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路11号虚构小区11室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026081090",
+    "buyerId": "B012",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026081090-1",
+        "productId": "P018",
+        "productName": "褶边领衬衫",
+        "skuId": "P018-C1-XS",
+        "color": "米白",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 249,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026081090-2",
+        "productId": "P011",
+        "productName": "柔软短夹克",
+        "skuId": "P011-C1-XL",
+        "color": "雾蓝",
+        "size": "XL",
+        "quantity": 1,
+        "unitPrice": 449,
+        "image": ""
+      }
+    ],
+    "totalAmount": 698,
+    "discount": 0,
+    "payAmount": 698,
+    "createdAt": "2026-08-10T06:00:00.000+08:00",
+    "address": {
+      "name": "郑悦",
+      "phone": "138****1012",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路12号虚构小区12室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026092991",
+    "buyerId": "B004",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026092991-1",
+        "productId": "P015",
+        "productName": "细条纹衬衫",
+        "skuId": "P015-C1-S",
+        "color": "雾蓝",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 319,
+        "image": ""
+      }
+    ],
+    "totalAmount": 319,
+    "discount": 0,
+    "payAmount": 319,
+    "createdAt": "2026-09-29T08:00:00.000+08:00",
+    "address": {
+      "name": "赵可心",
+      "phone": "138****1004",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路4号虚构小区4室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026090892",
+    "buyerId": "B005",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026090892-1",
+        "productId": "P005",
+        "productName": "细格衬衫裙",
+        "skuId": "P005-C2-L",
+        "color": "浅灰",
+        "size": "L",
+        "quantity": 1,
+        "unitPrice": 159,
+        "image": ""
+      }
+    ],
+    "totalAmount": 159,
+    "discount": 0,
+    "payAmount": 159,
+    "createdAt": "2026-09-08T09:00:00.000+08:00",
+    "address": {
+      "name": "许安宁",
+      "phone": "138****1005",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路5号虚构小区5室（演示地址）"
+    },
+    "afterSales": []
+  },
+  {
+    "id": "QM2026082093",
+    "buyerId": "B006",
+    "status": "cancelled",
+    "items": [
+      {
+        "itemId": "QM2026082093-1",
+        "productId": "P006",
+        "productName": "垂感背心长裙",
+        "skuId": "P006-C3-XS",
+        "color": "浅咖",
+        "size": "XS",
+        "quantity": 1,
+        "unitPrice": 269,
+        "image": ""
+      },
+      {
+        "itemId": "QM2026082093-2",
+        "productId": "P032",
+        "productName": "细褶中长裙",
+        "skuId": "P032-C2-S",
+        "color": "墨黑",
+        "size": "S",
+        "quantity": 1,
+        "unitPrice": 369,
+        "image": ""
+      }
+    ],
+    "totalAmount": 638,
+    "discount": 0,
+    "payAmount": 638,
+    "createdAt": "2026-08-20T05:00:00.000+08:00",
+    "address": {
+      "name": "李沐晴",
+      "phone": "138****1006",
+      "region": "上海市 上海市 浦东新区",
+      "detail": "栖木演示路6号虚构小区6室（演示地址）"
+    },
+    "afterSales": []
+  }
+]
