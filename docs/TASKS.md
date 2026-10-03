@@ -10,8 +10,8 @@
 |---|---|---|---|---|---|---|
 | T00 | 项目脚手架 | Codex | — | 0 | 1h | done |
 | T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | done |
-| T01b | Jev 延迟排查 + 兜底提速 | Codex | T01 | 1 | 45m | doing |
-| T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | todo |
+| T01b | Jev 延迟排查 + 兜底提速 | Codex | T01 | 1 | 45m | done |
+| T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | doing |
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
@@ -228,6 +228,7 @@
 6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。**务必遵守 CONTRACTS §2「补充约定」五条**（动作落买家消息、确认卡片状态回填、同一轮共用 traceId、转人工状态流转、images 可为空）。
 7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`；每写一条 trace 同时更新 `Conversation.lastLayer`。
 8. API：`POST /api/chat`、`GET /api/conversations/:id/messages`、`GET /api/conversations/latest`。
+8b. `lib/brain/decide/warmup.ts`：Jev 预热与保温（ARCHITECTURE §4.3、D010）。服务端第一次处理请求时异步发一次预热调用（不阻塞这次请求），之后每 `JEV_KEEPALIVE_MS` 发一次最小请求；`0` 表示关闭；预热调用不写 RouteTrace，成本记在日志里；没有 key 或 provider 不是 jev 时不启动。
 9. `scripts/chat-cli.ts`：命令行和客服对话（可选买家、可选 context），每轮打印回复和 trace 摘要，方便不打开前端就验证。
 
 **验收标准**（用 chat-cli 验证，交接文件贴对话记录）
