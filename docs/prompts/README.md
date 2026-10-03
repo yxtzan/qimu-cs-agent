@@ -21,4 +21,5 @@
 | T15a 不依赖后端的打磨 | Cursor | [T15a-cursor.md](T15a-cursor.md) |
 | T16 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | [T16-cursor.md](T16-cursor.md) |
 | T17 种子流量 + 看板 API | Cursor | [T17-cursor.md](T17-cursor.md) |
+| T18 演示剧本自动化冒烟测试 | Cursor | [T18-cursor.md](T18-cursor.md) |
 | T15 前后端联调 | Cursor | [T15-cursor.md](T15-cursor.md) |

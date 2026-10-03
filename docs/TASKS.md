@@ -23,8 +23,9 @@
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
 | T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
-| T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | doing |
-| T15 | 前后端联调 | Cursor | T05 T17 | 5 | 2h | todo |
+| T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
+| T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | doing |
+| T15 | 前后端联调 | Cursor | T05 T18 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
@@ -446,6 +447,38 @@
 
 ---
 
+## T18 演示剧本自动化冒烟测试（Playwright） — Cursor
+
+- 分支：`t18-e2e-demo`
+- 依赖：T17
+- 必读：`docs/PRD.md` §8、`docs/handoff/T15a.md`（演示指南的实现）
+- 背景：后端 T03–T05 还在做，你暂时没有可联调的接口。先把"演示能不能跑通"变成一条命令：以后每合并一个后端任务，跑一次就知道演示有没有被弄坏，T15 联调和最后录演示视频都靠它。
+
+**要做**
+
+1. 加 `@playwright/test`（devDependency），`playwright.config.ts`：只用 Chromium；`webServer` 自动启动 `npm run dev`（已有服务在跑就复用）；失败时保留截图和 trace。
+2. `e2e/demo.spec.ts`：按 PRD §8 的 6 步，**通过演示指南入口驱动**（和真人演示走同一条路），每步之前调用 `POST /api/admin/reset`（mock 模式下调用 mock 的重置）。每步的断言：
+   1. 售前：出现尺码卡片且推荐 M；有「参考了 N 条资料」。
+   2. 售中：出现物流时间线卡片（≥ 3 个节点）。
+   3. 售后多步：出现确认卡片；点「确认」后卡片锁定并出现售后单号；出现优惠券卡片且不含过期券。
+   4. 高风险：出现转人工提示，顶栏变为「等待人工接入」。
+   5. 卖家端（新页面，390×844）：3 秒内会话列表出现红点和横幅；打开会话 → 接管 → 回复；回到买家页，2 秒内收到卖家消息。
+   6. 看板：今天总消息数比第 1 步之前增加。
+   每步截图存 `e2e/artifacts/<步骤>.png`（目录加进 `.gitignore`）。
+3. AI 回复内容不做逐字断言，只断言卡片、徽标、状态这类结构化元素；真实后端下 AI 文案每次都不一样。超时：L1/L2 步骤 10 秒，L3 步骤 30 秒。
+4. `package.json` 加 `"e2e": "playwright test"`；README「本地运行」里补一行 `npm run e2e`。
+5. 现在用 mock 模式（`NEXT_PUBLIC_USE_MOCK=1`）跑通全部 6 步；真实后端下跑通留给 T15。
+
+**目录归属（本任务特批）**：`e2e/**`、`playwright.config.ts`、`package.json`（devDependency + script）、`.gitignore`（加一行）、`README.md`（加一行）。
+
+**验收标准**
+
+- [ ] mock 模式下 `npm run e2e` 6 步全部通过，交接文件贴运行结果
+- [ ] 故意把某一步的断言改错，确认测试会失败并留下截图（证明测试不是摆设），然后改回
+- [ ] 限时 2 小时，够用即可
+
+---
+
 ## T15 前后端联调 — Cursor
 
 - 分支：`t15-integration`
@@ -459,6 +492,7 @@
 
 **验收标准**
 
+- [ ] 真实后端下 `npm run e2e`（T18）全部通过
 - [ ] 真实后端下 PRD §8 剧本 6 步全部走通，录一段屏幕录像或附 6 张截图
 
 ---
