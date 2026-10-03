@@ -111,8 +111,8 @@ function TabBar() {
  */
 export function SellerShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  // 会话详情页有自己的输入栏，不显示底部 Tab（类似微信聊天页）
-  const hideTabs = pathname.startsWith("/seller/c/");
+  // 会话详情页有自己的输入栏、设置页有自己的返回按钮，都不显示底部 Tab
+  const hideTabs = pathname.startsWith("/seller/c/") || pathname.startsWith("/seller/settings");
   return (
     <SellerProvider>
       <div className="min-h-dvh bg-[#E9E7E2] md:flex md:items-center md:justify-center md:py-6">

@@ -7,6 +7,8 @@ export interface AsyncState<T> {
   data: T | null;
   error: ApiError | Error | null;
   loading: boolean;
+  /** 重新请求一次（错误态的「重试」按钮用） */
+  reload: () => void;
 }
 
 interface Settled<T> {
@@ -20,7 +22,8 @@ interface Settled<T> {
  * 切换期间保留上一次的数据并标记 loading，方便页面做"淡出"而不是闪白。
  */
 export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]): AsyncState<T> {
-  const key = JSON.stringify(deps);
+  const [nonce, setNonce] = useState(0);
+  const key = JSON.stringify([deps, nonce]);
   const [settled, setSettled] = useState<Settled<T> | null>(null);
 
   useEffect(() => {
@@ -44,5 +47,6 @@ export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]): AsyncState<T
     data: settled?.data ?? null,
     error: loading ? null : (settled?.error ?? null),
     loading,
+    reload: () => setNonce((n) => n + 1),
   };
 }

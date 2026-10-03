@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useState, useSyncExternalStore } from "react";
 import { BuyerSwitcher } from "./BuyerSwitcher";
 import { PRODUCT_CATEGORIES } from "./labels";
 
@@ -16,11 +16,29 @@ function Underline({ active }: { active: boolean }) {
   return active ? <span className="absolute inset-x-0 -bottom-[17px] h-0.5 rounded-full bg-brand" /> : null;
 }
 
+const subscribeNothing = () => () => {};
+
+/**
+ * 水合完成前为 false（服务端渲染和水合阶段），之后为 true。
+ * 用 useSyncExternalStore 的 getServerSnapshot 实现：React 在水合时用 server 值、水合后自动切到 client 值，
+ * 不会产生 hydration mismatch。
+ */
+function useHydrated(): boolean {
+  return useSyncExternalStore(
+    subscribeNothing,
+    () => true,
+    () => false,
+  );
+}
+
 function CategoryNav() {
   const pathname = usePathname();
   const params = useSearchParams();
-  const category = params.get("category");
-  const onHome = pathname === "/";
+  const hydrated = useHydrated();
+  // 当前选中的分类依赖 URL（服务端预渲染 / 开发模式热更新时与浏览器里的 URL 可能不同步），
+  // 所以水合完成前一律不高亮，水合后再按真实 URL 高亮——这样服务端 HTML 与首次客户端渲染永远一致。
+  const category = hydrated ? params.get("category") : null;
+  const onHome = hydrated && pathname === "/";
   return (
     <nav className="flex items-center gap-6" aria-label="商品分类">
       <Link href="/" className={navClass(onHome && !category)}>
@@ -88,7 +106,8 @@ function SearchBox() {
 
 export function TopBar() {
   const pathname = usePathname();
-  const onOrders = pathname.startsWith("/orders");
+  const hydrated = useHydrated();
+  const onOrders = hydrated && pathname.startsWith("/orders");
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-8 px-6">

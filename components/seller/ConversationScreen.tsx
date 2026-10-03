@@ -15,7 +15,9 @@ import { CONVERSATION_STATUS_CLASS, CONVERSATION_STATUS_LABEL } from "./labels";
 import { MessageBubble } from "./MessageBubble";
 import { useSeller } from "./SellerProvider";
 import { waitText } from "./time";
-import { Avatar, MemberBadge } from "./ui";
+import { ApiError } from "@/lib/api-client";
+import { friendlyError } from "@/components/shop/states";
+import { Avatar, EmptyCard, ErrorCard, MemberBadge } from "./ui";
 
 const POLL_MS = 2000; // 任务卡：每 2 秒轮询新消息
 
@@ -78,7 +80,7 @@ export function ConversationScreen({ id }: { id: string }) {
         await fn();
         reload();
       } catch (e) {
-        setNotice(e instanceof Error ? e.message : "操作失败，请稍后再试");
+        setNotice(friendlyError(e, "操作没有成功，请稍后再试"));
       } finally {
         setBusy(false);
       }
@@ -101,12 +103,24 @@ export function ConversationScreen({ id }: { id: string }) {
           <BackButton />
           <span className="text-base font-semibold">会话</span>
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-          <p className="text-base font-medium text-foreground">没有找到这个会话</p>
-          <p className="text-sm text-warm">{error.message}</p>
-          <Link href="/seller" className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-sm font-medium text-white">
-            回到会话列表
-          </Link>
+        <div className="flex flex-1 flex-col justify-center px-4">
+          {error instanceof ApiError && error.status === 404 ? (
+            <EmptyCard title="没有找到这个会话" hint="它可能已被清理，或链接有误。">
+              <Link href="/seller" className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-sm font-semibold text-white">
+                回到会话列表
+              </Link>
+            </EmptyCard>
+          ) : (
+            <ErrorCard
+              title="会话暂时没加载出来"
+              message={friendlyError(error, "网络好像不太稳定")}
+              onRetry={() => setTick((t) => t + 1)}
+            >
+              <Link href="/seller" className="inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-medium text-warm active:bg-stone-100">
+                回到会话列表
+              </Link>
+            </ErrorCard>
+          )}
         </div>
       </div>
     );
@@ -227,6 +241,9 @@ export function ConversationScreen({ id }: { id: string }) {
 
       {/* 消息流 */}
       <div ref={scrollerRef} className="min-h-0 flex-1 space-y-3.5 overflow-y-auto overscroll-contain bg-cream px-3 py-4">
+        {messages.length === 0 ? (
+          <p className="py-10 text-center text-sm text-warm">这个会话还没有消息</p>
+        ) : null}
         {messages.map((msg) => (
           <MessageBubble
             key={msg.id}

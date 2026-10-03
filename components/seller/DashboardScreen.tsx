@@ -6,7 +6,8 @@ import { getRoutingAnalytics } from "@/lib/api-client";
 import { relativeTime } from "@/components/shop/format";
 import type { EvalReport, Layer, RiskKey, RoutingAnalytics, Stage } from "@/lib/types";
 import { intentLabel, LAYER_META, RISK_LABEL, STAGE_LABEL } from "./labels";
-import { PageHeader } from "./ui";
+import { friendlyError } from "@/components/shop/states";
+import { ErrorCard, PageHeader } from "./ui";
 
 type Range = "today" | "7d";
 type FunnelLayer = Exclude<Layer, "action">;
@@ -114,6 +115,8 @@ function Hero({ d }: { d: RoutingAnalytics }) {
   const l2 = get("L2");
   const l3 = get("L3");
   const cheapShare = l1.share + l2.share;
+  // 主结论是"L1+L2"的占比，指标卡"自动解决率"还包含大模型自动解决的部分：这里补上中间那一段，两个数字就能对上
+  const bridge = Math.max(0, d.totals.autoResolvedRate - cheapShare);
   const totalCost = FUNNEL.reduce((s, k) => s + get(k).count * get(k).costPer1kCny, 0);
   const l3CostShare = totalCost > 0 ? (l3.count * l3.costPer1kCny) / totalCost : 0;
   const ratio = l2.costPer1kCny > 0 ? l3.costPer1kCny / l2.costPer1kCny : 0;
@@ -134,6 +137,12 @@ function Hero({ d }: { d: RoutingAnalytics }) {
           <span className="text-xs font-normal text-warm">不调用大模型，又快又省</span>
         </p>
       </div>
+      {bridge > 0.005 ? (
+        <p className="mt-2 text-xs leading-5 text-warm">
+          （其余 <b className="font-semibold text-purple-700">{pct(bridge)}</b> 由大模型 L3 自动解决，合计自动解决率{" "}
+          <b className="font-semibold text-success">{pct(d.totals.autoResolvedRate)}</b>，剩下的转人工）
+        </p>
+      ) : null}
 
       <div className="mt-4">
         <StackedBar parts={FUNNEL.map((k) => ({ key: k, value: get(k).count, className: LAYER_META[k].dot }))} />
@@ -187,7 +196,7 @@ function Metrics({ d }: { d: RoutingAnalytics }) {
   const humanN = get("human")?.count ?? 0;
   const cards = [
     { label: "总消息数", value: String(d.totals.messages), unit: "条", sub: `${RANGE_LABEL[d.range]}所有买家消息`, tone: "text-foreground" },
-    { label: "自动解决率", value: String(Math.round(d.totals.autoResolvedRate * 100)), unit: "%", sub: "无需人工介入", tone: "text-success" },
+    { label: "自动解决率", value: String(Math.round(d.totals.autoResolvedRate * 100)), unit: "%", sub: "L1/L2 + 大模型，无需人工", tone: "text-success" },
     { label: "转人工率", value: String(Math.round(d.totals.handoffRate * 100)), unit: "%", sub: `风险闸门 ${riskN} + 人工 ${humanN} 条`, tone: "text-red-700" },
     {
       label: "平均响应时间",
@@ -584,7 +593,7 @@ export function DashboardScreen() {
       })
       .catch((e: unknown) => {
         if (id !== reqId.current) return;
-        setError(e instanceof Error && e.message ? e.message : "看板数据加载失败，请稍后再试");
+        setError(friendlyError(e, "看板数据暂时没加载出来"));
       });
   }, []);
 
@@ -634,7 +643,11 @@ export function DashboardScreen() {
         }
       />
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-6 pt-3">
-        {error ? (
+        {error && !data ? (
+          <ErrorCard title="看板暂时没加载出来" message={error} onRetry={refreshNow} />
+        ) : null}
+
+        {error && data ? (
           <div role="alert" className="mb-3 flex items-center justify-between gap-3 rounded-card bg-orange-50 px-3.5 py-3 text-sm text-orange-800 ring-1 ring-orange-200">
             <span className="min-w-0">{error}</span>
             <button type="button" onClick={refreshNow} className="min-h-9 shrink-0 rounded-full bg-white px-3.5 text-[13px] font-semibold text-risk ring-1 ring-orange-200">

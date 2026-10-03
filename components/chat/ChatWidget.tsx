@@ -177,6 +177,7 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
   const [error, setError] = useState<SendError | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [draft, setDraft] = useState("");
+  const [prefilled, setPrefilled] = useState(false);
   const [resolutions, setResolutions] = useState<Record<string, ConfirmResolution>>({});
   const [chosen, setChosen] = useState<Record<string, string>>({});
   const [unseen, setUnseen] = useState(0);
@@ -233,6 +234,21 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
       })
       .finally(() => setLoaded(true));
   }, [open, buyerId]);
+
+  // 演示指南：带着示例话术打开聊天窗 → 填进输入框（不自动发送），并提示买家点「发送」
+  useEffect(() => {
+    const text = open ? target?.draft : undefined;
+    if (!text) return;
+    const t = setTimeout(() => {
+      setDraft(text);
+      setPrefilled(true);
+      const el = inputRef.current;
+      if (!el) return;
+      el.focus();
+      el.setSelectionRange(el.value.length, el.value.length);
+    }, 60);
+    return () => clearTimeout(t);
+  }, [open, target]);
 
   // 打开时清零未读提示、聚焦输入框；Esc 关闭
   useEffect(() => {
@@ -366,6 +382,7 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
     const text = draft.trim();
     if (!text || sendingRef.current) return;
     setDraft("");
+    setPrefilled(false);
     void send({ text });
   }
 
@@ -687,6 +704,12 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
               ))}
             </div>
           )}
+          {prefilled && draft.trim() && !sending ? (
+            <p data-testid="prefill-hint" className="fade-up mx-3 mb-2 flex items-center gap-1.5 rounded-lg bg-brand-soft px-3 py-1.5 text-xs text-brand">
+              <span aria-hidden>✍️</span>
+              示例话术已填好，点右边的「发送」就能继续演示
+            </p>
+          ) : null}
           <form
             className="flex items-center gap-2 px-3"
             onSubmit={(e) => {
@@ -697,7 +720,10 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
             <input
               ref={inputRef}
               value={draft}
-              onChange={(e) => setDraft(e.target.value)}
+              onChange={(e) => {
+                setDraft(e.target.value);
+                setPrefilled(false);
+              }}
               onKeyDown={(e) => {
                 // 中文输入法选词时的回车不算发送
                 if (e.key === "Enter" && e.nativeEvent.isComposing) e.preventDefault();

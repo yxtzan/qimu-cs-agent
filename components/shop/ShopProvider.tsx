@@ -11,6 +11,8 @@ const DEFAULT_BUYER_ID = "B001";
 export interface ChatTarget {
   productId?: string;
   orderId?: string;
+  /** 打开聊天窗时预填进输入框的话术（不会自动发送）。演示指南使用。 */
+  draft?: string;
 }
 
 interface ShopContextValue {

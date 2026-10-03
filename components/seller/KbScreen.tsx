@@ -5,14 +5,15 @@ import { deleteKbDoc, getKbChunks, importKbDoc, listKbDocs, searchKb } from "@/l
 import { fullDateTime } from "@/components/shop/format";
 import { useAsync } from "@/components/shop/useAsync";
 import type { KbChunk, KbDoc, KbSearchHit } from "@/lib/types";
-import { BottomSheet, PageHeader, Toast } from "./ui";
+import { friendlyError } from "@/components/shop/states";
+import { BottomSheet, EmptyCard, ErrorCard, PageHeader, Toast } from "./ui";
 
 const MAX_BYTES = 1024 * 1024;
 
 const SOURCE_LABEL: Record<KbDoc["source"], string> = { seed: "内置", upload: "上传", paste: "粘贴" };
 
 function errText(e: unknown, fallback: string): string {
-  return e instanceof Error && e.message ? e.message : fallback;
+  return friendlyError(e, fallback);
 }
 
 // ───────────────────────── 试搜一下 ─────────────────────────
@@ -504,7 +505,7 @@ export function KbScreen() {
             全部文档 <span className="font-normal text-warm">点击查看分块</span>
           </h2>
           {error && !docs ? (
-            <p className="rounded-card bg-white p-4 text-sm text-warm shadow-card">文档加载失败：{error.message}</p>
+            <ErrorCard title="文档暂时没加载出来" message={friendlyError(error, "网络好像不太稳定")} onRetry={reload} />
           ) : null}
           {!docs && !error ? (
             <div className="space-y-3" aria-busy>
@@ -514,9 +515,15 @@ export function KbScreen() {
             </div>
           ) : null}
           {docs && docs.length === 0 ? (
-            <p className="rounded-card bg-white px-4 py-6 text-center text-sm text-warm shadow-card">
-              还没有文档。点右上角「导入」，让 AI 学会你们店的规则吧。
-            </p>
+            <EmptyCard title="知识库还是空的" hint="导入退换货政策、尺码表、洗护说明等文档，AI 回答买家时就会查阅它们。">
+              <button
+                type="button"
+                onClick={() => setSheetOpen(true)}
+                className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-sm font-semibold text-white active:bg-brand-dark"
+              >
+                导入第一篇文档
+              </button>
+            </EmptyCard>
           ) : null}
           {docs && docs.length > 0 ? (
             <ul className="space-y-3">

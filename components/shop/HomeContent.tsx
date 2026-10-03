@@ -7,6 +7,7 @@ import type { ProductCategory } from "@/lib/types";
 import { PRODUCT_CATEGORIES } from "./labels";
 import { ProductCard } from "./ProductCard";
 import { ProductImage } from "./ProductImage";
+import { EmptyState, ErrorState, friendlyError } from "./states";
 import { useAsync } from "./useAsync";
 
 const SERVICES = [
@@ -97,7 +98,7 @@ export function HomeContent() {
     : undefined;
   const q = params.get("q")?.trim() || undefined;
 
-  const { data, error, loading } = useAsync(() => getProducts({ category, q }), [category, q]);
+  const { data, error, loading, reload } = useAsync(() => getProducts({ category, q }), [category, q]);
 
   const title = q ? `「${q}」的搜索结果` : category ?? "全部商品";
 
@@ -142,18 +143,16 @@ export function HomeContent() {
         </div>
 
         {error ? (
-          <div className="rounded-card border border-line bg-white px-6 py-16 text-center text-warm">
-            {error.message}
-          </div>
+          <ErrorState message={friendlyError(error, "商品暂时没加载出来")} onRetry={reload} />
         ) : loading && !data ? (
           <GridSkeleton />
         ) : data && data.length === 0 ? (
-          <div className="rounded-card border border-dashed border-line px-6 py-20 text-center">
-            <p className="text-warm">没有找到相关商品</p>
-            <Link href="/" className="mt-3 inline-block text-sm text-brand underline-offset-4 hover:underline">
-              看看全部商品
-            </Link>
-          </div>
+          <EmptyState
+            title={q ? `没有找到和「${q}」相关的商品` : "这个分类下暂时没有商品"}
+            hint="换个关键词试试，或者先看看全部商品。"
+            actionHref="/"
+            actionLabel="看看全部商品"
+          />
         ) : (
           <div className={`grid grid-cols-4 gap-6 transition-opacity ${loading ? "opacity-60" : ""}`}>
             {data?.map((p) => <ProductCard key={p.id} product={p} />)}

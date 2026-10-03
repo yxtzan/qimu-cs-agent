@@ -5,10 +5,11 @@ import { createRule, deleteRule, listRules, updateRule } from "@/lib/api-client"
 import { relativeTime } from "@/components/shop/format";
 import type { IntentId, Rule } from "@/lib/types";
 import { INTENT_LABEL, intentLabel } from "./labels";
-import { BottomSheet, PageHeader, Toast } from "./ui";
+import { friendlyError } from "@/components/shop/states";
+import { BottomSheet, EmptyCard, ErrorCard, PageHeader, Toast } from "./ui";
 
 function errText(e: unknown, fallback: string): string {
-  return e instanceof Error && e.message ? e.message : fallback;
+  return friendlyError(e, fallback);
 }
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
@@ -514,7 +515,7 @@ export function RulesScreen() {
           </p>
         ) : null}
 
-        {error && !data ? <p className="rounded-card bg-white p-4 text-sm text-warm shadow-card">规则加载失败：{error.message}</p> : null}
+        {error && !data ? <ErrorCard title="规则暂时没加载出来" message={friendlyError(error, "网络好像不太稳定")} onRetry={reload} /> : null}
         {!data && !error ? (
           <div className="space-y-3" aria-busy>
             {[0, 1, 2].map((i) => (
@@ -523,7 +524,15 @@ export function RulesScreen() {
           </div>
         ) : null}
         {data && rules.length === 0 ? (
-          <p className="rounded-card bg-white px-4 py-6 text-center text-sm text-warm shadow-card">还没有规则。点右上角「新增」添加一条。</p>
+          <EmptyCard title="还没有规则" hint="规则层适合处理“到哪了”“你好”这类高频、固定的问题。">
+            <button
+              type="button"
+              onClick={() => setSheet({ open: true, editing: null })}
+              className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-sm font-semibold text-white active:bg-brand-dark"
+            >
+              新增第一条规则
+            </button>
+          </EmptyCard>
         ) : null}
 
         <ul className="space-y-3">

@@ -177,3 +177,61 @@ export function Toast({ message, tone = "ok" }: { message: string | null; tone?:
     </div>
   );
 }
+
+/** 卖家端错误态：温和的一句话 + 重试。 */
+export function ErrorCard({
+  title = "没有加载出来",
+  message,
+  onRetry,
+  children,
+}: {
+  title?: string;
+  message: string;
+  onRetry?: () => void;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div role="alert" className="rounded-card bg-white px-5 py-8 text-center shadow-card">
+      <span aria-hidden className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-orange-50 text-lg font-semibold text-risk">
+        !
+      </span>
+      <p className="mt-3 text-[15px] font-semibold text-foreground">{title}</p>
+      <p className="mt-1 text-sm leading-5 text-warm">{message}</p>
+      <p className="mt-0.5 text-xs text-warm">别担心，数据没有丢。</p>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+        {onRetry ? (
+          <button
+            type="button"
+            onClick={onRetry}
+            className="inline-flex min-h-[44px] items-center rounded-full bg-brand px-6 text-sm font-semibold text-white active:bg-brand-dark"
+          >
+            重新加载
+          </button>
+        ) : null}
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/** 卖家端空状态：一句解释 + 可选的下一步。 */
+export function EmptyCard({
+  title,
+  hint,
+  children,
+}: {
+  title: string;
+  hint?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-card bg-white px-5 py-8 text-center shadow-card">
+      <span aria-hidden className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-brand-soft text-base font-semibold text-brand">
+        栖
+      </span>
+      <p className="mt-3 text-[15px] font-semibold text-foreground">{title}</p>
+      {hint ? <p className="mt-1 text-sm leading-5 text-warm">{hint}</p> : null}
+      {children ? <div className="mt-4 flex flex-wrap items-center justify-center gap-2">{children}</div> : null}
+    </div>
+  );
+}

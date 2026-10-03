@@ -8,6 +8,7 @@ import { fullDateTime, maskPhone, money, shortDateTime } from "./format";
 import { OrderItemRow } from "./OrderCard";
 import { BuyerGate, useShop } from "./ShopProvider";
 import { AfterSaleStatusBadge, OrderStatusBadge, PlainBadge } from "./StatusBadge";
+import { ErrorState, friendlyError } from "./states";
 import { useAsync } from "./useAsync";
 
 function Card({ title, right, children }: { title: string; right?: React.ReactNode; children: React.ReactNode }) {
@@ -299,19 +300,26 @@ function Detail({ order }: { order: Order }) {
 
 function OrderDetailInner({ id }: { id: string }) {
   const { buyerId, buyer } = useShop();
-  const { data, error, loading } = useAsync(() => getOrder(id, buyerId), [id, buyerId]);
+  const { data, error, loading, reload } = useAsync(() => getOrder(id, buyerId), [id, buyerId]);
 
   if (error) {
     const forbidden = error instanceof ApiError && error.status === 403;
+    const missing = error instanceof ApiError && error.status === 404;
     return (
-      <main className="mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
-        <p className="text-lg">
-          {forbidden ? `这个订单不属于「${buyer?.nickname ?? "当前买家"}」` : error.message}
-        </p>
-        {forbidden && <p className="text-sm text-warm">可以在右上角切换买家，或回到自己的订单列表。</p>}
-        <Link href="/orders" className="rounded-full bg-brand px-6 py-2.5 text-sm text-white hover:bg-brand-dark">
-          回到我的订单
-        </Link>
+      <main className="mx-auto w-full max-w-[640px] flex-1 px-6 py-20">
+        <ErrorState
+          message={
+            forbidden
+              ? `这个订单不属于「${buyer?.nickname ?? "当前买家"}」`
+              : missing
+                ? "没有找到这个订单"
+                : friendlyError(error, "订单暂时没加载出来")
+          }
+          onRetry={forbidden || missing ? undefined : reload}
+          backHref="/orders"
+          backLabel="回到我的订单"
+        />
+        {forbidden && <p className="mt-4 text-center text-sm text-warm">可以在右上角切换买家，或回到自己的订单列表。</p>}
       </main>
     );
   }

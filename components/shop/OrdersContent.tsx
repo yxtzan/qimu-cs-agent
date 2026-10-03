@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { getOrders } from "@/lib/api-client";
 import type { OrderStatus } from "@/lib/types";
 import { ORDER_STATUS_LABEL, ORDER_STATUS_ORDER } from "./labels";
 import { OrderCard } from "./OrderCard";
 import { BuyerGate, useShop } from "./ShopProvider";
+import { EmptyState, ErrorState, friendlyError } from "./states";
 import { useAsync } from "./useAsync";
 
 type Tab = "all" | OrderStatus;
@@ -14,7 +14,7 @@ type Tab = "all" | OrderStatus;
 function OrdersInner() {
   const { buyerId, buyer } = useShop();
   const [tab, setTab] = useState<Tab>("all");
-  const { data, error, loading } = useAsync(() => getOrders(buyerId), [buyerId]);
+  const { data, error, loading, reload } = useAsync(() => getOrders(buyerId), [buyerId]);
 
   const counts = useMemo(() => {
     const c: Partial<Record<OrderStatus, number>> = {};
@@ -67,7 +67,7 @@ function OrdersInner() {
       </div>
 
       {error ? (
-        <div className="rounded-card border border-line bg-white px-6 py-16 text-center text-warm">{error.message}</div>
+        <ErrorState message={friendlyError(error, "订单暂时没加载出来")} onRetry={reload} />
       ) : loading && !data ? (
         <div className="space-y-5">
           {[0, 1].map((i) => (
@@ -75,14 +75,16 @@ function OrdersInner() {
           ))}
         </div>
       ) : visible.length === 0 ? (
-        <div className="rounded-card border border-dashed border-line px-6 py-20 text-center">
-          <p className="text-warm">
-            {tab === "all" ? "还没有订单" : `没有「${ORDER_STATUS_LABEL[tab]}」的订单`}
-          </p>
-          <Link href="/" className="mt-3 inline-block text-sm text-brand underline-offset-4 hover:underline">
-            去逛逛
-          </Link>
-        </div>
+        <EmptyState
+          title={tab === "all" ? `${buyer?.nickname ?? "你"}还没有下过单` : `没有「${ORDER_STATUS_LABEL[tab]}」的订单`}
+          hint={
+            tab === "all"
+              ? "可以在右上角切换演示买家，看看其他人的订单；或者先去逛逛新品。"
+              : "切换到其他状态看看，或者回到「全部」。"
+          }
+          actionHref={tab === "all" ? "/" : undefined}
+          actionLabel="去逛逛"
+        />
       ) : (
         <div className={`space-y-5 transition-opacity ${loading ? "opacity-60" : ""}`}>
           {visible.map((o) => (
