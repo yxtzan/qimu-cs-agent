@@ -6,6 +6,7 @@
 |---|---|---|
 | T00 项目脚手架 | Codex | [T00-codex.md](T00-codex.md) |
 | T01 decide() 三实现（Jev 为主） | Codex | [T01-codex.md](T01-codex.md) |
+| T01b Jev 延迟排查 + 兜底提速 | Codex | [T01b-codex.md](T01b-codex.md) |
 | T02 虚构数据 + seed + 商城只读 API | Codex | [T02-codex.md](T02-codex.md) |
 | T03 工具层 + RAG + 知识库 API | Codex | [T03-codex.md](T03-codex.md) |
 | T04 大脑流水线核心 | Codex | [T04-codex.md](T04-codex.md) |

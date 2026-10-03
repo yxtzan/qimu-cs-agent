@@ -9,12 +9,13 @@
 | 编号 | 任务 | 负责 | 依赖 | 波次 | 预估 | 状态 |
 |---|---|---|---|---|---|---|
 | T00 | 项目脚手架 | Codex | — | 0 | 1h | done |
-| T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | doing |
-| T02 | 虚构数据 + seed + 商城只读 API | Codex | T00 | 1 | 3h | todo |
+| T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | done |
+| T01b | Jev 延迟排查 + 兜底提速 | Codex | T01 | 1 | 45m | doing |
+| T02 | 虚构数据 + seed + 商城只读 API | Codex | T01b | 1 | 3h | todo |
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | doing |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
-| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01 T03 | 2 | 5h | todo |
+| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 | 2 | 5h | todo |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | todo |
 | T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | todo |
@@ -80,6 +81,39 @@
 - [ ] 人为把 `JEV_MODEL` 改成不存在的模型 ID，`decide()` 自动降级到 llm 并在 `error` 中说明
 - [ ] `CLASSIFIER_PROVIDER=mock` 或无 key 时 `decide()` 无网络可用
 - [ ] 交接文件里记录：Jev 实测单次延迟、单次成本（T06 生成种子流量要用）
+
+---
+
+## T01b Jev 延迟排查 + 兜底提速 — Codex
+
+- 分支：`t01b-latency`
+- 依赖：T01
+- 必读：`docs/handoff/T01.md`、`docs/DECISIONS.md` D001 D010、`docs/ARCHITECTURE.md` §1 §4.3
+- 背景：T01 实测 Jev 单次调用约 **6.4 秒**（官方宣传 70–500ms），LLM 兜底 `qwen/qwen3.7-flash` 超过 8 秒超时（很可能开着"思考"模式）。按现在的数字，L2 不比 L3 快，"省钱又快"的故事只剩"省钱"。这个任务先查清楚慢在哪，再由 Claude 定 L2 方案。**只做测量和小修，不改架构。**
+
+**要做**
+
+1. `scripts/bench-decide.ts`：用下面 6 句话（不要用 `data/eval/cases.json` 里的句子），每种配置**各跑 5 轮**，记录每次的耗时、成本、结果，输出 p50 / p95：
+   - 句子：「我的快递到哪了」「这件大衣能机洗吗」「衣服穿了全身起红疹，不处理就去12315」「M码有点紧能换L吗」「在吗」「上周买的外套换成L，顺便看看有没有券」
+   - 配置：
+     - A. Jev，7 题一次请求（现状）
+     - B. Jev，只问 intent 1 题
+     - C. Jev，只问 4 个风险 noul + emotion
+     - D. Jev，7 题拆成 7 个请求**并行**发出（看延迟是否随题目数增长）
+     - E. `CLASSIFIER_LLM_MODEL` 关闭思考模式（OpenRouter `reasoning` 参数，先查文档确认这个模型的正确写法，并验证真的关掉了：返回里没有 reasoning 内容、耗时明显下降）
+     - F. `GENERATION_MODEL` 关闭思考模式，当分类器用（同样的 JSON schema）
+     - G. 对照组：`GENERATION_MODEL` 发一句"你好"，`max_tokens: 5`，测纯网络 + 排队开销
+   - 每种配置还要记下 6 句话的意图是否判对（人工给出期望值写在脚本里），给个粗略准确率。
+2. 修复：`lib/brain/decide/llm.ts` 默认关闭思考模式；`lib/llm/openrouter.ts` 的 `chatCompletion` 增加一个可选的 `reasoning` 默认值读取（环境变量 `LLM_REASONING=off|on`，默认 `off`），让后续 handler 和 agent 默认也不思考。L3 agent 以后可以单独打开。
+3. 降级链总时限：`decide()` 增加总预算（环境变量 `DECIDE_BUDGET_MS`，默认 9000），Jev 和 LLM 共享这个预算，超出直接降到 mock，保证 `decide()` 最坏情况不超过预算 + 50ms。
+4. 报告 `docs/reports/T01b-latency.md`：一张表列出 A–G 的 p50 / p95 / 单次成本 / 粗略准确率，加上你的分析：Jev 慢在哪（网络？题目数？供应商排队？），以及 Jev 是否有更快的调用方式（如 OpenRouter 的 provider 路由参数、TypeSafe 文档里的 `System One API` 路径 `POST /api/v1/systemone`，**两条路径都实测一次**）。
+
+**验收标准**
+
+- [ ] 报告里 A–G 七种配置都有 5 轮实测数据（某个配置调用失败就如实记录错误）
+- [ ] E、F 关闭思考后有实测耗时，并证明确实关掉了
+- [ ] `JEV_MODEL=does-not-exist npx tsx scripts/try-decide.ts "我的快递到哪了"` 降级到 llm（不再是 mock），总耗时在预算内
+- [ ] 报告最后给出你的推荐：L2 意图用哪个配置、风险检测用哪个配置；**最终由 Claude 决定**
 
 ---
 
@@ -190,7 +224,7 @@
 2. `lib/brain/risk.ts`：模型分数 ∪ 硬关键词，返回 `{ handoff, hits, flags }`。
 3. `lib/brain/rules.ts`：L1 匹配（quick_action 优先 → 正则 + maxLen），命中计数落盘；否定反馈时给上一条 L1 规则 `misfireCount++`。
 4. `lib/brain/handlers/`：ARCHITECTURE §4.5 全部意图。缺槽位按"状态 → 唯一订单自动选 → options 卡片 → 追问"补全。咨询类走 RAG + `GENERATION_MODEL`，回复附 `sources` 卡片。
-5. `lib/brain/pipeline.ts`：`handleMessage()` 实现 §1 的 ①–⑥ 和 ⑧（L3 先放一个占位：返回"这个问题我需要再确认一下"并 `unresolvedTurns++`，T05 替换）。decide 与 L1 用 `Promise.all` 并行。
+5. `lib/brain/pipeline.ts`：`handleMessage()` 实现 §1 的 ①–⑥ 和 ⑧（L3 先放一个占位：返回"这个问题我需要再确认一下"并 `unresolvedTurns++`，T05 替换）。**L1 命中时不等 decide()**：先同步跑硬关键词风险检查，未命中就立即回复，decide() 在后台继续跑，若模型风险分超阈值再追加转人工（见 ARCHITECTURE §1、D001 修订）。L2/L3 的具体模型配置以 T01b 报告后 Claude 的决定为准。
 6. 确认 / 取消动作：`action.type === "confirm"` → 调 `confirmPendingAction` → 回复结果卡片，trace `layer = "action"`。
 7. `lib/brain/trace.ts`：写 `data/runtime/traces.json`。
 8. API：`POST /api/chat`、`GET /api/conversations/:id/messages`、`GET /api/conversations/latest`。
