@@ -1,6 +1,25 @@
+# dependencies
 node_modules/
+.pnp
+.pnp.*
+
+# next.js
 .next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# secrets (keep .env.example committed)
+.env
 .env.local
 .env*.local
+
+# runtime data (reset with `npm run seed`)
 data/runtime/
+
+# misc
 .DS_Store
+*.pem
+npm-debug.log*
+.vercel

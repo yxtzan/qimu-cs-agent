@@ -8,10 +8,10 @@
 
 | 编号 | 任务 | 负责 | 依赖 | 波次 | 预估 | 状态 |
 |---|---|---|---|---|---|---|
-| T00 | 项目脚手架 | Codex | — | 0 | 1h | todo |
-| T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | todo |
+| T00 | 项目脚手架 | Codex | — | 0 | 1h | done |
+| T01 | decide() 三实现（Jev 为主） | Codex | T00 | 1 | 1.5h | doing |
 | T02 | 虚构数据 + seed + 商城只读 API | Codex | T00 | 1 | 3h | todo |
-| T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | todo |
+| T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | doing |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | todo |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | todo |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01 T03 | 2 | 5h | todo |
@@ -24,7 +24,7 @@
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
-**并行规则**：同一波次里 Codex 和 Cursor 的任务可以同时进行（目录不重叠）。T01 和 T02 也可以开两个 Codex 会话并行。前端在后端接口完成前一律用 `NEXT_PUBLIC_USE_MOCK=1` 开发。
+**并行规则**：同一波次里 Codex 和 Cursor 的任务可以同时进行（目录不重叠）。**两个 Agent 各用一份独立的本地克隆**（见 AGENTS.md §2），同一份克隆里同一时间只跑一个 Agent，所以 Codex 的 T01、T02 依次做。前端在后端接口完成前一律用 `NEXT_PUBLIC_USE_MOCK=1` 开发。
 
 ---
 
