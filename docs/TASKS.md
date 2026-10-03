@@ -20,8 +20,9 @@
 | T05 | L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | T04 | 3 | 4h | todo |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
 | T06 | 种子流量 + 看板 API + 评测脚本 | Codex | T05 | 4 | 3h | todo |
-| T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | doing |
-| T15 | 前后端联调 + 打磨 | Cursor | T05 T14 | 5 | 3h | todo |
+| T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
+| T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | doing |
+| T15 | 前后端联调 | Cursor | T05 T15a | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
@@ -328,7 +329,7 @@
 **要做**
 
 1. `scripts/gen-traffic.ts`：ARCHITECTURE §7。生成约 60 个历史会话、约 300 条买家消息及对应 AI 回复和 RouteTrace（`isSimulated: true`）。消息文本要像真实买家（复用各意图的多种说法），层级、意图、置信度、延迟、成本的分布合理（L1 20–50ms、L2 150–600ms、L3 2–7s；成本按 T01 交接文件记录的 Jev 实测单价）。包含约 10 条低置信度样本和约 12 条风险命中。`npm run seed` 末尾调用。
-2. `GET /api/analytics/routing`：CONTRACTS §6，按 `range` 聚合；"自动解决"= 未转人工的会话占比。
+2. `GET /api/analytics/routing`：CONTRACTS §6，按 `range` 聚合，**严格遵守 §6「统计口径」七条**（前端看板已按此实现）。
 3. `scripts/eval.ts`（`npm run eval`）：按 `cases.json` 说明逐条执行（每条前重置 runtime），统计意图准确率、路由准确率、风险召回率、风险误报率、平均延迟，失败用例列表；结果写 `data/runtime/eval_latest.json`（并复制到 `data/seed/eval_latest.json` 以便看板默认展示）和 `docs/reports/T06-eval.md`。
 4. `GET /api/eval/latest`。
 5. 用默认配置（Jev）跑一次 eval，在交接文件里贴结果；分别在 R007 开启 / 关闭时跑 E58，记录差异（这是"规则层做减法"的证据）。
@@ -368,17 +369,37 @@
 
 ---
 
-## T15 前后端联调 + 打磨 — Cursor
+## T15a 不依赖后端的打磨 — Cursor
 
-- 分支：`t15-polish`
-- 依赖：T05、T14
+- 分支：`t15a-polish`
+- 依赖：T14
+- 说明：后端 T02–T05 还没做完，先把不需要真实接口的打磨做掉，联调留给 T15。
 
 **要做**
 
-1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。关闭 mock（`NEXT_PUBLIC_USE_MOCK=0`），按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
-2. 加载态、空状态、错误态全部检查一遍；顺手修掉买家端首页开发模式下的 hydration 提示（`components/shop/TopBar.tsx` 的 `CategoryNav`，T13 交接里提到）。
-3. 卖家端加一个「设置」入口（会话 Tab 右上角齿轮）：「重置演示数据」按钮，调用 `POST /api/admin/reset`，成功后刷新页面。
-4. 买家端首页加一个不显眼的「演示指南」浮层入口，列出剧本的 6 步和对应可点击的快捷入口（如"以 B001 身份打开订单 QM2026100201"）。
+1. 加载态、空状态、错误态全部检查一遍（买家端 4 个页面 + 聊天窗 + 卖家端 4 个 Tab + 会话详情），缺的补上，文案统一、口吻温和。
+2. 修掉买家端首页开发模式下的 hydration 提示（`components/shop/TopBar.tsx` 的 `CategoryNav`，T13 交接里提到）。
+3. 卖家端「设置」入口（会话 Tab 右上角齿轮）→ 设置页：「重置演示数据」按钮（二次确认，调用 `resetDemo()` → `POST /api/admin/reset`；mock 下调用 `__qimuMock.reset()` 的同等逻辑），成功后刷新；顺便显示当前模式（mock / 真实后端）和版本信息。
+4. 买家端首页加一个不显眼的「演示指南」入口（右下角聊天按钮上方的小圆钮或页脚链接），浮层列出 PRD §8 剧本 6 步，每步一个可点击的快捷入口（如「以 林小满 身份打开订单 QM2026100201 并联系客服」：自动切换买家、跳转页面、打开聊天窗并带上上下文、把示例话术填进输入框但不自动发送）。第 5、6 步链接到卖家端对应页面。
+5. 看板主结论卡里「74% 在 L1/L2 就解决了」和指标卡「自动解决率 86%」口径不同，观众容易困惑：在主结论卡的说明里加半句「（其余 12% 由大模型自动解决）」之类的过渡，让两个数字能对上。
+
+**验收标准**
+
+- [ ] mock 模式下演示指南 6 步都能一键进入对应场景
+- [ ] 开发模式下首页没有 hydration 提示
+- [ ] PR 附截图：演示指南浮层、设置页、任意两个空状态
+
+---
+
+## T15 前后端联调 — Cursor
+
+- 分支：`t15-integration`
+- 依赖：T05、T15a
+
+**要做**
+
+1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。`.env.local` 设 `NEXT_PUBLIC_USE_MOCK=0`，按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
+2. 逐项核对 T12–T14 交接里列出的「待联调」项：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
 
 **验收标准**
 

@@ -15,6 +15,7 @@ import type {
 } from "@/lib/types";
 import { MOCK_COUPONS, MOCK_ORDERS } from "./data";
 import { MockApiError } from "./index";
+import { buildSimulatedSeed } from "./traffic";
 
 // ───────────────────────── helpers ─────────────────────────
 
@@ -715,8 +716,14 @@ let store: Seed[] = clone(SEEDS);
 
 function find(id: string): Seed {
   const s = store.find((x) => x.conversation.id === id);
-  if (!s) throw new MockApiError("NOT_FOUND", "没有找到这个会话", 404);
-  return s;
+  if (s) return s;
+  // 看板里的"模拟历史数据"样本（S1xxx）按需还原成只读会话；它们不出现在会话列表（isSimulated）
+  const sim = buildSimulatedSeed(id);
+  if (sim) {
+    store.push(sim);
+    return sim;
+  }
+  throw new MockApiError("NOT_FOUND", "没有找到这个会话", 404);
 }
 
 function touch(s: Seed, preview: string, at_ = nowIso()) {
