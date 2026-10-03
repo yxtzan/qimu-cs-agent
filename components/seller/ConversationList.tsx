@@ -30,12 +30,16 @@ function Row({ c, buyer }: { c: Conversation; buyer?: Buyer }) {
   return (
     <Link
       href={`/seller/c/${c.id}`}
+      data-testid="conv-row"
+      data-status={c.status}
+      data-buyer-id={c.buyerId}
       className="flex min-h-[76px] gap-3 px-3.5 py-3 transition-colors active:bg-brand-soft/60"
     >
       <span className="relative shrink-0">
         <Avatar id={c.buyerId} name={name} />
         {c.unreadForSeller > 0 ? (
           <span
+            data-testid="unread-dot"
             aria-label={`${c.unreadForSeller} 条未读`}
             className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-red-600 px-1 text-[11px] font-semibold leading-none text-white ring-2 ring-white"
           >
@@ -145,6 +149,8 @@ export function ConversationList() {
           <Link
             href={`/seller/c/${conversations.find((c) => c.status === "waiting_human")?.id ?? ""}`}
             role="status"
+            data-testid="waiting-banner"
+            data-count={waitingCount}
             className="mx-4 mt-3 flex min-h-[48px] items-center gap-2.5 rounded-card bg-red-600 px-3.5 text-white shadow-card active:bg-red-700"
           >
             <span className="relative flex h-2.5 w-2.5 shrink-0">

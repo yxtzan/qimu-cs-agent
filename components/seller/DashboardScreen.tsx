@@ -209,10 +209,10 @@ function Metrics({ d }: { d: RoutingAnalytics }) {
   return (
     <div className="grid grid-cols-2 gap-3">
       {cards.map((c) => (
-        <div key={c.label} className="min-w-0 rounded-card bg-white p-3.5 shadow-card">
+        <div key={c.label} data-testid="metric-card" data-label={c.label} className="min-w-0 rounded-card bg-white p-3.5 shadow-card">
           <p className="text-xs font-medium text-warm">{c.label}</p>
           <p className={`mt-1 truncate font-bold leading-none tabular-nums ${c.tone}`}>
-            <span className="text-[34px]">{c.value}</span>
+            <span data-testid="metric-value" className="text-[34px]">{c.value}</span>
             <span className="ml-0.5 text-base">{c.unit}</span>
           </p>
           <p className="mt-1.5 truncate text-[11px] text-warm">{c.sub}</p>

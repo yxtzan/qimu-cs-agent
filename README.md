@@ -57,6 +57,7 @@ npm install
 npm run seed                   # 生成/重置虚构数据
 npm run dev                    # http://localhost:3000 买家端，/seller 卖家端
 npm run eval                   # 跑评测集，输出路由准确率
+npm run e2e                    # 演示剧本 6 步自动化冒烟测试（Playwright；首次先 npx playwright install chromium）
 ```
 
 ## 文档索引

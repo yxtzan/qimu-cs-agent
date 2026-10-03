@@ -32,14 +32,21 @@ function Shell({
   right,
   children,
   accent = false,
+  testId,
+  attrs,
 }: {
   title?: string;
   right?: React.ReactNode;
   children: React.ReactNode;
   accent?: boolean;
+  /** 自动化测试（e2e）用的稳定选择器 */
+  testId?: string;
+  attrs?: Record<string, string | number>;
 }) {
   return (
     <div
+      data-testid={testId}
+      {...attrs}
       className={`mt-2 overflow-hidden rounded-xl bg-white text-left shadow-card ${
         accent ? "ring-1 ring-brand/40" : "ring-1 ring-line"
       }`}
@@ -59,7 +66,7 @@ function Shell({
 
 function OrderCardView({ order }: { order: Order }) {
   return (
-    <Shell title={`订单 ${order.id}`} right={<OrderStatusBadge status={order.status} />}>
+    <Shell testId="card-order" title={`订单 ${order.id}`} right={<OrderStatusBadge status={order.status} />}>
       <div className="space-y-2.5 px-3.5 py-3">
         {order.items.map((it) => (
           <div key={it.itemId} className="flex items-center gap-3">
@@ -96,6 +103,8 @@ function LogisticsCardView({ orderId, logistics }: { orderId: string; logistics:
   const delivered = logistics.status === "delivered";
   return (
     <Shell
+      testId="card-logistics"
+      attrs={{ "data-events": logistics.events.length }}
       title={`${logistics.carrier} · ${logistics.trackingNo}`}
       right={<PlainBadge tone={delivered ? "green" : logistics.status === "exception" ? "orange" : "blue"}>{LOGISTICS_STATUS_LABEL[logistics.status]}</PlainBadge>}
     >
@@ -172,7 +181,7 @@ function ProductCardView({ product }: { product: Product }) {
 
 function AfterSaleCardView({ afterSale }: { afterSale: AfterSale }) {
   return (
-    <Shell title={`售后单 ${afterSale.id}`} right={<AfterSaleStatusBadge status={afterSale.status} />}>
+    <Shell testId="card-aftersale" attrs={{ "data-id": afterSale.id }} title={`售后单 ${afterSale.id}`} right={<AfterSaleStatusBadge status={afterSale.status} />}>
       <div className="px-3.5 pt-3 text-xs leading-5 text-warm">
         <span className="font-medium text-foreground">{AFTER_SALE_TYPE_LABEL[afterSale.type]}</span>
         {afterSale.type === "exchange" && afterSale.newSize ? <span> · 换为 {afterSale.newSize as Size} 码</span> : null}
@@ -307,7 +316,7 @@ function OptionsCardView({
 }) {
   const locked = answered || !!chosen || disabled;
   return (
-    <Shell title={card.prompt}>
+    <Shell testId="card-options" title={card.prompt}>
       <ul className="divide-y divide-line/70">
         {card.options.map((o) => {
           const isChosen = chosen === o.value;
@@ -349,7 +358,7 @@ function OptionsCardView({
 
 function SizeResultCardView({ card }: { card: Extract<ChatCard, { kind: "size_result" }> }) {
   return (
-    <Shell title="尺码推荐">
+    <Shell testId="card-size" attrs={{ "data-size": card.size }} title="尺码推荐">
       <div className="flex items-center gap-3.5 px-3.5 py-3">
         <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-brand text-white shadow-card">
           <span className="text-xl font-semibold leading-none">{card.size}</span>
@@ -375,7 +384,7 @@ function SizeResultCardView({ card }: { card: Extract<ChatCard, { kind: "size_re
 
 function CouponRow({ c }: { c: Coupon }) {
   return (
-    <li className="flex overflow-hidden rounded-lg bg-[#fbf3e6] ring-1 ring-[#ecd9b8]">
+    <li data-testid="coupon-row" data-coupon-id={c.id} data-expires-at={c.expiresAt} className="flex overflow-hidden rounded-lg bg-[#fbf3e6] ring-1 ring-[#ecd9b8]">
       <div className="flex w-[84px] shrink-0 flex-col items-center justify-center border-r border-dashed border-[#e0c99c] bg-[#f6e7c9] px-2 py-2.5 text-[#8a5a12]">
         <span className="text-[11px]">立减</span>
         <span className="text-xl font-semibold leading-6">¥{c.discount}</span>
@@ -392,7 +401,7 @@ function CouponRow({ c }: { c: Coupon }) {
 
 function CouponsCardView({ coupons }: { coupons: Coupon[] }) {
   return (
-    <Shell title={`可用优惠券 · ${coupons.length} 张`}>
+    <Shell testId="card-coupons" attrs={{ "data-count": coupons.length }} title={`可用优惠券 · ${coupons.length} 张`}>
       {coupons.length === 0 ? (
         <p className="px-3.5 py-3 text-sm text-warm">暂无可用优惠券</p>
       ) : (
@@ -411,7 +420,7 @@ function CouponsCardView({ coupons }: { coupons: Coupon[] }) {
 function SourcesCardView({ sources }: { sources: Extract<ChatCard, { kind: "sources" }>["sources"] }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mt-2 overflow-hidden rounded-xl bg-white/70 text-left ring-1 ring-line">
+    <div data-testid="card-sources" data-count={sources.length} className="mt-2 overflow-hidden rounded-xl bg-white/70 text-left ring-1 ring-line">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
