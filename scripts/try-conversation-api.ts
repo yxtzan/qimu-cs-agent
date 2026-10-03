@@ -168,7 +168,9 @@ async function main() {
   console.log("\n── 7. 重置后数据恢复");
   check("POST /admin/reset → { ok: true }", ((await call<{ ok: boolean }>("POST", "/api/admin/reset")).data).ok === true);
   const afterReset = await call<Conversation[]>("GET", "/api/conversations?includeSimulated=1");
-  check("会话全部清空（种子流量由 T17 提供）", afterReset.data.length === 0, afterReset.data.length);
+  check("演示中产生的真实会话全部清空，只剩 T17 的模拟历史会话", afterReset.data.every((c) => c.isSimulated), afterReset.data.filter((c) => !c.isSimulated).length);
+  const realAfterReset = await call<Conversation[]>("GET", "/api/conversations");
+  check("卖家会话列表默认不含模拟会话（重置后为空）", realAfterReset.data.length === 0, realAfterReset.data.length);
   const rulesReset = await call<Rule[]>("GET", "/api/rules");
   check("规则恢复为 8 条、R002 误判数回到初始值", rulesReset.data.length === 8 && rulesReset.data.find((r) => r.id === "R002")!.misfireCount === r002.misfireCount, rulesReset.data.length);
 

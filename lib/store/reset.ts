@@ -5,10 +5,10 @@
  *   2. 清掉进程内缓存
  *   3. 依次执行用 registerResetHook 注册的钩子（T03：知识库索引；T17：种子流量）
  *
- * 钩子所在的模块必须在重置前被 import 过才会注册——新增钩子时，请在
- * `app/api/admin/reset/route.ts` 和 `scripts/seed.ts` 里 import 对应模块。
+ * 钩子所在的模块必须在重置前被 import 过才会注册——新增钩子时，只需在
+ * `lib/store/reset-hooks.ts` 里加一行 import（`app/api/admin/reset/route.ts` 和 `scripts/seed.ts` 都只 import 那个文件）。
  */
-import { copyFileSync, mkdirSync, readdirSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { clearStoreCache } from "./index";
 
@@ -27,8 +27,12 @@ export function registerResetHook(name: string, fn: ResetHook): void {
 export async function resetDemoData(): Promise<void> {
   const seedDir = join(process.cwd(), "data", "seed");
   const runtimeDir = join(process.cwd(), "data", "runtime");
+  // 评测结果（T06 产出）不是演示状态，重置时保留，否则看板的评测卡会消失
+  const evalFile = join(runtimeDir, "eval_latest.json");
+  const savedEval = existsSync(evalFile) ? readFileSync(evalFile) : undefined;
   rmSync(runtimeDir, { recursive: true, force: true });
   mkdirSync(runtimeDir, { recursive: true });
+  if (savedEval) writeFileSync(evalFile, savedEval);
   for (const file of readdirSync(seedDir).filter((f) => f.endsWith(".json"))) {
     copyFileSync(join(seedDir, file), join(runtimeDir, file));
   }

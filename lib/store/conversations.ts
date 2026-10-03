@@ -236,6 +236,30 @@ export function listTraces(
     .sort((a, b) => time(a.at) - time(b.at));
 }
 
+/** 按 id 取一条消息（看板低置信度样本要拿到买家原话）。 */
+export function getMessage(id: string): ChatMessage | undefined {
+  return readOrEmpty<ChatMessage>(MESSAGES).find((m) => m.id === id);
+}
+
+/**
+ * 种子流量专用（T17）：整体替换"模拟历史数据"——先删掉旧的模拟会话 / 消息 / trace，再写入新的；
+ * 演示中产生的真实会话（isSimulated 不为 true）原样保留。
+ */
+export function replaceSimulatedHistory(data: {
+  conversations: Conversation[];
+  messages: ChatMessage[];
+  traces: RouteTrace[];
+}): void {
+  const oldConversations = readOrEmpty<Conversation>(CONVERSATIONS);
+  const simulatedIds = new Set(oldConversations.filter((c) => c.isSimulated).map((c) => c.id));
+  writeCollection(CONVERSATIONS, [...oldConversations.filter((c) => !c.isSimulated), ...data.conversations]);
+  writeCollection(MESSAGES, [
+    ...readOrEmpty<ChatMessage>(MESSAGES).filter((m) => !simulatedIds.has(m.conversationId)),
+    ...data.messages,
+  ]);
+  writeCollection(TRACES, [...readOrEmpty<RouteTrace>(TRACES).filter((t) => !t.isSimulated), ...data.traces]);
+}
+
 /** 这条 trace 是否已被卖家标记过误判（防止重复点击重复计数）。 */
 export function isMisfireMarked(traceId: string): boolean {
   return readOrEmpty<{ id: string }>(MISFIRE_MARKS).some((m) => m.id === traceId);
