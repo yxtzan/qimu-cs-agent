@@ -7,4 +7,5 @@
  */
 import "../analytics/gen-traffic"; // T17：种子流量（模拟历史数据）
 import '../rag/reset-hook';
+import '../brain/decide/warmup-hook'; // T08：重置完成后预热一次 Jev（要放在最后一个钩子）
 // import "../rag/<知识库索引钩子模块>"; // T03：合并后由 T03 补这一行

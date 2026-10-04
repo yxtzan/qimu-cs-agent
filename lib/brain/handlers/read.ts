@@ -4,11 +4,27 @@ import type { HandlerContext, HandlerResult } from './context';
 import { ask, say } from './context';
 import { consult } from './consult';
 import { isReply, resolveOrder, resolveProduct } from './resolve';
+import type { SizeOutOfRange, SizeRecommendation } from '../../tools/recommend-size';
+
+// D011: an out-of-range size is a suggestion to the buyer, never an automatic transfer; the button transfers.
+function outOfRangeReply(result: SizeOutOfRange, height: number, weight: number): HandlerResult {
+  let text: string;
+  if (result.reason === 'product_sizes') text = `按尺码表，您适合 ${result.missingSize} 码，但这件商品暂时没有这个尺码，可能没有合适您的尺码。`;
+  else {
+    const { size, heightCm, weightKg } = result.limit;
+    const limit = result.bound === 'max' ? `本店尺码表最大到 ${size}（身高 ${heightCm}cm、体重 ${weightKg}kg 以内）` : `本店尺码表最小到 ${size}（身高 ${heightCm}cm、体重 ${weightKg}kg 起）`;
+    text = result.reason === 'slim_fit'
+      ? `这款是修身版型，按您的身高体重（${height}cm / ${weight}kg）需要比 ${size} 更大的尺码，但${limit}，这款可能没有合适您的尺码。`
+      : `您的身高体重（${height}cm / ${weight}kg）超出了尺码表范围，${limit}，这款可能没有合适您的尺码。`;
+  }
+  return { status: 'done', messages: [{ role: 'ai', text: `${text}如需进一步确认，可以让人工客服帮您看看。`, quickReplies: [{ label: '转人工', action: { type: 'quick_action', name: 'human' } }] }] };
+}
 
 export async function sizeRecommend(ctx: HandlerContext): Promise<HandlerResult> {
   const { heightCm, weightKg, productId } = ctx.state.slots;
   if (heightCm === undefined || weightKg === undefined) return ask(`为了推荐合适的尺码，请告诉我${heightCm === undefined && weightKg === undefined ? '身高和体重（例如160cm、50kg）' : heightCm === undefined ? '身高（厘米）' : '体重（公斤或斤）'}。`);
-  const result = await ctx.call<{ size: 'XS' | 'S' | 'M' | 'L' | 'XL'; basis: string }>('recommend_size', { heightCm, weightKg, ...(productId ? { productId } : {}) });
+  const result = await ctx.call<SizeRecommendation | SizeOutOfRange>('recommend_size', { heightCm, weightKg, ...(productId ? { productId } : {}) });
+  if (result.outOfRange) return outOfRangeReply(result, heightCm, weightKg);
   const messages: HandlerResult['messages'] = [{ role: 'ai', text: `建议您选 ${result.size} 码，供您参考。`, card: { kind: 'size_result', ...result, ...(productId ? { productId } : {}) } }];
   const product = productId ? await ctx.call<Product>('get_product', { productId }) : undefined;
   const care = /机洗|洗护|怎么洗|水洗/.test(ctx.text);

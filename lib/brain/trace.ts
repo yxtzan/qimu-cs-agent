@@ -11,7 +11,7 @@ export function makeTrace(message: ChatMessage, layer: Layer, started: number, i
     latency: { totalMs: Date.now() - started }, cost: { decideUsd: 0, generationUsd: 0, agentUsd: 0, totalUsd: 0 } };
 }
 export function withDecision(trace: RouteTrace, decision: DecideResult, risk: RiskResult): RouteTrace {
-  return { ...trace, decideProvider: decision.provider,
+  return { ...trace, decideProvider: decision.provider, multiStep: decision.multiStep,
     topIntents: Object.entries(decision.intent.probabilities).map(([id, p]) => ({ id: id as IntentId, p: p! })).sort((a, b) => b.p - a.p).slice(0, 3),
     confidence: trace.layer === 'L1' ? trace.confidence : decision.intent.confidence,
     riskScores: risk.scores, riskHit: risk.hits,
