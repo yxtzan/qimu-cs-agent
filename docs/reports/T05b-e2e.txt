@@ -1,0 +1,19 @@
+
+> qimu-cs-agent@0.1.0 e2e
+> playwright test
+
+
+Running 6 tests using 1 worker
+
+(node:53436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[e2e] 第 1 步之前 今天总消息数 = 32
+  ✓  1 [chromium] › e2e/demo.spec.ts:112:5 › 1 售前：尺码卡片推荐 M + 引用资料 (11.4s)
+  ✓  2 [chromium] › e2e/demo.spec.ts:127:5 › 2 售中：物流时间线卡片（≥ 3 个节点） (1.3s)
+  ✓  3 [chromium] › e2e/demo.spec.ts:138:5 › 3 售后多步：确认卡片 → 确认 → 售后单号 + 优惠券（无过期券） (7.5s)
+  ✓  4 [chromium] › e2e/demo.spec.ts:168:5 › 4 高风险：转人工提示 + 顶栏「等待人工接入」 (985ms)
+  ✓  5 [chromium] › e2e/demo.spec.ts:177:5 › 5 卖家端：红点 + 横幅 → 接管 → 回复 → 买家 2 秒内收到 (4.5s)
+[e2e] 现在 今天总消息数 = 33（第 1 步之前 32）
+  ✓  6 [chromium] › e2e/demo.spec.ts:212:5 › 6 看板：今天总消息数比第 1 步之前增加 (177ms)
+
+  6 passed (28.0s)

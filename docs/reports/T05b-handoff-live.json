@@ -1,0 +1,81 @@
+{
+  "base": "http://localhost:3002",
+  "measuredAt": "2026-10-04T04:57:39.293Z",
+  "responseMs": 9,
+  "initialSummary": "买家周雨桐，待核实需求，风险闸门：legal_threat 1.00；health_safety 1.00",
+  "modelSummary": "买家周雨桐称穿着商品后全身起红疹，已触发法律威胁和健康安全风险闸门，已记录其投诉，人工需核实过敏原因并处理其12315投诉风险。",
+  "summaryObservedMs": 9003,
+  "initialTrace": {
+    "id": "TR-bf7f6be0-6ab3-4059-9306-a8288e572eff",
+    "conversationId": "C1001",
+    "messageId": "C1001-M1",
+    "at": "2026-10-05T10:00:01.914+08:00",
+    "layer": "risk_gate",
+    "stage": "other",
+    "toolCalls": [],
+    "usedGeneration": false,
+    "latency": {
+      "totalMs": 5
+    },
+    "cost": {
+      "decideUsd": 0,
+      "generationUsd": 0,
+      "agentUsd": 0,
+      "totalUsd": 0
+    },
+    "riskScores": {
+      "legal_threat": 1,
+      "health_safety": 1,
+      "fraud_security": 0,
+      "abuse_extreme": 0,
+      "emotion": 0
+    },
+    "riskHit": [
+      "legal_threat",
+      "health_safety"
+    ],
+    "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00"
+  },
+  "finalTrace": {
+    "id": "TR-bf7f6be0-6ab3-4059-9306-a8288e572eff",
+    "conversationId": "C1001",
+    "messageId": "C1001-M1",
+    "at": "2026-10-05T10:00:01.914+08:00",
+    "layer": "risk_gate",
+    "intent": "other",
+    "stage": "other",
+    "toolCalls": [],
+    "usedGeneration": true,
+    "latency": {
+      "totalMs": 5,
+      "decideMs": 8977
+    },
+    "cost": {
+      "decideUsd": 0,
+      "generationUsd": 0.000006132,
+      "agentUsd": 0,
+      "totalUsd": 0.000006132,
+      "estimated": true
+    },
+    "riskScores": {
+      "legal_threat": 1,
+      "health_safety": 1,
+      "fraud_security": 0,
+      "abuse_extreme": 0,
+      "emotion": 0
+    },
+    "riskHit": [
+      "legal_threat",
+      "health_safety"
+    ],
+    "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00",
+    "decideProvider": "mock",
+    "topIntents": [
+      {
+        "id": "other",
+        "p": 0.55
+      }
+    ],
+    "confidence": 0.55
+  }
+}
