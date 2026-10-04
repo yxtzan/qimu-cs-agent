@@ -151,7 +151,7 @@ function Hero({ d }: { d: RoutingAnalytics }) {
         <p className="pb-1.5 text-sm font-medium leading-5 text-foreground">
           在 L1 / L2 就解决了
           <br />
-          <span className="text-xs font-normal text-warm">不调用大模型，又快又省</span>
+          <span className="text-xs font-normal text-warm">不走大模型多步编排，又快又省</span>
         </p>
       </div>
       {bridge > 0.005 ? (

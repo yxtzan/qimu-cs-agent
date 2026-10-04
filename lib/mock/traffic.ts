@@ -3,6 +3,7 @@
  *
  * - 约 295 条历史消息的 RouteTrace，时间分布在 DEMO_NOW 前 7 天（含今天 00:00–10:00）。
  * - 层级占比按 docs/ARCHITECTURE.md §7：风险 4% / L1 22% / L2 56% / L3 12% / 人工 6%（用精确计数 + 固定种子打乱，每次结果一致）。
+ * - L3 的 agentUsd 取 $0.00008–$0.0002（与 lib/analytics/gen-traffic.ts 的 T15b 口径一致）。早期 $0.002–0.005 会把看板「每千条」抬到十几元。
  * - 点击看板里的低置信度样本会跳到 /seller/c/S1xxx，这里能按需还原出对应的模拟会话（isSimulated=true，不出现在会话列表）。
  * - 只依赖 lib/types.ts，不依赖其它 mock 文件，避免循环引用。
  */
@@ -260,7 +261,8 @@ export function simulatedTraffic(): SimTrace[] {
       const agentMs = Math.round(between(3200, 6800));
       latency = { totalMs: decideMs + agentMs, decideMs, agentMs };
       decideUsd = 0.00002;
-      agentUsd = round(between(0.0025, 0.0043));
+      // T15b：agentUsd $0.00008–$0.0002，和真实种子流量同一档
+      agentUsd = round(between(0.00008, 0.0002), 6);
     } else if (layer === "risk_gate") {
       confidence = round(between(0.5, 0.94), 2);
       const decideMs = Math.round(between(175, 230));
