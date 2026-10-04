@@ -33,7 +33,7 @@
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | done |
-| T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | doing |
+| T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | done |
 | T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | doing |
 | T23 | 部署到阿里云香港 + 子域名 + HTTPS（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
