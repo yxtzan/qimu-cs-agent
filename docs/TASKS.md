@@ -36,8 +36,8 @@
 | T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | done |
 | T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | done |
 | T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | done |
-| T21c | 上线验收修复：演示卡片排版与交互 + 「仅退款」规则 | Cursor | T23 | 8 | 2h | doing |
-| T21d | 未发货订单查物流不再报错（「这单什么时候发货」被转人工） | Cursor | T21c | 8 | 45m | todo |
+| T21c | 上线验收修复：演示卡片排版与交互 + 「仅退款」规则 | Cursor | T23 | 8 | 2h | done |
+| T21d | 未发货查物流不报错 + 手机演示横向溢出 + 已发货仅退款先说明 | Cursor | T21c | 8 | 1.5h | todo |
 | T23 | 部署到阿里云杭州 ECS，用 IP 访问（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | doing（已上线 http://120.27.142.15，待验收） |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 
@@ -596,17 +596,32 @@ C. **生产构建可用**
 
 ---
 
-## T21d 「这单什么时候发货」被转人工 — Cursor（T21c 之后）
+## T21d 未发货查物流不报错 + 手机演示横向溢出 + 已发货仅退款先说明 — Cursor（T21c 之后）
 
-- 分支：`t21d-unshipped-logistics`
-- 依赖：T21c
-- 现象（线上，B003 已付款订单 QM2026100401，问「这单什么时候发货」）：Jev 判成 shipping_policy（置信度 0.48）→ 落到 L3 → 模型调了 `track_logistics`，订单还没发货，工具报错 → Agent 失败 → 转人工。买家只是问发货时间，被转人工很不合理。
-- 要做：
-  1. `lib/tools/track-logistics`（及其注册说明）：订单未发货时**不报错**，返回结构化结果，例如 `{ shipped: false, status: 'paid', expectedShipBy: '<付款时间 + 48 小时>' }`（48 小时规则见 DATA_SPEC §2），工具说明写明这一点。
-  2. 确认 L2 的 `urge_shipping` / `order_status` 处理器、L3 都能用这个结果回答「预计 X 前发货」，不转人工。
-  3. 不针对这句话写特判。
-- 验收：B003 带 orderId=QM2026100401 问「这单什么时候发货」「什么时候能发」「还没发货吗」三句，回复都给出预计发货时间、不转人工，贴回复原文；`lib/**/*.test.ts`、e2e 通过；限时 45 分钟。
-- 目录归属（特批）：`lib/tools/**` 中物流工具及其测试、`lib/tools/registry.ts` 的说明文字。
+- 分支：`t21d-followups`
+- 依赖：T21c（已合并到 main）
+- 必读：`docs/handoff/T21c.md`、`components/demo/**`、`lib/brain/handlers/write.ts`、`lib/tools/registry.ts`、`docs/DATA_SPEC.md` §2 §6
+
+**要做**
+
+1. **未发货订单查物流不报错**。现象（线上，B003 已付款订单 QM2026100401，问「这单什么时候发货」）：Jev 判成 shipping_policy（置信度 0.48）→ 落到 L3 → 模型调了 `track_logistics`，订单还没发货，工具报错 → Agent 失败 → 转人工。买家只是问发货时间，被转人工很不合理。
+   - 物流工具在订单未发货时**不报错**，返回结构化结果，例如 `{ shipped: false, status: 'paid', expectedShipBy: '<付款时间 + 48 小时>' }`（48 小时规则见 DATA_SPEC §2；待付款订单返回 `status: 'pending_payment'`、不给预计时间），`registry.ts` 里的工具说明写明这一点。
+   - 确认 L2 的 `urge_shipping` / `order_status` 处理器、L3 都能用这个结果回答「预计 X 前发货」，不转人工。不针对这句话写特判。
+2. **手机宽度演示横向溢出（T21c 引入的回归）**。T21c 交接里 390 宽的截图（`docs/handoff/t21c/phone-01-send.png`、`phone-03-confirm.png` 等）整页向左偏了约 130px：聊天窗从 x≈132 开始，输入框被截断，**红圈里的「发送」按钮在屏幕外**；顶部卡片右侧也超出屏幕。T21 的 `docs/handoff/t21/mobile-send.png` 是正常的，对比着查。
+   - 390×844 下每一步都满足：`document.documentElement.scrollWidth === window.innerWidth`（没有横向滚动）、红圈目标完整在视口内、卡片完整在视口内。
+   - 把这三条断言加进 `e2e/demo-mode.spec.ts` 的手机流程（每步检查），以后再坏会直接报错。
+   - 截图前**亲眼打开看**：发送按钮和红圈要在画面里。
+3. **已发货 / 已签收的「仅退款」先说明，不先问原因**。现在 B001 已签收订单先说「我想退款不退货」，系统先问原因，买家说完原因后才告诉他不支持仅退款，等于白问一轮。改为：识别到仅退款意愿、订单已发货或已签收时，**当轮直接**回复 T21c 那句说明 + 「改为退货退款」「转人工」两个快捷回复；如果这句话里已经带了原因，照旧记进 `slots.reason`，点「改为退货退款」后直接出退货退款确认卡，没带原因就再问原因。未发货订单的流程不变。相关测试同步改。
+
+**目录归属（本任务特批）**：`lib/tools/**` 中物流工具及其测试、`lib/tools/registry.ts` 的说明文字、`lib/brain/handlers/read.ts`（只为第 1 条，如需要）、`lib/brain/handlers/write.ts`、`components/demo/**`、`components/chat/**`（只为第 2 条，如需要）、`e2e/demo-mode.spec.ts`、相关 `*.test.ts`。不改契约、评测集和其他大脑文件。
+
+**验收标准**
+
+- [ ] B003 带 orderId=QM2026100401 问「这单什么时候发货」「什么时候能发」「还没发货吗」三句（真实后端），回复都给出预计发货时间、不转人工，贴回复原文和每句的层级
+- [ ] 390×844 从 `/?demo=1` 走完全程，新加的三条断言每步通过；交接里附 `phone-01-send.png`、`phone-03-confirm.png`、`phone-05-reply.png`，画面里能看到红圈和被圈的按钮
+- [ ] B001 / QM2026092801：「我想退款不退货」→ 当轮说明 + 两个快捷回复；「我要退款不退货，颜色不喜欢」→ 点「改为退货退款」直接出退货退款确认卡（原因是「颜色不喜欢」相关原话）；B003 / QM2026100401「这单我不要了，只退款」→ 仍是仅退款确认卡。贴回复原文
+- [ ] `npm run typecheck` `npm run lint`、`lib/**/*.test.ts` 全部通过；`NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 全部通过
+- [ ] 限时 1.5 小时
 
 ---
 
