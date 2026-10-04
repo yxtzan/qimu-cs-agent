@@ -32,7 +32,7 @@
 | T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | done |
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
-| T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
+| T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 
 **2026-10-04 重排**：后端是关键路径，把不依赖流水线的后端活（会话数据层、卖家会话 / 规则 / 重置 API、种子流量、看板 API）从 Codex 的 T04–T06 里拆出来，交给 Cursor 做 T16、T17。Cursor 写过这些接口的 mock，对契约最熟。Codex 的关键路径 T03 → T04 → T05 → T06 因此缩短约 3.5 小时。
 
