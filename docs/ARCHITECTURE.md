@@ -132,7 +132,8 @@ scripts/
 | 阶段 | intent id | 中文描述（即 criteria） | 必需槽位 |
 |---|---|---|---|
 | 售前 | `product_consult` | 询问商品的材质、版型、颜色、细节、洗护、是否适合某场合 | productId（缺则问或用 RAG 泛答） |
-| 售前 | `size_recommend` | 询问该穿什么尺码，常给出身高体重 | heightCm, weightKg |
+| 售前 | `size_recommend` + 洗护组合（T04 起） | 当前有商品上下文、给出了身高体重、且只问尺码与洗护时，在 L2 内组合处理：确定性尺码 + RAG 洗护回答，不进 L3（见 `docs/questions/T04-1.md`）。其他多诉求仍走 L3。 |
+| `size_recommend` | 询问该穿什么尺码，常给出身高体重 | heightCm, weightKg |
 | 售前 | `stock_check` | 询问某款某码某色是否有货、何时补货 | productId |
 | 售前 | `promotion` | 询问优惠、折扣、优惠券、满减、会员价 | — |
 | 售前 | `shipping_policy` | 下单前询问发货时间、快递公司、运费、配送范围 | — |

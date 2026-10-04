@@ -15,9 +15,9 @@
 | T10 | 买家商城界面 | Cursor | T00 | 1 | 3h | done |
 | T11 | 卖家端骨架 + PWA | Cursor | T00 | 1 | 2h | done |
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | done |
-| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | doing |
+| T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | done |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
-| T05 | L3 Agent + 转人工 | Codex | T04 | 3 | 2.5h | todo |
+| T05 | L3 Agent + 转人工 + 重置提速 | Codex | T04 | 3 | 3h | doing |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
 | T06 | 评测脚本 + 评测 API | Codex | T05 | 4 | 1.5h | todo |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
@@ -296,7 +296,9 @@
 1. `lib/brain/agent.ts`：ARCHITECTURE §4.6。系统提示词写在 `lib/brain/prompts/agent.ts`，中文；把服务原则写清楚（只基于工具结果回答、写操作必须生成确认、不确定就 `create_handoff`、不承诺政策以外的东西）。替换 T04 的 L3 占位。L3 可单独打开思考模式（环境变量 `AGENT_REASONING=on|off`，默认 off，先测 off 的效果）。
 2. 无 key / mock 模式下的 L3：返回"这个问题比较复杂，我帮您转接人工客服"并转人工（保证流程不断）。
 3. `lib/brain/handoff.ts`：§4.7 + CONTRACTS §2 补充约定第 4 条。进入 `waiting_human` 时写 `handoffAt`。一句话摘要用 `GENERATION_MODEL` 生成（mock 用模板：`买家{昵称}，{意图中文}，{原因}`）。
-4. 人工模式下买家消息：不自动回复，`unreadForSeller++`（在 `POST /api/chat` 的流水线入口处理）。
+4. 人工模式下买家消息：不自动回复，`unreadForSeller++`（T04 已实现，确认即可）。
+5. **重置提速**：T04 实测每次「重置演示数据」要重建 10 篇知识库的向量索引，耗时 40–70 秒——演示现场点一次重置要等一分钟，E2E 每步也被拖慢。改为**按内容缓存向量**：以「分块文本 + 模型名」的哈希为键，把向量存到 `data/runtime/embedding_cache.json`（重置时**保留**这个文件，像 T17 保留 eval_latest 那样），重置时内容没变的分块直接复用。目标：第二次起重置 < 5 秒。
+6. 接 T04 交接的接口：替换 `lib/brain/agent.ts` 的 `runAgent(ctx)`，返回 `HandlerResult`；L3 的费用记到 `cost.agentUsd`，不要混进 `generationUsd`；L3 不能绕过风险闸门和写操作确认。
 
 **验收标准**（chat-cli + curl，交接文件贴记录）
 
@@ -495,7 +497,8 @@
 
 1. 把 `lib/api-client.ts` 的默认值改为「未设置 = 真实后端」（见 `docs/questions/T10-1.md`）。`.env.local` 设 `NEXT_PUBLIC_USE_MOCK=0`，按 PRD §8 演示剧本完整走一遍，修复所有前端问题；后端问题写到 `docs/questions/`（标明用例和复现步骤）。
 2. 演示指南每一步点「开始」时**新开一个会话**（前端不带 `conversationId`，后端会新建），避免第 1、2 步的上下文干扰第 3 步的 L3 多步流程（T15a 交接里提到的风险）。
-3. 逐项核对 T12–T15a 交接里列出的「待联调」项（含 `POST /api/admin/reset`）：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
+3. 种子流量里 L1 的成本改为和真实 trace 一致：`cost.decideUsd = 0.000059`（后台风险检查费，见 `docs/questions/T04-3.md`），看板 L1 每千条约 ¥0.4。
+4. 逐项核对 T12–T15a 交接里列出的「待联调」项（含 `POST /api/admin/reset`）：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
 
 **验收标准**
 

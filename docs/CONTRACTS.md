@@ -142,7 +142,7 @@
 
 1. 统计单位是**买家消息**，每条对应一条 RouteTrace。`byLayer` 只含漏斗 5 层：`risk_gate / L1 / L2 / L3 / human`。`layer="action"`（确认卡片动作）不进漏斗，也不计入 `totals.messages`。L3 失败后转人工的消息记为 `human`（`escalatedFrom="L3"`）。
 2. `handoffRate = (risk_gate + human) / messages`，`autoResolvedRate = 1 − handoffRate`。
-3. `share = 该层条数 / totals.messages`。`costPer1kCny = 该层单条平均 cost.totalUsd × 1000 × USD_TO_CNY`（L1 为 0）。`avgLatencyMs` 取 `latency.totalMs` 平均。
+3. `share = 该层条数 / totals.messages`。`costPer1kCny = 该层单条平均 cost.totalUsd × 1000 × USD_TO_CNY`。L1 规则匹配本身免费，但每条消息都有后台风险检查的模型费用（`cost.decideUsd`，约 $0.000059 / 条），如实计入（见 `docs/questions/T04-3.md`）。`avgLatencyMs` 取 `latency.totalMs` 平均。
 4. `lowConfidence`：只收 `layer` 为 L2 或 L3、且 `confidence < L2_CONFIDENCE_THRESHOLD` 的消息，**最近的在前，最多 10 条**；`text` 为买家原话。
 5. `timeseries.bucket`：`range=today` 按小时，`YYYY-MM-DDTHH:00:00+08:00`，从当天 00:00 到当前小时；`range=7d` 按天，`YYYY-MM-DD`，共 7 格（含今天）。**没有数据的格子补 0**。
 6. `byIntent` 返回全部意图（前端取 Top 8），`stage` 为该意图所属阶段。
