@@ -1,13 +1,27 @@
 {
-  "runAt": "2026-10-04T03:48:13.748Z",
+  "runAt": "2026-10-04T04:42:04.427Z",
   "provider": "jev",
   "cases": 60,
-  "intentAccuracy": 0.9545454545454546,
-  "layerAccuracy": 0.9333333333333333,
+  "intentAccuracy": 0.9090909090909091,
+  "layerAccuracy": 0.85,
   "riskRecall": 1,
   "riskFalsePositiveRate": 0,
-  "avgLatencyMs": 1249,
+  "avgLatencyMs": 2640,
   "failures": [
+    {
+      "caseId": "E01",
+      "text": "这件大衣是纯羊毛的吗",
+      "expected": "layer=L2 intent=product_consult",
+      "got": "layer=L3 intent=other riskHit=[] handoff=false tools=[search_kb,get_product]（原因：分类器降级）",
+      "reason": "分类器降级"
+    },
+    {
+      "caseId": "E39",
+      "text": "这条裙子是不是会让我被闺蜜嫉妒死哈哈",
+      "expected": "layer=L2|L3 riskHit=[]",
+      "got": "layer=human(来自L3) intent=other riskHit=[] handoff=true tools=[]（原因：转人工判断错）",
+      "reason": "转人工判断错"
+    },
     {
       "caseId": "E40",
       "text": "有点小失望，外套比图片颜色深一点",
@@ -19,29 +33,22 @@
       "caseId": "E44",
       "text": "那灰色呢",
       "expected": "layer=L2|L3 intent=stock_check",
-      "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[]（原因：分类错）",
+      "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[list_orders,search_products,list_coupons]（原因：分类错）",
       "reason": "分类错"
     },
     {
-      "caseId": "E51",
-      "text": "上周买的那件外套换成L码，顺便帮我看看有没有能用的券",
-      "expected": "layer=L3 tools⊇[list_orders,check_stock,request_exchange,list_coupons]",
-      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
-      "reason": "依赖 T05"
+      "caseId": "E49",
+      "text": "不是这个，我问的是退款",
+      "expected": "layer=L2|L3 intent=refund_progress",
+      "got": "layer=L3 intent=refund_apply riskHit=[] handoff=false tools=[list_orders,get_aftersale]（原因：分类错）",
+      "reason": "分类错"
     },
     {
-      "caseId": "E52",
-      "text": "帮我看看最近的订单 哪个还没到 哪个能退",
-      "expected": "layer=L3 tools⊇[list_orders]",
-      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
-      "reason": "依赖 T05"
-    },
-    {
-      "caseId": "E53",
-      "text": "我想再买一件和上次那件大衣同色的开衫，有我的码吗，用券后多少钱",
-      "expected": "layer=L3 tools⊇[search_products,list_coupons]",
-      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
-      "reason": "依赖 T05"
+      "caseId": "E50",
+      "text": "付不了款怎么办",
+      "expected": "layer=L2|L3 intent=order_status",
+      "got": "layer=human(来自L3) intent=order_status riskHit=[] handoff=true tools=[]（原因：转人工判断错）",
+      "reason": "转人工判断错"
     },
     {
       "caseId": "E55",
@@ -49,6 +56,20 @@
       "expected": "layer=L3 tools⊇[get_aftersale,check_stock]",
       "got": "layer=L2 intent=stock_check riskHit=[] handoff=false tools=[]（原因：多步没识别）",
       "reason": "多步没识别"
+    },
+    {
+      "caseId": "E56",
+      "text": "比较一下你们家的大衣和开衫哪个更保暖，顺便告诉我怎么洗",
+      "expected": "layer=L3",
+      "got": "layer=human(来自L3) intent=product_consult riskHit=[] handoff=true tools=[]（原因：转人工判断错）",
+      "reason": "转人工判断错"
+    },
+    {
+      "caseId": "E57",
+      "text": "到哪了，另外我想把上周那件外套退了",
+      "expected": "layer=L3",
+      "got": "layer=human(来自L3) intent=multi_step_complex riskHit=[] handoff=true tools=[list_orders,track_logistics,get_aftersale,apply_refund]（原因：转人工判断错）",
+      "reason": "转人工判断错"
     },
     {
       "caseId": "E58",
@@ -65,46 +86,46 @@
       "reason": "转人工判断错"
     }
   ],
-  "passed": 52,
-  "totalCostUsd": 0.004302,
+  "passed": 49,
+  "totalCostUsd": 0.007065,
   "riskFalsePositiveRateBroad": 0,
   "reasonCounts": {
-    "转人工判断错": 2,
-    "分类错": 1,
-    "依赖 T05": 3,
+    "分类器降级": 1,
+    "转人工判断错": 6,
+    "分类错": 2,
     "多步没识别": 1,
     "规则误吞": 1
   },
   "byLayer": {
     "risk_gate": {
       "n": 7,
-      "avgMs": 229,
-      "p95Ms": 419,
-      "avgCostUsd": 0.000062868
+      "avgMs": 2534,
+      "p95Ms": 2915,
+      "avgCostUsd": 0.00007408581428571428
     },
     "L1": {
       "n": 10,
-      "avgMs": 416,
-      "p95Ms": 4099,
-      "avgCostUsd": 0.00007875282799999999
+      "avgMs": 414,
+      "p95Ms": 4055,
+      "avgCostUsd": 0.000090140608
     },
     "L2": {
-      "n": 29,
-      "avgMs": 2215,
-      "p95Ms": 8955,
-      "avgCostUsd": 0.0000726868827586207
+      "n": 28,
+      "avgMs": 1554,
+      "p95Ms": 4255,
+      "avgCostUsd": 0.0000760504692857143
     },
     "L3": {
-      "n": 10,
-      "avgMs": 409,
-      "p95Ms": 485,
-      "avgCostUsd": 0.0000715008
+      "n": 7,
+      "avgMs": 8913,
+      "p95Ms": 22540,
+      "avgCostUsd": 0.0003631451428571428
     },
     "human": {
-      "n": 4,
-      "avgMs": 205,
-      "p95Ms": 416,
-      "avgCostUsd": 0.000062895
+      "n": 8,
+      "avgMs": 3829,
+      "p95Ms": 5853,
+      "avgCostUsd": 0.00012172125000000001
     }
   },
   "note": "T06 评测：60 条用例，分类器 jev，含 R007 开/关对比"
