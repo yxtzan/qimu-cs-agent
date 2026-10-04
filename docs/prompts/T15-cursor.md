@@ -11,4 +11,6 @@
 **本任务特别注意：**
 
 - 关闭 mock，按 PRD §8 剧本逐步走，每一步截图。
+- 本任务**不改 `lib/brain/**`**（T08 的特批已归还 Codex）。任务卡第 5 条的 `lib/store/reset.ts` 是你的文件，可以改。
+- Codex 的 T05b 合并后（人类会告诉你），把分支 rebase 到最新 main，再跑一遍 e2e。
 - 发现后端问题不要自己改后端代码，写进 `docs/questions/` 并注明复现步骤。

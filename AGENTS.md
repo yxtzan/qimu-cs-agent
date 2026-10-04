@@ -40,7 +40,7 @@ npm run typecheck && npm run lint     # 必须通过
 | `lib/api-client.ts` | Cursor（前端调用 API 的唯一入口） |
 | `lib/store/conversations.ts` `lib/store/reset.ts` `lib/rules/**` `lib/analytics/**` `app/api/conversations/**` `app/api/rules/**` `app/api/traces/**` `app/api/admin/**` `app/api/analytics/**` `scripts/gen-traffic.ts` `scripts/try-conversation-api.ts` | **Cursor**（2026-10-04 重排，T16 / T17）。Codex 只调用、不修改 |
 | `lib/eval/**` `scripts/eval.ts` `app/api/eval/**` `docs/reports/T06-eval.md` `data/seed/eval_latest.json` | **Cursor**（T06 改派） |
-| `lib/brain/handlers/index.ts` `lib/brain/handlers/read.ts` `lib/brain/risk.ts` `lib/brain/risk.test.ts` `lib/brain/caution.ts` `lib/brain/trace.ts` `lib/brain/decide/warmup.ts` `lib/tools/recommend-size.ts` | **Cursor**（T08 特批，任务结束后归还 Codex）。`lib/brain/pipeline.ts` 只允许加调用行和改风险闸门那几行 |
+| `lib/brain/handlers/index.ts` `lib/brain/handlers/read.ts` `lib/brain/risk.ts` `lib/brain/risk.test.ts` `lib/brain/caution.ts` `lib/brain/trace.ts` `lib/brain/decide/warmup.ts` `lib/tools/recommend-size.ts` | ~~Cursor（T08 特批）~~ **已归还 Codex**（2026-10-04 T08 合并后） |
 | `docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `data/seed/eval_latest.json` `docs/handoff/T06.md`（只补对比） | **Codex**（T05b 补跑评测特批） |
 | `lib/store/reset-hooks.ts` | 共用登记表：Codex 和 Cursor 都可以**只加 import 行** |
 | `package.json` | 谁需要谁加依赖，PR 里写明新增了哪些包 |

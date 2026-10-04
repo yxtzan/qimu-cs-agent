@@ -26,8 +26,9 @@
 | T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
-| T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | doing |
-| T15 | 前后端联调 | Cursor | T05 T05b T08 T18 | 5 | 2h | todo |
+| T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | done |
+| T09 | 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 | Codex | T05b T08 | 5 | 1.5h | todo |
+| T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | doing |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
@@ -337,6 +338,33 @@
 
 ---
 
+## T09 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 — Codex
+
+- 分支：`t09-risk-polish`
+- 依赖：T05b、T08（都合并后再开工）
+- 必读：`docs/questions/T08-1.md` `T08-2.md` 的 Claude 答复、`docs/ARCHITECTURE.md` §4.2（问法已修订）、`docs/DECISIONS.md` D011、`docs/handoff/T08.md`、`lib/brain/caution.ts`
+- 说明：T08 的评测发现，「这件是防过敏面料吗」「敏感肌穿羊毛会扎吗」这类购买前咨询会被 Jev 判成健康风险（0.46–0.71），原因是风险问题问的是「买家是否**提到**过敏」。另有两处小取舍和一处 T08 遗留的文案驱动流程。T08 期间借给 Cursor 的大脑文件已归还给你。
+
+**要做**
+
+1. **风险问法修订**（`lib/brain/decide/questions.ts`）：`legal_threat`、`health_safety` 的 instructions 改成 ARCHITECTURE §4.2 的新文字（`true` / `false` 的 criteria 跟着改成同样的意思）。llm 兜底分类器如果用同一段文字，一起生效。
+2. **关键词等待上限**（`lib/brain/pipeline.ts` 风险闸门那几行）：关键词命中后等分类器最多 `KEYWORD_RISK_WAIT_MS`（默认 2500，加进 `.env.example`），超时按关键词转人工，trace 里注明 `decideProvider` 缺失或超时。
+3. **从关键词降级来的黄标不加安抚语**（`lib/brain/caution.ts`）：这种情况只确保有「转人工」按钮；模型自己判出的黄标照旧加安抚语。用 `RiskResult` 里已有的降级信息判断。
+4. **流程不看文案**（`lib/brain/handlers/index.ts` 的 `runHandler` + 抛这类错误的地方，如 `lib/tools/write-rules.ts`）：需要转人工的报错带结构化字段（例如 `ToolError` / `HandlerFailure` 加 `handoff: true`），`runHandler` 只看这个字段，删掉 `/转人工|人工审核|人工确认/` 正则。**买家看到的文字和是否转人工的结果都保持不变**，只是判断方式变了。
+5. **修 `scripts/check-pipeline.ts`**：T05 之后在 main 上报「缺少 aftersale 卡片」（T08 交接里有复现）。查清是脚本的期望过时还是流水线真的少了卡片；是后者就修流水线并在交接里说明。
+
+**验收标准**（交接文件贴记录）
+
+- [ ] `npm run typecheck` `npm run lint`、`lib/brain/*.test.ts` `lib/tools/*.test.ts` 全部通过（caution 测试按第 3 条更新）；`scripts/check-pipeline.ts` 通过
+- [ ] `npm run eval -- --only E38` 连跑 3 次都不触发风险闸门；「这件是防过敏面料吗」（B001，`productId=P013`）和「我闺蜜是律师，她说这件挺好看」都不转人工，贴 Jev 分数
+- [ ] 「穿了全身起红疹 不处理就去12315」「穿了一天脖子痒得睡不着」「我要让所有人都知道你们家东西什么质量」仍然转人工（或至少进黄区，照实贴分数）
+- [ ] 全量 `npm run eval`（真实 Jev）：风险召回 100%，宽口径风险误报 0；和 T05b 补跑结果逐条对比，有变化逐条解释
+- [ ] 把 Jev 人为调到超时（例如临时把 Jev 超时设成 1ms）时，带「12315」的消息在 3 秒内转人工
+- [ ] `NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 6 步全部通过
+- [ ] 限时 1.5 小时
+
+---
+
 ## T13 人工接管台 + 知识库页 + 规则页 — Cursor
 
 - 分支：`t13-seller-pages`
@@ -569,7 +597,8 @@
 ## T15 前后端联调 — Cursor
 
 - 分支：`t15-integration`
-- 依赖：T05、T05b、T08、T17
+- 依赖：T05、T08、T17（已合并）。T05b 会改 `lib/brain/handoff.ts`（转人工摘要改后台生成），它合并后把本分支 rebase 到最新 main 再跑一遍验收。
+- 说明：`lib/brain/**` 的 T08 特批已归还 Codex，本任务不改大脑代码。
 
 **要做**
 
