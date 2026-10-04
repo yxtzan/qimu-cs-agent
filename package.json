@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
-    "start": "next start",
+    "start": "node --import tsx lib/store/start.ts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",

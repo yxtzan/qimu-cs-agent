@@ -10,6 +10,7 @@ async function main() {
     const page = await context.newPage();
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.name + ': ' + error.message));
+    page.on('console', message => { if (message.type() === 'error' && /hydration|Minified React error/i.test(message.text())) errors.push(message.text()); });
     await page.goto('/');
     const status = async () => (await context.request.get('/api/demo/status')).json() as Promise<{ simplified: boolean; message: string }>;
     if (!(await status()).simplified) {
@@ -29,6 +30,8 @@ async function main() {
     const banner = page.getByTestId('public-budget-banner');
     await banner.waitFor({ state: 'visible', timeout: 10_000 });
     assert.match(await banner.getByRole('status').innerText(), /演示额度今日已用完/);
+    const header = await page.locator('header.sticky').first().boundingBox();
+    assert.ok(header && header.y >= (await banner.boundingBox())!.height, '额度横幅不能遮住商城顶部导航');
     await page.screenshot({ path: process.env.BUDGET_SCREENSHOT ?? '/private/tmp/qimu-t22-budget.png' });
     console.log('PASS 网页顶部实际出现额度横幅并保存截图');
     const link = page.locator('a[href^="/product/"]').first();
@@ -37,6 +40,8 @@ async function main() {
     assert.equal(await banner.isVisible(), true);
     await page.goto('/seller/dashboard');
     await page.getByTestId('public-budget-banner').waitFor({ state: 'visible', timeout: 10_000 });
+    const navigation = await page.getByRole('navigation', { name: '底部导航' }).boundingBox();
+    assert.ok(navigation && navigation.y + navigation.height <= 844, '手机底部导航不能被额度横幅挤出屏幕');
     assert.deepEqual(errors, [], '公开横幅注入不能引发 hydration/页面运行时异常');
     console.log('PASS 手机、卖家页面和页面跳转均保留横幅，未出现页面异常');
   } finally { await browser.close(); }

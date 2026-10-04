@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { RouteTrace } from '../types';
+import { verifiedPeer } from './public-peer';
 import { currentVisitor, publicDemo, sharedDirectory, visitorIsCurrent, visitorNamespace } from './visitor-context';
 
 export const BUDGET_NOTICE = '演示额度今日已用完，以下为简化模式';
@@ -76,7 +77,9 @@ export function recordTransportCost(cost: number, now = Date.now()): void {
   const value = ledger(now); value.transportUsd += cost; save(value);
 }
 export function clientAddress(headers: Headers): string {
-  // Only enable behind a trusted reverse proxy which APPENDS the actual peer address.
+  const peer = verifiedPeer(headers);
+  if (peer) return peer;
+  // Development/raw next start has no socket access: fail conservatively unless behind a trusted proxy.
   if (process.env.PUBLIC_DEMO_TRUST_PROXY !== '1') return 'direct';
   return headers.get('x-forwarded-for')?.split(',').at(-1)?.trim() || 'direct';
 }

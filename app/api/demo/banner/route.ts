@@ -12,6 +12,13 @@ export function GET() {
     const root = host.attachShadow({mode:'open'});
     root.innerHTML = '<style>div{box-sizing:border-box;padding:10px 16px;background:#fff4d6;color:#664300;font:14px/1.5 system-ui;text-align:center;border-bottom:1px solid #ead49a}</style><div role="status"></div>';
     document.documentElement.appendChild(host);
+    const offsetStyle = document.createElement('style');
+    offsetStyle.textContent = 'body{padding-top:var(--qimu-budget-offset,0px)!important}body header.sticky.top-0{top:var(--qimu-budget-offset,0px)!important}body .h-dvh{height:calc(100dvh - var(--qimu-budget-offset,0px))!important}body .min-h-dvh{min-height:calc(100dvh - var(--qimu-budget-offset,0px))!important}@media(min-width:768px){body .h-dvh{height:min(900px,calc(100dvh - 48px - var(--qimu-budget-offset,0px)))!important}}';
+    document.head.appendChild(offsetStyle);
+    function offset() {
+      document.documentElement.style.setProperty('--qimu-budget-offset', host.style.display === 'none' ? '0px' : host.getBoundingClientRect().height + 'px');
+    }
+    new ResizeObserver(offset).observe(host);
     let pending = false;
     async function update() {
       if (pending || document.hidden) return;
@@ -22,6 +29,7 @@ export function GET() {
         const value = await res.json();
         root.querySelector('[role="status"]').textContent = value.message;
         host.style.display = value.simplified ? 'block' : 'none';
+        offset();
       } catch {} finally { pending = false; }
     }
     update(); setInterval(update, 5000);

@@ -60,7 +60,8 @@ export function cleanupVisitors(now = Date.now(), root = visitorRoot()): number 
   }
   return removed;
 }
-function startCleanup(): void {
+export function startVisitorCleanup(): void {
+  if (!publicDemo()) return;
   const root = visitorRoot();
   if (!state.roots.has(root)) { state.roots.add(root); cleanupVisitors(Date.now(), root); }
   if (!state.timer) {
@@ -85,7 +86,7 @@ export function bindVisitor<T>(fn: () => Promise<T>): () => Promise<T | undefine
 export async function runVisitor<T>(sid: string, initialize: () => Promise<void>, fn: () => Promise<T>): Promise<T> {
   if (!publicDemo()) return fn();
   if (!validSid(sid)) throw new Error('Invalid visitor identifier');
-  startCleanup();
+  startVisitorCleanup();
   const directory = join(visitorRoot(), sid);
   const release = retain(directory);
   try {
@@ -104,4 +105,4 @@ export async function runVisitor<T>(sid: string, initialize: () => Promise<void>
   } finally { release(); }
 }
 
-if (publicDemo()) startCleanup();
+if (publicDemo()) startVisitorCleanup();

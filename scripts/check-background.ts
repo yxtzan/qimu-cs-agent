@@ -10,7 +10,7 @@ const root = process.cwd(), temp = mkdtempSync(join(tmpdir(), 'qimu-t22-'));
 cpSync(join(root, 'data/seed'), join(temp, 'data/seed'), { recursive: true });
 process.chdir(temp);
 process.env.PUBLIC_DEMO = '1'; process.env.OPENROUTER_API_KEY = ''; process.env.CLASSIFIER_PROVIDER = 'mock';
-process.env.JEV_KEEPALIVE_MS = '0'; process.env.DAILY_BUDGET_USD = '1'; process.env.GENERATION_MODEL = 'fixture';
+process.env.PUBLIC_DEMO_TRUST_PROXY = '0'; process.env.JEV_KEEPALIVE_MS = '0'; process.env.DAILY_BUDGET_USD = '1'; process.env.GENERATION_MODEL = 'fixture';
 function deferred<T>() { let resolve!: (value: T) => void; const promise = new Promise<T>(done => { resolve = done; }); return { promise, resolve }; }
 const tick = () => new Promise<void>(done => setTimeout(done, 10));
 let checks = 0;
@@ -31,6 +31,17 @@ async function main() {
   const limits = await import('../lib/store/public-limits');
   const { consumeChat, publicBudget, recordTransportCost, recordTraceCosts, installPublicModelGuard } = limits;
   await ensurePublicSharedData();
+  const peer = await import('../lib/store/public-peer');
+  peer.initializePeerSecret();
+  const signed = new Headers(peer.signedPeerHeaders('192.0.2.1'));
+  signed.set('x-forwarded-for', 'fake-address');
+  assert.equal(limits.clientAddress(signed), '192.0.2.1');
+  const spoofed = new Headers({ 'x-qimu-peer': '192.0.2.1', 'x-qimu-peer-signature': '0'.repeat(64), 'x-forwarded-for': 'fake-address' });
+  assert.equal(limits.clientAddress(spoofed), 'direct');
+  process.env.PUBLIC_DEMO_TRUST_PROXY = '1';
+  assert.equal(limits.clientAddress(new Headers({ 'x-forwarded-for': 'fake-address, 192.0.2.2' })), '192.0.2.2');
+  process.env.PUBLIC_DEMO_TRUST_PROXY = '0';
+  pass('TCP 来源签名可验证，伪造来源头失败，可信代理只取最后一项');
   const sharedFiles = ['kb_index.json', 'simulated_traces.json', 'simulated_conversations.json', 'simulated_messages.json'];
   const sharedBefore = sharedFiles.map(name => readFileSync(join(temp, 'data/runtime', name), 'utf8'));
   const A = randomUUID(), B = randomUUID();
