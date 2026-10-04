@@ -1,5 +1,7 @@
 import { incrementMisfire } from '@/lib/rules';
 import { ConversationError, getTrace, isMisfireMarked, markMisfire } from '@/lib/store/conversations';
+import { currentVisitor } from '@/lib/store/visitor-context';
+import { ApiError } from '@/lib/store/http';
 import { respondTo } from '../../../conversations/_respond';
 export const dynamic = 'force-dynamic';
 
@@ -8,6 +10,7 @@ export function POST(_request: Request, context: { params: Promise<{ id: string 
   return respondTo(async () => {
     const trace = getTrace((await context.params).id);
     if (!trace) throw new ConversationError('NOT_FOUND', '没有找到这条路由记录', 404);
+    if (currentVisitor() && trace.isSimulated) throw new ApiError('READ_ONLY', '模拟历史记录为只读', 403);
     if (!isMisfireMarked(trace.id)) {
       markMisfire(trace.id);
       if (trace.ruleId) incrementMisfire(trace.ruleId);

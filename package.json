@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build --webpack",
+    "start": "node --import tsx lib/store/start.ts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed.ts",
     "eval": "tsx scripts/eval.ts",
     "check-seed": "tsx scripts/check-seed.ts",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "check-visitors": "tsx scripts/check-visitors.ts",
+    "check-background": "tsx scripts/check-background.ts",
+    "check-budget": "tsx scripts/check-budget.ts"
   },
   "dependencies": {
     "next": "16.3.8",

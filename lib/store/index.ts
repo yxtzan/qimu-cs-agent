@@ -17,7 +17,12 @@ import {
   statSync,
   writeFileSync,
 } from "node:fs";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import type { RouteTrace } from '../types';
+import { currentVisitor, onVisitorEvicted, publicDemo, sharedDirectory, visitorIsCurrent } from './visitor-context';
+import { recordTraceCosts } from './public-limits';
+
+export const SHARED_COLLECTIONS = new Set(['kb_index', 'embedding_cache', 'eval_latest', 'simulated_conversations', 'simulated_messages', 'simulated_traces']);
 
 export class StoreError extends Error {
   constructor(message: string) {
@@ -35,7 +40,8 @@ function seedFile(name: string): string {
   return join(dataDir(), "seed", `${name}.json`);
 }
 function runtimeFile(name: string): string {
-  return join(dataDir(), "runtime", `${name}.json`);
+  const visitor = currentVisitor();
+  return join(visitor && !SHARED_COLLECTIONS.has(name) ? visitor.directory : sharedDirectory(), `${name}.json`);
 }
 
 // Keep the cache on globalThis so Next.js dev-mode module reloads don't lose writes.
@@ -57,18 +63,19 @@ function assertName(name: string): void {
 export function readCollection<T>(name: string): T[] {
   assertName(name);
   const rt = runtimeFile(name);
-  const cached = cache.get(name);
+  const cached = cache.get(rt);
   // A CLI reset happens in another process; refresh cached collections after disk changes.
-  if (cached && versions.get(name) === fileVersion(rt)) return cached as T[];
+  if (cached && versions.get(rt) === fileVersion(rt)) return withSimulated(name, cached as T[]);
 
   if (!existsSync(rt)) {
     const seed = seedFile(name);
     if (!existsSync(seed)) {
+      if (currentVisitor() && ['conversations', 'messages', 'traces'].includes(name)) return withSimulated(name, []);
       throw new StoreError(
         `Collection "${name}" not found: neither data/runtime/${name}.json nor data/seed/${name}.json exists. Run \`npm run seed\`.`,
       );
     }
-    mkdirSync(join(dataDir(), "runtime"), { recursive: true });
+    mkdirSync(dirname(rt), { recursive: true });
     copyFileSync(seed, rt);
   }
 
@@ -83,25 +90,47 @@ export function readCollection<T>(name: string): T[] {
   if (!Array.isArray(parsed)) {
     throw new StoreError(`data/runtime/${name}.json must contain a JSON array`);
   }
-  cache.set(name, parsed);
-  versions.set(name, fileVersion(rt));
-  return parsed as T[];
+  cache.set(rt, parsed);
+  versions.set(rt, fileVersion(rt));
+  return withSimulated(name, parsed as T[]);
 }
 
 /** Replace a whole collection: updates the cache and persists to data/runtime. */
 export function writeCollection<T>(name: string, data: T[]): void {
   assertName(name);
-  mkdirSync(join(dataDir(), "runtime"), { recursive: true });
+  if (!visitorIsCurrent()) return; // A callback captured before reset/cleanup cannot resurrect data.
+  if (currentVisitor() && SHARED_COLLECTIONS.has(name)) throw new StoreError('公开演示的共享数据为只读');
+  if (currentVisitor() && ['conversations', 'traces', 'messages'].includes(name)) {
+    data = data.filter(row => {
+      const item = row as { isSimulated?: boolean; conversationId?: string };
+      return !item.isSimulated && !item.conversationId?.startsWith('S');
+    });
+  }
   const rt = runtimeFile(name);
+  mkdirSync(dirname(rt), { recursive: true });
   const tmp = `${rt}.tmp`;
   writeFileSync(tmp, JSON.stringify(data, null, 2) + "\n", "utf8");
   renameSync(tmp, rt);
-  cache.set(name, data);
-  versions.set(name, fileVersion(rt));
+  cache.set(rt, data);
+  versions.set(rt, fileVersion(rt));
+  if (name === 'traces') recordTraceCosts(data as RouteTrace[]);
 }
 
 /** Drop the in-memory cache (next read goes back to disk). Used by `npm run seed` and tests. */
 export function clearStoreCache(): void {
-  cache.clear();
-  versions.clear();
+  const directory = currentVisitor()?.directory;
+  if (directory) evictDirectory(directory);
+  else { cache.clear(); versions.clear(); }
+}
+
+function evictDirectory(directory: string): void {
+  for (const key of cache.keys()) if (key.startsWith(directory + '/')) { cache.delete(key); versions.delete(key); }
+}
+onVisitorEvicted(evictDirectory);
+
+function withSimulated<T>(name: string, own: T[]): T[] {
+  if (!publicDemo() || !currentVisitor() || !['conversations', 'messages', 'traces'].includes(name)) return own;
+  const file = join(sharedDirectory(), `simulated_${name}.json`);
+  if (!existsSync(file)) return own;
+  return [...own, ...readCollection<T>(`simulated_${name}`)];
 }
