@@ -7,6 +7,7 @@ import { readCollection, writeCollection } from '../store';
 import { ApiError } from '../store/http';
 import type { KbChunk, KbDoc } from '../types';
 import { chunkDocument } from './chunk';
+import { getCachedEmbedding, putCachedEmbeddings } from './embedding-cache';
 
 export interface IndexedDoc {
   doc: KbDoc;
@@ -42,16 +43,22 @@ async function makeIndex(id: string, title: string, content: string, source: KbD
     try {
       // Indexing is a batch operation. Each batch gets 30s and one retry;
       // online query embeddings use a separate 2s timeout (search.ts).
-      const vectors: number[][] = [];
-      for (let offset = 0; offset < chunks.length; offset += 64) {
-        const batch = chunks.slice(offset, offset + 64);
+      const model = process.env.EMBEDDING_MODEL?.trim();
+      if (!model) throw new Error('Embedding model missing');
+      const texts = chunks.map(c => `${c.docTitle}\n${c.heading ?? ''}\n${c.text}`);
+      const vectors = texts.map(text => getCachedEmbedding(model, text));
+      const missing = texts.map((_, i) => i).filter(i => !vectors[i]);
+      for (let offset = 0; offset < missing.length; offset += 64) {
+        const indices = missing.slice(offset, offset + 64);
+        const batch = indices.map(i => texts[i]);
         for (let attempt = 0; attempt < 2; attempt++) {
           try {
-            const result = await embed({ input: batch.map(c => `${c.docTitle}\n${c.heading ?? ''}\n${c.text}`), timeoutMs: 30000 });
+            const result = await embed({ input: batch, model, timeoutMs: 30000 });
             record.indexing.costUsd += result.costUsd;
             record.indexing.estimated ||= result.estimated;
             if (!validVectors(result.data, batch.length)) throw new Error('Invalid embeddings');
-            vectors.push(...result.data);
+            putCachedEmbeddings(model, batch, result.data);
+            indices.forEach((index, i) => { vectors[index] = result.data[i]; });
             break;
           } catch (error) {
             record.indexing.estimated = true;
@@ -59,9 +66,9 @@ async function makeIndex(id: string, title: string, content: string, source: KbD
           }
         }
       }
-      if (!validVectors(vectors, chunks.length)) throw new Error('Inconsistent embedding dimensions');
-      record.vectors = vectors;
-      record.model = process.env.EMBEDDING_MODEL?.trim();
+      if (!validVectors(vectors as number[][], chunks.length)) throw new Error('Inconsistent embedding dimensions');
+      record.vectors = vectors as number[][];
+      record.model = model;
       record.doc.indexMode = 'embedding';
     } catch (error) {
       // Persist a safe diagnostic, never upstream response bodies or credentials.

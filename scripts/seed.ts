@@ -1,9 +1,12 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { generateSeed } from './seed-data';
+import { loadLocalEnv } from '../lib/llm/env';
 import { checkSeed } from './check-seed';
 import { resetDemoData as resetRuntimeData } from '../lib/store/reset';
 import '../lib/store/reset-hooks'; // T17：所有重置钩子（种子流量、知识库索引…）统一登记在这个文件里
+
+loadLocalEnv();
 
 const seedDir = join(process.cwd(), 'data/seed');
 const runtimeDir = join(process.cwd(), 'data/runtime');

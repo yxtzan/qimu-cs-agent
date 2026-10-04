@@ -1,0 +1,409 @@
+[
+  {
+    "conversation": {
+      "id": "C1001",
+      "mode": "ai",
+      "status": "ai_active",
+      "riskFlags": [],
+      "tags": [],
+      "state": {
+        "currentTask": {
+          "intent": "exchange",
+          "status": "awaiting_confirm",
+          "startedAt": "2026-10-05T10:00:18.616+08:00"
+        },
+        "slots": {
+          "size": "L",
+          "orderId": "QM2026092801",
+          "itemId": "QM2026092801-1",
+          "productId": "P007"
+        },
+        "history": [
+          {
+            "type": "tool_call",
+            "name": "list_orders",
+            "summary": "已查询或申请：list_orders",
+            "at": "2026-10-05T10:00:09.314+08:00"
+          },
+          {
+            "type": "tool_call",
+            "name": "check_stock",
+            "summary": "已查询或申请：check_stock",
+            "at": "2026-10-05T10:00:12.512+08:00"
+          },
+          {
+            "type": "tool_call",
+            "name": "request_exchange",
+            "summary": "已查询或申请：request_exchange",
+            "at": "2026-10-05T10:00:17.536+08:00"
+          },
+          {
+            "type": "pending_action",
+            "name": "PA-ec639be8-226a-4750-ae5e-19cbf92fdd61",
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件",
+            "at": "2026-10-05T10:00:17.536+08:00"
+          },
+          {
+            "type": "tool_call",
+            "name": "list_coupons",
+            "summary": "已查询或申请：list_coupons",
+            "at": "2026-10-05T10:00:18.615+08:00"
+          },
+          {
+            "type": "intent",
+            "name": "exchange",
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件（待您确认后办理）\n已查到2张可用优惠券，详情见卡片。",
+            "at": "2026-10-05T10:00:18.616+08:00"
+          }
+        ],
+        "turnCount": 1,
+        "unresolvedTurns": 0,
+        "riskFlags": [],
+        "pendingActionId": "PA-ec639be8-226a-4750-ae5e-19cbf92fdd61",
+        "lastIntent": "exchange"
+      },
+      "createdAt": "2026-10-05T10:00:00.322+08:00",
+      "updatedAt": "2026-10-05T10:00:18.617+08:00",
+      "lastMessagePreview": "以下是当前可用的优惠券。",
+      "unreadForSeller": 0,
+      "buyerId": "B001",
+      "lastLayer": "L3"
+    },
+    "messages": [
+      {
+        "role": "buyer",
+        "text": "上周买的那件外套换成L码，顺便帮我看看有没有能用的券",
+        "id": "C1001-M1",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:00.334+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件（待您确认后办理）\n已查到2张可用优惠券，详情见卡片。",
+        "traceId": "TR-624e8dee-c46e-4b12-943c-5d952aa71693",
+        "id": "C1001-M2",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:18.617+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "请核对下面的信息，确认后再办理。",
+        "card": {
+          "kind": "confirm",
+          "pendingAction": {
+            "id": "PA-ec639be8-226a-4750-ae5e-19cbf92fdd61",
+            "conversationId": "C1001",
+            "tool": "request_exchange",
+            "args": {
+              "orderId": "QM2026092801",
+              "itemId": "QM2026092801-1",
+              "newSize": "L",
+              "newColor": "燕麦色",
+              "buyerId": "B001"
+            },
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:17.533+08:00"
+          }
+        },
+        "traceId": "TR-624e8dee-c46e-4b12-943c-5d952aa71693",
+        "id": "C1001-M3",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:18.617+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "以下是当前可用的优惠券。",
+        "card": {
+          "kind": "coupons",
+          "coupons": [
+            {
+              "id": "CP001",
+              "buyerId": "B001",
+              "title": "满 299 减 30",
+              "threshold": 299,
+              "discount": 30,
+              "scope": "全店",
+              "expiresAt": "2026-10-31T23:59:59+08:00",
+              "used": false
+            },
+            {
+              "id": "CP002",
+              "buyerId": "B001",
+              "title": "满 199 减 20",
+              "threshold": 199,
+              "discount": 20,
+              "scope": "外套",
+              "expiresAt": "2026-10-15T23:59:59+08:00",
+              "used": false
+            }
+          ]
+        },
+        "traceId": "TR-624e8dee-c46e-4b12-943c-5d952aa71693",
+        "id": "C1001-M4",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:18.617+08:00"
+      }
+    ],
+    "trace": {
+      "id": "TR-624e8dee-c46e-4b12-943c-5d952aa71693",
+      "conversationId": "C1001",
+      "messageId": "C1001-M1",
+      "at": "2026-10-05T10:00:00.334+08:00",
+      "layer": "L3",
+      "intent": "exchange",
+      "stage": "aftersale",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "check_stock",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "request_exchange",
+          "ok": true,
+          "ms": 5
+        },
+        {
+          "name": "list_coupons",
+          "ok": true,
+          "ms": 2
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 18287,
+        "agentMs": 9303,
+        "decideMs": 8979
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0.00015347,
+        "totalUsd": 0.00015347,
+        "estimated": true
+      },
+      "confidence": 0.9,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "exchange",
+          "p": 0.9
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "conversation": {
+      "id": "C1002",
+      "mode": "ai",
+      "status": "ai_active",
+      "riskFlags": [],
+      "tags": [],
+      "state": {
+        "currentTask": {
+          "intent": "multi_step_complex",
+          "status": "awaiting_confirm",
+          "startedAt": "2026-10-05T10:00:22.171+08:00"
+        },
+        "slots": {},
+        "history": [
+          {
+            "type": "tool_call",
+            "name": "list_orders",
+            "summary": "已查询或申请：list_orders",
+            "at": "2026-10-05T10:00:20.099+08:00"
+          },
+          {
+            "type": "tool_call",
+            "name": "cancel_order",
+            "summary": "已查询或申请：cancel_order",
+            "at": "2026-10-05T10:00:22.169+08:00"
+          },
+          {
+            "type": "pending_action",
+            "name": "PA-70b7c08a-a390-422d-a5d3-f08d765d7f16",
+            "summary": "取消订单 QM2026100402（尚未付款，无需退款）",
+            "at": "2026-10-05T10:00:22.169+08:00"
+          },
+          {
+            "type": "tool_call",
+            "name": "modify_address",
+            "summary": "已查询或申请：modify_address",
+            "at": "2026-10-05T10:00:22.171+08:00"
+          },
+          {
+            "type": "pending_action",
+            "name": "PA-4b21ff4f-f79d-4df6-afb7-dfa5ad5569d1",
+            "summary": "将订单 QM2026100401 的收货地址改为：陈思，138****1003，浙江省 杭州市 西湖区 文三路88号",
+            "at": "2026-10-05T10:00:22.171+08:00"
+          },
+          {
+            "type": "intent",
+            "name": "multi_step_complex",
+            "summary": "取消订单 QM2026100402（尚未付款，无需退款）（待您确认后办理）\n将订单 QM2026100401 的收货地址改为：陈思，138****1003，浙江省 杭州市 西湖区 文三路88号（待您确认后办理）",
+            "at": "2026-10-05T10:00:22.171+08:00"
+          }
+        ],
+        "turnCount": 1,
+        "unresolvedTurns": 0,
+        "riskFlags": [],
+        "pendingActionId": "PA-4b21ff4f-f79d-4df6-afb7-dfa5ad5569d1",
+        "lastIntent": "multi_step_complex"
+      },
+      "createdAt": "2026-10-05T10:00:18.624+08:00",
+      "updatedAt": "2026-10-05T10:00:22.172+08:00",
+      "lastMessagePreview": "请核对下面的信息，确认后再办理。",
+      "unreadForSeller": 0,
+      "buyerId": "B003",
+      "lastLayer": "L3"
+    },
+    "messages": [
+      {
+        "role": "buyer",
+        "text": "两个订单都帮我处理下：没付款的取消，已经付了的改地址到浙江省 杭州市 西湖区 文三路88号",
+        "id": "C1002-M1",
+        "conversationId": "C1002",
+        "createdAt": "2026-10-05T10:00:18.628+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "取消订单 QM2026100402（尚未付款，无需退款）（待您确认后办理）\n将订单 QM2026100401 的收货地址改为：陈思，138****1003，浙江省 杭州市 西湖区 文三路88号（待您确认后办理）",
+        "traceId": "TR-8f5cb786-0fba-428c-9ac0-eebd0faac21f",
+        "id": "C1002-M2",
+        "conversationId": "C1002",
+        "createdAt": "2026-10-05T10:00:22.172+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "请核对下面的信息，确认后再办理。",
+        "card": {
+          "kind": "confirm",
+          "pendingAction": {
+            "id": "PA-70b7c08a-a390-422d-a5d3-f08d765d7f16",
+            "conversationId": "C1002",
+            "tool": "cancel_order",
+            "args": {
+              "orderId": "QM2026100402",
+              "buyerId": "B003"
+            },
+            "summary": "取消订单 QM2026100402（尚未付款，无需退款）",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:22.168+08:00"
+          }
+        },
+        "traceId": "TR-8f5cb786-0fba-428c-9ac0-eebd0faac21f",
+        "id": "C1002-M3",
+        "conversationId": "C1002",
+        "createdAt": "2026-10-05T10:00:22.172+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "请核对下面的信息，确认后再办理。",
+        "card": {
+          "kind": "confirm",
+          "pendingAction": {
+            "id": "PA-4b21ff4f-f79d-4df6-afb7-dfa5ad5569d1",
+            "conversationId": "C1002",
+            "tool": "modify_address",
+            "args": {
+              "orderId": "QM2026100401",
+              "address": {
+                "name": "陈思",
+                "phone": "138****1003",
+                "region": "浙江省 杭州市 西湖区",
+                "detail": "文三路88号"
+              },
+              "buyerId": "B003"
+            },
+            "summary": "将订单 QM2026100401 的收货地址改为：陈思，138****1003，浙江省 杭州市 西湖区 文三路88号",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:22.170+08:00"
+          }
+        },
+        "traceId": "TR-8f5cb786-0fba-428c-9ac0-eebd0faac21f",
+        "id": "C1002-M4",
+        "conversationId": "C1002",
+        "createdAt": "2026-10-05T10:00:22.172+08:00"
+      }
+    ],
+    "trace": {
+      "id": "TR-8f5cb786-0fba-428c-9ac0-eebd0faac21f",
+      "conversationId": "C1002",
+      "messageId": "C1002-M1",
+      "at": "2026-10-05T10:00:18.628+08:00",
+      "layer": "L3",
+      "intent": "multi_step_complex",
+      "stage": "other",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "cancel_order",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "modify_address",
+          "ok": true,
+          "ms": 2
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 3549,
+        "agentMs": 2074,
+        "decideMs": 1468
+      },
+      "cost": {
+        "decideUsd": 0.000064554,
+        "generationUsd": 0,
+        "agentUsd": 0.00007105,
+        "totalUsd": 0.000135604,
+        "estimated": false
+      },
+      "confidence": 0.99,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "multi_step_complex",
+          "p": 1
+        },
+        {
+          "id": "size_recommend",
+          "p": 0
+        },
+        {
+          "id": "promotion",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.01,
+        "fraud_security": 0.03,
+        "abuse_extreme": 0.01,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  }
+]

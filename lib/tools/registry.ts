@@ -13,7 +13,7 @@ type Schema = Record<string, unknown>;
 const string = (description: string, values?: readonly string[]): Schema => ({ type: 'string', description, ...(values ? { enum: values } : {}) });
 const number = (description: string, minimum?: number): Schema => ({ type: 'number', description, ...(minimum !== undefined ? { minimum } : {}) });
 const orderId = string('要查询或办理的订单编号，例如 QM2026092801；只能访问当前买家的订单');
-const itemId = string('订单商品行 itemId，先用 get_order 获取，不是 productId 或 skuId');
+const itemId = string('订单商品行 itemId，从 list_orders 或 get_order 返回的商品行中取得，不是 productId 或 skuId');
 const productId = string('商品编号，例如 P007');
 const size = string('尺码：XS、S、M、L、XL', ['XS', 'S', 'M', 'L', 'XL']);
 const schema = (properties: Record<string, Schema>, required: string[] = []): Schema => ({ type: 'object', properties, required, additionalProperties: false });
