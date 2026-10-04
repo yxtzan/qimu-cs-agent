@@ -1,4 +1,5 @@
 import { decisions, hasApiKey } from '../../llm/openrouter';
+import { buildDecisionQuestions } from './questions';
 
 // Jev answers in ~0.4s when warm but ~6s when cold (T01b), so we ping it:
 //   - every JEV_KEEPALIVE_MS (default 120000) while the server runs (startJevWarmup),
@@ -19,7 +20,9 @@ async function ping(reason: 'startup' | 'keepalive' | 'reset'): Promise<void> {
   if (state.busy || !jevActive()) return;
   state.busy = true;
   try {
-    const result = await decisions({ state: '你好', questions: { warm: { type: 'choice', instructions: '是否是问候？', criteria: { greeting: '问候', other: '其他' } } }, timeoutMs: 8000 });
+    // Ping with the same 7-question set as real traffic: a 1-question ping stayed ~6.3s on every keepalive,
+    // which suggests the warm path is keyed to the question set rather than the model alone.
+    const result = await decisions({ state: '买家：你好', questions: buildDecisionQuestions(), timeoutMs: 8000 });
     console.info('[jev-warmup]', JSON.stringify({ reason, latencyMs: result.latencyMs, costUsd: result.costUsd, estimated: result.estimated }));
   } catch (error) { console.info('[jev-warmup]', JSON.stringify({ reason, error: error instanceof Error ? error.name : 'UnknownError' })); }
   finally { state.busy = false; }
