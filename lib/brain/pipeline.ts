@@ -74,7 +74,8 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   if (hardRisk.handoff) {
     mergeRiskFlags(id, hardRisk);
     const trace = { ...makeTrace(buyer, 'risk_gate', started, rule?.intent), riskScores: hardRisk.scores, riskHit: hardRisk.hits, handoffReason: riskReason(hardRisk) };
-    appendMessages(id, enterHandoff(id, trace.handoffReason, hardRisk.flags).map(m => ({ ...m, traceId: trace.id })));
+    appendMessages(id, (await handoffMessages(trace, id, trace.handoffReason, hardRisk.flags)).map(m => ({ ...m, traceId: trace.id })));
+    trace.latency.totalMs = Date.now() - started;
     updateConversation(id, { lastLayer: 'risk_gate' });
     schedule(() => finishEarlyTrace(trace, buyer, text, decisionPromise, started));
     return response(id, buyer, request.debug, trace);
@@ -88,7 +89,8 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
     mergeRiskFlags(id, risk);
     if (risk.handoff) {
       const trace = withDecision({ ...makeTrace(buyer, 'risk_gate', started), handoffReason: riskReason(risk) }, decision, risk);
-      appendMessages(id, enterHandoff(id, riskReason(risk), risk.flags).map(m => ({ ...m, traceId: trace.id })));
+      appendMessages(id, (await handoffMessages(trace, id, riskReason(risk), risk.flags)).map(m => ({ ...m, traceId: trace.id })));
+      trace.latency.totalMs = Date.now() - started;
       persistTrace(trace);
       return response(id, buyer, request.debug, trace);
     }
@@ -120,7 +122,8 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
     mergeRiskFlags(id, risk);
     if (risk.handoff) {
       const trace = withDecision({ ...makeTrace(buyer, 'risk_gate', started, decision.intent.id), handoffReason: riskReason(risk) }, decision, risk);
-      appendMessages(id, enterHandoff(id, riskReason(risk), risk.flags).map(m => ({ ...m, traceId: trace.id })));
+      appendMessages(id, (await handoffMessages(trace, id, riskReason(risk), risk.flags)).map(m => ({ ...m, traceId: trace.id })));
+      trace.latency.totalMs = Date.now() - started;
       persistTrace(trace);
       return response(id, buyer, request.debug, trace);
     }
@@ -133,7 +136,7 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   }
   const ctx = createHandlerContext(toolContext, state, text, intent, request.action, started + 9000);
   const handlerStart = Date.now();
-  // ⑦ General L3 remains a visible placeholder until T05 implements the agent.
+  // ⑦ Bounded L3 shares tools and confirmation with L2.
   let result: HandlerResult;
   try { result = layer === 'L3' ? await runAgent(ctx) : await runHandler(ctx); }
   catch { result = { status: 'collecting', messages: [{ role: 'ai', text: '抱歉，暂时无法完成查询，我帮您转人工核实。' }], handoffReason: '执行查询异常，需要人工核实' }; }
@@ -143,9 +146,10 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   trace = withHandler(trace, ctx.metrics, Date.now() - handlerStart, Date.now() - started);
   const reason = result.handoffReason ?? (state.unresolvedTurns >= 2 ? '连续两轮未能解决，需要人工协助' : undefined);
   if (reason) { trace = { ...trace, layer: 'human', escalatedFrom: layer, handoffReason: reason }; }
-  const outgoing = [...result.messages, ...(reason ? enterHandoff(id, reason) : [])];
+  const outgoing = [...result.messages, ...(reason ? await handoffMessages(trace, id, reason) : [])];
   // ⑧ One trace per buyer message, and one shared traceId for all replies this turn.
   appendMessages(id, outgoing.map(m => ({ ...m, traceId: trace.id })));
+  trace.latency.totalMs = Date.now() - started;
   if (decision) trace = persistTrace(withDecision(trace, decision, checkRisk(text, decision)));
   else {
     updateConversation(id, { lastLayer: trace.layer });
@@ -173,7 +177,7 @@ async function finishEarlyTrace(trace: RouteTrace, buyer: ChatMessage, text: str
   if (risk.handoff && trace.layer !== 'risk_gate') {
     const reason = riskReason(risk);
     final = { ...final, layer: 'risk_gate', escalatedFrom: trace.layer, handoffReason: reason };
-    appendMessages(buyer.conversationId, enterHandoff(buyer.conversationId, reason, risk.flags).map(m => ({ ...m, traceId: trace.id })));
+    appendMessages(buyer.conversationId, (await handoffMessages(final, buyer.conversationId, reason, risk.flags)).map(m => ({ ...m, traceId: trace.id })));
     // totalMs for an asynchronous escalation includes the classifier wait.
     final.latency.totalMs = Date.now() - started;
   }
@@ -187,4 +191,13 @@ function forwardedResponse(id: string, buyer: ChatMessage, debug: boolean | unde
   if (decision) trace = withDecision(trace, decision, risk);
   persistTrace(trace);
   return response(id, buyer, debug, trace);
+}
+
+async function handoffMessages(trace: RouteTrace, id: string, reason: string, flags: import('../types').RiskKey[] = []) {
+  return enterHandoff(id, reason, flags, result => {
+    trace.usedGeneration = true;
+    trace.cost.generationUsd += result.costUsd;
+    trace.cost.totalUsd += result.costUsd;
+    trace.cost.estimated ||= result.estimated;
+  });
 }

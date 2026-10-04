@@ -14,6 +14,7 @@ export interface HandlerMetrics {
   toolCalls: RouteTrace['toolCalls'];
   usedGeneration: boolean;
   generationUsd: number;
+  agentUsd: number;
   estimated: boolean;
   ragHits: number;
   ragMs: number;
@@ -30,7 +31,7 @@ export interface HandlerContext {
   call<T>(name: string, args: Record<string, unknown>): Promise<T>;
 }
 export function createHandlerContext(toolContext: ToolContext, state: DialogState, text: string, intent: IntentId, action?: ChatAction, deadlineMs?: number): HandlerContext {
-  const metrics: HandlerMetrics = { toolCalls: [], usedGeneration: false, generationUsd: 0, estimated: false, ragHits: 0, ragMs: 0 };
+  const metrics: HandlerMetrics = { toolCalls: [], usedGeneration: false, generationUsd: 0, agentUsd: 0, estimated: false, ragHits: 0, ragMs: 0 };
   return { toolContext, state, text, intent, action, metrics, deadlineMs, async call<T>(name: string, args: Record<string, unknown>): Promise<T> {
     const started = Date.now();
     const result = await runTool(name, args, toolContext);

@@ -1,0 +1,54 @@
+[jev-warmup] {"latencyMs":6289,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1522, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 2164, tools: [ 'request_exchange' ], finish: 'tool_calls' }
+[agent-step] { ms: 1258, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+
+会话 C1002 · 买家 B001 · ai_active
+客服：为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件（待您确认后办理）
+已查到2张可用优惠券，详情见卡片。
+客服：请核对下面的信息，确认后再办理。
+{
+  "kind": "confirm",
+  "pendingAction": {
+    "id": "PA-77989faa-93e8-4395-8f38-88966dcf3ade",
+    "conversationId": "C1002",
+    "tool": "request_exchange",
+    "args": {
+      "orderId": "QM2026092801",
+      "itemId": "QM2026092801-1",
+      "newSize": "L",
+      "newColor": "燕麦色",
+      "buyerId": "B001"
+    },
+    "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件",
+    "status": "pending",
+    "createdAt": "2026-10-05T10:00:12.861+08:00"
+  }
+}
+客服：以下是当前可用的优惠券。
+{
+  "kind": "coupons",
+  "coupons": [
+    {
+      "id": "CP001",
+      "buyerId": "B001",
+      "title": "满 299 减 30",
+      "threshold": 299,
+      "discount": 30,
+      "scope": "全店",
+      "expiresAt": "2026-10-31T23:59:59+08:00",
+      "used": false
+    },
+    {
+      "id": "CP002",
+      "buyerId": "B001",
+      "title": "满 199 减 20",
+      "threshold": 199,
+      "discount": 20,
+      "scope": "外套",
+      "expiresAt": "2026-10-15T23:59:59+08:00",
+      "used": false
+    }
+  ]
+}
+路由：{"id":"TR-7edba1c8-24aa-4f95-8127-7e253ce9b55d","conversationId":"C1002","messageId":"C1002-M1","at":"2026-10-05T10:00:00.179+08:00","layer":"L3","intent":"exchange","stage":"aftersale","toolCalls":[{"name":"list_orders","ok":true,"ms":0},{"name":"check_stock","ok":true,"ms":1},{"name":"request_exchange","ok":true,"ms":4},{"name":"list_coupons","ok":true,"ms":2}],"usedGeneration":false,"latency":{"totalMs":13953,"agentMs":4959,"decideMs":8982},"cost":{"decideUsd":0,"generationUsd":0,"agentUsd":0.000158606,"totalUsd":0.000158606,"estimated":true},"confidence":0.9,"ragHits":0,"decideProvider":"mock","topIntents":[{"id":"exchange","p":0.9}],"riskScores":{"legal_threat":0,"health_safety":0,"fraud_security":0,"abuse_extreme":0,"emotion":0},"riskHit":[]}

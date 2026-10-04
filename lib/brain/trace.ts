@@ -22,7 +22,7 @@ export function withDecision(trace: RouteTrace, decision: DecideResult, risk: Ri
 export function withHandler(trace: RouteTrace, metrics: HandlerMetrics, handlerMs: number, totalMs: number): RouteTrace {
   return { ...trace, toolCalls: metrics.toolCalls, usedGeneration: metrics.usedGeneration, ragHits: metrics.ragHits,
     latency: { ...trace.latency, totalMs, ...(trace.layer === 'L3' ? { agentMs: handlerMs } : { handlerMs }) },
-    cost: { ...trace.cost, generationUsd: metrics.generationUsd, totalUsd: trace.cost.decideUsd + metrics.generationUsd + trace.cost.agentUsd, estimated: trace.cost.estimated || metrics.estimated } };
+    cost: { ...trace.cost, generationUsd: metrics.generationUsd, agentUsd: metrics.agentUsd, totalUsd: trace.cost.decideUsd + metrics.generationUsd + metrics.agentUsd, estimated: trace.cost.estimated || metrics.estimated } };
 }
 export function originStillExists(message: ChatMessage): boolean {
   const fresh = getMessage(message.id);
