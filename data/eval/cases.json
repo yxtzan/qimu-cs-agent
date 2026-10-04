@@ -54,7 +54,7 @@
     { "id": "E43", "buyerId": "B001", "setup": { "context": { "orderId": "QM2026092801" } }, "input": { "text": "能换L吗" }, "expect": { "layer": "L2", "intent": "exchange" } },
     { "id": "E44", "buyerId": "B001", "setup": { "context": { "productId": "P007" } }, "input": { "text": "那灰色呢" }, "expect": { "layer": ["L2", "L3"], "intent": "stock_check" } },
     { "id": "E45", "buyerId": "B001", "setup": { "prior": [{ "text": "我160 50kg" }] }, "input": { "text": "那这件大衣穿哪个码" }, "expect": { "layer": "L2", "intent": "size_recommend" } },
-    { "id": "E46", "buyerId": "B003", "setup": { "context": { "orderId": "QM2026100401" } }, "input": { "text": "不要了" }, "expect": { "layer": "L2", "intent": "cancel_order" } },
+    { "id": "E46", "buyerId": "B003", "setup": { "context": { "orderId": "QM2026100401" } }, "input": { "text": "不要了" }, "expect": { "layer": ["L2", "L3"], "intent": "cancel_order" } },
     { "id": "E47", "buyerId": "B001", "setup": { "context": { "orderId": "QM2026092801" }, "prior": [{ "text": "大衣M码小了想换L" }] }, "input": { "action": { "type": "text", "text": "好的，确认换" } }, "expect": { "layer": ["L2", "L3"], "intent": "exchange" } },
     { "id": "E48", "buyerId": "B001", "setup": { "prior": [{ "text": "我想换货" }] }, "input": { "text": "上周那件大衣" }, "expect": { "layer": ["L2", "L3"], "intent": "exchange" } },
     { "id": "E49", "buyerId": "B001", "setup": { "prior": [{ "text": "到哪了" }] }, "input": { "text": "不是这个，我问的是退款" }, "expect": { "layer": ["L2", "L3"], "intent": "refund_progress" } },

@@ -19,13 +19,14 @@
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 + 重置提速 | Codex | T04 | 3 | 3h | doing |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
-| T06 | 评测脚本 + 评测 API | **Cursor**（2026-10-04 改派） | T04 | 4 | 2h | doing |
+| T06 | 评测脚本 + 评测 API | **Cursor**（2026-10-04 改派） | T04 | 4 | 2h | done（T05 合并后补跑一次） |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
 | T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
-| T15 | 前后端联调 | Cursor | T05 T18 | 5 | 2h | todo |
+| T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | doing |
+| T15 | 前后端联调 | Cursor | T05 T08 T18 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
@@ -330,6 +331,45 @@
 - [ ] 导入一篇新的 .md 后，「试搜一下」能搜到其中内容
 - [ ] 关闭 R007 后，买家发「尺码不合适想退货」走 L2 refund_apply（与 Codex 联调验证）
 - [ ] PR 附手机宽度截图：接管台（路由轨迹展开）、知识库导入、规则页
+
+---
+
+## T08 边界情况处理（评测发现的问题 + 风险闸门补强） — Cursor
+
+- 分支：`t08-edge-cases`
+- 依赖：T06（已合并）。**和 T05 并行开发，但必须在 T05 之后合并**：如果你先做完，等 T05 合并后把分支 rebase 到最新 main，重跑验收再推。
+- 必读：`docs/questions/T06-1.md` `T06-2.md` `T06-3.md` 里 Claude 的答复、`docs/DECISIONS.md` D011、`docs/ARCHITECTURE.md` §4.2 §4.5、`docs/reports/T06-eval.md`、`lib/brain/pipeline.ts`、`lib/brain/risk.ts`
+- 说明：T06 评测和讲解手册的复盘找出了几处「拿不准时处理得太粗」的地方：该给方案的直接转人工、关键词误伤、黄色区间没有动作、情绪黄标门槛写错。本任务按 D011 把它们补上。改动都小，**不要借机重构**。
+
+**要做**
+
+1. **质量问题先给方案**（`lib/brain/handlers/index.ts` 的 `qualityIssue`）：订单已签收且在 7 天无理由期内（DEMO_NOW 计）→ 致歉 + 说明可 7 天无理由退换（金卡会员免退货运费）+ 快捷回复「换个颜色」「申请退货」「是质量问题，转人工」，不自动转人工；已过 7 天、在 15 天质量期内且金额 > ¥500 → 维持转人工；其他情况维持现状。
+2. **尺码超范围不自动转**（`lib/tools/recommend-size.ts` + `lib/brain/handlers/read.ts` 的 `sizeRecommend`）：工具对超范围返回结构化结果（例如 `{ outOfRange: true, maxSize: 'XL', ... }`），不再抛带「建议转人工」文案的错误；handler 回复说明本店尺码表上限（XL：身高 175cm、体重 70kg）、这款可能没有合适尺码，附「转人工」快捷回复，买家点了才转。`runHandler` 里那条匹配文案的正则这次不动（只是尺码不再走到它）。
+3. **情绪黄标门槛 bug**（`lib/brain/risk.ts`）：情绪是 0–3 分，黄标门槛改为 ≥ 1.5；四个风险项仍是 ≥ 0.5。在 `risk.test.ts` 补测试。
+4. **关键词误伤降级**（`lib/brain/risk.ts` + pipeline 里风险闸门那几行）：硬关键词命中后**不再立刻转人工**，而是等这一轮的 `decide()` 结果（它本来就在跑，受 `DECIDE_BUDGET_MS` 约束）：
+   - `decideProvider` 是 `jev` 或 `llm`，且该风险项的模型分数 < 0.3 → 不转，改为黄标（进入第 5 条的黄区处理）；
+   - 其他情况（模型分 ≥ 0.3、decide 失败、mock）→ 照旧转人工。
+   - L1 命中的消息同样适用：只有在**关键词命中**时 L1 才等 decide，其余 L1 消息仍然不等。
+5. **黄色区间要有动作**（新文件 `lib/brain/caution.ts`，pipeline 只加一行调用）：这一轮有黄标、没有转人工、最终由 L2 或 L3 回复时，在第一条 AI 消息前加一句固定的安抚语（按风险类型选模板，**不调模型**），并确保回复里有「转人工」快捷回复。L1 回复不处理。调用点放在 L2/L3 结果写入消息之前的**同一个位置**，方便和 T05 合并。
+6. **连续两轮黄标 → 转人工**（同在 `caution.ts`）：同一会话里上一条买家消息的 trace 有黄标（用同一套门槛从 `riskScores` 算），这一条又有黄标 → 用现有的 `enterHandoff` 转人工，原因「连续两轮情绪或风险偏高」，`trace.handoffReason` 同步写。
+7. **观测**：把 `decision.multiStep` 写进 `RouteTrace.multiStep`（字段已由 Claude 加在 `lib/types.ts`）。
+8. **Jev 保温**（`lib/brain/decide/warmup.ts`、`lib/store/reset-hooks.ts` 只加 import 行、`.env.example`）：导出 `warmJevNow()`，重置演示数据完成后调用一次（没有 key 或 provider 不是 jev 时什么都不做）；`JEV_KEEPALIVE_MS` 默认值改为 120000（代码和 `.env.example` 一起改）。
+9. **评测报告文案**（`lib/eval/report.ts`）：未通过列表里 E58 的原因后面加「预期内失败（R007 为反面教材规则）」。判定逻辑不变、总分照算。
+
+**目录归属（本任务特批）**：`lib/brain/handlers/index.ts` `lib/brain/handlers/read.ts` `lib/brain/risk.ts` `lib/brain/risk.test.ts` `lib/brain/caution.ts`（新建） `lib/brain/trace.ts` `lib/brain/decide/warmup.ts` `lib/tools/recommend-size.ts` `.env.example`（只改 `JEV_KEEPALIVE_MS` 一行）、`lib/brain/pipeline.ts`（**只加调用行和风险闸门那几行**，逻辑放进新文件）。**不要碰** `lib/brain/agent.ts` `lib/brain/prompts/**` `lib/brain/handoff.ts` `lib/rag/**`——T05 正在改它们。不改 `data/eval/**`。
+
+**验收标准**（chat-cli 或 `npm run eval -- --only`，交接文件贴记录）
+
+- [ ] `npm run typecheck` `npm run lint` 通过，`risk.test.ts` 新增用例通过
+- [ ] E40「有点小失望，外套比图片颜色深一点」→ 不转人工，回复提到 7 天无理由，带三个快捷回复
+- [ ] E59「身高185体重90kg有合适的吗」→ 不转人工，回复说明尺码上限，带「转人工」快捷回复；点它才转
+- [ ] B001「我闺蜜是律师，她说这件挺好看」、B001 带 `productId=P013`「这件是防过敏面料吗」→ Jev 正常时不转人工（若 Jev 分数 ≥ 0.3 导致仍转，照实写分数，不要为它调阈值）
+- [ ] B002「穿了全身起红疹 不处理就去12315」→ 仍然 `layer=risk_gate` 转人工
+- [ ] 黄区演示：找一句能让情绪分落在 1.5–2.5 的话（例如「什么破快递，三天了还没动」）→ 回复带安抚语和「转人工」按钮；同一会话再发一句不满的话 → 转人工。若 Jev 分数没进黄区，换句话，交接里照实记录分数
+- [ ] trace 里有 `multiStep`；重置演示数据后日志里能看到一次 Jev 预热
+- [ ] `npm run eval` 全量（真实 Jev）：风险召回仍 100%，宽口径风险误报仍 0；E40、E59 通过；其他原本通过的用例没有变成失败（有变化逐条解释）
+- [ ] `NEXT_PUBLIC_USE_MOCK=0 npm run e2e`：不依赖 T05 的步骤仍全部通过
+- [ ] 限时 2 小时
 
 ---
 
