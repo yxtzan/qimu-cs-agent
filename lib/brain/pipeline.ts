@@ -3,7 +3,7 @@ import { appendMessages, createConversation, getConversation, listMessages, upda
 import type { ChatMessage, Conversation, DecideResult, IntentId, RouteTrace } from '../types';
 import { decide, decideWithMock } from './decide';
 import { INTENTS } from './decide/questions';
-import { startJevWarmup } from './decide/warmup';
+import { noteJevActivity } from './decide/warmup';
 import { describeInput, parseChatRequest, validateIdentity, type ChatRequest } from './input';
 import { addHistory, serializeStateForModel, updateState } from './state';
 import { checkRisk, waitForKeywordDecision, type RiskResult } from './risk';
@@ -65,7 +65,7 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   }
 
   // ② Start decide and ③ synchronously match L1 in parallel (never await here).
-  startJevWarmup();
+  noteJevActivity();
   const decideStarted = Date.now();
   const decisionPromise = (options.decide ?? decide)(serializeStateForModel(getConversation(id)!, listMessages(id)), text).catch(() => ({ ...decideWithMock(text), error: '分类器异常，已降级到 mock' })).then(result => ({ ...result, latencyMs: Date.now() - decideStarted }));
   const rule = matchRule(text, request.action);
