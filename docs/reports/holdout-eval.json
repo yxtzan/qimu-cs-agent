@@ -1,0 +1,763 @@
+{
+  "report": {
+    "runAt": "2026-10-04T07:49:28.091Z",
+    "provider": "jev",
+    "cases": 15,
+    "intentAccuracy": 0.8333333333333334,
+    "layerAccuracy": 0.8666666666666667,
+    "riskRecall": 1,
+    "riskFalsePositiveRate": 0,
+    "avgLatencyMs": 3397,
+    "failures": [
+      {
+        "caseId": "H01",
+        "text": "这件真丝衬衫能直接放洗衣机吗",
+        "expected": "layer=L2 intent=product_consult riskHit=[]",
+        "got": "layer=L3 intent=other riskHit=[] handoff=false tools=[get_product]（原因：分类器降级）",
+        "reason": "分类器降级"
+      },
+      {
+        "caseId": "H13",
+        "text": "没付款的那单不要了，另外已经付款的那单什么时候发货",
+        "expected": "layer=L3 tools⊇[list_orders]",
+        "got": "layer=human(来自L3) intent=multi_step_complex riskHit=[] handoff=true tools=[list_orders,cancel_order,track_logistics]（原因：转人工判断错）",
+        "reason": "转人工判断错"
+      }
+    ],
+    "passed": 13,
+    "totalCostUsd": 0.002147,
+    "riskFalsePositiveRateBroad": 0,
+    "reasonCounts": {
+      "分类器降级": 1,
+      "转人工判断错": 1
+    },
+    "byLayer": {
+      "risk_gate": {
+        "n": 3,
+        "avgMs": 392,
+        "p95Ms": 407,
+        "avgCostUsd": 0.00008771303333333333
+      },
+      "L2": {
+        "n": 7,
+        "avgMs": 1953,
+        "p95Ms": 8217,
+        "avgCostUsd": 0.00007373028571428571
+      },
+      "L3": {
+        "n": 4,
+        "avgMs": 7977,
+        "p95Ms": 18478,
+        "avgCostUsd": 0.0002477735
+      },
+      "human": {
+        "n": 1,
+        "avgMs": 4207,
+        "p95Ms": 4207,
+        "avgCostUsd": 0.00037639799999999996
+      }
+    },
+    "note": "T06 评测：15 条用例，分类器 jev"
+  },
+  "context": {
+    "provider": "jev",
+    "runAt": "2026-10-04T07:49:28.091Z",
+    "resetMs": 6302,
+    "resetEach": true,
+    "checkTools": true,
+    "t05Pending": false
+  },
+  "results": [
+    {
+      "id": "H01",
+      "buyerId": "B001",
+      "text": "这件真丝衬衫能直接放洗衣机吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "product_consult",
+        "riskHit": []
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.55,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "get_product"
+        ],
+        "decideProvider": "mock",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "intent": false,
+        "risk": true
+      },
+      "pass": false,
+      "reason": "分类器降级",
+      "latencyMs": 18478,
+      "responseMs": 18484,
+      "costUsd": 0.000104342,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": true,
+      "replyPreview": "根据商品详情，这件云感真丝衬衫**不建议直接放入洗衣机**。 官方洗护建议为： * **轻柔手洗**：请使用真丝专用中性洗涤剂。 * **注意事项**：不要用力搓拧，避免暴晒。 * **熨烫**：如需熨烫，请垫布并使用低温。 为了保护面料质"
+    },
+    {
+      "id": "H02",
+      "buyerId": "B001",
+      "text": "我165 55kg，这条裤子拿哪个码",
+      "expect": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "tools": [
+          "recommend_size"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "recommend_size",
+          "get_product",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 2411,
+      "responseMs": 2417,
+      "costUsd": 0.000070308,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "建议您选 L 码，供您参考。 / 建议结合下面的尺码资料和穿着习惯选择。 / 这些资料供您参考。"
+    },
+    {
+      "id": "H03",
+      "buyerId": "B001",
+      "text": "我那条西装裤和开衫现在到哪儿了",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "logistics_track",
+        "tools": [
+          "track_logistics"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.08
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 1309,
+      "responseMs": 1313,
+      "costUsd": 0.000069678,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "H04",
+      "buyerId": "B001",
+      "text": "碎花裙的钱退回来没有啊",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "refund_progress"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.04,
+          "emotion": 0.86
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "get_aftersale"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 395,
+      "responseMs": 401,
+      "costUsd": 0.00007203,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
+    },
+    {
+      "id": "H05",
+      "buyerId": "B003",
+      "text": "地址写错了，帮我改成上海市徐汇区漕溪北路100号",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "modify_order"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "modify_order",
+        "classifierIntent": "modify_order",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.02
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 462,
+      "responseMs": 469,
+      "costUsd": 0.000073248,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请补充新收货地址，例如：姓名：林小满，电话：138****0001，地区：浙江省 杭州市 西湖区，地址：示例路1号。我会先给您确认，再修改。"
+    },
+    {
+      "id": "H06",
+      "buyerId": "B002",
+      "text": "这件衬衫我妈穿了一下午，脖子上起了一片小疙瘩，又痒又红",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "health_safety"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "quality_issue",
+        "classifierIntent": "quality_issue",
+        "classifierConfidence": 0.85,
+        "riskHit": [
+          "health_safety"
+        ],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.98,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.03,
+          "emotion": 0.91
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 380,
+      "responseMs": 386,
+      "costUsd": 0.0000918631,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "H07",
+      "buyerId": "B001",
+      "text": "有人加我微信说是你们客服，让我先交保证金才能退款",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "fraud_security"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.79,
+        "riskHit": [
+          "fraud_security"
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.99,
+          "abuse_extreme": 0.03,
+          "emotion": 0.53
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 389,
+      "responseMs": 397,
+      "costUsd": 0.0000735,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "H08",
+      "buyerId": "B001",
+      "text": "你们再这样敷衍，我就把聊天记录发到网上让大家评评理",
+      "expect": {
+        "layer": "risk_gate",
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.91,
+        "riskHit": [
+          "legal_threat",
+          "emotion"
+        ],
+        "riskScores": {
+          "legal_threat": 0.97,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.38,
+          "emotion": 2.55
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 407,
+      "responseMs": 416,
+      "costUsd": 0.000097776,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "H09",
+      "buyerId": "B001",
+      "text": "我皮肤比较敏感，这件羊毛的贴身穿会痒吗",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "riskHit": []
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "get_product",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true
+      },
+      "pass": true,
+      "latencyMs": 8217,
+      "responseMs": 8223,
+      "costUsd": 0.000091912,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "羊毛混纺大衣建议内搭薄针织或衬衫，避免直接接触皮肤。若皮肤敏感，可先试穿感受，具体因人而异。 / 这些资料供您参考。"
+    },
+    {
+      "id": "H10",
+      "buyerId": "B001",
+      "text": "我老公是做律师的，他说你家大衣版型挺正",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "riskHit": [],
+        "handoff": false
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "greeting",
+        "classifierIntent": "greeting",
+        "classifierConfidence": 0.68,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 1,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 1415,
+      "responseMs": 1419,
+      "costUsd": 0.000105302,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "谢谢夸奖，您先生真有眼光！"
+    },
+    {
+      "id": "H11",
+      "buyerId": "B001",
+      "text": "今天心情不错，随便逛逛",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "riskHit": [],
+        "handoff": false
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "greeting",
+        "classifierIntent": "greeting",
+        "classifierConfidence": 0.79,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 393,
+      "responseMs": 396,
+      "costUsd": 0.00006678,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您好，我是栖木智能客服。有什么可以帮您？"
+    },
+    {
+      "id": "H12",
+      "buyerId": "B001",
+      "text": "上周那件大衣还能换L吗，另外最近那单到哪了",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ]
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.02
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "check_stock",
+          "request_exchange",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 7304,
+      "responseMs": 7309,
+      "costUsd": 0.0005761560000000001,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "关于换货： 上周购买的燕麦色羊毛混纺大衣（M码）目前L码有库存，已为您生成换L码的申请。请您核对确认卡片，点击确认后我们将安排寄回并为您发出新尺码。 关于物流： 您最近一单（QM2026100201）由顺丰速运承运，包裹已到达上海浦东配送站"
+    },
+    {
+      "id": "H13",
+      "buyerId": "B003",
+      "text": "没付款的那单不要了，另外已经付款的那单什么时候发货",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "list_orders"
+        ]
+      },
+      "got": {
+        "layer": "human",
+        "escalatedFrom": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.1
+        },
+        "handoff": true,
+        "tools": [
+          "list_orders",
+          "cancel_order",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "tools": true
+      },
+      "pass": false,
+      "reason": "转人工判断错",
+      "latencyMs": 4207,
+      "responseMs": 4210,
+      "costUsd": 0.00037639799999999996,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "这个问题比较复杂，我帮您转接人工客服 / 我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "H14",
+      "buyerId": "B004",
+      "text": "西装裤和茶歇裙哪个更显瘦，顺便说下怎么洗",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "handoff": false
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 0.6,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_products"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 4711,
+      "responseMs": 4718,
+      "costUsd": 0.00020529400000000002,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "关于显瘦效果，西装裤采用高腰直筒版型，能修饰腿部线条；茶歇裙则是修身收腰设计，突出腰线。两者各有优势，具体显不显瘦取决于您的身材特点。 洗护建议如下： * **西装裤**：冷水轻柔洗涤，深浅分开，不拧绞，整理裤线后阴干。 * **茶歇裙**"
+    },
+    {
+      "id": "H15",
+      "buyerId": "B001",
+      "text": "那件大衣腰身有点大，我想退了",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "refund_apply"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "refund_apply",
+        "classifierIntent": "refund_apply",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.18
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 482,
+      "responseMs": 489,
+      "costUsd": 0.000072156,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "可以的，请告诉我退款或退货原因，我先帮您核实是否符合申请条件。"
+    }
+  ]
+}

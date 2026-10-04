@@ -64,7 +64,8 @@ test('order-status requests with known context pre-read facts independently of t
     const result = await runAgent(ctx);
     assert.equal(result.handoffReason, undefined); assert.equal(requests[0].tool_choice, 'required');
     assert.deepEqual(ctx.metrics.toolCalls.map(t => t.name), ['get_order']);
-    assert.equal(result.messages[0].text, '订单 QM2026100402 目前为待付款状态。具体问题原因尚不确定，请补充遇到的错误提示。');
+    assert.equal(result.messages[0].text, '可能是银行卡拦截，请换支付方式再试。');
+    assert.doesNotMatch(result.messages[0].text, /请补充遇到的错误提示/);
     assert(requests[0].messages.some(m => m.role === 'tool' && m.content.includes('pending_payment')));
     assert.equal(requests[0].messages.filter(m => m.role === 'system').length, 1);
     assert(requests[0].messages[0].content.includes('无风险时不要仅因缺少这些买家信息而转人工'));

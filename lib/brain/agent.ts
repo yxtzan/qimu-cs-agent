@@ -54,7 +54,6 @@ export async function runAgent(ctx: HandlerContext): Promise<HandlerResult> {
   const cards: NewMessage[] = [];
   const queriedProducts = new Map<string, Product>();
   let queriedCoupons: Coupon[] | undefined;
-  let knownOrderFacts: Order | undefined;
   let calls = 0;
   let firstModelCall = true;
   const casual = ctx.intent === 'other' || ctx.intent === 'greeting';
@@ -72,7 +71,6 @@ export async function runAgent(ctx: HandlerContext): Promise<HandlerResult> {
       const name = knownOrder ? 'get_order' : 'list_orders';
       const args = knownOrder ? { orderId: knownOrder } : {};
       const output = await within(ctx.call<unknown>(name, args), deadline);
-      if (knownOrder) knownOrderFacts = output as Order;
       calls++;
       messages.push({ role: 'assistant', content: null, tool_calls: [{ id: 'initial-orders', type: 'function', function: { name, arguments: JSON.stringify(args) } }] }, { role: 'tool', tool_call_id: 'initial-orders', name, content: JSON.stringify(modelToolResult(name, output)) });
     }
@@ -109,10 +107,7 @@ export async function runAgent(ctx: HandlerContext): Promise<HandlerResult> {
         if (!text || data.finishReason !== 'stop') return failed();
         // Unqueried small talk cannot carry numeric shopping facts. All other answers need tools.
         if (!calls && (!casual || [...text].length > 80 || /\p{N}|[零〇一二三四五六七八九十百千万亿两]/u.test(text))) return failed();
-        // Status tools do not diagnose why an operation failed. Keep this fact-only response bounded.
-        const statusNames: Record<Order['status'], string> = { pending_payment: '待付款', paid: '已付款未发货', shipped: '已发货', delivered: '已签收', completed: '已完成', cancelled: '已取消' };
-        const reply = knownOrderFacts && !cards.length ? `订单 ${knownOrderFacts.id} 目前为${statusNames[knownOrderFacts.status]}状态。具体问题原因尚不确定，请补充遇到的错误提示。` : text;
-        return { status: cards.some(m => m.card?.kind === 'confirm') ? 'awaiting_confirm' : 'done', messages: [{ role: 'ai', text: reply }, ...cards] };
+        return { status: cards.some(m => m.card?.kind === 'confirm') ? 'awaiting_confirm' : 'done', messages: [{ role: 'ai', text }, ...cards] };
       }
       if (calls + data.toolCalls.length > MAX_TOOL_CALLS) return failed();
       messages.push(data.message);
