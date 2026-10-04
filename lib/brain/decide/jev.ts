@@ -13,7 +13,8 @@ export interface JevInput {
 
 // Keep an unhealthy Jev route from consuming the whole shared fallback budget.
 // Normal Jev calls in the T01b benchmark are well below this ceiling.
-const DEFAULT_JEV_ATTEMPT_TIMEOUT_MS = 3000;
+// Hangzhou server → OpenRouter: warm Jev measured 1.8–2.7s (2026-10-04), so 3s was too tight.
+const DEFAULT_JEV_ATTEMPT_TIMEOUT_MS = 4500;
 
 function modelState(stateForModel: unknown, message: string): Record<string, unknown> {
   if (stateForModel && typeof stateForModel === "object" && !Array.isArray(stateForModel)) {

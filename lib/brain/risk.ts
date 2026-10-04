@@ -52,7 +52,7 @@ export function checkRisk(text: string, result?: DecideResult): RiskResult {
 
 /** Bound keyword arbitration; the classifier continues for background accounting. */
 export async function waitForKeywordDecision(pending: Promise<DecideResult>): Promise<DecideResult | undefined> {
-  const configured = Number(process.env.KEYWORD_RISK_WAIT_MS ?? 2500);
+  const configured = Number(process.env.KEYWORD_RISK_WAIT_MS ?? 3500);
   const ms = Number.isFinite(configured) && configured > 0 ? configured : 2500;
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
