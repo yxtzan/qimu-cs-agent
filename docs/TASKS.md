@@ -19,7 +19,7 @@
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
 | T05 | L3 Agent + 转人工 + 重置提速 | Codex | T04 | 3 | 3h | doing |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
-| T06 | 评测脚本 + 评测 API | Codex | T05 | 4 | 1.5h | todo |
+| T06 | 评测脚本 + 评测 API | **Cursor**（2026-10-04 改派） | T04 | 4 | 2h | doing |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
 | T15a | 不依赖后端的打磨 | Cursor | T14 | 4 | 2h | done |
 | T16 | 会话数据层 + 卖家会话 / 规则 / 重置 API | Cursor | T02 T15a | 4 | 2.5h | done |
@@ -333,25 +333,37 @@
 
 ---
 
-## T06 评测脚本 + 评测 API — Codex
+## T06 评测脚本 + 评测 API — Cursor（2026-10-04 由 Codex 改派）
 
-- 分支：`t06-analytics-eval`
-- 依赖：T05
-- 必读：`docs/CONTRACTS.md` §6、`data/eval/cases.json`
-- 说明：种子流量和看板 API 已改由 Cursor 在 T17 完成，本任务只做评测。
+- 分支：`t06-eval`
+- 依赖：T04（流水线已合并）。T05 还在做，L3 类用例（E51–E57）在 T05 合并前会失败，属正常，合并后重跑一次即可。
+- 必读：`data/eval/cases.json`（顶部 `_readme` 写了执行规则）、`docs/CONTRACTS.md` §6、`docs/handoff/T04.md`、`scripts/chat-cli.ts`（照它的方式在进程内调用流水线）、`docs/reports/T01b-latency.md`
+- 说明：评测是演示的"成绩单"，也代替了当初取消的 Jev 中文前置测试。你写过看板，评测成绩卡要读的就是这里的产出。
 
 **要做**
 
-1. `scripts/eval.ts`（`npm run eval`）：按 `cases.json` 说明逐条执行（每条前调用 `lib/store/reset.ts` 的 `resetDemoData()` 重置，T16 提供），统计意图准确率、路由准确率、风险召回率、风险误报率、平均延迟，失败用例列表；结果写 `data/runtime/eval_latest.json`（并复制到 `data/seed/eval_latest.json` 以便看板默认展示）和 `docs/reports/T06-eval.md`。
-2. `GET /api/eval/latest`。
-3. 用默认配置（Jev）跑一次 eval，在交接文件里贴结果；分别在 R007 开启 / 关闭时跑 E58，记录差异（这是"规则层做减法"的证据）。
+1. `lib/eval/run.ts` + `scripts/eval.ts`（`npm run eval`）：
+   - **进程内**调用流水线（和 `scripts/chat-cli.ts` 一样），每条用例处理完调用 `drainBackgroundTasks()`（`lib/brain/background.ts`），再读该轮买家消息对应的**最终** RouteTrace——L1 和风险闸门的最终 trace 是后台写的。
+   - 每条用例用**新会话**；`setup.context` 作为请求的 context，`setup.prior` 在同一会话里先依次发送。
+   - 重置策略：开始时调用一次 `resetDemoData()`（记得 import `lib/store/reset-hooks`）。如果单次重置 < 10 秒（T05 合并后会这样），改为每条用例前都重置；否则只在开始时重置一次，并在报告里注明。
+   - 判定按 `cases.json` 的 `_readme`：layer（字符串或数组）、intent、riskHit（子集）、handoff、tools（子集，仅非 mock 模式检查）。
+   - 指标：意图准确率、路由准确率、风险召回率、风险误报率、平均延迟和 p95（按层分开）、总成本；失败用例逐条列出 期望 / 实际 / 原因分类（分类错 / 槽位没补全 / 规则误吞 / 风险漏判 / 依赖 T05）。
+   - 并发最多 4，或干脆串行；遇到 429 退避。
+2. 结果写 `data/runtime/eval_latest.json`（`EvalReport` 类型，看板会自动显示成绩卡），同时复制一份到 `data/seed/eval_latest.json`；完整报告写 `docs/reports/T06-eval.md`。
+3. `GET /api/eval/latest`：读 runtime 文件，没有就返回 `null`。
+4. 报告里必须有 **「Jev 中文表现」**一节：L2 用例上的意图准确率；置信度分桶（<0.5 / 0.5–0.7 / 0.7–0.85 / ≥0.85）的数量和准确率；风险各项召回率和误报率；`L2_CONFIDENCE_THRESHOLD` 的建议值（使"被 L2 接下的消息准确率 ≥ 95%"的最低置信度）。若 Jev 意图准确率 < 70%，明确写出，并用 `CLASSIFIER_PROVIDER=llm` 再跑一次做对比。
+5. 「规则层做减法」证据：分别在 R007 开启 / 关闭时跑 E58，记录结果差异。
+6. `--provider jev|llm|mock`、`--only E01,E02` 两个参数，方便调试。
+
+**目录归属（本任务特批）**：`lib/eval/**`、`scripts/eval.ts`、`app/api/eval/**`、`docs/reports/T06-eval.md`、`data/seed/eval_latest.json`。不要改 `lib/brain/**`；发现流水线的 bug 写到 `docs/questions/`，由 Codex 修。
 
 **验收标准**
 
-- [ ] `npm run eval` 跑完 60 条并生成报告
-- [ ] 报告中失败用例逐条给出原因分析（分类错 / 槽位没补全 / 规则误吞 / 风险漏判）
-- [ ] 报告包含 **Jev 中文表现**一节（代替原先取消的前置测试）：L2 用例上 Jev 的意图准确率、置信度分桶（<0.5 / 0.5–0.7 / 0.7–0.85 / ≥0.85）的数量和准确率、风险各项召回率与误报率，并给出 `L2_CONFIDENCE_THRESHOLD` 的调整建议（选使"被 L2 接下的消息准确率 ≥ 95%"的最低置信度）
-- [ ] 若 Jev 意图准确率 < 70%，报告里明确写出，并用 `CLASSIFIER_PROVIDER=llm` 再跑一次作对比（是否切换由 Claude 决定）
+- [ ] 真实后端（默认 Jev）下 `npm run eval` 跑完 60 条，生成报告和 `eval_latest.json`，看板评测卡显示真实数字
+- [ ] 失败用例逐条有原因分类
+- [ ] 「Jev 中文表现」一节齐全，给出阈值建议
+- [ ] T05 合并后重跑一次，交接文件里附两次结果的对比
+- [ ] 限时 2 小时，够用即可
 
 ---
 

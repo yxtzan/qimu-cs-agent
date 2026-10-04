@@ -11,7 +11,7 @@
 | T03 工具层 + RAG + 知识库 API | Codex | [T03-codex.md](T03-codex.md) |
 | T04 大脑流水线核心 | Codex | [T04-codex.md](T04-codex.md) |
 | T05 L3 Agent + 转人工 + 卖家会话 API + 规则 API | Codex | [T05-codex.md](T05-codex.md) |
-| T06 种子流量 + 看板 API + 评测脚本 | Codex | [T06-codex.md](T06-codex.md) |
+| T06 评测脚本 + 评测 API | **Cursor**（改派，旧的 T06-codex.md 作废） | [T06-cursor.md](T06-cursor.md) |
 | T07 (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | [T07-codex.md](T07-codex.md) |
 | T10 买家商城界面 | Cursor | [T10-cursor.md](T10-cursor.md) |
 | T11 卖家端骨架 + PWA | Cursor | [T11-cursor.md](T11-cursor.md) |
