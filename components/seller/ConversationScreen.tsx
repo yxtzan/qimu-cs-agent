@@ -9,6 +9,7 @@ import {
   replyConversation,
   takeoverConversation,
 } from "@/lib/api-client";
+import { DEMO_PREFILL, DEMO_SELLER_REPLIED, DEMO_TOOK_OVER, emitDemo, type DemoPrefillDetail } from "@/components/demo/events";
 import { useAsync } from "@/components/shop/useAsync";
 import { AiContextPanel } from "./AiContextPanel";
 import { CONVERSATION_STATUS_CLASS, CONVERSATION_STATUS_LABEL } from "./labels";
@@ -92,8 +93,21 @@ export function ConversationScreen({ id }: { id: string }) {
     const text = draft.trim();
     if (!text || busy) return;
     setDraft("");
-    void run(() => replyConversation(id, text));
+    void run(async () => {
+      await replyConversation(id, text);
+      emitDemo(DEMO_SELLER_REPLIED);
+    });
   };
+
+  useEffect(() => {
+    const onPrefill = (event: Event) => {
+      const text = (event as CustomEvent<DemoPrefillDetail>).detail?.text;
+      if (!text) return;
+      setDraft((current) => (current.trim() ? current : text));
+    };
+    window.addEventListener(DEMO_PREFILL, onPrefill);
+    return () => window.removeEventListener(DEMO_PREFILL, onPrefill);
+  }, []);
 
   // ── 错误 / 加载态 ──
   if (error && !data) {
@@ -201,7 +215,13 @@ export function ConversationScreen({ id }: { id: string }) {
             <button
               type="button"
               disabled={busy}
-              onClick={() => run(() => takeoverConversation(id))}
+              onClick={() => {
+                void run(async () => {
+                  await takeoverConversation(id);
+                  emitDemo(DEMO_TOOK_OVER);
+                });
+              }}
+              data-tour="takeover"
               className="inline-flex min-h-[44px] min-w-[88px] items-center justify-center rounded-full bg-brand px-5 text-[15px] font-semibold text-white shadow-card transition-colors active:bg-brand-dark disabled:opacity-60"
             >
               接管
@@ -280,11 +300,13 @@ export function ConversationScreen({ id }: { id: string }) {
             placeholder={canReply ? "回复买家…" : isClosed ? "会话已结束" : "接管后可回复"}
             enterKeyHint="send"
             aria-label="回复内容"
+            data-tour="seller-reply"
             className="min-h-[44px] min-w-0 flex-1 rounded-full bg-cream px-4 text-base text-foreground outline-none ring-1 ring-line transition focus:bg-white focus:ring-brand disabled:cursor-not-allowed disabled:opacity-60"
           />
           <button
             type="submit"
             disabled={!canReply || busy || draft.trim() === ""}
+            data-tour="seller-send"
             className="inline-flex min-h-[44px] min-w-[64px] items-center justify-center rounded-full bg-brand px-4 text-[15px] font-semibold text-white transition-colors active:bg-brand-dark disabled:bg-stone-300"
           >
             发送

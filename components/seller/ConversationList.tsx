@@ -33,6 +33,7 @@ function Row({ c, buyer }: { c: Conversation; buyer?: Buyer }) {
       data-testid="conv-row"
       data-status={c.status}
       data-buyer-id={c.buyerId}
+      data-tour={waiting ? "handoff-row" : undefined}
       className="flex min-h-[76px] gap-3 px-3.5 py-3 transition-colors active:bg-brand-soft/60"
     >
       <span className="relative shrink-0">

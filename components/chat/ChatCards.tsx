@@ -104,7 +104,7 @@ function LogisticsCardView({ orderId, logistics }: { orderId: string; logistics:
   return (
     <Shell
       testId="card-logistics"
-      attrs={{ "data-events": logistics.events.length }}
+      attrs={{ "data-events": logistics.events.length, "data-tour": "logistics-card" }}
       title={`${logistics.carrier} · ${logistics.trackingNo}`}
       right={<PlainBadge tone={delivered ? "green" : logistics.status === "exception" ? "orange" : "blue"}>{LOGISTICS_STATUS_LABEL[logistics.status]}</PlainBadge>}
     >
@@ -181,7 +181,7 @@ function ProductCardView({ product }: { product: Product }) {
 
 function AfterSaleCardView({ afterSale }: { afterSale: AfterSale }) {
   return (
-    <Shell testId="card-aftersale" attrs={{ "data-id": afterSale.id }} title={`售后单 ${afterSale.id}`} right={<AfterSaleStatusBadge status={afterSale.status} />}>
+    <Shell testId="card-aftersale" attrs={{ "data-id": afterSale.id, "data-tour": "aftersale-card" }} title={`售后单 ${afterSale.id}`} right={<AfterSaleStatusBadge status={afterSale.status} />}>
       <div className="px-3.5 pt-3 text-xs leading-5 text-warm">
         <span className="font-medium text-foreground">{AFTER_SALE_TYPE_LABEL[afterSale.type]}</span>
         {afterSale.type === "exchange" && afterSale.newSize ? <span> · 换为 {afterSale.newSize as Size} 码</span> : null}
@@ -281,6 +281,7 @@ function ConfirmCardView({
             type="button"
             disabled={disabled || busy}
             onClick={() => onConfirm(pending.id, true)}
+            data-tour={done ? undefined : "confirm-yes"}
             className="h-9 flex-1 rounded-full bg-brand text-sm font-medium text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:bg-warm/40"
           >
             {busy ? "处理中…" : "确认"}
@@ -358,7 +359,7 @@ function OptionsCardView({
 
 function SizeResultCardView({ card }: { card: Extract<ChatCard, { kind: "size_result" }> }) {
   return (
-    <Shell testId="card-size" attrs={{ "data-size": card.size }} title="尺码推荐">
+    <Shell testId="card-size" attrs={{ "data-size": card.size, "data-tour": "size-card" }} title="尺码推荐">
       <div className="flex items-center gap-3.5 px-3.5 py-3">
         <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-brand text-white shadow-card">
           <span className="text-xl font-semibold leading-none">{card.size}</span>
@@ -420,7 +421,7 @@ function CouponsCardView({ coupons }: { coupons: Coupon[] }) {
 function SourcesCardView({ sources }: { sources: Extract<ChatCard, { kind: "sources" }>["sources"] }) {
   const [open, setOpen] = useState(false);
   return (
-    <div data-testid="card-sources" data-count={sources.length} className="mt-2 overflow-hidden rounded-xl bg-white/70 text-left ring-1 ring-line">
+    <div data-testid="card-sources" data-tour="sources" data-count={sources.length} className="mt-2 overflow-hidden rounded-xl bg-white/70 text-left ring-1 ring-line">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

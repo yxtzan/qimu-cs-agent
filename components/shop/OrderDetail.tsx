@@ -119,7 +119,7 @@ function LogisticsTimeline({ logistics }: { logistics: Logistics }) {
 function AfterSaleBlock({ a, order }: { a: AfterSale; order: Order }) {
   const item = order.items.find((i) => i.itemId === a.itemId);
   return (
-    <div className="rounded-lg border border-line p-5" data-testid="aftersale">
+    <div className="rounded-lg border border-line p-5" data-testid="aftersale" data-tour="order-aftersale">
       <div className="flex flex-wrap items-center gap-3">
         <span className="font-medium">{AFTER_SALE_TYPE_LABEL[a.type]}</span>
         <AfterSaleStatusBadge status={a.status} />

@@ -19,6 +19,8 @@ import { ProductImage } from "@/components/shop/ProductImage";
 import { type ChatTarget, useShop } from "@/components/shop/ShopProvider";
 import { OrderStatusBadge } from "@/components/shop/StatusBadge";
 import { useAsync } from "@/components/shop/useAsync";
+import { DEMO_AI_REPLIED, DEMO_CONFIRMED, DEMO_MESSAGE_SENT, emitDemo } from "@/components/demo/events";
+import { isDemoActive } from "@/components/demo/storage";
 import { CardView, type CardContext, type ConfirmResolution } from "./ChatCards";
 import { DebugLine } from "./DebugLine";
 
@@ -400,11 +402,17 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
       ...(input.text ? { text: input.text } : {}),
       ...(input.action ? { action: input.action } : {}),
       context: contextRef.current,
-      debug: debugRef.current || undefined,
+      debug: debugRef.current || isDemoActive() || undefined,
     };
     try {
       const res = await sendChat(req);
       applyResponse(res, localId);
+      emitDemo(DEMO_AI_REPLIED, {
+        trace: res.trace ?? null,
+        conversationId: res.conversation.id,
+        status: res.conversation.status,
+        hasConfirm: res.messages.some((m) => m.card?.kind === "confirm"),
+      });
       return res;
     } catch (e) {
       if (localId) setMessages((prev) => prev.map((m) => (m.id === localId ? { ...m, local: "failed" } : m)));
@@ -421,6 +429,7 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
     if (!text || sendingRef.current) return;
     setDraft("");
     setPrefilled(false);
+    emitDemo(DEMO_MESSAGE_SENT);
     void send({ text });
   }
 
@@ -458,6 +467,7 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
       const card = ai.find((m) => m.card?.kind === "aftersale" || m.card?.kind === "order")?.card;
       const orderId = card?.kind === "aftersale" ? card.afterSale.orderId : card?.kind === "order" ? card.order.id : undefined;
       window.dispatchEvent(new CustomEvent("qimu:order-updated", { detail: { orderId } }));
+      emitDemo(DEMO_CONFIRMED, { trace: res.trace ?? null });
     }
   }
 
@@ -555,7 +565,7 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
     return (
       <div key={m.id}>
         {timeEl}
-        <div className="flex gap-2">
+        <div className="flex gap-2" data-tour={isSeller ? "seller-bubble" : undefined}>
           <Avatar role={m.role} />
           <div className="min-w-0 max-w-[88%]">
             {isSeller && <div className="mb-0.5 text-[11px] text-warm">人工客服 阿栖</div>}
@@ -643,7 +653,10 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-base font-semibold">栖</span>
           <div className="min-w-0 flex-1">
             <div className="truncate text-[15px] font-semibold leading-5">栖木客服</div>
-            <div className="mt-0.5 flex items-center gap-1.5 text-xs text-white/75">
+            <div
+              className="mt-0.5 flex items-center gap-1.5 text-xs text-white/75"
+              data-tour={status === "waiting_human" ? "waiting-human" : undefined}
+            >
               <span className={`h-1.5 w-1.5 rounded-full ${status === "human_active" ? "bg-[#f3c969]" : "bg-[#8fe0a8]"}`} />
               {status === "human_active" ? "人工客服 阿栖" : status === "waiting_human" ? "等待人工接入" : `AI 智能客服小栖 · ${nickname}`}
             </div>
@@ -692,7 +705,7 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
         {closed && <div className="shrink-0 border-b border-line bg-[#efece5] px-4 py-2 text-sm text-warm">本次会话已结束</div>}
 
         {/* 消息区 */}
-        <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-3.5 py-4" data-testid="chat-scroll">
+        <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-3.5 py-4" data-testid="chat-scroll" data-tour="chat-thread">
           {messages.length === 0 && (
             <div className="flex gap-2">
               <Avatar role="ai" />
@@ -783,6 +796,7 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
               type="submit"
               disabled={!draft.trim() || sending}
               data-testid="chat-send"
+              data-tour="chat-send"
               className="h-11 shrink-0 rounded-full bg-brand px-5 text-sm font-medium text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:bg-warm/40"
             >
               发送

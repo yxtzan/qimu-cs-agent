@@ -212,6 +212,21 @@ export function DemoGuide() {
               </div>
             </header>
 
+            <div className="shrink-0 border-b border-line bg-cream px-3.5 py-3">
+              <button
+                type="button"
+                data-testid="guide-start-demo"
+                onClick={() => {
+                  setOpen(false);
+                  window.dispatchEvent(new CustomEvent("qimu:demo-start"));
+                }}
+                className="flex w-full items-center justify-center rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-card hover:bg-brand-dark"
+              >
+                开始演示模式
+              </button>
+              <p className="mt-1.5 text-center text-[11px] leading-4 text-warm">红圈会标出下一步该点哪里，不用翻说明书</p>
+            </div>
+
             <ol className="min-h-0 flex-1 space-y-2.5 overflow-y-auto overscroll-contain p-3.5">
               {STEPS.map((s) => {
                 const isDone = done.includes(s.n);
