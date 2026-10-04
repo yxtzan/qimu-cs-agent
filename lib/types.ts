@@ -307,6 +307,7 @@ export interface RouteTrace {
   stage?: Stage;
   confidence?: number;
   topIntents?: { id: IntentId; p: number }[]; // 前 3
+  multiStep?: number; // decide() 的多诉求概率（T06-3 观测用）
   decideProvider?: DecideResult["provider"];
   riskScores?: Partial<Record<RiskKey, number>>;
   riskHit?: RiskKey[];
