@@ -49,7 +49,7 @@ export function AiContextPanel({ conversation: c, messages, traces, pendingActio
     .join(" ｜ ");
 
   return (
-    <section aria-label="AI 上下文" className="shrink-0 border-b border-line bg-white">
+    <section aria-label="AI 上下文" data-tour="ai-context" className="shrink-0 border-b border-line bg-white">
       <button
         type="button"
         onClick={onToggle}
@@ -86,7 +86,7 @@ export function AiContextPanel({ conversation: c, messages, traces, pendingActio
         <div className="max-h-[50dvh] space-y-4 overflow-y-auto overscroll-contain border-t border-line bg-cream/60 px-4 pb-4 pt-3">
           {/* 1. 转人工原因：接管前最先要看的 */}
           {hasHandoff ? (
-            <div className="rounded-card border border-orange-200 bg-orange-50/70 p-3">
+            <div data-tour="handoff-reason" className="rounded-card border border-orange-200 bg-orange-50/70 p-3">
               <SectionTitle>
                 <span className="text-risk">为什么转到人工</span>
               </SectionTitle>

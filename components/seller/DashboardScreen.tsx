@@ -70,9 +70,9 @@ function bucketTitle(bucket: string, range: Range): string {
 
 // ───────────────────────── 通用小件 ─────────────────────────
 
-function Card({ title, subtitle, children, right }: { title: string; subtitle?: string; children: React.ReactNode; right?: React.ReactNode }) {
+function Card({ title, subtitle, children, right, tour }: { title: string; subtitle?: string; children: React.ReactNode; right?: React.ReactNode; tour?: string }) {
   return (
-    <section className="rounded-card bg-white p-4 shadow-card">
+    <section data-tour={tour} className="rounded-card bg-white p-4 shadow-card">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <h2 className="text-[15px] font-semibold leading-6 text-foreground">{title}</h2>
@@ -94,6 +94,7 @@ function RangeToggle({ value, onChange }: { value: Range; onChange: (r: Range) =
           type="button"
           aria-pressed={value === r}
           onClick={() => onChange(r)}
+          data-tour={r === "7d" ? "range-7d" : undefined}
           className={`min-h-9 rounded-full px-3.5 text-[13px] font-semibold transition-colors ${
             value === r ? "bg-white text-brand shadow-sm" : "text-warm active:text-brand"
           }`}
@@ -138,7 +139,7 @@ function Hero({ d }: { d: RoutingAnalytics }) {
   ].filter((part): part is string => part !== null);
 
   return (
-    <section className="rounded-card bg-white p-4 shadow-card">
+    <section data-tour="board-hero" className="rounded-card bg-white p-4 shadow-card">
       <p className="text-xs text-warm">
         {RANGE_LABEL[d.range]}共处理 <b className="font-semibold text-foreground">{d.totals.messages}</b> 条消息，其中
       </p>
@@ -522,7 +523,7 @@ function errTone(v: number): string {
 function EvalCard({ ev }: { ev: EvalReport | undefined }) {
   if (!ev) {
     return (
-      <Card title="评测成绩" subtitle="最近一次 npm run eval">
+      <Card title="评测成绩" subtitle="最近一次 npm run eval" tour="eval-card">
         <div className="mt-3 rounded-xl bg-cream px-3 py-6 text-center">
           <p className="text-sm font-medium text-foreground">还没有评测记录</p>
           <p className="mt-1 text-xs leading-5 text-warm">
@@ -539,7 +540,7 @@ function EvalCard({ ev }: { ev: EvalReport | undefined }) {
     { label: "风险误报率", value: ev.riskFalsePositiveRate, tone: errTone(ev.riskFalsePositiveRate), hint: "越低越好" },
   ];
   return (
-    <Card title="评测成绩" subtitle={`${ev.runAt.slice(0, 10)} ${ev.runAt.slice(11, 16)} · ${ev.cases} 条用例 · ${PROVIDER_LABEL[ev.provider] ?? ev.provider}`}>
+    <Card title="评测成绩" tour="eval-card" subtitle={`${ev.runAt.slice(0, 10)} ${ev.runAt.slice(11, 16)} · ${ev.cases} 条用例 · ${PROVIDER_LABEL[ev.provider] ?? ev.provider}`}>
       <ul className="mt-3 grid grid-cols-2 gap-2">
         {tiles.map((t) => (
           <li key={t.label} className="min-w-0 rounded-xl bg-cream px-3 py-2.5">

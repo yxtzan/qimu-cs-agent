@@ -1,4 +1,5 @@
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { DemoShopBridge } from "@/components/demo/DemoShopBridge";
 import { DemoGuide } from "@/components/shop/DemoGuide";
 import { Footer } from "@/components/shop/Footer";
 import { ShopProvider } from "@/components/shop/ShopProvider";
@@ -11,6 +12,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
       <div className="flex flex-1 flex-col">{children}</div>
       <Footer />
       <DemoGuide />
+      <DemoShopBridge />
       <ChatWidget />
     </ShopProvider>
   );
