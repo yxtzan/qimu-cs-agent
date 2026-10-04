@@ -33,6 +33,8 @@
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | doing |
+| T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | Cursor | T21 | 7 | 4h | todo |
+| T23 | 部署到阿里云香港 + 子域名 + HTTPS（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 
 **2026-10-04 重排**：后端是关键路径，把不依赖流水线的后端活（会话数据层、卖家会话 / 规则 / 重置 API、种子流量、看板 API）从 Codex 的 T04–T06 里拆出来，交给 Cursor 做 T16、T17。Cursor 写过这些接口的 mock，对契约最熟。Codex 的关键路径 T03 → T04 → T05 → T06 因此缩短约 3.5 小时。
@@ -486,6 +488,49 @@
 - [ ] 第 3 步大模型慢（15 秒以上）时，卡片显示等待秒数，不报错
 - [ ] `npm run typecheck` `npm run lint` 通过；`NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 原有 6 步仍全部通过；新增一条演示模式的 e2e（至少走到第 2 步）
 - [ ] 限时 3.5 小时
+
+---
+
+## T22 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 — Cursor
+
+- 分支：`t22-public-demo`
+- 依赖：T21（演示模式合并后再开工，避免同一份克隆里两个任务打架）
+- 必读：`docs/DECISIONS.md` D005（JSON 文件存储）D014、`lib/store/index.ts` `lib/store/reset.ts` `lib/store/http.ts` `lib/store/conversations.ts`、`lib/brain/background.ts`、`app/api/**`、`docs/DEPLOY.md`
+- 说明：网站要部署到公网交作业，评审会同时打开。现在所有人共用一份演示数据：第一个人换完货，后面的人第 3 步都会被转人工；卖家端看到所有人的对话；谁点「重置」都会清空所有人。而且公开链接用的是人类的 OpenRouter key。本任务让**每位访客有一份自己的演示数据**，并加上限流和每日花费上限。只在环境变量 `PUBLIC_DEMO=1` 时生效，本地开发、评测、e2e 默认行为不变。
+
+**要做**
+
+A. **每位访客一份数据**（`PUBLIC_DEMO=1` 时）
+1. 访客第一次请求时发一个随机会话号 cookie（如 `qimu_sid`，httpOnly、SameSite=Lax、7 天）。
+2. 数据层按会话号分目录：`data/runtime/visitors/<sid>/`。第一次用到时从 `data/seed` 复制一份，并跑需要的重置钩子。读写缓存也要按目录区分，不能串。
+3. **共享、只读**的部分不复制：知识库索引和向量缓存、模拟历史流量、评测成绩。看板 = 共享的模拟流量 + 这位访客自己的真实消息。
+4. 「重置演示数据」只重置当前访客自己的目录。
+5. 卖家端只看到当前访客自己的会话（加上模拟会话，规则与现在一致）。
+6. **后台任务不能串号**：L1 / 风险闸门的后台补写、转人工摘要等后台任务，必须写回发起它的那位访客的目录（用 `AsyncLocalStorage` 之类在请求入口建立上下文，并确认 `scheduleBackground`、`serializeConversation` 等后台排队在上下文里执行；排队的键要带上会话号，不同访客的 `C1001` 不能互相排队）。
+7. 公开模式下关闭会改共享资源的操作：知识库导入 / 删除返回友好提示「公开演示版不开放导入，可在本地运行体验」（试搜照常可用）；规则的开关、编辑只改访客自己那份。
+8. 清理：超过 24 小时没访问的访客目录自动删除（启动时 + 每小时一次）；访客目录总数超过 500 时删最久没用的。
+
+B. **限流和花费上限**（`PUBLIC_DEMO=1` 时）
+1. 每位访客每小时最多 40 条聊天消息、每天 150 条；同一 IP 每天最多 400 条（防止清 cookie 绕过）。超出时聊天返回友好提示，不调用模型。
+2. 全站每日花费上限 `DAILY_BUDGET_USD`（默认 1）：按 trace 记录的费用累计；超过后分类器自动用 mock、L3 直接给「演示额度今日已用完，以下为简化模式」的说明，网页顶部出现一条提示横幅。第二天（北京时间 0 点）自动恢复。
+3. 新增环境变量写进 `.env.example`，带中文注释。
+
+C. **生产构建可用**
+1. `npm run build && npm start` 能成功构建并运行（目前只验证过 `npm run dev`）；修掉构建中出现的错误。
+2. 新增 `GET /api/health` 返回 `{ ok: true }`（部署后检查用）。
+3. 用生产构建跑一遍：`npm run build && PUBLIC_DEMO=1 npm start` 后，`NEXT_PUBLIC_USE_MOCK=0 npm run e2e`（e2e 需要能指向已启动的服务，若现有配置不支持就加一个环境变量开关）。
+
+**目录归属（本任务特批）**：`lib/store/**`、`lib/brain/background.ts`（只为会话上下文和排队键）、`app/api/**`、`middleware.ts`（新建，如需要）、`lib/analytics/**`、`.env.example`、`next.config.ts`、`package.json`（如需加脚本）。**不改** `lib/brain/**` 的其他文件、`lib/tools/**` 的业务逻辑、`data/seed/**`、`data/eval/**`。
+
+**验收标准**
+
+- [ ] 写一个脚本（如 `scripts/check-visitors.ts`）证明：两个不同 cookie 的访客 A、B，A 走完第 3 步换货、点重置、发风险消息，B 的订单、会话、卖家列表都不受影响；B 第 3 步仍能出确认卡
+- [ ] 后台任务归属正确：A 触发 L1 + 风险后台补写、转人工摘要后，补写落在 A 的目录，B 的目录没有多出 trace
+- [ ] 限流：同一访客第 41 条消息（一小时内）收到友好提示且没有调用模型；把 `DAILY_BUDGET_USD` 设成极小值时，聊天走简化模式并出现横幅
+- [ ] 不设 `PUBLIC_DEMO` 时，`npm run eval -- --only E01,E24,E51` 和原有 e2e 结果与改动前一致
+- [ ] `npm run build && PUBLIC_DEMO=1 npm start` 下，真实后端 e2e 6 步全部通过；`/api/health` 返回 ok
+- [ ] `npm run typecheck` `npm run lint`、`lib/**/*.test.ts` 通过
+- [ ] 限时 4 小时
 
 ---
 
