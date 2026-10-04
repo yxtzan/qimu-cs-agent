@@ -26,3 +26,5 @@
 命令：E2E_PORT=3001 NEXT_PUBLIC_USE_MOCK=0 npm run e2e。原版第3步30秒上限、全部断言均未修改。E2E第5步的轮询断言实际沿用T18的4秒余量；第5、6步不reset也沿用T18，详见其交接。截图为本次真实服务，见T05-screenshots/。
 
 开发时Pro与Flash有多次超时，早期第3步失败；Qwen初次浏览器短话术也发生过工具路径不匹配。最终修复并完整通过，没有修改测试凑通过。详情、模型选择及系统提示词全文见../handoff/T05.md。
+
+合入最新main=33fda33（T06及Claude审查）后再次验证：typecheck/lint/diff检查全部通过；完整真实E2E **6 passed (44.4s)**（第3步24.6秒、第5步2.1秒、看板32→33）。公共类型、规格、Cursor接口/前端与origin/main逐字一致。
