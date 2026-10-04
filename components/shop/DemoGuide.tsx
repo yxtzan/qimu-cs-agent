@@ -2,7 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { resetDemo } from "@/lib/api-client";
 import { type ChatTarget, useShop } from "./ShopProvider";
+import { friendlyError } from "./states";
 
 /** 页脚「演示指南」链接通过这个事件打开浮层，避免把状态提到 layout 里。 */
 export const OPEN_GUIDE_EVENT = "qimu:open-guide";
@@ -105,6 +107,9 @@ export function DemoGuide() {
   const [open, setOpen] = useState(false);
   const [seen, setSeen] = useState(false);
   const [done, setDone] = useState<number[]>([]);
+  const [resetAsk, setResetAsk] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
 
   const show = useCallback(() => {
     setOpen(true);
@@ -141,6 +146,18 @@ export function DemoGuide() {
     if (step.buyerId) setBuyerId(step.buyerId);
     router.push(step.path);
     openChat({ ...step.target, draft: step.draft, newConversation: true });
+  };
+
+  const confirmReset = async () => {
+    setResetting(true);
+    setResetError(null);
+    try {
+      await resetDemo();
+      window.location.reload();
+    } catch (e) {
+      setResetError(friendlyError(e, "重置没有成功，数据没有被改动，请稍后再试"));
+      setResetting(false);
+    }
   };
 
   return (
@@ -254,8 +271,51 @@ export function DemoGuide() {
               })}
             </ol>
 
-            <footer className="shrink-0 border-t border-line bg-white px-4 py-2.5 text-xs leading-5 text-warm">
-              玩乱了？打开卖家端「会话 → 右上角齿轮 → 设置」，可以一键重置演示数据。
+            <footer className="shrink-0 border-t border-line bg-white px-4 py-3 text-xs leading-5 text-warm">
+              {resetAsk ? (
+                <div>
+                  <p>确定重置？对话、订单改动和规则都会回到初始状态，且不能撤销。</p>
+                  {resetError ? (
+                    <p role="alert" className="mt-1 text-red-700">
+                      {resetError}
+                    </p>
+                  ) : null}
+                  <div className="mt-2 flex gap-2">
+                    <button
+                      type="button"
+                      disabled={resetting}
+                      onClick={() => void confirmReset()}
+                      data-testid="guide-reset-confirm"
+                      className="rounded-full bg-risk px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-60"
+                    >
+                      {resetting ? "重置中…" : "确认重置"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={resetting}
+                      onClick={() => {
+                        setResetAsk(false);
+                        setResetError(null);
+                      }}
+                      className="rounded-full bg-stone-100 px-3 py-1.5 text-xs font-medium text-foreground disabled:opacity-60"
+                    >
+                      取消
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between gap-3">
+                  <p className="min-w-0">玩乱了可以回到初始状态，第 3 步就能再走一次。</p>
+                  <button
+                    type="button"
+                    onClick={() => setResetAsk(true)}
+                    data-testid="guide-reset"
+                    className="shrink-0 rounded-full border border-risk/40 px-3 py-1.5 text-xs font-semibold text-risk hover:bg-orange-50"
+                  >
+                    重置演示数据
+                  </button>
+                </div>
+              )}
             </footer>
           </section>
         </>

@@ -454,6 +454,11 @@ function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabCl
         result: af && af.kind === "aftersale" ? `已提交，售后单号 ${af.afterSale.id}` : (ai[0]?.text ?? undefined),
       },
     }));
+    if (ok) {
+      const card = ai.find((m) => m.card?.kind === "aftersale" || m.card?.kind === "order")?.card;
+      const orderId = card?.kind === "aftersale" ? card.afterSale.orderId : card?.kind === "order" ? card.order.id : undefined;
+      window.dispatchEvent(new CustomEvent("qimu:order-updated", { detail: { orderId } }));
+    }
   }
 
   function onSelectOption(messageId: string, value: string, label: string) {

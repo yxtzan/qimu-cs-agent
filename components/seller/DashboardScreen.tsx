@@ -37,6 +37,18 @@ function fmtMs(ms: number): string {
   if (ms < 1000) return `${Math.round(ms)} ms`;
   return `${(ms / 1000).toFixed(1)} s`;
 }
+/** 对比句里的等待时间：满 1 秒一位小数，不到 1 秒两位，和看板上的毫秒数对得上。 */
+function fmtWait(ms: number): string {
+  const sec = ms / 1000;
+  if (sec >= 10) return `${Math.round(sec)} 秒`;
+  if (sec >= 1) return `${sec.toFixed(1)} 秒`;
+  return `${sec.toFixed(2)} 秒`;
+}
+/** 倍数保留一位小数；正好是整数时不带 .0，避免把 3.4 四舍五入成 3 再被追问。 */
+function formatTimes(ratio: number): string {
+  const tenths = Math.round(ratio * 10) / 10;
+  return Number.isInteger(tenths) ? String(tenths) : tenths.toFixed(1);
+}
 const PROVIDER_LABEL: Record<EvalReport["provider"], string> = { jev: "Jev 分类器", llm: "LLM 分类器", mock: "关键词 mock" };
 
 function bucketHour(bucket: string): string | null {
@@ -106,7 +118,7 @@ function StackedBar({ parts }: { parts: { key: string; value: number; className:
   );
 }
 
-// ───────────────────────── 1. 主结论：一眼看出"大部分在 L1/L2 解决，L3 很少很贵" ─────────────────────────
+// ───────────────────────── 1. 主结论：大部分在 L1/L2 解决；L3 更慢，单条也更贵 ─────────────────────────
 
 function Hero({ d }: { d: RoutingAnalytics }) {
   const layers = new Map(d.byLayer.map((l) => [l.layer, l]));
@@ -117,9 +129,13 @@ function Hero({ d }: { d: RoutingAnalytics }) {
   const cheapShare = l1.share + l2.share;
   // 主结论是"L1+L2"的占比，指标卡"自动解决率"还包含大模型自动解决的部分：这里补上中间那一段，两个数字就能对上
   const bridge = Math.max(0, d.totals.autoResolvedRate - cheapShare);
-  const totalCost = FUNNEL.reduce((s, k) => s + get(k).count * get(k).costPer1kCny, 0);
-  const l3CostShare = totalCost > 0 ? (l3.count * l3.costPer1kCny) / totalCost : 0;
-  const ratio = l2.costPer1kCny > 0 ? l3.costPer1kCny / l2.costPer1kCny : 0;
+  // 倍数用看板上已经四舍五入的每千条成本和平均延迟来除，观众拿卡片上的数字验算能对上。不足 1.5 倍的那半句不说。
+  const costRatio = l2.costPer1kCny > 0 ? l3.costPer1kCny / l2.costPer1kCny : 0;
+  const latencyRatio = l2.avgLatencyMs > 0 ? l3.avgLatencyMs / l2.avgLatencyMs : 0;
+  const comparisons = [
+    costRatio >= 1.5 ? `单条成本是 L2 的 ${formatTimes(costRatio)} 倍` : null,
+    latencyRatio >= 1.5 ? `平均要等 ${fmtWait(l3.avgLatencyMs)}（L2 ${fmtWait(l2.avgLatencyMs)}）` : null,
+  ].filter((part): part is string => part !== null);
 
   return (
     <section className="rounded-card bg-white p-4 shadow-card">
@@ -173,15 +189,20 @@ function Hero({ d }: { d: RoutingAnalytics }) {
       </div>
 
       {l3.count > 0 ? (
-        <p className="mt-3 rounded-xl bg-cream px-3 py-2.5 text-[13px] leading-5 text-foreground">
-          L3 只处理了 <b className="text-purple-700">{pct(l3.share)}</b> 的消息，却花掉{" "}
-          <b className="text-purple-700">{pct(l3CostShare)}</b> 的成本
-          {ratio >= 2 ? (
+        <p data-testid="layer-compare" className="mt-3 rounded-xl bg-cream px-3 py-2.5 text-[13px] leading-5 text-foreground">
+          L3 只处理了 <b className="text-purple-700">{pct(l3.share)}</b> 的消息
+          {comparisons.length > 0 ? (
             <>
-              ，单条是 L2 的 <b className="text-purple-700">{Math.round(ratio)} 倍</b>
+              ，
+              {comparisons.map((part, i) => (
+                <span key={part}>
+                  {i > 0 ? "，" : null}
+                  {part.includes("成本") ? <b className="text-purple-700">{part}</b> : part}
+                </span>
+              ))}
             </>
           ) : null}
-          。所以要尽量把消息挡在前面几层。
+          。所以要尽量把消息挡在前面几层，又快又省。
         </p>
       ) : null}
     </section>
