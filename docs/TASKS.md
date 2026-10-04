@@ -569,7 +569,7 @@
 ## T15 前后端联调 — Cursor
 
 - 分支：`t15-integration`
-- 依赖：T05、T17
+- 依赖：T05、T05b、T08、T17
 
 **要做**
 
@@ -577,6 +577,7 @@
 2. 演示指南每一步点「开始」时**新开一个会话**（前端不带 `conversationId`，后端会新建），避免第 1、2 步的上下文干扰第 3 步的 L3 多步流程（T15a 交接里提到的风险）。
 3. 种子流量里 L1 的成本改为和真实 trace 一致：`cost.decideUsd = 0.000059`（后台风险检查费，见 `docs/questions/T04-3.md`），看板 L1 每千条约 ¥0.4。
 4. 逐项核对 T12–T15a 交接里列出的「待联调」项（含 `POST /api/admin/reset`）：确认卡片回写、`after` 增量轮询、同一轮共用 traceId、知识库上传字段、试搜请求体、规则 PATCH、看板口径（CONTRACTS §6）。
+5. `lib/store/reset.ts` 的保留名单加上 `embedding_cache.json`（和 `eval_latest.json` 一样，见 `docs/questions/T05-1.md`），重置后知识库仍是向量检索而不是 bigram。
 
 **验收标准**
 
