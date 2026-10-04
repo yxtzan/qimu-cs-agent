@@ -404,11 +404,13 @@ export function DemoTour() {
     const arrived = step.id === "s5-back" && window.location.pathname.startsWith("/orders");
     const center = Boolean(step.center) && !arrived;
     const els = center ? [] : collectTargets(step.id, readDemo().conversationId);
+    if (window.scrollX !== 0) window.scrollTo(0, window.scrollY);
     if (!center && els[0] && scrolled.current !== step.id) {
       const r = els[0].getBoundingClientRect();
       const vh = window.innerHeight;
       if (r.top < 8 || r.bottom > vh - 8) {
-        els[0].scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" });
+        const top = window.scrollY + r.top - Math.max(8, (vh - r.height) / 2);
+        window.scrollTo({ top: Math.max(0, top), left: 0 });
       }
       scrolled.current = step.id;
     }
@@ -525,6 +527,10 @@ export function DemoTour() {
           50% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
         }
         .qimu-demo-ring { animation: qimu-demo-breathe 1.6s ease-in-out infinite; }
+        /* 12 列加 gap-12 在 390 宽上最小也有 528px，会把整页撑出屏幕，红圈里的按钮跟着偏到视口外。 */
+        @media (max-width: 719px) {
+          .grid-cols-12 { grid-template-columns: minmax(0, 1fr) !important; gap: 1rem !important; }
+        }
       `}</style>
       <Dim hole={hole} />
       {hole ? (
