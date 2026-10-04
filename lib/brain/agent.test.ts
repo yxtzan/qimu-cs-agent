@@ -101,15 +101,16 @@ test('invalid parameters, access errors and business rules requiring review stil
     fixture([{ calls: [call] }]); assert((await runAgent(context('multi_step_complex', '尺寸不合适，质量问题'))).handoffReason);
   }
 });
-test('generic L3 explains shipped refund refusal even when L2 requires handoff', async () => {
+test('generic L3 explains shipped refund-only as an ordinary refusal', async () => {
+  const refusal = '这件已经发货了，本店不支持仅退款，需要把商品寄回办理退货退款；如果是质量问题，可以转人工核实。';
   fixture([
     { calls: [{ name: 'apply_refund', args: { orderId: 'QM2026100201', itemId: 'QM2026100201-2', type: 'refund_only', reason: '尺寸不合适' } }] },
-    { text: '已发货仅退款需先拒收或退回，请申请退货退款或转人工核实。' },
+    { text: refusal },
   ]);
   const result = await runAgent(context('multi_step_complex', '尺寸不合适'));
   assert.equal(result.handoffReason, undefined);
-  assert(result.messages.some(m => m.text === '已发货仅退款需先拒收或退回，请申请退货退款或转人工核实'));
-  assert(requests[1].messages.some(m => m.role === 'tool' && m.content.includes('"kind":"business"')));
+  assert(result.messages.some(m => m.text === refusal));
+  assert(requests[1].messages.some(m => m.role === 'tool' && m.content.includes('"kind":"business"') && m.content.includes('本店不支持仅退款')));
 });
 test('generic summaries must finish; truncated prose cannot silently omit questions', async () => {
   fixture([{ calls: [{ name: 'list_coupons', args: {} }] }, { text: '未完成的总结', finish: 'length' }]);

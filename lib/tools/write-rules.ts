@@ -24,6 +24,12 @@ function readAddress(value: unknown): Address {
   return { name: textArg(args, 'name'), phone: textArg(args, 'phone'), region: textArg(args, 'region'), detail: textArg(args, 'detail') };
 }
 
+/** 已发货 / 已签收不能仅退款。普通业务拒绝，不强制转人工（D011：把原因告诉买家）。 */
+export function refundOnlyBlockedMessage(status: Order['status']): string {
+  const when = status === 'shipped' ? '发货' : '签收';
+  return `这件已经${when}了，本店不支持仅退款，需要把商品寄回办理退货退款；如果是质量问题，可以转人工核实。`;
+}
+
 export function validateWrite(tool: PendingAction['tool'], input: Record<string, unknown>, ctx: ToolContext): ValidatedWrite {
   const order = ownedOrder(textArg(input, 'orderId'), ctx);
   if (tool === 'modify_address') {
@@ -61,7 +67,7 @@ export function validateWrite(tool: PendingAction['tool'], input: Record<string,
   if (!['refund_only', 'return_refund'].includes(type)) throw new ToolError('退款类型必须为仅退款或退货退款');
   if (['pending_payment', 'cancelled'].includes(order.status)) throw new ToolError('这个订单尚未付款或已取消，不能申请退款', { kind: 'business' });
   const quality = qualityPattern.test(reason);
-  if (type === 'refund_only' && order.status !== 'paid') throw new ToolError('已发货仅退款需先拒收或退回，请申请退货退款或转人工核实', { kind: 'business', handoff: true });
+  if (type === 'refund_only' && order.status !== 'paid') throw new ToolError(refundOnlyBlockedMessage(order.status), { kind: 'business', handoff: false });
   if (type === 'return_refund') {
     checkWindow(order, quality ? 15 : 7);
     if (!quality && /已(?:经)?(?:洗|剪)|洗过|洗了|吊牌(?:不在|没了|丢|已拆|已剪)|没有吊牌/.test(reason)) throw new ToolError('无理由退货要求吊牌完好、未洗涤；如有质量问题请说明并提供照片', { kind: 'business' });

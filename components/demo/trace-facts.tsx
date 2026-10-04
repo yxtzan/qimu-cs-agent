@@ -53,26 +53,26 @@ export function TraceFacts({ trace }: { trace: RouteTrace }) {
 }
 
 export function FunnelDiagram() {
-  const rows = [
-    ["风险闸门", "每条消息先过一遍"],
-    ["L1 规则", "固定短句，毫秒级"],
-    ["L2 Jev", "便宜的判断模型"],
-    ["L3 大模型", "复杂的多步问题"],
-    ["人工", "拿不准就交给人"],
+  const rows: { key: keyof typeof LAYER_META; name: string; note: string }[] = [
+    { key: "risk_gate", name: "风险闸门", note: "每条消息先过一遍" },
+    { key: "L1", name: "L1 规则", note: "固定短句，毫秒级" },
+    { key: "L2", name: "L2 Jev", note: "便宜的判断模型" },
+    { key: "L3", name: "L3 大模型", note: "复杂的多步问题" },
+    { key: "human", name: "人工", note: "拿不准就交给人" },
   ];
   return (
-    <div className="mt-2 space-y-1" aria-hidden>
-      {rows.map(([name, note], i) => (
-        <div
-          key={name}
-          className="mx-auto rounded-lg bg-white px-2 py-1 text-center text-[12px] leading-5 text-foreground ring-1 ring-line"
-          style={{ width: `${100 - i * 8}%` }}
-        >
-          <span className="font-semibold">{name}</span>
-          <span className="text-warm"> · {note}</span>
-        </div>
+    <ol className="mt-3" aria-label="漏斗顺序">
+      {rows.map((row, i) => (
+        <li key={row.name}>
+          {i > 0 ? <div className="ml-[3px] h-1.5 w-px bg-line" aria-hidden /> : null}
+          <div className="flex items-center gap-2">
+            <span className={`h-3.5 w-1 shrink-0 rounded-sm ${LAYER_META[row.key].dot}`} aria-hidden />
+            <span className="w-20 shrink-0 text-left text-[13px] font-semibold leading-5 text-foreground">{row.name}</span>
+            <span className="min-w-0 flex-1 text-left text-[13px] leading-5 text-warm">{row.note}</span>
+          </div>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 

@@ -35,15 +35,16 @@ export function DemoShopBridge() {
       seen.current = demo.stepId;
       return;
     }
-    const entered = seen.current !== demo.stepId;
-    if (entered) seen.current = demo.stepId;
-    // 先等买家切过去再打开聊天。同一次渲染里又换买家又打开，会把「恢复上次对话」的请求取消掉，之后不再重试。
+    // 先等买家切过去再打开聊天。同一次渲染里又换买家又打开，会把「恢复上次对话」的请求取消掉。
+    // 买家还没切过去时不要记「这一步已经处理」，否则切完之后会被当成重复渲染，话术填不进去。
     if (buyerId !== step.shop.buyerId) {
       setBuyerId(step.shop.buyerId);
       return;
     }
+    const entered = seen.current !== demo.stepId;
     // 聊天窗被关掉时再打开。只有「点发送」这种新的一步才新开对话，避免把刚回来的卡片清掉。
     if (!entered && chatOpen) return;
+    seen.current = demo.stepId;
     const fresh = step.shop.fresh && (entered || !chatOpen);
     openChat({
       ...step.shop.target,
