@@ -3,6 +3,7 @@
 > 维护者：Claude（总指挥）。**Agent 不得修改本文件**（包括状态列）。任务有疑问写到 `docs/questions/`。
 > 状态：`todo` → `doing` → `review`（已开 PR）→ `done`（Claude 审查通过）。状态由 Claude 根据交接文件更新。
 > 编号：Codex = T0x，Cursor = T1x，Claude = T2x。
+> 2026-10-04 起：人类反馈 Codex 太慢，后续任务优先派给 Cursor，Codex 只在必须时使用。
 
 ## 总览
 
@@ -34,7 +35,7 @@
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | done |
 | T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | done |
-| T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | doing |
+| T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | done |
 | T23 | 部署到阿里云杭州 ECS，用 IP 访问（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | doing（环境已装好，等 T22） |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 

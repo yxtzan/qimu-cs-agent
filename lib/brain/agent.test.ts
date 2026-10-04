@@ -68,7 +68,7 @@ test('order-status requests with known context pre-read facts independently of t
     assert.doesNotMatch(result.messages[0].text, /请补充遇到的错误提示/);
     assert(requests[0].messages.some(m => m.role === 'tool' && m.content.includes('pending_payment')));
     assert.equal(requests[0].messages.filter(m => m.role === 'system').length, 1);
-    assert(requests[0].messages[0].content.includes('无风险时不要仅因缺少这些买家信息而转人工'));
+    assert(requests[0].messages[0].content.includes('无风险时不要仅因缺少信息而转人工'));
   }
 });
 test('generic loop preserves model summary alongside confirm/coupon cards', async () => {
