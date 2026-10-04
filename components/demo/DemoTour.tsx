@@ -527,10 +527,6 @@ export function DemoTour() {
           50% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
         }
         .qimu-demo-ring { animation: qimu-demo-breathe 1.6s ease-in-out infinite; }
-        /* 12 列加 gap-12 在 390 宽上最小也有 528px，会把整页撑出屏幕，红圈里的按钮跟着偏到视口外。 */
-        @media (max-width: 719px) {
-          .grid-cols-12 { grid-template-columns: minmax(0, 1fr) !important; gap: 1rem !important; }
-        }
       `}</style>
       <Dim hole={hole} />
       {hole ? (

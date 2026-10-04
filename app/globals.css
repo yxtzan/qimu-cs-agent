@@ -121,3 +121,11 @@ body {
 .fade-in {
   animation: qimu-fade-in 0.2s ease-out both;
 }
+
+
+/* 买家商城按桌面设计：12 列 + 大间距在手机宽度上会把整页撑出屏幕。
+   窄屏统一收成一列（原先只在演示模式里生效，T21d 审查后改为全站）。 */
+@media (max-width: 719px) {
+  .grid-cols-12 { grid-template-columns: minmax(0, 1fr) !important; gap: 1rem !important; }
+  .grid-cols-12 > * { grid-column: 1 / -1 !important; }
+}
