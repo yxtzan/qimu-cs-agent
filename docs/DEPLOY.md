@@ -1,126 +1,91 @@
-# 部署到公网（T23）：阿里云香港轻量服务器 + 子域名 + HTTPS
+# 部署到公网（T23）：阿里云杭州 ECS，用 IP 地址访问
 
-> 维护者：Claude。人类照着做，每做完一大步告诉 Claude。决策依据见 DECISIONS D014。
-> 全程**不要把 OpenRouter key、GitHub token、服务器密码发到任何聊天里**（包括发给 Claude）。
-> 下文的 `demo.你的域名.com` 换成你实际的子域名，`服务器IP` 换成服务器的公网 IP。
-
-现在就可以先做第 1–3 步（买服务器、开端口、配域名解析），不用等代码。第 4 步之后要等 T22 合并。
+> 维护者：Claude。人类照着做，每做完一大步告诉 Claude。决策依据见 DECISIONS D014（2026-10-04 修订）。
+> 全程**不要把 OpenRouter key、服务器密码发到任何聊天里**（包括发给 Claude）。
+> 服务器：华东1（杭州）ECS，公网 IP `120.27.142.15`，系统 Alibaba Cloud Linux 4，2 核 4G。
+> 网址：`http://120.27.142.15`。内地服务器用域名必须先备案，所以暂时没有域名和 HTTPS（见文末）。
 
 ---
 
-## 第 1 步：买服务器（约 10 分钟）
+## 已经完成的（2026-10-04）
 
-1. 登录阿里云 → 搜索「轻量应用服务器」→ 创建实例。
-2. **地域：中国香港**（一定要选香港，不用备案）。
-3. **镜像：系统镜像 → Ubuntu 22.04**。
-4. **套餐：2 核 2G 或以上**（1G 内存构建网站会失败）。
-5. 购买时长按你的需要；买完进控制台，记下**公网 IP**。
-6. 在实例详情里「重置密码」，设置一个 root 密码（自己记好，不要发给任何人）。
+- [x] 连通测试：OpenRouter 可达（建连 + 加密握手约 0.5 秒，完全够用）；npm 很快；GitHub 很慢 → 不从 GitHub 拉代码，改为上传压缩包。
+- [x] 安全组放行 80 端口（入方向，0.0.0.0/0，描述「网站」）。
+- [x] 装好 Node 22（npmmirror 镜像）和 pm2，npm 源已切到 npmmirror。
 
-## 第 2 步：开放端口（2 分钟）
+## 第 1 步：顺手收紧安全组（1 分钟，可选但建议做）
 
-轻量服务器控制台 → 你的实例 → **防火墙** → 确认有以下规则，没有就添加：
+服务器页面 →「网络与安全组」→ 点 `sg-` 开头的安全组 →「入方向」：
 
-| 端口 | 协议 | 用途 |
-|---|---|---|
-| 22 | TCP | 远程登录（默认已有） |
-| 80 | TCP | 网页（申请证书也要用） |
-| 443 | TCP | HTTPS 网页 |
+- **RDP(3389)** 那条：这是 Windows 远程桌面用的，你的服务器是 Linux，用不到 → 点「删除」。
+- **8888** 那条：10 月 1 日你自己加的。如果不记得它是做什么的，也可以删掉；以后需要再加。
+- **SSH(22)** 那条：**不要删**，Workbench 远程连接要用它。
 
-## 第 3 步：配子域名解析（3 分钟，生效要几分钟到半小时）
+## 第 2 步：上传代码（T22 合并后再做）
 
-1. 阿里云控制台 → 「云解析 DNS」→ 找到你的域名 → 「解析设置」→「添加记录」。
-2. 填：
-   - 记录类型：**A**
-   - 主机记录：**demo**（网址就是 `demo.你的域名.com`；想用别的名字就换掉 demo）
-   - 记录值：**服务器IP**
-   - 其他保持默认 → 确认。
-3. 这只新增了一条子域名记录，**主域名和个人网站不受影响**。
-
-> 如果域名还没做实名认证，阿里云会提示先认证；香港服务器不需要备案。
-
-## 第 4 步：登录服务器，装好基础环境（约 10 分钟）
-
-1. 轻量服务器控制台 → 你的实例 → 「远程连接」→ 用 Workbench 登录（输入 root 密码）。之后的命令都粘贴到这个网页终端里，一次粘一段，等它跑完再粘下一段。
-
-2. 加 2G 交换内存（防止构建时内存不够）：
-   ```bash
-   fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo '/swapfile none swap sw 0 0' >> /etc/fstab
+1. Claude 会在你电脑的「客服 agent」文件夹里生成一个 `qimu-deploy.tar.gz`（只有代码，不含 key）。
+2. 打开 Workbench 远程连接的终端页面，在**顶部菜单找「文件」**（或左侧的文件树图标）→ 选「上传文件」→ 上传位置选 `/root` → 选中电脑上的 `qimu-deploy.tar.gz` → 上传。
+   找不到上传入口就截图发给 Claude。
+3. 上传完成后，在终端粘贴：
    ```
-
-3. 装 Node 22、git、pm2：
-   ```bash
-   apt-get update && apt-get install -y git curl
-   curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-   apt-get install -y nodejs
-   npm install -g pm2
-   node -v
+   mkdir -p /opt/qimu && tar -xzf /root/qimu-deploy.tar.gz -C /opt/qimu && cd /opt/qimu && npm ci
    ```
-   最后一行应显示 `v22.` 开头。
+   `npm ci` 要 1–3 分钟，最后出现 `added ... packages` 就是成功。
 
-4. 装 Caddy（自动申请 HTTPS 证书的网页服务器）：
-   ```bash
-   apt-get install -y debian-keyring debian-archive-keyring apt-transport-https
-   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
-   apt-get update && apt-get install -y caddy
+## 第 3 步：放配置文件（3 分钟）
+
+`.env.local` 里有你的 key，不经过任何聊天，直接从电脑上传：
+
+1. 同样用 Workbench 的「上传文件」，上传位置填 `/opt/qimu`，选你电脑上「客服 agent」文件夹里的 `.env.local`。
+   Mac 的文件选择框默认不显示以点开头的文件：在选择框里按 **`Cmd + Shift + .`**（句号）就能看到。
+2. 在终端粘贴（给公开网站加上三项设置，不会显示 key）：
    ```
-
-## 第 5 步：拉代码（约 5 分钟，T22 合并后再做）
-
-仓库是私有的，服务器需要一把**只读**的 GitHub 令牌：
-
-1. 在电脑上打开 GitHub → 右上角头像 → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token。
-   - Repository access：Only select repositories → 选 `qimu-cs-agent`
-   - Permissions → Repository permissions → **Contents: Read-only**
-   - 生成后复制（只显示一次）。**不要发到任何聊天里。**
-2. 回到服务器终端，把下面命令里的 `你的令牌` 换成刚复制的令牌再执行：
-   ```bash
-   cd /opt && git clone https://你的令牌@github.com/yxtzan/qimu-cs-agent.git qimu && cd /opt/qimu && npm ci
+   cd /opt/qimu && printf '\nNEXT_PUBLIC_USE_MOCK=0\nPUBLIC_DEMO=1\nDAILY_BUDGET_USD=1\n' >> .env.local && grep -c OPENROUTER_API_KEY .env.local
    ```
+   最后输出 `1` 就说明 key 那一行在文件里（只显示个数，不显示内容）。
+3. **去 OpenRouter 给这把 key 设额度上限**：openrouter.ai → Keys → 这把 key → Credit limit 设成例如 $5。这是第三道保险。
 
-## 第 6 步：写服务器上的配置文件（3 分钟）
+## 第 4 步：构建并启动（约 5 分钟）
 
-1. 执行 `nano /opt/qimu/.env.local`，打开一个编辑器。
-2. 把你电脑上「客服 agent」文件夹里 `.env.local` 的内容**在电脑上复制**，粘贴进来（不要经过任何聊天）。
-3. 在末尾再加这几行（如果已有同名的行，改成下面的值）：
-   ```
-   NEXT_PUBLIC_USE_MOCK=0
-   PUBLIC_DEMO=1
-   DAILY_BUDGET_USD=1
-   ```
-4. 按 `Ctrl+O` 回车保存，`Ctrl+X` 退出。
-
-5. **去 OpenRouter 给这把 key 设额度上限**：openrouter.ai → Keys → 这把 key → 设置 Credit limit（例如 $5）。这是第三道保险。
-
-## 第 7 步：构建并启动（约 5–10 分钟）
-
-```bash
-cd /opt/qimu && npm run build && npm run seed && pm2 start npm --name qimu -- start && pm2 save && pm2 startup systemd -u root --hp /root
 ```
-等它跑完，执行 `curl -s localhost:3000/api/health`，看到 `{"ok":true}` 就说明网站起来了。
-
-## 第 8 步：挂上子域名和 HTTPS（2 分钟）
-
-把 `demo.你的域名.com` 换成你的子域名再执行：
-```bash
-printf 'demo.你的域名.com {\n  reverse_proxy localhost:3000\n}\n' > /etc/caddy/Caddyfile && systemctl reload caddy
+cd /opt/qimu && npm run build && npm run seed
 ```
-等半分钟，在电脑浏览器打开 `https://demo.你的域名.com`。能打开、地址栏有小锁，就完成了。再打开 `https://demo.你的域名.com/?demo=1` 走一遍演示模式。
+看到 build 成功（没有红色的 `Error`）、seed 结束后，再粘贴：
+```
+cd /opt/qimu && PORT=80 pm2 start npm --name qimu -- start && pm2 save && pm2 startup systemd -u root --hp /root
+```
+然后检查：
+```
+curl -s localhost/api/health
+```
+看到 `{"ok":true}` 就说明网站起来了。
+
+## 第 5 步：在浏览器验收
+
+1. 电脑浏览器打开 `http://120.27.142.15`，能看到商城首页。
+2. 打开 `http://120.27.142.15/?demo=1`，从头走一遍演示模式。
+3. 用手机（关掉 Wi-Fi，用流量）也打开一次，确认外网能访问。
+4. 打开聊天窗右上角「调试」：回复下面应显示 L1/L2/L3 和 jev，不是 mock。
 
 ---
 
 ## 以后更新代码
 
-```bash
-cd /opt/qimu && git pull && npm ci && npm run build && pm2 restart qimu
+Claude 生成新的 `qimu-deploy.tar.gz` → 上传到 `/root`（覆盖）→ 粘贴：
 ```
+cd /opt/qimu && tar -xzf /root/qimu-deploy.tar.gz -C /opt/qimu && npm ci && npm run build && pm2 restart qimu
+```
+（解压会覆盖代码，但保留 `.env.local` 和运行数据。）
 
 ## 出问题时
 
 | 情况 | 怎么办 |
 |---|---|
-| 浏览器打不开子域名 | 解析可能还没生效：等 10 分钟再试；在电脑终端运行 `ping demo.你的域名.com`，看返回的 IP 是不是你的服务器 |
-| 打开是 502 | 网站没在运行：服务器上执行 `pm2 logs qimu --lines 50`，把输出（不含 key）发给 Claude |
-| 构建时报内存不足 | 确认第 4 步的交换内存加上了：`free -h` 里 Swap 应该是 2.0Gi |
-| 证书申请失败 | 确认防火墙开了 80 和 443、解析已经指向服务器 IP，然后 `systemctl reload caddy` |
+| 浏览器打不开 `http://120.27.142.15` | 确认安全组 80 端口规则还在；终端执行 `pm2 status`，`qimu` 应是 `online` |
+| 页面打开但报错 / 502 | 执行 `pm2 logs qimu --lines 50`，把输出发给 Claude（日志里不会有 key） |
+| 回复全是 mock | 检查第 3 步：`.env.local` 里要有 `NEXT_PUBLIC_USE_MOCK=0`，且必须在 `npm run build` **之前**放好；改了要重新 build |
+| 服务器重启后网站没起来 | 执行 `pm2 resurrect`；第 4 步的 `pm2 startup` 没成功的话，把输出发给 Claude |
+
+## 以后想用域名（可选）
+
+内地服务器的域名必须先 ICP 备案（阿里云顶栏「备案」，一般 1–3 周；阿里云通常要求服务器是包年包月且剩余 3 个月以上，按量付费的实例可能不能用来备案）。备案通过后，在云解析 DNS 给 `yxtzan.com` 加一条 A 记录（如 `demo` → `120.27.142.15`），再加 HTTPS，Claude 到时再写步骤。不想等备案，也可以换香港服务器（不用备案）。

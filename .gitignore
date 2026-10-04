@@ -29,3 +29,6 @@ e2e/artifacts/
 e2e/test-results/
 e2e/report/
 playwright-report/
+
+# deployment archive (T23)
+qimu-deploy.tar.gz
