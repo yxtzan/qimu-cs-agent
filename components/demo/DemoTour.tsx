@@ -415,7 +415,10 @@ export function DemoTour() {
   const elapsed = Math.max(0, Math.floor((now - (demo.stepEnteredAt || now)) / 1000));
   let sentence = step.sentence;
   if (step.id === "s1-reply") sentence = sentence.replace("N", sourceCount ?? "几");
-  const headline = missing && !step.showTimer ? step.waitCopy : sentence;
+  let headline = missing && !step.showTimer ? step.waitCopy : sentence;
+  if (step.id === "s1-reply" && missing && !step.showTimer && elapsed > 5) {
+    headline = `${step.waitCopy}第一条消息会慢一点，模型在热身。`;
+  }
   const trace = demo.trace as RouteTrace | null;
   const showPrimary = step.primary && !(step.primary.kind === "buyer" && arrivedBuyer);
 
@@ -521,24 +524,28 @@ export function DemoTour() {
           ) : null}
         </div>
         <div className="flex flex-wrap items-center gap-2 border-t border-line px-3 py-2.5">
-          <button
-            type="button"
-            data-testid="demo-prev"
-            disabled={busy || step.id === "intro"}
-            onClick={goPrev}
-            className="rounded-full px-3 py-1.5 text-xs font-medium text-foreground disabled:opacity-40"
-          >
-            上一步
-          </button>
-          <button
-            type="button"
-            data-testid="demo-exit"
-            disabled={busy}
-            onClick={leave}
-            className="rounded-full px-3 py-1.5 text-xs font-medium text-warm"
-          >
-            退出演示
-          </button>
+          {step.id !== "intro" && step.id !== "end" ? (
+            <>
+              <button
+                type="button"
+                data-testid="demo-prev"
+                disabled={busy}
+                onClick={goPrev}
+                className="rounded-full px-3 py-1.5 text-xs font-medium text-foreground disabled:opacity-40"
+              >
+                上一步
+              </button>
+              <button
+                type="button"
+                data-testid="demo-exit"
+                disabled={busy}
+                onClick={leave}
+                className="rounded-full px-3 py-1.5 text-xs font-medium text-warm"
+              >
+                退出演示
+              </button>
+            </>
+          ) : null}
           <span className="ml-auto flex flex-wrap justify-end gap-2">
             {step.id === "end" ? (
               <button
@@ -562,15 +569,17 @@ export function DemoTour() {
                 {busy ? "请稍等…" : step.primary.label}
               </button>
             ) : null}
-            <button
-              type="button"
-              data-testid="demo-next"
-              disabled={busy}
-              onClick={goNext}
-              className="rounded-full bg-brand px-3.5 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
-            >
-              {step.id === "end" ? "自由体验" : "下一步"}
-            </button>
+            {step.id !== "intro" && step.id !== "end" ? (
+              <button
+                type="button"
+                data-testid="demo-next"
+                disabled={busy}
+                onClick={goNext}
+                className="rounded-full bg-brand px-3.5 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+              >
+                下一步
+              </button>
+            ) : null}
           </span>
         </div>
       </section>

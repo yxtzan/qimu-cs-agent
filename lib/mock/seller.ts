@@ -505,7 +505,8 @@ const c5: Seed = {
       ],
       usedGeneration: true,
       latency: { totalMs: 4820, decideMs: 210, agentMs: 4600 },
-      cost: { decideUsd: 0.00002, generationUsd: 0, agentUsd: 0.0031, totalUsd: 0.00312 },
+      // 与 mock 流量同一档：agentUsd $0.00008–$0.0002，避免把「今天」的每千条成本抬到几元
+      cost: { decideUsd: 0.00002, generationUsd: 0, agentUsd: 0.00014, totalUsd: 0.00016 },
     }),
   ],
   pendingActions: [exchangePending],

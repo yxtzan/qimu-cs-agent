@@ -698,7 +698,8 @@ function agentTurn(intent: IntentId, replies: Reply[], extra: Partial<Turn>, ctx
     agentMs: 3224,
     decideProvider: "mock",
     usedGeneration: true,
-    cost: { decideUsd: 0.00002, generationUsd: 0, agentUsd: 0.00318, totalUsd: 0.0032 },
+    // 与 mock 流量同一档，演示走到看板时「今天」的 L3 每千条仍在 ¥1–2
+    cost: { decideUsd: 0.00002, generationUsd: 0, agentUsd: 0.00014, totalUsd: 0.00016 },
     ...extra,
   };
 }
