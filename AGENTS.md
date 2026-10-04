@@ -43,7 +43,7 @@ npm run typecheck && npm run lint     # 必须通过
 | `lib/brain/handlers/index.ts` `lib/brain/handlers/read.ts` `lib/brain/risk.ts` `lib/brain/risk.test.ts` `lib/brain/caution.ts` `lib/brain/trace.ts` `lib/brain/decide/warmup.ts` `lib/tools/recommend-size.ts` | ~~Cursor（T08 特批）~~ **已归还 Codex**（2026-10-04 T08 合并后） |
 | `docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `docs/reports/holdout-eval.*` `data/seed/eval_latest.json` `docs/handoff/T06.md`（只补对比） | **Codex**（T05b / T09b 评测特批） |
 | `lib/tools/execute-pending.ts` `next.config.ts` | T15b 特批**已归还 Codex** |
-| `lib/brain/agent.ts`（只删整句替换） `lib/brain/agent.test.ts` `lib/tools/execute-pending.ts`（只做幂等） `lib/tools/*.test.ts` + T09b 评测报告文件 | **Cursor**（T09b 改派特批，任务结束后归还 Codex） |
+| `lib/brain/agent.ts`（只删整句替换） `lib/brain/agent.test.ts` `lib/tools/execute-pending.ts`（只做幂等） `lib/tools/*.test.ts` + T09b 评测报告文件 | ~~Cursor（T09b 改派特批）~~ **已归还 Codex** |
 | `lib/store/reset-hooks.ts` | 共用登记表：Codex 和 Cursor 都可以**只加 import 行** |
 | `package.json` | 谁需要谁加依赖，PR 里写明新增了哪些包 |
 | `docs/handoff/T<编号>.md` `docs/questions/T<编号>-*.md` | 该任务的负责 Agent（只新建自己的文件） |

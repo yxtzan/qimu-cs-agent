@@ -28,7 +28,7 @@
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
 | T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | done |
 | T09 | 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 + L3 通用循环修复 | Codex | T05b T08 | 5 | 2.5h | done |
-| T09b | L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） | **Cursor**（2026-10-04 改派，Codex 额度用完） | T09 T15b | 6 | 1h | doing |
+| T09b | L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） | **Cursor**（2026-10-04 改派，Codex 额度用完） | T09 T15b | 6 | 1h | done |
 | T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | done |
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |

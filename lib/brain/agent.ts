@@ -84,7 +84,7 @@ export async function runAgent(ctx: HandlerContext): Promise<HandlerResult> {
         if (t.function.name === 'list_coupons' && /换/.test(ctx.text)) return cards.some(m => m.card?.kind === 'confirm' && m.card.pendingAction.tool === 'request_exchange');
         return true;
       });
-      messages[0] = { role: 'system', content: AGENT_SYSTEM_PROMPT + `\n本轮要求：基于已有订单，一次提出能确定参数的完整操作计划，多个调用按业务依赖顺序返回；库存和资格由服务器逐步校验，普通业务拒绝要如实说明原因，其他失败转人工。本轮只能调用以下工具：${availableTools.map(t => t.function.name).join('、')}。已完成：${completedTools(cards).join('、') || '尚无确认或券结果'}。不要调用未提供的工具。${firstModelCall && !casual ? '本轮必须先调用工具，禁止直接输出文字答案。' : ''}最终只用80字以内总结，逐项答复，不添加工具结果之外的事实；券须同时符合品类和满减门槛，物流只取时间最新的节点，待确认申请不得称作已经提交或办理。若仅闲聊则简短回应，不含任何数字和购物事实。${knownOrder ? '本轮为订单状态咨询：只概括工具返回的订单状态，并请买家补充具体错误提示。查询资料未提供失败原因，禁止生成任何操作建议或推测原因。不要仅因缺少错误提示转人工。' : ''}` };
+      messages[0] = { role: 'system', content: AGENT_SYSTEM_PROMPT + `\n本轮要求：基于已有订单，一次提出能确定参数的完整操作计划，多个调用按业务依赖顺序返回；库存和资格由服务器逐步校验，普通业务拒绝要如实说明原因，其他失败转人工。本轮只能调用以下工具：${availableTools.map(t => t.function.name).join('、')}。已完成：${completedTools(cards).join('、') || '尚无确认或券结果'}。不要调用未提供的工具。${firstModelCall && !casual ? '本轮必须先调用工具，禁止直接输出文字答案。' : ''}最终只用80字以内总结，逐项答复，不添加工具结果之外的事实；券须同时符合品类和满减门槛，物流只取时间最新的节点，待确认申请不得称作已经提交或办理。若仅闲聊则简短回应，不含任何数字和购物事实。${knownOrder ? '本轮为订单状态咨询：只用工具返回的订单信息回答买家这句话问的事；工具没给出的原因、时间或操作步骤一律不推测，直接说目前资料还无法确认。只有买家提到付款失败、报错等异常时，才请他补充看到的错误提示。不要仅因信息不足转人工。' : ''}` };
       if (queriedCoupons) {
         const quotes = [...queriedProducts.values()].map(p => {
           const eligible = queriedCoupons!.filter(c => (c.scope === '全店' || c.scope === p.category) && p.price >= c.threshold);
