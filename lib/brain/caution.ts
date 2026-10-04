@@ -4,7 +4,7 @@
  * A turn is "yellow" when a risk score is above the flag line but below the handoff line
  * (four risk items 0.5–threshold; emotion 1.5–2.5), or a keyword hit was overruled by a real model.
  * For such turns answered by L2 / L3 we:
- *   1. put one fixed reassurance line (no model call) before the first AI message,
+ *   1. reassure for model yellow scores (no model call); keyword-only downgrades skip this,
  *   2. make sure a "转人工" quick reply is available,
  *   3. hand off when the previous buyer message in the same conversation was yellow too.
  */
@@ -55,7 +55,6 @@ export function applyCaution(input: { conversationId: string; buyer: ChatMessage
   const yellow = risk.flags.filter(k => !risk.hits.includes(k));
   if (!yellow.length || risk.handoff || result.handoffReason) return result;
   if (previousYellow(conversationId, buyer).length) return { ...result, handoffReason: CONSECUTIVE_YELLOW_REASON };
-  const text = cautionText(yellow);
-  if (!text) return result;
-  return { ...result, messages: [{ role: 'ai', text }, ...withHumanReply(result.messages)] };
+  const text = cautionText(yellow.filter(k => !risk.downgraded.includes(k)));
+  return { ...result, messages: [...(text ? [{ role: 'ai' as const, text }] : []), ...withHumanReply(result.messages)] };
 }

@@ -1,0 +1,1196 @@
+[
+  {
+    "attempt": 1,
+    "result": {
+      "status": "awaiting_confirm",
+      "messages": [
+        {
+          "role": "ai",
+          "text": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：买家想退回上周购买的外套；商家承担退货运费；请确认吊牌完好、未洗涤（待您确认后办理）"
+        },
+        {
+          "role": "ai",
+          "text": "请核对下面的信息，确认后再办理。",
+          "card": {
+            "kind": "confirm",
+            "pendingAction": {
+              "id": "PA-63ac6d14-2e69-4ebe-9b26-da14d0a6e76d",
+              "conversationId": "C1001",
+              "tool": "apply_refund",
+              "args": {
+                "orderId": "QM2026092801",
+                "itemId": "QM2026092801-1",
+                "type": "return_refund",
+                "reason": "买家想退回上周购买的外套",
+                "buyerId": "B001"
+              },
+              "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：买家想退回上周购买的外套；商家承担退货运费；请确认吊牌完好、未洗涤",
+              "status": "pending",
+              "createdAt": "2026-10-05T10:00:09.408+08:00"
+            }
+          }
+        }
+      ]
+    },
+    "tools": [
+      {
+        "name": "list_orders",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "QM2026100201",
+              "buyerId": "B001",
+              "status": "shipped",
+              "items": [
+                {
+                  "itemId": "QM2026100201-1",
+                  "productId": "P021",
+                  "productName": "高腰直筒西装裤",
+                  "skuId": "P021-C1-S",
+                  "color": "黑",
+                  "size": "S",
+                  "quantity": 1,
+                  "unitPrice": 329,
+                  "image": ""
+                },
+                {
+                  "itemId": "QM2026100201-2",
+                  "productId": "P030",
+                  "productName": "软糯圆领开衫",
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 269,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 598,
+              "discount": 0,
+              "payAmount": 598,
+              "createdAt": "2026-10-02T10:00:00+08:00",
+              "paidAt": "2026-10-02T10:05:00+08:00",
+              "shippedAt": "2026-10-03T10:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026100201",
+                "status": "in_transit",
+                "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-10-03T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-10-03T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026092801",
+              "buyerId": "B001",
+              "status": "delivered",
+              "items": [
+                {
+                  "itemId": "QM2026092801-1",
+                  "productId": "P007",
+                  "productName": "燕麦色羊毛混纺大衣",
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 599,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 599,
+              "discount": 0,
+              "payAmount": 599,
+              "createdAt": "2026-09-26T10:00:00+08:00",
+              "paidAt": "2026-09-26T10:05:00+08:00",
+              "shippedAt": "2026-09-28T10:00:00+08:00",
+              "deliveredAt": "2026-09-30T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026092801",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-30T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-28T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-28T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026091501",
+              "buyerId": "B001",
+              "status": "completed",
+              "items": [
+                {
+                  "itemId": "QM2026091501-1",
+                  "productId": "P002",
+                  "productName": "法式碎花茶歇裙",
+                  "skuId": "P002-C1-M",
+                  "color": "蓝底白花",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 389,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 389,
+              "discount": 0,
+              "payAmount": 389,
+              "createdAt": "2026-09-15T10:00:00+08:00",
+              "paidAt": "2026-09-15T10:05:00+08:00",
+              "shippedAt": "2026-09-16T10:00:00+08:00",
+              "deliveredAt": "2026-09-18T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026091501",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-18T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-16T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-16T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": [
+                {
+                  "id": "AS20260920001",
+                  "orderId": "QM2026091501",
+                  "itemId": "QM2026091501-1",
+                  "type": "return_refund",
+                  "reason": "腰有点紧",
+                  "amount": 389,
+                  "status": "refunding",
+                  "createdAt": "2026-09-20T10:00:00+08:00",
+                  "timeline": [
+                    {
+                      "at": "2026-09-20T10:00:00+08:00",
+                      "status": "pending_review",
+                      "note": "申请退货退款，腰有点紧"
+                    },
+                    {
+                      "at": "2026-09-20T15:00:00+08:00",
+                      "status": "approved",
+                      "note": "已同意退货，请寄回商品"
+                    },
+                    {
+                      "at": "2026-09-29T10:00:00+08:00",
+                      "status": "returning",
+                      "note": "买家已寄回，退件运输中"
+                    },
+                    {
+                      "at": "2026-10-03T10:00:00+08:00",
+                      "status": "refunding",
+                      "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "track_logistics",
+        "args": {
+          "orderId": "QM2026100201"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "get_aftersale",
+        "args": {
+          "orderId": "QM2026092801"
+        },
+        "result": {
+          "ok": true,
+          "data": []
+        }
+      },
+      {
+        "name": "apply_refund",
+        "args": {
+          "itemId": "QM2026092801-1",
+          "orderId": "QM2026092801",
+          "reason": "买家想退回上周购买的外套",
+          "type": "return_refund"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "PA-63ac6d14-2e69-4ebe-9b26-da14d0a6e76d",
+            "conversationId": "C1001",
+            "tool": "apply_refund",
+            "args": {
+              "orderId": "QM2026092801",
+              "itemId": "QM2026092801-1",
+              "type": "return_refund",
+              "reason": "买家想退回上周购买的外套",
+              "buyerId": "B001"
+            },
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：买家想退回上周购买的外套；商家承担退货运费；请确认吊牌完好、未洗涤",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:09.408+08:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "attempt": 2,
+    "result": {
+      "status": "awaiting_confirm",
+      "messages": [
+        {
+          "role": "ai",
+          "text": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢/效果不好；商家承担退货运费；请确认吊牌完好、未洗涤（待您确认后办理）"
+        },
+        {
+          "role": "ai",
+          "text": "请核对下面的信息，确认后再办理。",
+          "card": {
+            "kind": "confirm",
+            "pendingAction": {
+              "id": "PA-ac04f7d2-de52-4b61-ac2a-9a0c2a83ace5",
+              "conversationId": "C1002",
+              "tool": "apply_refund",
+              "args": {
+                "orderId": "QM2026092801",
+                "itemId": "QM2026092801-1",
+                "type": "return_refund",
+                "reason": "不喜欢/效果不好",
+                "buyerId": "B001"
+              },
+              "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢/效果不好；商家承担退货运费；请确认吊牌完好、未洗涤",
+              "status": "pending",
+              "createdAt": "2026-10-05T10:00:14.799+08:00"
+            }
+          }
+        }
+      ]
+    },
+    "tools": [
+      {
+        "name": "list_orders",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "QM2026100201",
+              "buyerId": "B001",
+              "status": "shipped",
+              "items": [
+                {
+                  "itemId": "QM2026100201-1",
+                  "productId": "P021",
+                  "productName": "高腰直筒西装裤",
+                  "skuId": "P021-C1-S",
+                  "color": "黑",
+                  "size": "S",
+                  "quantity": 1,
+                  "unitPrice": 329,
+                  "image": ""
+                },
+                {
+                  "itemId": "QM2026100201-2",
+                  "productId": "P030",
+                  "productName": "软糯圆领开衫",
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 269,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 598,
+              "discount": 0,
+              "payAmount": 598,
+              "createdAt": "2026-10-02T10:00:00+08:00",
+              "paidAt": "2026-10-02T10:05:00+08:00",
+              "shippedAt": "2026-10-03T10:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026100201",
+                "status": "in_transit",
+                "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-10-03T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-10-03T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026092801",
+              "buyerId": "B001",
+              "status": "delivered",
+              "items": [
+                {
+                  "itemId": "QM2026092801-1",
+                  "productId": "P007",
+                  "productName": "燕麦色羊毛混纺大衣",
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 599,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 599,
+              "discount": 0,
+              "payAmount": 599,
+              "createdAt": "2026-09-26T10:00:00+08:00",
+              "paidAt": "2026-09-26T10:05:00+08:00",
+              "shippedAt": "2026-09-28T10:00:00+08:00",
+              "deliveredAt": "2026-09-30T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026092801",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-30T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-28T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-28T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026091501",
+              "buyerId": "B001",
+              "status": "completed",
+              "items": [
+                {
+                  "itemId": "QM2026091501-1",
+                  "productId": "P002",
+                  "productName": "法式碎花茶歇裙",
+                  "skuId": "P002-C1-M",
+                  "color": "蓝底白花",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 389,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 389,
+              "discount": 0,
+              "payAmount": 389,
+              "createdAt": "2026-09-15T10:00:00+08:00",
+              "paidAt": "2026-09-15T10:05:00+08:00",
+              "shippedAt": "2026-09-16T10:00:00+08:00",
+              "deliveredAt": "2026-09-18T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026091501",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-18T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-16T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-16T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": [
+                {
+                  "id": "AS20260920001",
+                  "orderId": "QM2026091501",
+                  "itemId": "QM2026091501-1",
+                  "type": "return_refund",
+                  "reason": "腰有点紧",
+                  "amount": 389,
+                  "status": "refunding",
+                  "createdAt": "2026-09-20T10:00:00+08:00",
+                  "timeline": [
+                    {
+                      "at": "2026-09-20T10:00:00+08:00",
+                      "status": "pending_review",
+                      "note": "申请退货退款，腰有点紧"
+                    },
+                    {
+                      "at": "2026-09-20T15:00:00+08:00",
+                      "status": "approved",
+                      "note": "已同意退货，请寄回商品"
+                    },
+                    {
+                      "at": "2026-09-29T10:00:00+08:00",
+                      "status": "returning",
+                      "note": "买家已寄回，退件运输中"
+                    },
+                    {
+                      "at": "2026-10-03T10:00:00+08:00",
+                      "status": "refunding",
+                      "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "track_logistics",
+        "args": {
+          "orderId": "QM2026100201"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "get_aftersale",
+        "args": {
+          "orderId": "QM2026092801"
+        },
+        "result": {
+          "ok": true,
+          "data": []
+        }
+      },
+      {
+        "name": "apply_refund",
+        "args": {
+          "orderId": "QM2026092801",
+          "itemId": "QM2026092801-1",
+          "type": "return_refund",
+          "reason": "不喜欢/效果不好"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "PA-ac04f7d2-de52-4b61-ac2a-9a0c2a83ace5",
+            "conversationId": "C1002",
+            "tool": "apply_refund",
+            "args": {
+              "orderId": "QM2026092801",
+              "itemId": "QM2026092801-1",
+              "type": "return_refund",
+              "reason": "不喜欢/效果不好",
+              "buyerId": "B001"
+            },
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢/效果不好；商家承担退货运费；请确认吊牌完好、未洗涤",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:14.799+08:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "attempt": 3,
+    "result": {
+      "status": "awaiting_confirm",
+      "messages": [
+        {
+          "role": "ai",
+          "text": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢；商家承担退货运费；请确认吊牌完好、未洗涤（待您确认后办理）"
+        },
+        {
+          "role": "ai",
+          "text": "请核对下面的信息，确认后再办理。",
+          "card": {
+            "kind": "confirm",
+            "pendingAction": {
+              "id": "PA-af2fa2b6-cca9-48ed-ac6a-95525311b91b",
+              "conversationId": "C1003",
+              "tool": "apply_refund",
+              "args": {
+                "orderId": "QM2026092801",
+                "itemId": "QM2026092801-1",
+                "type": "return_refund",
+                "reason": "不喜欢",
+                "buyerId": "B001"
+              },
+              "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢；商家承担退货运费；请确认吊牌完好、未洗涤",
+              "status": "pending",
+              "createdAt": "2026-10-05T10:00:20.364+08:00"
+            }
+          }
+        }
+      ]
+    },
+    "tools": [
+      {
+        "name": "list_orders",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "QM2026100201",
+              "buyerId": "B001",
+              "status": "shipped",
+              "items": [
+                {
+                  "itemId": "QM2026100201-1",
+                  "productId": "P021",
+                  "productName": "高腰直筒西装裤",
+                  "skuId": "P021-C1-S",
+                  "color": "黑",
+                  "size": "S",
+                  "quantity": 1,
+                  "unitPrice": 329,
+                  "image": ""
+                },
+                {
+                  "itemId": "QM2026100201-2",
+                  "productId": "P030",
+                  "productName": "软糯圆领开衫",
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 269,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 598,
+              "discount": 0,
+              "payAmount": 598,
+              "createdAt": "2026-10-02T10:00:00+08:00",
+              "paidAt": "2026-10-02T10:05:00+08:00",
+              "shippedAt": "2026-10-03T10:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026100201",
+                "status": "in_transit",
+                "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-10-03T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-10-03T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026092801",
+              "buyerId": "B001",
+              "status": "delivered",
+              "items": [
+                {
+                  "itemId": "QM2026092801-1",
+                  "productId": "P007",
+                  "productName": "燕麦色羊毛混纺大衣",
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 599,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 599,
+              "discount": 0,
+              "payAmount": 599,
+              "createdAt": "2026-09-26T10:00:00+08:00",
+              "paidAt": "2026-09-26T10:05:00+08:00",
+              "shippedAt": "2026-09-28T10:00:00+08:00",
+              "deliveredAt": "2026-09-30T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026092801",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-30T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-28T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-28T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026091501",
+              "buyerId": "B001",
+              "status": "completed",
+              "items": [
+                {
+                  "itemId": "QM2026091501-1",
+                  "productId": "P002",
+                  "productName": "法式碎花茶歇裙",
+                  "skuId": "P002-C1-M",
+                  "color": "蓝底白花",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 389,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 389,
+              "discount": 0,
+              "payAmount": 389,
+              "createdAt": "2026-09-15T10:00:00+08:00",
+              "paidAt": "2026-09-15T10:05:00+08:00",
+              "shippedAt": "2026-09-16T10:00:00+08:00",
+              "deliveredAt": "2026-09-18T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026091501",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-18T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-16T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-16T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": [
+                {
+                  "id": "AS20260920001",
+                  "orderId": "QM2026091501",
+                  "itemId": "QM2026091501-1",
+                  "type": "return_refund",
+                  "reason": "腰有点紧",
+                  "amount": 389,
+                  "status": "refunding",
+                  "createdAt": "2026-09-20T10:00:00+08:00",
+                  "timeline": [
+                    {
+                      "at": "2026-09-20T10:00:00+08:00",
+                      "status": "pending_review",
+                      "note": "申请退货退款，腰有点紧"
+                    },
+                    {
+                      "at": "2026-09-20T15:00:00+08:00",
+                      "status": "approved",
+                      "note": "已同意退货，请寄回商品"
+                    },
+                    {
+                      "at": "2026-09-29T10:00:00+08:00",
+                      "status": "returning",
+                      "note": "买家已寄回，退件运输中"
+                    },
+                    {
+                      "at": "2026-10-03T10:00:00+08:00",
+                      "status": "refunding",
+                      "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "track_logistics",
+        "args": {
+          "orderId": "QM2026100201"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "get_order",
+        "args": {
+          "orderId": "QM2026092801"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "QM2026092801",
+            "buyerId": "B001",
+            "status": "delivered",
+            "items": [
+              {
+                "itemId": "QM2026092801-1",
+                "productId": "P007",
+                "productName": "燕麦色羊毛混纺大衣",
+                "skuId": "P007-C1-M",
+                "color": "燕麦色",
+                "size": "M",
+                "quantity": 1,
+                "unitPrice": 599,
+                "image": ""
+              }
+            ],
+            "totalAmount": 599,
+            "discount": 0,
+            "payAmount": 599,
+            "createdAt": "2026-09-26T10:00:00+08:00",
+            "paidAt": "2026-09-26T10:05:00+08:00",
+            "shippedAt": "2026-09-28T10:00:00+08:00",
+            "deliveredAt": "2026-09-30T14:00:00+08:00",
+            "address": {
+              "name": "林小满",
+              "phone": "138****1001",
+              "region": "上海市 上海市 浦东新区",
+              "detail": "栖木演示路1号虚构小区1室（演示地址）"
+            },
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026092801",
+              "status": "delivered",
+              "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-09-30T14:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "收件人已签收"
+                },
+                {
+                  "at": "2026-09-28T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-09-28T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-09-28T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-09-28T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-09-28T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            },
+            "afterSales": []
+          }
+        }
+      },
+      {
+        "name": "apply_refund",
+        "args": {
+          "orderId": "QM2026092801",
+          "itemId": "QM2026092801-1",
+          "reason": "不喜欢",
+          "type": "return_refund"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "PA-af2fa2b6-cca9-48ed-ac6a-95525311b91b",
+            "conversationId": "C1003",
+            "tool": "apply_refund",
+            "args": {
+              "orderId": "QM2026092801",
+              "itemId": "QM2026092801-1",
+              "type": "return_refund",
+              "reason": "不喜欢",
+              "buyerId": "B001"
+            },
+            "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：不喜欢；商家承担退货运费；请确认吊牌完好、未洗涤",
+            "status": "pending",
+            "createdAt": "2026-10-05T10:00:20.364+08:00"
+          }
+        }
+      }
+    ]
+  }
+]

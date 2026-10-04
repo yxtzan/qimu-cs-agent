@@ -6,7 +6,7 @@ import { INTENTS } from './decide/questions';
 import { startJevWarmup } from './decide/warmup';
 import { describeInput, parseChatRequest, validateIdentity, type ChatRequest } from './input';
 import { addHistory, serializeStateForModel, updateState } from './state';
-import { checkRisk, type RiskResult } from './risk';
+import { checkRisk, waitForKeywordDecision, type RiskResult } from './risk';
 import { applyCaution } from './caution';
 import { matchRule, recordNegativeFeedback, recordRuleHit } from './rules';
 import { createHandlerContext, type HandlerResult } from './handlers/context';
@@ -14,7 +14,7 @@ import { isSizeCareCombination, runHandler } from './handlers';
 import { runAgent } from './agent';
 import { handleConfirmation } from './action';
 import { enterHandoff } from './handoff';
-import { makeTrace, originStillExists, persistTrace, withDecision, withHandler } from './trace';
+import { makeTrace, originStillExists, persistTrace, recordLateDecisionCost, withDecision, withHandler } from './trace';
 import { scheduleBackground, serializeConversation, type Schedule } from './background';
 
 export interface ChatResponse { conversation: Conversation; messages: ChatMessage[]; trace?: RouteTrace }
@@ -75,16 +75,22 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   let earlyDecision: DecideResult | undefined;
   if (hardRisk.handoff) {
     // D011: a keyword alone transfers only if the real model does not clearly deny it (< 0.3).
-    // decide() is already running and bounded by DECIDE_BUDGET_MS; mock / failure keeps the keyword verdict.
-    earlyDecision = await decisionPromise;
+    // Only keyword arbitration waits up to KEYWORD_RISK_WAIT_MS; mock / timeout keeps the keyword verdict.
+    earlyDecision = await waitForKeywordDecision(decisionPromise);
     hardRisk = checkRisk(text, earlyDecision);
   }
   if (hardRisk.handoff) {
     mergeRiskFlags(id, hardRisk);
-    const trace = withDecision({ ...makeTrace(buyer, 'risk_gate', started, rule?.intent ?? earlyDecision!.intent.id), handoffReason: riskReason(hardRisk) }, earlyDecision!, hardRisk);
+    let trace: RouteTrace = { ...makeTrace(buyer, 'risk_gate', started, rule?.intent ?? earlyDecision?.intent.id), handoffReason: riskReason(hardRisk), riskScores: hardRisk.scores, riskHit: hardRisk.hits };
+    if (earlyDecision) trace = withDecision(trace, earlyDecision, hardRisk);
+    else {
+      trace.handoffReason += '；关键词分类等待超时（decideProvider 缺失）';
+      trace.cost.estimated = true;
+    }
     appendMessages(id, (await handoffMessages(trace, id, trace.handoffReason!, hardRisk.flags)).map(m => ({ ...m, traceId: trace.id })));
     trace.latency.totalMs = Date.now() - started;
     persistTrace(trace);
+    if (!earlyDecision) schedule(async () => recordLateDecisionCost(buyer, await decisionPromise));
     return response(id, buyer, request.debug, trace);
   }
   if (earlyDecision) mergeRiskFlags(id, hardRisk);

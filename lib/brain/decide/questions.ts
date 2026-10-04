@@ -38,13 +38,13 @@ export const INTENT_CRITERIA: Record<IntentId, string> = Object.fromEntries(
 export const RISK_QUESTIONS = {
   legal_threat: {
     type: "noul" as const,
-    instructions: "买家是否威胁向监管部门（如 12315、消协）投诉、起诉、找律师，或曝光到媒体/社交平台？",
-    criteria: { true: "明确威胁投诉、起诉、找律师或公开曝光", false: "没有这些威胁或相关表达" },
+    instructions: "买家本人是否在威胁向监管部门（如 12315、消协）投诉、起诉、找律师，或曝光到媒体/社交平台？只是提到别人的职业或身份（例如「我朋友是律师」）不算。",
+    criteria: { true: "买家本人明确威胁投诉、起诉、找律师或公开曝光", false: "没有买家本人的威胁，只提到别人的职业或身份也不算" },
   },
   health_safety: {
     type: "noul" as const,
-    instructions: "买家是否提到商品造成身体伤害、过敏、皮肤问题、受伤或其他安全隐患？",
-    criteria: { true: "明确提到商品引起伤害、过敏、皮肤问题或安全隐患", false: "没有伤害、过敏或安全隐患表达" },
+    instructions: "买家是否说商品已经给自己或家人造成了身体伤害、过敏、皮肤问题、受伤或其他不适，或指出商品存在安全隐患？购买前询问材质、是否适合敏感肌、是否防过敏等咨询不算。",
+    criteria: { true: "商品已经给买家或家人造成伤害、过敏、皮肤问题或不适，或存在安全隐患", false: "没有已经发生的伤害或安全隐患；购买前的材质、敏感肌、防过敏咨询不算" },
   },
   fraud_security: {
     type: "noul" as const,

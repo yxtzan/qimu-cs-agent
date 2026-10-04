@@ -1,0 +1,2252 @@
+[
+  {
+    "id": "E39",
+    "agentModel": "qwen/qwen3.7-flash",
+    "input": {
+      "text": "这条裙子是不是会让我被闺蜜嫉妒死哈哈"
+    },
+    "responseMs": 2405,
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "other",
+          "confidence": 0.64,
+          "probabilities": {
+            "multi_step_complex": 0,
+            "promotion": 0,
+            "shipping_policy": 0,
+            "stock_check": 0,
+            "return_policy": 0,
+            "modify_order": 0,
+            "product_consult": 0.27,
+            "greeting": 0.06,
+            "refund_progress": 0,
+            "refund_apply": 0,
+            "size_recommend": 0,
+            "exchange": 0,
+            "invoice": 0,
+            "cancel_order": 0,
+            "human_request": 0,
+            "quality_issue": 0,
+            "urge_shipping": 0,
+            "order_status": 0,
+            "other": 0.67,
+            "logistics_track": 0
+          }
+        },
+        "multiStep": 0.08,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.03,
+          "emotion": {
+            "score": 0,
+            "confidence": 1
+          }
+        },
+        "latencyMs": 370,
+        "costUsd": 0.000067452
+      }
+    ],
+    "trace": {
+      "id": "TR-0bed573c-e6ea-4daf-99a7-f14c7878a2cb",
+      "conversationId": "C1001",
+      "messageId": "C1001-M1",
+      "at": "2026-10-05T10:00:06.495+08:00",
+      "layer": "human",
+      "intent": "other",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 2401,
+        "agentMs": 2025,
+        "decideMs": 370
+      },
+      "cost": {
+        "decideUsd": 0.000067452,
+        "generationUsd": 0.000009737,
+        "agentUsd": 0.00011387,
+        "totalUsd": 0.00019105900000000002,
+        "estimated": false
+      },
+      "confidence": 0.64,
+      "ragHits": 0,
+      "escalatedFrom": "L3",
+      "handoffReason": "l3_failed",
+      "decideProvider": "jev",
+      "multiStep": 0.08,
+      "topIntents": [
+        {
+          "id": "other",
+          "p": 0.67
+        },
+        {
+          "id": "product_consult",
+          "p": 0.27
+        },
+        {
+          "id": "greeting",
+          "p": 0.06
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.01,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.03,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "这个问题比较复杂，我帮您转接人工客服",
+        "traceId": "TR-0bed573c-e6ea-4daf-99a7-f14c7878a2cb",
+        "id": "C1001-M2",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:08.893+08:00"
+      },
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-0bed573c-e6ea-4daf-99a7-f14c7878a2cb",
+        "id": "C1001-M3",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:08.893+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": [
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "哈哈，这自信太迷人了！不过我还没看到您说的“这条裙子”具体是哪一款呢。您可以发一下商品链接或名称，我帮您看看它的亮点，说不定真能让您成为焦点～",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "E50",
+    "agentModel": "qwen/qwen3.7-flash",
+    "input": {
+      "text": "付不了款怎么办"
+    },
+    "context": {
+      "orderId": "QM2026100402"
+    },
+    "responseMs": 1801,
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "order_status",
+          "confidence": 0.66,
+          "probabilities": {
+            "promotion": 0,
+            "exchange": 0,
+            "shipping_policy": 0,
+            "other": 0.26,
+            "modify_order": 0,
+            "return_policy": 0,
+            "product_consult": 0,
+            "refund_apply": 0,
+            "quality_issue": 0,
+            "cancel_order": 0,
+            "invoice": 0,
+            "greeting": 0,
+            "multi_step_complex": 0.04,
+            "refund_progress": 0,
+            "order_status": 0.68,
+            "size_recommend": 0,
+            "stock_check": 0,
+            "logistics_track": 0,
+            "human_request": 0.01,
+            "urge_shipping": 0
+          }
+        },
+        "multiStep": 0.28,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.04,
+          "abuse_extreme": 0.03,
+          "emotion": {
+            "score": 0.36,
+            "confidence": 0.64
+          }
+        },
+        "latencyMs": 397,
+        "costUsd": 0.000071904
+      }
+    ],
+    "trace": {
+      "id": "TR-cf0a5ccd-1035-4c31-83a0-98b86a8e4852",
+      "conversationId": "C1002",
+      "messageId": "C1002-M1",
+      "at": "2026-10-05T10:00:10.774+08:00",
+      "layer": "L3",
+      "intent": "order_status",
+      "stage": "insale",
+      "toolCalls": [
+        {
+          "name": "get_order",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 1796,
+        "agentMs": 1394,
+        "decideMs": 397
+      },
+      "cost": {
+        "decideUsd": 0.000071904,
+        "generationUsd": 0,
+        "agentUsd": 0.00002361,
+        "totalUsd": 0.000095514,
+        "estimated": false
+      },
+      "confidence": 0.66,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "multiStep": 0.28,
+      "topIntents": [
+        {
+          "id": "order_status",
+          "p": 0.68
+        },
+        {
+          "id": "other",
+          "p": 0.26
+        },
+        {
+          "id": "multi_step_complex",
+          "p": 0.04
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.01,
+        "fraud_security": 0.04,
+        "abuse_extreme": 0.03,
+        "emotion": 0.36
+      },
+      "riskHit": []
+    },
+    "status": "ai_active",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "订单 QM2026100402 目前为待付款状态。由于工具未返回具体失败原因，目前资料还无法确认是支付渠道、网络还是其他问题，请补充具体的错误提示以便进一步处理。",
+        "traceId": "TR-cf0a5ccd-1035-4c31-83a0-98b86a8e4852",
+        "id": "C1002-M2",
+        "conversationId": "C1002",
+        "createdAt": "2026-10-05T10:00:12.568+08:00"
+      }
+    ],
+    "tools": [
+      {
+        "name": "get_order",
+        "args": {
+          "orderId": "QM2026100402"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "QM2026100402",
+            "buyerId": "B003",
+            "status": "pending_payment",
+            "items": [
+              {
+                "itemId": "QM2026100402-1",
+                "productId": "P021",
+                "productName": "高腰直筒西装裤",
+                "skuId": "P021-C2-S",
+                "color": "卡其",
+                "size": "S",
+                "quantity": 1,
+                "unitPrice": 329,
+                "image": ""
+              }
+            ],
+            "totalAmount": 329,
+            "discount": 0,
+            "payAmount": 329,
+            "createdAt": "2026-10-05T09:30:00+08:00",
+            "address": {
+              "name": "陈思",
+              "phone": "138****1003",
+              "region": "上海市 上海市 浦东新区",
+              "detail": "栖木演示路3号虚构小区3室（演示地址）"
+            },
+            "afterSales": []
+          }
+        }
+      }
+    ],
+    "modelReplies": [
+      {
+        "toolChoice": "required",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "订单 QM2026100402 目前为待付款状态。由于工具未返回具体失败原因，目前资料还无法确认是支付渠道、网络还是其他问题，请补充具体的错误提示以便进一步处理。",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "E53",
+    "agentModel": "qwen/qwen3.7-flash",
+    "input": {
+      "text": "我想再买一件和上次那件大衣同色的开衫，有我的码吗，用券后多少钱"
+    },
+    "responseMs": 10570,
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "multi_step_complex",
+          "confidence": 0.98,
+          "probabilities": {
+            "greeting": 0,
+            "promotion": 0,
+            "size_recommend": 0,
+            "multi_step_complex": 0.99,
+            "modify_order": 0,
+            "quality_issue": 0,
+            "order_status": 0,
+            "human_request": 0,
+            "urge_shipping": 0,
+            "exchange": 0,
+            "stock_check": 0.01,
+            "return_policy": 0,
+            "refund_apply": 0,
+            "invoice": 0,
+            "shipping_policy": 0,
+            "other": 0,
+            "logistics_track": 0,
+            "cancel_order": 0,
+            "refund_progress": 0,
+            "product_consult": 0
+          }
+        },
+        "multiStep": 0.96,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": {
+            "score": 0,
+            "confidence": 1
+          }
+        },
+        "latencyMs": 410,
+        "costUsd": 0.000068376
+      }
+    ],
+    "trace": {
+      "id": "TR-97085632-ac1c-4f9e-ace4-f65605951af1",
+      "conversationId": "C1003",
+      "messageId": "C1003-M1",
+      "at": "2026-10-05T10:00:12.574+08:00",
+      "layer": "L3",
+      "intent": "multi_step_complex",
+      "stage": "other",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "search_products",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "search_products",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "search_products",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "list_coupons",
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "name": "recommend_size",
+          "ok": true,
+          "ms": 1
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 10567,
+        "agentMs": 10153,
+        "decideMs": 410
+      },
+      "cost": {
+        "decideUsd": 0.000068376,
+        "generationUsd": 0,
+        "agentUsd": 0.0006652979999999999,
+        "totalUsd": 0.0007336739999999999,
+        "estimated": false
+      },
+      "confidence": 0.98,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "multiStep": 0.96,
+      "topIntents": [
+        {
+          "id": "multi_step_complex",
+          "p": 0.99
+        },
+        {
+          "id": "stock_check",
+          "p": 0.01
+        },
+        {
+          "id": "greeting",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.01,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.01,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "ai_active",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "上次大衣为燕麦色，同款软糯圆领开衫有您的 M 码（库存12件）。因单件价格未达全店券门槛，无可用优惠，券后价格为269元。",
+        "traceId": "TR-97085632-ac1c-4f9e-ace4-f65605951af1",
+        "id": "C1003-M2",
+        "conversationId": "C1003",
+        "createdAt": "2026-10-05T10:00:23.139+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "以下是当前可用的优惠券。",
+        "card": {
+          "kind": "coupons",
+          "coupons": [
+            {
+              "id": "CP001",
+              "buyerId": "B001",
+              "title": "满 299 减 30",
+              "threshold": 299,
+              "discount": 30,
+              "scope": "全店",
+              "expiresAt": "2026-10-31T23:59:59+08:00",
+              "used": false
+            },
+            {
+              "id": "CP002",
+              "buyerId": "B001",
+              "title": "满 199 减 20",
+              "threshold": 199,
+              "discount": 20,
+              "scope": "外套",
+              "expiresAt": "2026-10-15T23:59:59+08:00",
+              "used": false
+            }
+          ]
+        },
+        "traceId": "TR-97085632-ac1c-4f9e-ace4-f65605951af1",
+        "id": "C1003-M3",
+        "conversationId": "C1003",
+        "createdAt": "2026-10-05T10:00:23.139+08:00"
+      }
+    ],
+    "tools": [
+      {
+        "name": "list_orders",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "QM2026100201",
+              "buyerId": "B001",
+              "status": "shipped",
+              "items": [
+                {
+                  "itemId": "QM2026100201-1",
+                  "productId": "P021",
+                  "productName": "高腰直筒西装裤",
+                  "skuId": "P021-C1-S",
+                  "color": "黑",
+                  "size": "S",
+                  "quantity": 1,
+                  "unitPrice": 329,
+                  "image": ""
+                },
+                {
+                  "itemId": "QM2026100201-2",
+                  "productId": "P030",
+                  "productName": "软糯圆领开衫",
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 269,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 598,
+              "discount": 0,
+              "payAmount": 598,
+              "createdAt": "2026-10-02T10:00:00+08:00",
+              "paidAt": "2026-10-02T10:05:00+08:00",
+              "shippedAt": "2026-10-03T10:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026100201",
+                "status": "in_transit",
+                "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-10-03T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-10-03T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026092801",
+              "buyerId": "B001",
+              "status": "delivered",
+              "items": [
+                {
+                  "itemId": "QM2026092801-1",
+                  "productId": "P007",
+                  "productName": "燕麦色羊毛混纺大衣",
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 599,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 599,
+              "discount": 0,
+              "payAmount": 599,
+              "createdAt": "2026-09-26T10:00:00+08:00",
+              "paidAt": "2026-09-26T10:05:00+08:00",
+              "shippedAt": "2026-09-28T10:00:00+08:00",
+              "deliveredAt": "2026-09-30T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026092801",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-30T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-28T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-28T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026091501",
+              "buyerId": "B001",
+              "status": "completed",
+              "items": [
+                {
+                  "itemId": "QM2026091501-1",
+                  "productId": "P002",
+                  "productName": "法式碎花茶歇裙",
+                  "skuId": "P002-C1-M",
+                  "color": "蓝底白花",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 389,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 389,
+              "discount": 0,
+              "payAmount": 389,
+              "createdAt": "2026-09-15T10:00:00+08:00",
+              "paidAt": "2026-09-15T10:05:00+08:00",
+              "shippedAt": "2026-09-16T10:00:00+08:00",
+              "deliveredAt": "2026-09-18T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026091501",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-18T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-16T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-16T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": [
+                {
+                  "id": "AS20260920001",
+                  "orderId": "QM2026091501",
+                  "itemId": "QM2026091501-1",
+                  "type": "return_refund",
+                  "reason": "腰有点紧",
+                  "amount": 389,
+                  "status": "refunding",
+                  "createdAt": "2026-09-20T10:00:00+08:00",
+                  "timeline": [
+                    {
+                      "at": "2026-09-20T10:00:00+08:00",
+                      "status": "pending_review",
+                      "note": "申请退货退款，腰有点紧"
+                    },
+                    {
+                      "at": "2026-09-20T15:00:00+08:00",
+                      "status": "approved",
+                      "note": "已同意退货，请寄回商品"
+                    },
+                    {
+                      "at": "2026-09-29T10:00:00+08:00",
+                      "status": "returning",
+                      "note": "买家已寄回，退件运输中"
+                    },
+                    {
+                      "at": "2026-10-03T10:00:00+08:00",
+                      "status": "refunding",
+                      "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "search_products",
+        "args": {
+          "query": "开衫",
+          "category": "上衣"
+        },
+        "result": {
+          "ok": true,
+          "data": []
+        }
+      },
+      {
+        "name": "search_products",
+        "args": {
+          "query": "燕麦色 开衫"
+        },
+        "result": {
+          "ok": true,
+          "data": []
+        }
+      },
+      {
+        "name": "search_products",
+        "args": {
+          "query": "开衫"
+        },
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "P027",
+              "name": "短款扣式开衫",
+              "category": "针织衫",
+              "price": 259,
+              "colors": [
+                "雾蓝",
+                "浅灰"
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ],
+              "fit": "修身",
+              "material": "羊毛 30% 腈纶 50% 锦纶 20%",
+              "care": "中性洗剂冷水轻柔手洗，勿拧绞，平铺阴干。",
+              "description": "短款扣式开衫采用修身版型，方便日常通勤搭配。选择尺码时请参考身高体重和量体数据。",
+              "highlights": [
+                "日常通勤",
+                "修身版型",
+                "易于搭配"
+              ],
+              "images": [],
+              "sales": 672,
+              "rating": 4.3,
+              "skus": [
+                {
+                  "skuId": "P027-C1-XS",
+                  "color": "雾蓝",
+                  "size": "XS",
+                  "stock": 14
+                },
+                {
+                  "skuId": "P027-C1-S",
+                  "color": "雾蓝",
+                  "size": "S",
+                  "stock": 33
+                },
+                {
+                  "skuId": "P027-C1-M",
+                  "color": "雾蓝",
+                  "size": "M",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P027-C1-L",
+                  "color": "雾蓝",
+                  "size": "L",
+                  "stock": 12
+                },
+                {
+                  "skuId": "P027-C1-XL",
+                  "color": "雾蓝",
+                  "size": "XL",
+                  "stock": 29
+                },
+                {
+                  "skuId": "P027-C2-XS",
+                  "color": "浅灰",
+                  "size": "XS",
+                  "stock": 7
+                },
+                {
+                  "skuId": "P027-C2-S",
+                  "color": "浅灰",
+                  "size": "S",
+                  "stock": 14
+                },
+                {
+                  "skuId": "P027-C2-M",
+                  "color": "浅灰",
+                  "size": "M",
+                  "stock": 33
+                },
+                {
+                  "skuId": "P027-C2-L",
+                  "color": "浅灰",
+                  "size": "L",
+                  "stock": 28
+                },
+                {
+                  "skuId": "P027-C2-XL",
+                  "color": "浅灰",
+                  "size": "XL",
+                  "stock": 18
+                }
+              ],
+              "tags": [
+                "通勤",
+                "日常"
+              ]
+            },
+            {
+              "id": "P030",
+              "name": "软糯圆领开衫",
+              "category": "针织衫",
+              "price": 269,
+              "colors": [
+                "奶白",
+                "燕麦",
+                "雾粉"
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ],
+              "fit": "宽松",
+              "material": "羊毛 30% 腈纶 50% 锦纶 20%",
+              "care": "羊毛中性洗剂轻柔手洗，毛巾吸水后平铺阴干，不悬挂湿衣。",
+              "description": "圆领宽松开衫，可单穿也可叠搭，肩线柔和不勒手臂。",
+              "highlights": [
+                "柔软混纺",
+                "圆领叠搭",
+                "宽松肩线"
+              ],
+              "images": [],
+              "sales": 614,
+              "rating": 4.8,
+              "tags": [
+                "秋冬",
+                "叠搭"
+              ],
+              "skus": [
+                {
+                  "skuId": "P030-C1-XS",
+                  "color": "奶白",
+                  "size": "XS",
+                  "stock": 8
+                },
+                {
+                  "skuId": "P030-C1-S",
+                  "color": "奶白",
+                  "size": "S",
+                  "stock": 13
+                },
+                {
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "stock": 15
+                },
+                {
+                  "skuId": "P030-C1-L",
+                  "color": "奶白",
+                  "size": "L",
+                  "stock": 7
+                },
+                {
+                  "skuId": "P030-C1-XL",
+                  "color": "奶白",
+                  "size": "XL",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P030-C2-XS",
+                  "color": "燕麦",
+                  "size": "XS",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P030-C2-S",
+                  "color": "燕麦",
+                  "size": "S",
+                  "stock": 9
+                },
+                {
+                  "skuId": "P030-C2-M",
+                  "color": "燕麦",
+                  "size": "M",
+                  "stock": 12
+                },
+                {
+                  "skuId": "P030-C2-L",
+                  "color": "燕麦",
+                  "size": "L",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P030-C2-XL",
+                  "color": "燕麦",
+                  "size": "XL",
+                  "stock": 3
+                },
+                {
+                  "skuId": "P030-C3-XS",
+                  "color": "雾粉",
+                  "size": "XS",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P030-C3-S",
+                  "color": "雾粉",
+                  "size": "S",
+                  "stock": 11
+                },
+                {
+                  "skuId": "P030-C3-M",
+                  "color": "雾粉",
+                  "size": "M",
+                  "stock": 10
+                },
+                {
+                  "skuId": "P030-C3-L",
+                  "color": "雾粉",
+                  "size": "L",
+                  "stock": 8
+                },
+                {
+                  "skuId": "P030-C3-XL",
+                  "color": "雾粉",
+                  "size": "XL",
+                  "stock": 4
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "list_coupons",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "CP001",
+              "buyerId": "B001",
+              "title": "满 299 减 30",
+              "threshold": 299,
+              "discount": 30,
+              "scope": "全店",
+              "expiresAt": "2026-10-31T23:59:59+08:00",
+              "used": false
+            },
+            {
+              "id": "CP002",
+              "buyerId": "B001",
+              "title": "满 199 减 20",
+              "threshold": 199,
+              "discount": 20,
+              "scope": "外套",
+              "expiresAt": "2026-10-15T23:59:59+08:00",
+              "used": false
+            }
+          ]
+        }
+      },
+      {
+        "name": "recommend_size",
+        "args": {
+          "heightCm": 160,
+          "weightKg": 50,
+          "productId": "P030"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "size": "S",
+            "basis": "身高 160cm 对应 M，体重 50kg 对应 M，取较大尺码 M。这款是宽松版型，喜欢宽松效果可选 M，想合身选 S。"
+          }
+        }
+      }
+    ],
+    "modelReplies": [
+      {
+        "toolChoice": "required",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_76ebe4a3967040058f316367",
+              "function": {
+                "name": "list_orders",
+                "arguments": "{}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_e07a6f9630c84996bc79de9a",
+              "function": {
+                "name": "search_products",
+                "arguments": "{\"query\": \"开衫\", \"category\": \"上衣\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_bea4f6926fc347debe4d8489",
+              "function": {
+                "name": "search_products",
+                "arguments": "{\"query\": \"燕麦色 开衫\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_ffaf7aa72dca498f9b30dc78",
+              "function": {
+                "name": "search_products",
+                "arguments": "{\"query\": \"开衫\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_c4c045da525c4c739850e366",
+              "function": {
+                "name": "list_coupons",
+                "arguments": "{}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_4e017b0369be47ceb538cb15",
+              "function": {
+                "name": "recommend_size",
+                "arguments": "{\"heightCm\": 160, \"weightKg\": 50, \"productId\": \"P030\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "none",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "上次大衣为燕麦色，同款软糯圆领开衫有您的 M 码（库存12件）。因单件价格未达全店券门槛，无可用优惠，券后价格为269元。",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "E56",
+    "agentModel": "qwen/qwen3.7-flash",
+    "input": {
+      "text": "比较一下你们家的大衣和开衫哪个更保暖，顺便告诉我怎么洗"
+    },
+    "responseMs": 6881,
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "product_consult",
+          "confidence": 0.52,
+          "probabilities": {
+            "greeting": 0,
+            "multi_step_complex": 0.45,
+            "refund_apply": 0,
+            "promotion": 0,
+            "stock_check": 0,
+            "quality_issue": 0,
+            "product_consult": 0.55,
+            "size_recommend": 0,
+            "exchange": 0,
+            "invoice": 0,
+            "urge_shipping": 0,
+            "shipping_policy": 0,
+            "order_status": 0,
+            "human_request": 0,
+            "return_policy": 0,
+            "other": 0,
+            "refund_progress": 0,
+            "logistics_track": 0,
+            "cancel_order": 0,
+            "modify_order": 0
+          }
+        },
+        "multiStep": 0.97,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": {
+            "score": 0,
+            "confidence": 1
+          }
+        },
+        "latencyMs": 460,
+        "costUsd": 0.000070938
+      }
+    ],
+    "trace": {
+      "id": "TR-34785c44-0be6-460d-a319-974a69186ab7",
+      "conversationId": "C1004",
+      "messageId": "C1004-M1",
+      "at": "2026-10-05T10:00:23.147+08:00",
+      "layer": "human",
+      "intent": "product_consult",
+      "stage": "presale",
+      "toolCalls": [
+        {
+          "name": "search_products",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "search_products",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "search_kb",
+          "ok": true,
+          "ms": 2013
+        }
+      ],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 6878,
+        "agentMs": 6406,
+        "decideMs": 460
+      },
+      "cost": {
+        "decideUsd": 0.000070938,
+        "generationUsd": 0.0000489472,
+        "agentUsd": 0.00039872,
+        "totalUsd": 0.0005186052,
+        "estimated": false
+      },
+      "confidence": 0.52,
+      "ragHits": 0,
+      "escalatedFrom": "L3",
+      "handoffReason": "没有找到足够的政策资料，需要人工核实",
+      "decideProvider": "jev",
+      "multiStep": 0.97,
+      "topIntents": [
+        {
+          "id": "product_consult",
+          "p": 0.55
+        },
+        {
+          "id": "multi_step_complex",
+          "p": 0.45
+        },
+        {
+          "id": "greeting",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.02,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.02,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "这个问题比较复杂，我帮您转接人工客服",
+        "traceId": "TR-34785c44-0be6-460d-a319-974a69186ab7",
+        "id": "C1004-M2",
+        "conversationId": "C1004",
+        "createdAt": "2026-10-05T10:00:30.021+08:00"
+      },
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-34785c44-0be6-460d-a319-974a69186ab7",
+        "id": "C1004-M3",
+        "conversationId": "C1004",
+        "createdAt": "2026-10-05T10:00:30.021+08:00"
+      }
+    ],
+    "tools": [
+      {
+        "name": "search_products",
+        "args": {
+          "query": "大衣"
+        },
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "P007",
+              "name": "燕麦色羊毛混纺大衣",
+              "category": "外套",
+              "price": 599,
+              "colors": [
+                "燕麦色",
+                "炭灰"
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ],
+              "fit": "标准",
+              "material": "羊毛 70% 锦纶 30%",
+              "care": "建议专业干洗，勿机洗，通风阴干，收纳时使用宽肩衣架。",
+              "description": "直身剪裁搭配翻领，里面搭薄针织适合日常通勤。",
+              "highlights": [
+                "羊毛混纺",
+                "直身翻领",
+                "双侧插袋"
+              ],
+              "images": [],
+              "sales": 426,
+              "rating": 4.8,
+              "tags": [
+                "通勤",
+                "秋冬"
+              ],
+              "skus": [
+                {
+                  "skuId": "P007-C1-XS",
+                  "color": "燕麦色",
+                  "size": "XS",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P007-C1-S",
+                  "color": "燕麦色",
+                  "size": "S",
+                  "stock": 8
+                },
+                {
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "stock": 12
+                },
+                {
+                  "skuId": "P007-C1-L",
+                  "color": "燕麦色",
+                  "size": "L",
+                  "stock": 3
+                },
+                {
+                  "skuId": "P007-C1-XL",
+                  "color": "燕麦色",
+                  "size": "XL",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P007-C2-XS",
+                  "color": "炭灰",
+                  "size": "XS",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P007-C2-S",
+                  "color": "炭灰",
+                  "size": "S",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P007-C2-M",
+                  "color": "炭灰",
+                  "size": "M",
+                  "stock": 9
+                },
+                {
+                  "skuId": "P007-C2-L",
+                  "color": "炭灰",
+                  "size": "L",
+                  "stock": 0,
+                  "restockDate": "2026-10-12T10:00:00+08:00"
+                },
+                {
+                  "skuId": "P007-C2-XL",
+                  "color": "炭灰",
+                  "size": "XL",
+                  "stock": 4
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "search_products",
+        "args": {
+          "query": "开衫"
+        },
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "P027",
+              "name": "短款扣式开衫",
+              "category": "针织衫",
+              "price": 259,
+              "colors": [
+                "雾蓝",
+                "浅灰"
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ],
+              "fit": "修身",
+              "material": "羊毛 30% 腈纶 50% 锦纶 20%",
+              "care": "中性洗剂冷水轻柔手洗，勿拧绞，平铺阴干。",
+              "description": "短款扣式开衫采用修身版型，方便日常通勤搭配。选择尺码时请参考身高体重和量体数据。",
+              "highlights": [
+                "日常通勤",
+                "修身版型",
+                "易于搭配"
+              ],
+              "images": [],
+              "sales": 672,
+              "rating": 4.3,
+              "skus": [
+                {
+                  "skuId": "P027-C1-XS",
+                  "color": "雾蓝",
+                  "size": "XS",
+                  "stock": 14
+                },
+                {
+                  "skuId": "P027-C1-S",
+                  "color": "雾蓝",
+                  "size": "S",
+                  "stock": 33
+                },
+                {
+                  "skuId": "P027-C1-M",
+                  "color": "雾蓝",
+                  "size": "M",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P027-C1-L",
+                  "color": "雾蓝",
+                  "size": "L",
+                  "stock": 12
+                },
+                {
+                  "skuId": "P027-C1-XL",
+                  "color": "雾蓝",
+                  "size": "XL",
+                  "stock": 29
+                },
+                {
+                  "skuId": "P027-C2-XS",
+                  "color": "浅灰",
+                  "size": "XS",
+                  "stock": 7
+                },
+                {
+                  "skuId": "P027-C2-S",
+                  "color": "浅灰",
+                  "size": "S",
+                  "stock": 14
+                },
+                {
+                  "skuId": "P027-C2-M",
+                  "color": "浅灰",
+                  "size": "M",
+                  "stock": 33
+                },
+                {
+                  "skuId": "P027-C2-L",
+                  "color": "浅灰",
+                  "size": "L",
+                  "stock": 28
+                },
+                {
+                  "skuId": "P027-C2-XL",
+                  "color": "浅灰",
+                  "size": "XL",
+                  "stock": 18
+                }
+              ],
+              "tags": [
+                "通勤",
+                "日常"
+              ]
+            },
+            {
+              "id": "P030",
+              "name": "软糯圆领开衫",
+              "category": "针织衫",
+              "price": 269,
+              "colors": [
+                "奶白",
+                "燕麦",
+                "雾粉"
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ],
+              "fit": "宽松",
+              "material": "羊毛 30% 腈纶 50% 锦纶 20%",
+              "care": "羊毛中性洗剂轻柔手洗，毛巾吸水后平铺阴干，不悬挂湿衣。",
+              "description": "圆领宽松开衫，可单穿也可叠搭，肩线柔和不勒手臂。",
+              "highlights": [
+                "柔软混纺",
+                "圆领叠搭",
+                "宽松肩线"
+              ],
+              "images": [],
+              "sales": 614,
+              "rating": 4.8,
+              "tags": [
+                "秋冬",
+                "叠搭"
+              ],
+              "skus": [
+                {
+                  "skuId": "P030-C1-XS",
+                  "color": "奶白",
+                  "size": "XS",
+                  "stock": 8
+                },
+                {
+                  "skuId": "P030-C1-S",
+                  "color": "奶白",
+                  "size": "S",
+                  "stock": 13
+                },
+                {
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "stock": 15
+                },
+                {
+                  "skuId": "P030-C1-L",
+                  "color": "奶白",
+                  "size": "L",
+                  "stock": 7
+                },
+                {
+                  "skuId": "P030-C1-XL",
+                  "color": "奶白",
+                  "size": "XL",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P030-C2-XS",
+                  "color": "燕麦",
+                  "size": "XS",
+                  "stock": 5
+                },
+                {
+                  "skuId": "P030-C2-S",
+                  "color": "燕麦",
+                  "size": "S",
+                  "stock": 9
+                },
+                {
+                  "skuId": "P030-C2-M",
+                  "color": "燕麦",
+                  "size": "M",
+                  "stock": 12
+                },
+                {
+                  "skuId": "P030-C2-L",
+                  "color": "燕麦",
+                  "size": "L",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P030-C2-XL",
+                  "color": "燕麦",
+                  "size": "XL",
+                  "stock": 3
+                },
+                {
+                  "skuId": "P030-C3-XS",
+                  "color": "雾粉",
+                  "size": "XS",
+                  "stock": 6
+                },
+                {
+                  "skuId": "P030-C3-S",
+                  "color": "雾粉",
+                  "size": "S",
+                  "stock": 11
+                },
+                {
+                  "skuId": "P030-C3-M",
+                  "color": "雾粉",
+                  "size": "M",
+                  "stock": 10
+                },
+                {
+                  "skuId": "P030-C3-L",
+                  "color": "雾粉",
+                  "size": "L",
+                  "stock": 8
+                },
+                {
+                  "skuId": "P030-C3-XL",
+                  "color": "雾粉",
+                  "size": "XL",
+                  "stock": 4
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "search_kb",
+        "args": {
+          "query": "大衣和开衫的洗护说明"
+        },
+        "result": {
+          "ok": true,
+          "data": []
+        }
+      }
+    ],
+    "modelReplies": [
+      {
+        "toolChoice": "required",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_abb2905e8f244d78bc207b8e",
+              "function": {
+                "name": "search_products",
+                "arguments": "{\"query\": \"大衣\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_a79a28c1df194fbd99cd2a99",
+              "function": {
+                "name": "search_products",
+                "arguments": "{\"query\": \"开衫\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_07b338ffd8ed41b6ae7fecd0",
+              "function": {
+                "name": "search_kb",
+                "arguments": "{\"query\": \"大衣和开衫的洗护说明\"}"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "E57",
+    "agentModel": "qwen/qwen3.7-flash",
+    "input": {
+      "text": "到哪了，另外我想把上周那件外套退了"
+    },
+    "responseMs": 15240,
+    "decisions": [
+      {
+        "provider": "llm",
+        "intent": {
+          "id": "multi_step_complex",
+          "confidence": 0.95,
+          "probabilities": {
+            "multi_step_complex": 0.95,
+            "logistics_track": 0.03,
+            "refund_apply": 0.02
+          }
+        },
+        "multiStep": 1,
+        "risk": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": {
+            "score": 0,
+            "confidence": 0.9
+          }
+        },
+        "latencyMs": 4581,
+        "costUsd": 0.000044156,
+        "error": "jev failed: OpenRouterError: OpenRouter /alpha/decisions timed out after 3000ms"
+      }
+    ],
+    "trace": {
+      "id": "TR-2d21404d-585f-4f43-8b3d-ace8e981160a",
+      "conversationId": "C1005",
+      "messageId": "C1005-M1",
+      "at": "2026-10-05T10:00:36.784+08:00",
+      "layer": "L3",
+      "intent": "multi_step_complex",
+      "stage": "other",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "track_logistics",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 15236,
+        "agentMs": 7645,
+        "decideMs": 7585
+      },
+      "cost": {
+        "decideUsd": 0.000044156,
+        "generationUsd": 0,
+        "agentUsd": 0.00044169,
+        "totalUsd": 0.000485846,
+        "estimated": true
+      },
+      "confidence": 0.95,
+      "ragHits": 0,
+      "decideProvider": "llm",
+      "multiStep": 1,
+      "topIntents": [
+        {
+          "id": "multi_step_complex",
+          "p": 0.95
+        },
+        {
+          "id": "logistics_track",
+          "p": 0.03
+        },
+        {
+          "id": "refund_apply",
+          "p": 0.02
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "ai_active",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "您的订单 QM2026100201 目前由顺丰速运承运，最新状态为“已到达上海浦东配送站，等待安排派送”，预计送达时间为明天（10月6日）18:00前。\n\n关于您想退回的燕麦色羊毛混纺大衣（QM2026092801），系统提示需要说明本次退货的具体原因（如：尺码不合适、质量问题等）。请您告知具体原因，我将为您生成退货退款申请卡片。",
+        "traceId": "TR-2d21404d-585f-4f43-8b3d-ace8e981160a",
+        "id": "C1005-M2",
+        "conversationId": "C1005",
+        "createdAt": "2026-10-05T10:00:52.017+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "请说明这件商品本次退货的原因，我再帮您准备申请。",
+        "traceId": "TR-2d21404d-585f-4f43-8b3d-ace8e981160a",
+        "id": "C1005-M3",
+        "conversationId": "C1005",
+        "createdAt": "2026-10-05T10:00:52.017+08:00"
+      }
+    ],
+    "tools": [
+      {
+        "name": "list_orders",
+        "args": {},
+        "result": {
+          "ok": true,
+          "data": [
+            {
+              "id": "QM2026100201",
+              "buyerId": "B001",
+              "status": "shipped",
+              "items": [
+                {
+                  "itemId": "QM2026100201-1",
+                  "productId": "P021",
+                  "productName": "高腰直筒西装裤",
+                  "skuId": "P021-C1-S",
+                  "color": "黑",
+                  "size": "S",
+                  "quantity": 1,
+                  "unitPrice": 329,
+                  "image": ""
+                },
+                {
+                  "itemId": "QM2026100201-2",
+                  "productId": "P030",
+                  "productName": "软糯圆领开衫",
+                  "skuId": "P030-C1-M",
+                  "color": "奶白",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 269,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 598,
+              "discount": 0,
+              "payAmount": 598,
+              "createdAt": "2026-10-02T10:00:00+08:00",
+              "paidAt": "2026-10-02T10:05:00+08:00",
+              "shippedAt": "2026-10-03T10:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026100201",
+                "status": "in_transit",
+                "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-10-03T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-10-03T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-10-03T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026092801",
+              "buyerId": "B001",
+              "status": "delivered",
+              "items": [
+                {
+                  "itemId": "QM2026092801-1",
+                  "productId": "P007",
+                  "productName": "燕麦色羊毛混纺大衣",
+                  "skuId": "P007-C1-M",
+                  "color": "燕麦色",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 599,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 599,
+              "discount": 0,
+              "payAmount": 599,
+              "createdAt": "2026-09-26T10:00:00+08:00",
+              "paidAt": "2026-09-26T10:05:00+08:00",
+              "shippedAt": "2026-09-28T10:00:00+08:00",
+              "deliveredAt": "2026-09-30T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026092801",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-30T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-30T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-28T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-28T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-28T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": []
+            },
+            {
+              "id": "QM2026091501",
+              "buyerId": "B001",
+              "status": "completed",
+              "items": [
+                {
+                  "itemId": "QM2026091501-1",
+                  "productId": "P002",
+                  "productName": "法式碎花茶歇裙",
+                  "skuId": "P002-C1-M",
+                  "color": "蓝底白花",
+                  "size": "M",
+                  "quantity": 1,
+                  "unitPrice": 389,
+                  "image": ""
+                }
+              ],
+              "totalAmount": 389,
+              "discount": 0,
+              "payAmount": 389,
+              "createdAt": "2026-09-15T10:00:00+08:00",
+              "paidAt": "2026-09-15T10:05:00+08:00",
+              "shippedAt": "2026-09-16T10:00:00+08:00",
+              "deliveredAt": "2026-09-18T14:00:00+08:00",
+              "address": {
+                "name": "林小满",
+                "phone": "138****1001",
+                "region": "上海市 上海市 浦东新区",
+                "detail": "栖木演示路1号虚构小区1室（演示地址）"
+              },
+              "logistics": {
+                "carrier": "顺丰速运",
+                "trackingNo": "SF0002026091501",
+                "status": "delivered",
+                "estimatedDelivery": "2026-09-18T14:00:00+08:00",
+                "events": [
+                  {
+                    "at": "2026-09-18T14:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "收件人已签收"
+                  },
+                  {
+                    "at": "2026-09-16T21:00:00+08:00",
+                    "location": "上海浦东配送站",
+                    "description": "已到达配送站，等待安排派送"
+                  },
+                  {
+                    "at": "2026-09-16T19:00:00+08:00",
+                    "location": "上海转运中心",
+                    "description": "到达上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T15:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "已发往上海转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T12:00:00+08:00",
+                    "location": "杭州转运中心",
+                    "description": "到达杭州转运中心"
+                  },
+                  {
+                    "at": "2026-09-16T10:00:00+08:00",
+                    "location": "杭州仓",
+                    "description": "包裹已揽收"
+                  }
+                ]
+              },
+              "afterSales": [
+                {
+                  "id": "AS20260920001",
+                  "orderId": "QM2026091501",
+                  "itemId": "QM2026091501-1",
+                  "type": "return_refund",
+                  "reason": "腰有点紧",
+                  "amount": 389,
+                  "status": "refunding",
+                  "createdAt": "2026-09-20T10:00:00+08:00",
+                  "timeline": [
+                    {
+                      "at": "2026-09-20T10:00:00+08:00",
+                      "status": "pending_review",
+                      "note": "申请退货退款，腰有点紧"
+                    },
+                    {
+                      "at": "2026-09-20T15:00:00+08:00",
+                      "status": "approved",
+                      "note": "已同意退货，请寄回商品"
+                    },
+                    {
+                      "at": "2026-09-29T10:00:00+08:00",
+                      "status": "returning",
+                      "note": "买家已寄回，退件运输中"
+                    },
+                    {
+                      "at": "2026-10-03T10:00:00+08:00",
+                      "status": "refunding",
+                      "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "track_logistics",
+        "args": {
+          "orderId": "QM2026100201"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "modelReplies": [
+      {
+        "toolChoice": "required",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_7815c365961a4987b79562da",
+              "function": {
+                "name": "track_logistics",
+                "arguments": "{\"orderId\": \"QM2026100201\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "tool_calls",
+        "native_finish_reason": "tool_calls",
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "refusal": null,
+          "reasoning": null,
+          "tool_calls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_c6959ea426dc460e8b038f68",
+              "function": {
+                "name": "apply_refund",
+                "arguments": "{\"itemId\": \"QM2026092801-1\", \"orderId\": \"QM2026092801\", \"reason\": \"我想把上周那件外套退了\", \"type\": \"return_refund\"}"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "toolChoice": "auto",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "您的订单 QM2026100201 目前由顺丰速运承运，最新状态为“已到达上海浦东配送站，等待安排派送”，预计送达时间为明天（10月6日）18:00前。\n\n关于您想退回的燕麦色羊毛混纺大衣（QM2026092801），系统提示需要说明本次退货的具体原因（如：尺码不合适、质量问题等）。请您告知具体原因，我将为您生成退货退款申请卡片。",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ]
+  }
+]

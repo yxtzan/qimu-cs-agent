@@ -1,4 +1,5 @@
 import { runTool, type ToolContext } from '../../tools/registry';
+import type { ToolFailureOptions } from '../../tools/types';
 import type { ChatAction, DialogState, IntentId, RouteTrace } from '../../types';
 import type { NewMessage } from '../../store/conversations';
 import { addHistory } from '../state';
@@ -19,7 +20,13 @@ export interface HandlerMetrics {
   ragHits: number;
   ragMs: number;
 }
-export class HandlerFailure extends Error {}
+export class HandlerFailure extends Error {
+  readonly handoff: boolean;
+  readonly kind: ToolFailureOptions['kind'];
+  constructor(message: string, options: ToolFailureOptions = {}) {
+    super(message); this.handoff = options.handoff ?? false; this.kind = options.kind;
+  }
+}
 export interface HandlerContext {
   toolContext: ToolContext;
   state: DialogState;
@@ -37,7 +44,7 @@ export function createHandlerContext(toolContext: ToolContext, state: DialogStat
     const result = await runTool(name, args, toolContext);
     metrics.toolCalls.push({ name, ok: result.ok, ms: Date.now() - started });
     addHistory(state, 'tool_call', name, result.ok ? `已查询或申请：${name}` : result.reason);
-    if (!result.ok) throw new HandlerFailure(result.reason);
+    if (!result.ok) throw new HandlerFailure(result.reason, result);
     return result.data as T;
   } };
 }

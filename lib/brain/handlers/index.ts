@@ -64,15 +64,17 @@ const handlers: Record<IntentId, (ctx: HandlerContext) => Promise<HandlerResult>
     return { status: 'done', messages: [{ role: 'ai', text: order?.buyerId === ctx.toolContext.buyerId ? `找到订单 ${order.id}（${order.items.map(i => i.productName).join('、')}）。您想办理什么？` : '我可以帮您查物流、推荐尺码、查询退款或办理退换。请告诉我具体需要。', quickReplies: [{ label: '查物流', action: { type: 'quick_action', name: 'track_logistics' } }, { label: '退款进度', action: { type: 'quick_action', name: 'refund_progress' } }, { label: '转人工', action: { type: 'quick_action', name: 'human' } }] }] };
   },
 };
-export async function runHandler(ctx: HandlerContext): Promise<HandlerResult> {
+export function collectRefundReason(ctx: HandlerContext): void {
   if (ctx.intent === 'refund_apply' && /不合适|太紧|偏小|偏大|质量|破损|色差|不喜欢|开线|起球|已洗|洗过/.test(ctx.text)) ctx.state.slots.reason = ctx.text;
   // A follow-up such as “腰太紧了” completes the previously collected refund reason.
   if (ctx.intent === 'refund_apply' && ctx.state.currentTask?.status === 'collecting' && ctx.state.currentTask.intent === 'refund_apply' && !/退款|退货/.test(ctx.text)) ctx.state.slots.reason = ctx.text;
+}
+export async function runHandler(ctx: HandlerContext): Promise<HandlerResult> {
+  collectRefundReason(ctx);
   try { return await handlers[ctx.intent](ctx); }
   catch (error) {
     if (!(error instanceof HandlerFailure)) throw error;
-    const transfer = /转人工|人工审核|人工确认/.test(error.message);
-    return { ...ask(error.message), ...(transfer ? { handoffReason: error.message } : {}) };
+    return { ...ask(error.message), ...(error.handoff ? { handoffReason: error.message } : {}) };
   }
 }
 // T04-1: this finite, read-only combination has no write or general agent loop.

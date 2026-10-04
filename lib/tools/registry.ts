@@ -38,9 +38,9 @@ function add(name: string, description: string, parameters: Schema, kind: ToolDe
       if (!validate(args, parameters)) throw new ToolError('工具参数不完整或格式错误，请按参数说明补充');
       return { ok: true, data: await handler(args, ctx) };
     } catch (error) {
-      if (error instanceof ToolError) return { ok: false, reason: error.message };
+      if (error instanceof ToolError) return { ok: false, reason: error.message, handoff: error.handoff, kind: error.kind };
       console.error('[tools]', name, error instanceof Error ? error.name : 'UnknownError');
-      return { ok: false, reason: '工具暂时无法执行，请稍后重试或转人工客服' };
+      return { ok: false, reason: '工具暂时无法执行，请稍后重试或转人工客服', handoff: true, kind: 'system' };
     }
   } });
 }
@@ -60,7 +60,7 @@ add('check_stock', '实时查询商品指定颜色和尺码的库存与补货日
 add('recommend_size', '按确定性尺码表推荐，身高体重取较大码并按商品版型修正；超出尺码表时返回 outOfRange 和尺码表上限，此时把上限告诉买家并提供转人工选项，不要自动转人工。体重必须先换算为公斤，100 斤等于 50kg。', schema({ heightCm: number('身高，单位厘米', 1), weightKg: number('体重，单位公斤；斤需先除以 2', 1), productId }, ['heightCm', 'weightKg']), 'read', args => recommendSize(args.heightCm as number, args.weightKg as number, args.productId as string | undefined));
 add('list_coupons', '查询当前买家未使用且未过期的优惠券；不返回已用或过期券。', schema({}), 'read', (_args, ctx) => listCoupons(ctx.buyerId));
 add('search_kb', '搜索店铺知识库，返回最相关的政策或洗护分块及来源；无资料时不要编造答案，应转人工。', schema({ query: string('自然语言问题，例如 真丝怎么洗') }, ['query']), 'read', args => searchKnowledge(textArg(args, 'query')));
-add('apply_refund', '申请仅退款或退货退款，校验期限和资格，只生成待买家确认的 PendingAction，不立即退款。质量问题需照片，金额超过 500 元转人工；已发货仅退款先拒收或退回。', schema({ orderId, itemId, type: string('退款种类：refund_only 仅退款，return_refund 退货退款', ['refund_only', 'return_refund']), reason: string('买家说明的真实退款原因，质量问题请说明并提醒提供照片') }, ['orderId', 'itemId', 'type', 'reason']), 'write', (args, ctx) => createPendingAction('apply_refund', args, ctx));
+add('apply_refund', '申请仅退款或退货退款，校验期限和资格，只生成待买家确认的 PendingAction，不立即退款。质量问题需照片，金额超过 500 元转人工；已签收应选退货退款。缺少买家说明的原因时先追问，不猜测原因或商品行。', schema({ orderId, itemId, type: string('退款种类：refund_only 仅退款（仅未发货），return_refund 退货退款（已签收）', ['refund_only', 'return_refund']), reason: string('直接复制买家消息中说明本次退款原因的原文片段，不改写、不从历史售后记录取原因；仅说想退货还没给原因，先追问。质量问题提醒提供照片') }, ['orderId', 'itemId', 'type', 'reason']), 'write', (args, ctx) => createPendingAction('apply_refund', args, ctx));
 add('request_exchange', '同款换尺码或颜色，签收后 7 天内每件限一次且目标库存足够；只生成 PendingAction，买家确认后才提交售后和扣库存。', schema({ orderId, itemId, newSize: size, newColor: string('希望换成的颜色；省略则保留原颜色') }, ['orderId', 'itemId']), 'write', (args, ctx) => createPendingAction('request_exchange', args, ctx));
 add('modify_address', '仅已付款未发货（paid）的订单可改地址；只生成 PendingAction，买家确认后才修改订单。', schema({ orderId, address: schema({ name: string('收件人姓名'), phone: string('收件电话，演示数据使用打码号码'), region: string('省、市、区'), detail: string('街道门牌等详细地址') }, ['name', 'phone', 'region', 'detail']) }, ['orderId', 'address']), 'write', (args, ctx) => createPendingAction('modify_address', args, ctx));
 add('cancel_order', '仅待付款或已付款未发货订单可取消；只生成 PendingAction，确认后取消，已付款自动全额退款。', schema({ orderId }, ['orderId']), 'write', (args, ctx) => createPendingAction('cancel_order', args, ctx));

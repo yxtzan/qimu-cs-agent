@@ -1,0 +1,87 @@
+[
+  {
+    "id": "E50",
+    "agentModel": "qwen/qwen3.7-flash",
+    "source": "真实模型直接调用 L3；不经过分类器或风险闸门，不计入评测成绩",
+    "responseMs": 6935,
+    "result": {
+      "status": "done",
+      "messages": [
+        {
+          "role": "ai",
+          "text": "订单 QM2026100402 目前为待付款状态。具体问题原因尚不确定，请补充遇到的错误提示。"
+        }
+      ]
+    },
+    "metrics": {
+      "toolCalls": [
+        {
+          "name": "get_order",
+          "ok": true,
+          "ms": 1
+        }
+      ],
+      "usedGeneration": false,
+      "generationUsd": 0,
+      "agentUsd": 0.00006837,
+      "estimated": false,
+      "ragHits": 0,
+      "ragMs": 0
+    },
+    "tools": [
+      {
+        "name": "get_order",
+        "args": {
+          "orderId": "QM2026100402"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "QM2026100402",
+            "buyerId": "B003",
+            "status": "pending_payment",
+            "items": [
+              {
+                "itemId": "QM2026100402-1",
+                "productId": "P021",
+                "productName": "高腰直筒西装裤",
+                "skuId": "P021-C2-S",
+                "color": "卡其",
+                "size": "S",
+                "quantity": 1,
+                "unitPrice": 329,
+                "image": ""
+              }
+            ],
+            "totalAmount": 329,
+            "discount": 0,
+            "payAmount": 329,
+            "createdAt": "2026-10-05T09:30:00+08:00",
+            "address": {
+              "name": "陈思",
+              "phone": "138****1003",
+              "region": "上海市 上海市 浦东新区",
+              "detail": "栖木演示路3号虚构小区3室（演示地址）"
+            },
+            "afterSales": []
+          }
+        }
+      }
+    ],
+    "modelReplies": [
+      {
+        "toolChoice": "required",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "目前资料还无法确认，请补充具体的错误提示。",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ]
+  }
+]

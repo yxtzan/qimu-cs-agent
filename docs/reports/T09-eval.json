@@ -1,0 +1,2837 @@
+{
+  "report": {
+    "runAt": "2026-10-04T06:34:50.587Z",
+    "provider": "jev",
+    "cases": 60,
+    "intentAccuracy": 0.9318181818181818,
+    "layerAccuracy": 0.95,
+    "riskRecall": 1,
+    "riskFalsePositiveRate": 0,
+    "avgLatencyMs": 1776,
+    "failures": [
+      {
+        "caseId": "E01",
+        "text": "这件大衣是纯羊毛的吗",
+        "expected": "layer=L2 intent=product_consult",
+        "got": "layer=human(来自L3) intent=other riskHit=[] handoff=true tools=[]（原因：分类器降级）",
+        "reason": "分类器降级"
+      },
+      {
+        "caseId": "E44",
+        "text": "那灰色呢",
+        "expected": "layer=L2|L3 intent=stock_check",
+        "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[get_product]（原因：分类错）",
+        "reason": "分类错"
+      },
+      {
+        "caseId": "E55",
+        "text": "退的那条裙子钱到了我想用这钱再买条同款L码的，有货吗",
+        "expected": "layer=L3 tools⊇[get_aftersale,check_stock]",
+        "got": "layer=L2 intent=stock_check riskHit=[] handoff=false tools=[]（原因：多步没识别）",
+        "reason": "多步没识别"
+      },
+      {
+        "caseId": "E58",
+        "text": "尺码不合适想退货",
+        "expected": "layer=L2 intent=refund_apply",
+        "got": "layer=L1 intent=size_recommend riskHit=[] handoff=false tools=[] rule=R007（原因：规则误吞）",
+        "reason": "规则误吞"
+      }
+    ],
+    "passed": 56,
+    "totalCostUsd": 0.007684,
+    "riskFalsePositiveRateBroad": 0,
+    "reasonCounts": {
+      "分类器降级": 1,
+      "分类错": 1,
+      "多步没识别": 1,
+      "规则误吞": 1
+    },
+    "byLayer": {
+      "risk_gate": {
+        "n": 7,
+        "avgMs": 396,
+        "p95Ms": 442,
+        "avgCostUsd": 0.00007913151428571429
+      },
+      "L1": {
+        "n": 10,
+        "avgMs": 188,
+        "p95Ms": 1764,
+        "avgCostUsd": 0.00009815819999999999
+      },
+      "L2": {
+        "n": 31,
+        "avgMs": 1558,
+        "p95Ms": 6647,
+        "avgCostUsd": 0.0000782145806451613
+      },
+      "L3": {
+        "n": 9,
+        "avgMs": 4595,
+        "p95Ms": 10854,
+        "avgCostUsd": 0.0003822946666666666
+      },
+      "human": {
+        "n": 3,
+        "avgMs": 4085,
+        "p95Ms": 12243,
+        "avgCostUsd": 0.00009432626666666666
+      }
+    },
+    "note": "T06 评测：60 条用例，分类器 jev，含 R007 开/关对比"
+  },
+  "context": {
+    "provider": "jev",
+    "runAt": "2026-10-04T06:34:50.587Z",
+    "resetMs": 6287,
+    "resetEach": true,
+    "checkTools": true,
+    "t05Pending": false
+  },
+  "results": [
+    {
+      "id": "E01",
+      "buyerId": "B001",
+      "text": "这件大衣是纯羊毛的吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "product_consult"
+      },
+      "got": {
+        "layer": "human",
+        "escalatedFrom": "L3",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.55,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "mock",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "intent": false
+      },
+      "pass": false,
+      "reason": "分类器降级",
+      "latencyMs": 12243,
+      "responseMs": 12250,
+      "costUsd": 0.0001262508,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": true,
+      "replyPreview": "这个问题比较复杂，我帮您转接人工客服 / 我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E02",
+      "buyerId": "B001",
+      "text": "真丝的衣服可以丢洗衣机吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "product_consult"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 3832,
+      "responseMs": 3839,
+      "costUsd": 0.000082092,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "不建议机洗。真丝面料娇贵，请用专用中性洗剂轻柔手洗，先化开洗剂再放入衣服，不要搓拧或暴晒。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E03",
+      "buyerId": "B001",
+      "text": "我160 50公斤穿什么码合适",
+      "expect": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "tools": [
+          "recommend_size"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "recommend_size",
+          "get_product",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 1047,
+      "responseMs": 1054,
+      "costUsd": 0.000069514,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "建议您选 M 码，供您参考。 / 建议结合下面的尺码资料和穿着习惯选择。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E04",
+      "buyerId": "B003",
+      "text": "身高158 体重94斤 选S还是M",
+      "expect": {
+        "layer": "L2",
+        "intent": "size_recommend"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "recommend_size",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 2394,
+      "responseMs": 2398,
+      "costUsd": 0.000068208,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "建议您选 S 码，供您参考。 / 建议结合下面的尺码资料和穿着习惯选择。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E05",
+      "buyerId": "B001",
+      "text": "燕麦色L还有货不",
+      "expect": {
+        "layer": "L2",
+        "intent": "stock_check",
+        "tools": [
+          "check_stock"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "stock_check",
+        "classifierIntent": "stock_check",
+        "classifierConfidence": 0.9,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "get_product",
+          "check_stock"
+        ],
+        "decideProvider": "mock",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 8993,
+      "responseMs": 9002,
+      "costUsd": 0,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": true,
+      "replyPreview": "燕麦色 L：有货（3件）"
+    },
+    {
+      "id": "E06",
+      "buyerId": "B001",
+      "text": "我有哪些优惠券可以用",
+      "expect": {
+        "layer": "L2",
+        "intent": "promotion",
+        "tools": [
+          "list_coupons"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "promotion",
+        "classifierIntent": "promotion",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "list_coupons",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 6647,
+      "responseMs": 6653,
+      "costUsd": 0.000112478,
+      "retried": true,
+      "attempts": 2,
+      "degradedFirstAttempt": true,
+      "degradedFinal": false,
+      "replyPreview": "这是您目前可用的优惠券，一单限用一张。 / 您好，请提供您的会员信息，我帮您查询当前可用的优惠券。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E07",
+      "buyerId": "B004",
+      "text": "满多少包邮啊",
+      "expect": {
+        "layer": "L2",
+        "intent": "shipping_policy"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "shipping_policy",
+        "classifierIntent": "shipping_policy",
+        "classifierConfidence": 0.96,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 3176,
+      "responseMs": 3193,
+      "costUsd": 0.000082008,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "满99元包邮，默认中通。金卡会员全部顺丰。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E08",
+      "buyerId": "B003",
+      "text": "为啥我的订单一直是待付款 钱都扣了",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "order_status"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "order_status",
+        "classifierIntent": "order_status",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.01,
+          "fraud_security": 0.05,
+          "abuse_extreme": 0.05,
+          "emotion": 1.42
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 379,
+      "responseMs": 384,
+      "costUsd": 0.0000672,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您想查询或办理哪一单？"
+    },
+    {
+      "id": "E09",
+      "buyerId": "B001",
+      "text": "我买的裤子和开衫现在到哪了",
+      "expect": {
+        "layer": "L2",
+        "intent": "logistics_track",
+        "tools": [
+          "track_logistics"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.02
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 369,
+      "responseMs": 373,
+      "costUsd": 0.00006951,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "E10",
+      "buyerId": "B003",
+      "text": "麻烦尽快发一下货 下周出差要带",
+      "expect": {
+        "layer": "L2",
+        "intent": "urge_shipping"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "urge_shipping",
+        "classifierIntent": "urge_shipping",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.23
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 400,
+      "responseMs": 404,
+      "costUsd": 0.000066948,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "已记录您的催发货诉求。常规预计发货时间为 2026/10/6 21:00:00，实际安排请以订单更新为准。"
+    },
+    {
+      "id": "E11",
+      "buyerId": "B003",
+      "text": "收货地址写错了想改一下",
+      "expect": {
+        "layer": "L2",
+        "intent": "modify_order"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "modify_order",
+        "classifierIntent": "modify_order",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 470,
+      "responseMs": 476,
+      "costUsd": 0.000066612,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请补充新收货地址，例如：姓名：林小满，电话：138****0001，地区：浙江省 杭州市 西湖区，地址：示例路1号。我会先给您确认，再修改。"
+    },
+    {
+      "id": "E12",
+      "buyerId": "B003",
+      "text": "那个雾粉开衫的订单我不要了",
+      "expect": {
+        "layer": "L2",
+        "intent": "cancel_order"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "cancel_order",
+        "classifierIntent": "cancel_order",
+        "classifierConfidence": 0.9,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.08
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "cancel_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 376,
+      "responseMs": 380,
+      "costUsd": 0.000072828,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请核对下面的信息，确认后我再为您办理。"
+    },
+    {
+      "id": "E13",
+      "buyerId": "B001",
+      "text": "外套不太合身 想退掉",
+      "expect": {
+        "layer": "L2",
+        "intent": "refund_apply"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "refund_apply",
+        "classifierIntent": "refund_apply",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.33
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 382,
+      "responseMs": 391,
+      "costUsd": 0.000071904,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "可以的，请告诉我退款或退货原因，我先帮您核实是否符合申请条件。"
+    },
+    {
+      "id": "E14",
+      "buyerId": "B001",
+      "text": "之前退的那条裙子钱怎么还没到",
+      "expect": {
+        "layer": "L2",
+        "intent": "refund_progress",
+        "tools": [
+          "get_aftersale"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.01,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.03,
+          "emotion": 0.92
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "get_aftersale"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 385,
+      "responseMs": 389,
+      "costUsd": 0.000066864,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
+    },
+    {
+      "id": "E15",
+      "buyerId": "B001",
+      "text": "大衣M码有点小 我想换大一码",
+      "expect": {
+        "layer": "L2",
+        "intent": "exchange",
+        "tools": [
+          "request_exchange"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "exchange",
+        "classifierIntent": "exchange",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.07
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "check_stock",
+          "request_exchange"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 368,
+      "responseMs": 371,
+      "costUsd": 0.000072576,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请选择不同的尺码或颜色"
+    },
+    {
+      "id": "E16",
+      "buyerId": "B004",
+      "text": "衣服有股很重的味道 洗了也没散",
+      "expect": {
+        "layer": "L2",
+        "intent": "quality_issue"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "quality_issue",
+        "classifierIntent": "quality_issue",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.09,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.03,
+          "emotion": 1.11
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 372,
+      "responseMs": 380,
+      "costUsd": 0.000067032,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您想查询或办理哪一单？"
+    },
+    {
+      "id": "E17",
+      "buyerId": "B004",
+      "text": "签收第八天了还能无理由退吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "return_policy"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "return_policy",
+        "classifierIntent": "return_policy",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.03
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 4697,
+      "responseMs": 4701,
+      "costUsd": 0.00008591399999999999,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您好，无理由退换货期限是签收后7天内（含第7天）。您已超过期限，无法按无理由办理。如有质量问题，请提供照片申请售后。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E18",
+      "buyerId": "B001",
+      "text": "我要开个发票 个人抬头就行",
+      "expect": {
+        "layer": [
+          "L1",
+          "L2"
+        ],
+        "intent": "invoice"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "invoice",
+        "classifierIntent": "invoice",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 4403,
+      "responseMs": 4408,
+      "costUsd": 0.000107094,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您好，请确认收货后，在订单详情中申请电子普通发票，填写个人姓名即可。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E19",
+      "buyerId": "B004",
+      "text": "谢谢你啦 问题解决了",
+      "expect": {
+        "layer": "L2",
+        "intent": "greeting"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "greeting",
+        "classifierIntent": "greeting",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 397,
+      "responseMs": 400,
+      "costUsd": 0.000066612,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "不客气，很高兴能帮到您。还有问题随时找我。"
+    },
+    {
+      "id": "E20",
+      "buyerId": "B004",
+      "text": "能推荐个附近好吃的餐厅吗",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "other"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 369,
+      "responseMs": 375,
+      "costUsd": 0.000066696,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我可以帮您查物流、推荐尺码、查询退款或办理退换。请告诉我具体需要。"
+    },
+    {
+      "id": "E21",
+      "buyerId": "B001",
+      "text": "［动作 {\"type\":\"quick_action\",\"name\":\"track_logistics\"}］",
+      "expect": {
+        "layer": "L1",
+        "intent": "logistics_track"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.01
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 14,
+      "responseMs": 17,
+      "costUsd": 0.00006594,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "E22",
+      "buyerId": "B001",
+      "text": "［动作 {\"type\":\"quick_action\",\"name\":\"refund_progress\"}］",
+      "expect": {
+        "layer": "L1",
+        "intent": "refund_progress"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.02,
+          "emotion": 0.14
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "get_aftersale"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 17,
+      "responseMs": 19,
+      "costUsd": 0.000066024,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
+    },
+    {
+      "id": "E23",
+      "buyerId": "B001",
+      "text": "［动作 {\"type\":\"quick_action\",\"name\":\"size_recommend\"}］",
+      "expect": {
+        "layer": "L1",
+        "intent": "size_recommend"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 4,
+      "responseMs": 4,
+      "costUsd": 0.000066024,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "为了推荐合适的尺码，请告诉我身高和体重（例如160cm、50kg）。"
+    },
+    {
+      "id": "E24",
+      "buyerId": "B004",
+      "text": "［动作 {\"type\":\"quick_action\",\"name\":\"human\"}］",
+      "expect": {
+        "layer": "L1",
+        "intent": "human_request",
+        "handoff": true
+      },
+      "got": {
+        "layer": "human",
+        "escalatedFrom": "L1",
+        "intent": "human_request",
+        "classifierIntent": "human_request",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.04,
+          "abuse_extreme": 0.02,
+          "emotion": 0.33
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 6,
+      "responseMs": 8,
+      "costUsd": 0.00008642,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E25",
+      "buyerId": "B001",
+      "text": "到哪了",
+      "expect": {
+        "layer": "L1",
+        "intent": "logistics_track"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.28
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ],
+        "ruleId": "R002",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 16,
+      "responseMs": 20,
+      "costUsd": 0.00006594,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "E26",
+      "buyerId": "B004",
+      "text": "转人工",
+      "expect": {
+        "layer": "L1",
+        "intent": "human_request",
+        "handoff": true
+      },
+      "got": {
+        "layer": "human",
+        "escalatedFrom": "L1",
+        "intent": "human_request",
+        "classifierIntent": "human_request",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.02,
+          "emotion": 0.29
+        },
+        "handoff": true,
+        "tools": [],
+        "ruleId": "R001",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 6,
+      "responseMs": 7,
+      "costUsd": 0.00007030799999999999,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E27",
+      "buyerId": "B004",
+      "text": "在吗？",
+      "expect": {
+        "layer": "L1",
+        "intent": "greeting"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "greeting",
+        "classifierIntent": "greeting",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "ruleId": "R004",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 11,
+      "responseMs": 13,
+      "costUsd": 0.00006594,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您好，我是栖木智能客服。有什么可以帮您？"
+    },
+    {
+      "id": "E28",
+      "buyerId": "B001",
+      "text": "退款进度",
+      "expect": {
+        "layer": "L1",
+        "intent": "refund_progress"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.02,
+          "emotion": 0.12
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "get_aftersale"
+        ],
+        "ruleId": "R003",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 11,
+      "responseMs": 14,
+      "costUsd": 0.000066024,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
+    },
+    {
+      "id": "E29",
+      "buyerId": "B004",
+      "text": "有运费险吗",
+      "expect": {
+        "layer": "L1",
+        "intent": "return_policy"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "return_policy",
+        "classifierIntent": "return_policy",
+        "classifierConfidence": 0.66,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "ruleId": "R006",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 1764,
+      "responseMs": 1772,
+      "costUsd": 0.000152678,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "这里没有额外承诺所有订单都附带运费险。非质量问题的退货运费由买家承担，金卡会员免退货运费；质量问题由商家承担。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E30",
+      "buyerId": "B001",
+      "text": "查物流",
+      "expect": {
+        "layer": "L1",
+        "intent": "logistics_track"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0.01
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ],
+        "ruleId": "R002",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 14,
+      "responseMs": 17,
+      "costUsd": 0.00006594,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "E31",
+      "buyerId": "B002",
+      "text": "穿了你们的真丝衬衫脖子和后背全是红疹子，必须给我个说法",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "health_safety"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "quality_issue",
+        "classifierIntent": "quality_issue",
+        "classifierConfidence": 0.96,
+        "riskHit": [
+          "health_safety"
+        ],
+        "riskScores": {
+          "legal_threat": 0.03,
+          "health_safety": 1,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.19,
+          "emotion": 2.34
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 442,
+      "responseMs": 449,
+      "costUsd": 0.00009217599999999999,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E32",
+      "buyerId": "B002",
+      "text": "今天不解决我明天就去消协",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "legal_threat"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.8,
+        "riskHit": [
+          "legal_threat"
+        ],
+        "riskScores": {
+          "legal_threat": 1,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.29,
+          "emotion": 2.46
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 384,
+      "responseMs": 392,
+      "costUsd": 0.000094036,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E33",
+      "buyerId": "B004",
+      "text": "有人加我微信说是你们店的 让我先转200保证金才能退款",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "fraud_security"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.6900000000000001,
+        "riskHit": [
+          "fraud_security"
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.99,
+          "abuse_extreme": 0.03,
+          "emotion": 0.57
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 388,
+      "responseMs": 396,
+      "costUsd": 0.00007378,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E34",
+      "buyerId": "B004",
+      "text": "滚 一群骗子 恶心死了",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "abuse_extreme"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.99,
+        "riskHit": [
+          "abuse_extreme",
+          "emotion"
+        ],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.2,
+          "abuse_extreme": 0.98,
+          "emotion": 3
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 390,
+      "responseMs": 395,
+      "costUsd": 0.0000767606,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E35",
+      "buyerId": "B004",
+      "text": "我已经问了三遍了！！！到底有没有人管！！！",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "emotion"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "human_request",
+        "classifierIntent": "human_request",
+        "classifierConfidence": 0.96,
+        "riskHit": [
+          "emotion"
+        ],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.69,
+          "emotion": 2.97
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 412,
+      "responseMs": 419,
+      "costUsd": 0.000072408,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E36",
+      "buyerId": "B001",
+      "text": "退款进度 再拖我就找律师",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "legal_threat"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [
+          "legal_threat",
+          "emotion"
+        ],
+        "riskScores": {
+          "legal_threat": 1,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.33,
+          "emotion": 2.63
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 381,
+      "responseMs": 387,
+      "costUsd": 0.000072268,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E37",
+      "buyerId": "B004",
+      "text": "孩子把衣服上的扣子吞下去了怎么办",
+      "expect": {
+        "layer": "risk_gate",
+        "riskHit": [
+          "health_safety"
+        ],
+        "handoff": true
+      },
+      "got": {
+        "layer": "risk_gate",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.97,
+        "riskHit": [
+          "health_safety"
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.8,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.03,
+          "emotion": 0.14
+        },
+        "handoff": true,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 372,
+      "responseMs": 378,
+      "costUsd": 0.00007249200000000001,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+    },
+    {
+      "id": "E38",
+      "buyerId": "B004",
+      "text": "敏感肌穿羊毛会扎吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "product_consult",
+        "riskHit": []
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "risk": true
+      },
+      "pass": true,
+      "latencyMs": 2414,
+      "responseMs": 2418,
+      "costUsd": 0.000066444,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "抱歉，现有资料还无法确认这个问题。我可以帮您转接人工核实。"
+    },
+    {
+      "id": "E39",
+      "buyerId": "B004",
+      "text": "这条裙子是不是会让我被闺蜜嫉妒死哈哈",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "riskHit": []
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.63,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.03,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true
+      },
+      "pass": true,
+      "latencyMs": 2284,
+      "responseMs": 2290,
+      "costUsd": 0.000175152,
+      "retried": true,
+      "attempts": 2,
+      "degradedFirstAttempt": true,
+      "degradedFinal": false,
+      "replyPreview": "哈哈，这自信的光芒确实挡不住！只要穿上喜欢的裙子，那份由内而外的快乐和自信就是最迷人的。相信你的眼光，开心最重要！"
+    },
+    {
+      "id": "E40",
+      "buyerId": "B001",
+      "text": "有点小失望，外套比图片颜色深一点",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "riskHit": []
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "quality_issue",
+        "classifierIntent": "quality_issue",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.03,
+          "emotion": 0.98
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "risk": true
+      },
+      "pass": true,
+      "latencyMs": 397,
+      "responseMs": 405,
+      "costUsd": 0.000072324,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "很抱歉这件商品没能让您满意。这单签收还在 7 天无理由退换期内，您可以直接申请退货或换货，您是金卡会员，退货运费由我们承担。如果是商品质量问题，也可以转人工客服核实。"
+    },
+    {
+      "id": "E41",
+      "buyerId": "B001",
+      "text": "退款到哪了",
+      "expect": {
+        "layer": [
+          "L1",
+          "L2"
+        ],
+        "intent": "refund_progress"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.48
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "get_aftersale"
+        ],
+        "ruleId": "R003",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 13,
+      "responseMs": 13,
+      "costUsd": 0.000300712,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
+    },
+    {
+      "id": "E42",
+      "buyerId": "B001",
+      "text": "啥时候能到",
+      "expect": {
+        "layer": "L2",
+        "intent": "logistics_track"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "logistics_track",
+        "classifierIntent": "logistics_track",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.16
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 412,
+      "responseMs": 417,
+      "costUsd": 0.000068754,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "包裹正在配送中，预计 10-06 送达。"
+    },
+    {
+      "id": "E43",
+      "buyerId": "B001",
+      "text": "能换L吗",
+      "expect": {
+        "layer": "L2",
+        "intent": "exchange"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "exchange",
+        "classifierIntent": "exchange",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.01
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "check_stock",
+          "request_exchange"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 457,
+      "responseMs": 462,
+      "costUsd": 0.000071652,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请核对下面的信息，确认后我再为您办理。"
+    },
+    {
+      "id": "E44",
+      "buyerId": "B001",
+      "text": "那灰色呢",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "stock_check"
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 0.64,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.05
+        },
+        "handoff": false,
+        "tools": [
+          "get_product"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": false
+      },
+      "pass": false,
+      "reason": "分类错",
+      "latencyMs": 3737,
+      "responseMs": 3745,
+      "costUsd": 0.00030257,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "灰色（炭灰）也是这款大衣的可选颜色，材质和版型与燕麦色一致。目前 S、M 和 XL 码有现货，XS 也有少量库存；L 码暂时缺货，预计 10 月 12 日补货。您看需要帮您预留哪个尺码吗？"
+    },
+    {
+      "id": "E45",
+      "buyerId": "B001",
+      "text": "那这件大衣穿哪个码",
+      "expect": {
+        "layer": "L2",
+        "intent": "size_recommend"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.16
+        },
+        "handoff": false,
+        "tools": [
+          "recommend_size",
+          "get_product",
+          "search_kb"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 2410,
+      "responseMs": 2414,
+      "costUsd": 0.000146248,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "建议您选 M 码，供您参考。 / 建议结合下面的尺码资料和穿着习惯选择。 / 这些资料供您参考。"
+    },
+    {
+      "id": "E46",
+      "buyerId": "B003",
+      "text": "不要了",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "cancel_order"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "cancel_order",
+        "classifierIntent": "cancel_order",
+        "classifierConfidence": 0.76,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.25
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "cancel_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 438,
+      "responseMs": 446,
+      "costUsd": 0.0000714,
+      "retried": true,
+      "attempts": 2,
+      "degradedFirstAttempt": true,
+      "degradedFinal": false,
+      "replyPreview": "请核对下面的信息，确认后我再为您办理。"
+    },
+    {
+      "id": "E47",
+      "buyerId": "B001",
+      "text": "［动作 {\"type\":\"text\",\"text\":\"好的，确认换\"}］",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "exchange"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "exchange",
+        "classifierIntent": "exchange",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "get_order",
+          "check_stock",
+          "request_exchange"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 373,
+      "responseMs": 378,
+      "costUsd": 0.0001491,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "请选择不同的尺码或颜色"
+    },
+    {
+      "id": "E48",
+      "buyerId": "B001",
+      "text": "上周那件大衣",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "exchange"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "exchange",
+        "classifierIntent": "exchange",
+        "classifierConfidence": 0.94,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 371,
+      "responseMs": 375,
+      "costUsd": 0.000141918,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您希望换成什么尺码或颜色？告诉我后，我先帮您确认库存。"
+    },
+    {
+      "id": "E49",
+      "buyerId": "B001",
+      "text": "不是这个，我问的是退款",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "refund_progress"
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "refund_progress",
+        "classifierIntent": "refund_progress",
+        "classifierConfidence": 0.5700000000000001,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.03,
+          "emotion": 0.89
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 3234,
+      "responseMs": 3238,
+      "costUsd": 0.000391392,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "目前资料还无法确认您具体想查询哪笔订单的退款进度。您是有正在处理的退货退款，还是想申请新的退款呢？请告诉我具体的商品名称或订单号，以便我为您核实。"
+    },
+    {
+      "id": "E50",
+      "buyerId": "B003",
+      "text": "付不了款怎么办",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "order_status"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "order_status",
+        "classifierIntent": "order_status",
+        "classifierConfidence": 0.74,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.02,
+          "emotion": 0.34
+        },
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 387,
+      "responseMs": 394,
+      "costUsd": 0.000071904,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "已找到您的订单，详情在这里。"
+    },
+    {
+      "id": "E51",
+      "buyerId": "B001",
+      "text": "上周买的那件外套换成L码，顺便帮我看看有没有能用的券",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "list_orders",
+          "check_stock",
+          "request_exchange",
+          "list_coupons"
+        ]
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.89,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "check_stock",
+          "request_exchange",
+          "list_coupons"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 4373,
+      "responseMs": 4379,
+      "costUsd": 0.0004004,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件（待您确认后办理） 已查到2张可用优惠券，详情见卡片。 / 请核对下面的信息，确认后再"
+    },
+    {
+      "id": "E52",
+      "buyerId": "B001",
+      "text": "帮我看看最近的订单 哪个还没到 哪个能退",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "list_orders"
+        ]
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.03
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 4039,
+      "responseMs": 4045,
+      "costUsd": 0.000359966,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您好，帮您查到了最近的订单情况： 1. **尚未送达的订单**：**QM2026100201**（高腰直筒西装裤、软糯圆领开衫）。目前包裹正在运输中，预计明天（10月6日）送达。 2. **可以办理退货的订单**：**QM202609280"
+    },
+    {
+      "id": "E53",
+      "buyerId": "B001",
+      "text": "我想再买一件和上次那件大衣同色的开衫，有我的码吗，用券后多少钱",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "search_products",
+          "list_coupons"
+        ]
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "search_products",
+          "list_coupons"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "tools": true
+      },
+      "pass": true,
+      "latencyMs": 10854,
+      "responseMs": 10859,
+      "costUsd": 0.0008433519999999999,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您上次购买的大衣是**燕麦色**的。目前店内有同款的**软糯圆领开衫（P030）**，颜色包含**燕麦色**。 根据您大衣购买的尺码（M码），这款开衫的**燕麦色 M 码**库存充足（12件）。 关于价格： * 商品原价：**269元** "
+    },
+    {
+      "id": "E54",
+      "buyerId": "B003",
+      "text": "两个订单都帮我处理下：没付款的取消，已经付了的改地址到浙江省杭州市滨江区网商路699号",
+      "expect": {
+        "layer": "L3"
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "cancel_order",
+          "modify_address"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true
+      },
+      "pass": true,
+      "latencyMs": 3328,
+      "responseMs": 3332,
+      "costUsd": 0.000238764,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "取消订单 QM2026100402（尚未付款，无需退款）（待您确认后办理） 将订单 QM2026100401 的收货地址改为：陈思，138****1003，浙江省 杭州市 滨江区 网商路699号（待您确认后办理） / 请核对下面的信息，确认"
+    },
+    {
+      "id": "E55",
+      "buyerId": "B001",
+      "text": "退的那条裙子钱到了我想用这钱再买条同款L码的，有货吗",
+      "expect": {
+        "layer": "L3",
+        "tools": [
+          "get_aftersale",
+          "check_stock"
+        ]
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "stock_check",
+        "classifierIntent": "stock_check",
+        "classifierConfidence": 0.93,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "tools": false
+      },
+      "pass": false,
+      "reason": "多步没识别",
+      "latencyMs": 386,
+      "responseMs": 392,
+      "costUsd": 0.000068166,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您想了解哪件商品？从商品页点「问客服」，或告诉我商品编号就可以。"
+    },
+    {
+      "id": "E56",
+      "buyerId": "B004",
+      "text": "比较一下你们家的大衣和开衫哪个更保暖，顺便告诉我怎么洗",
+      "expect": {
+        "layer": "L3"
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 0.58,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "search_products"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true
+      },
+      "pass": true,
+      "latencyMs": 4271,
+      "responseMs": 4276,
+      "costUsd": 0.00035469799999999997,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "关于保暖性，目前资料还无法确定哪件更保暖。因为工具返回的材质比例（如羊毛含量）不足以直接判定保暖强弱，且没有具体的保暖测试结果或说明。 关于洗护建议： * **大衣**（P007）：建议专业干洗，勿机洗，通风阴干，收纳时使用宽肩衣架。 * "
+    },
+    {
+      "id": "E57",
+      "buyerId": "B001",
+      "text": "到哪了，另外我想把上周那件外套退了",
+      "expect": {
+        "layer": "L3"
+      },
+      "got": {
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "classifierIntent": "multi_step_complex",
+        "classifierConfidence": 0.96,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.21
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders",
+          "track_logistics"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true
+      },
+      "pass": true,
+      "latencyMs": 5236,
+      "responseMs": 5243,
+      "costUsd": 0.000374358,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您提到的“上周那件外套”在订单记录中未找到匹配项。目前仅有一笔已签收的燕麦色羊毛混纺大衣（QM2026092801）和一笔正在运输中的西装裤/开衫订单（QM2026100201）。 关于物流进度：您的订单 QM2026100201 目前由顺"
+    },
+    {
+      "id": "E58",
+      "buyerId": "B001",
+      "text": "尺码不合适想退货",
+      "expect": {
+        "layer": "L2",
+        "intent": "refund_apply"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "size_recommend",
+        "classifierIntent": "refund_apply",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.05
+        },
+        "handoff": false,
+        "tools": [],
+        "ruleId": "R007",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "intent": false
+      },
+      "pass": false,
+      "reason": "规则误吞",
+      "latencyMs": 12,
+      "responseMs": 15,
+      "costUsd": 0.00006636,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "为了推荐合适的尺码，请告诉我身高和体重（例如160cm、50kg）。"
+    },
+    {
+      "id": "E59",
+      "buyerId": "B004",
+      "text": "身高185体重90kg有合适的吗",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "size_recommend"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "size_recommend",
+        "classifierIntent": "size_recommend",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "handoff": false,
+        "tools": [
+          "recommend_size"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 401,
+      "responseMs": 409,
+      "costUsd": 0.000067704,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您的身高体重（185cm / 90kg）超出了尺码表范围，本店尺码表最大到 XL（身高 175cm、体重 70kg 以内），这款可能没有合适您的尺码。如需进一步确认，可以让人工客服帮您看看。"
+    },
+    {
+      "id": "E60",
+      "buyerId": "B004",
+      "text": "人工智能客服现在都这么厉害了吗",
+      "expect": {
+        "layer": [
+          "L2",
+          "L3"
+        ],
+        "intent": "other",
+        "handoff": false
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "other",
+        "classifierIntent": "other",
+        "classifierConfidence": 0.8200000000000001,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.03,
+          "emotion": 0.04
+        },
+        "handoff": false,
+        "tools": [],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true,
+        "handoff": true
+      },
+      "pass": true,
+      "latencyMs": 386,
+      "responseMs": 388,
+      "costUsd": 0.000066948,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "我可以帮您查物流、推荐尺码、查询退款或办理退换。请告诉我具体需要。"
+    }
+  ],
+  "r007": {
+    "on": {
+      "id": "E58",
+      "buyerId": "B001",
+      "text": "尺码不合适想退货",
+      "expect": {
+        "layer": "L2",
+        "intent": "refund_apply"
+      },
+      "got": {
+        "layer": "L1",
+        "intent": "size_recommend",
+        "classifierIntent": "refund_apply",
+        "classifierConfidence": 1,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.04
+        },
+        "handoff": false,
+        "tools": [],
+        "ruleId": "R007",
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": false,
+        "intent": false
+      },
+      "pass": false,
+      "reason": "规则误吞",
+      "latencyMs": 4,
+      "responseMs": 4,
+      "costUsd": 0.00006636,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "为了推荐合适的尺码，请告诉我身高和体重（例如160cm、50kg）。"
+    },
+    "off": {
+      "id": "E58",
+      "buyerId": "B001",
+      "text": "尺码不合适想退货",
+      "expect": {
+        "layer": "L2",
+        "intent": "refund_apply"
+      },
+      "got": {
+        "layer": "L2",
+        "intent": "refund_apply",
+        "classifierIntent": "refund_apply",
+        "classifierConfidence": 0.99,
+        "riskHit": [],
+        "riskScores": {
+          "legal_threat": 0.02,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
+          "emotion": 0.04
+        },
+        "handoff": false,
+        "tools": [
+          "list_orders"
+        ],
+        "decideProvider": "jev",
+        "l3Placeholder": false
+      },
+      "dims": {
+        "layer": true,
+        "intent": true
+      },
+      "pass": true,
+      "latencyMs": 407,
+      "responseMs": 418,
+      "costUsd": 0.00006636,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
+      "replyPreview": "您想查询或办理哪一单？"
+    }
+  }
+}
