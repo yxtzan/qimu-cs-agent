@@ -54,6 +54,12 @@ export interface StepDef {
   showTrace?: boolean;
   /** 即使目标已经出现，也显示已等秒数（第 3 步等待）。 */
   showTimer?: boolean;
+  /**
+   * click：红圈或卡片主按钮才能前进，底部只留「退出演示」。
+   * narrate：「看这里」，可以上一步 / 下一步。
+   * wait：等人或等模型，不能跳步。
+   */
+  advance?: "click" | "narrate" | "wait";
   /** data-tour 名。union：圈出所有已出现的；first：用第一个已经出现的。 */
   targets?: string[];
   pick?: "union" | "first";
@@ -65,7 +71,7 @@ export interface StepDef {
   primary?: { kind: PrimaryKind; label: string; testId: string };
 }
 
-const WAIT = "这一步的内容还在路上，已等一会儿就会圈出来。也可以点「下一步」继续。";
+const WAIT = "这一步的内容还在路上，已等一会儿就会圈出来。";
 
 export const STEPS: Record<StepId, StepDef> = {
   intro: {
@@ -75,7 +81,7 @@ export const STEPS: Record<StepId, StepDef> = {
     sentence:
       "这是一个女装店的 AI 客服。它像一个漏斗：固定问题用规则秒回，大部分问题由便宜的判断模型 Jev 分流，只有复杂的多步问题才交给大模型；所有消息都会先过一道风险闸门。",
     waitCopy: WAIT,
-    detail: "下面是漏斗的顺序。点「开始演示」会先把演示数据重置，再从第 1 步走。",
+    detail: "点「开始演示」会先把演示数据重置，再从第 1 步走。",
     showFunnel: true,
     center: true,
     path: null,
@@ -85,6 +91,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s1-send",
     progress: "1/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "一句话问了尺码和洗护两件事，点「发送」。",
     waitCopy: "正在打开商品页并填好话术。",
     targets: ["chat-send"],
@@ -100,6 +107,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s1-reply",
     progress: "1/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "尺码是按尺码表**算**出来的，不是模型猜的；洗护是从店铺知识库查到的，点「参考了 N 条资料」能看依据。",
     waitCopy: "正在等客服回复尺码和洗护。",
     detail: "模型只许按资料回答，查不到就说不确定、建议转人工。",
@@ -112,6 +120,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s2-send",
     progress: "2/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "只说「到哪了」三个字：订单已经从页面带上，不用追问。",
     waitCopy: "正在打开订单页并填好话术。",
     targets: ["chat-send"],
@@ -127,6 +136,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s2-reply",
     progress: "2/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "这类说法固定的高频问题走第一层规则，毫秒级、几乎不花钱。",
     waitCopy: "正在等物流卡片。",
     detail: "规则只对短句生效，长句交给下一层，宁可漏给下一层也不误判。",
@@ -139,6 +149,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s3-send",
     progress: "3/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "一句话两个诉求：换 L 码 + 找优惠券。这种多步问题交给大模型。",
     waitCopy: "正在打开上周那笔订单并填好话术。",
     targets: ["chat-send"],
@@ -154,6 +165,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s3-wait",
     progress: "3/6",
     kicker: "请稍等",
+    advance: "wait",
     sentence: "大模型正在一步步查：订单 → L 码库存 → 换货申请 → 优惠券，通常要 5–20 秒。",
     waitCopy: "正在等大模型开始查订单。",
     showTimer: true,
@@ -166,6 +178,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s3-confirm",
     progress: "3/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "大模型**不能直接改订单**，只能生成一张确认卡。点「确认」才真正办理。",
     waitCopy: "确认卡还在生成，大模型通常要 5–20 秒。",
     detail: "退款、换货、改地址、取消订单都必须买家确认。",
@@ -178,6 +191,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s3-done",
     progress: "3/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "售后单已生成，左边订单页同步更新；过期的优惠券不会出现在这里。",
     waitCopy: "正在等售后单出现。",
     showTrace: true,
@@ -189,6 +203,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s4-send",
     progress: "4/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "这句话里有健康问题，还有投诉威胁。",
     waitCopy: "正在切换买家并填好话术。",
     targets: ["chat-send"],
@@ -204,6 +219,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s4-reply",
     progress: "4/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "风险闸门拦下了：AI 不抢答、不解释政策，直接转人工。",
     waitCopy: "正在等风险闸门把这条转到人工。",
     detail:
@@ -217,6 +233,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-go",
     progress: "5/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "这是商家后台，手机优先，可以加到手机主屏幕当 App 用。",
     waitCopy: WAIT,
     center: true,
@@ -227,6 +244,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-list",
     progress: "5/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "转人工的会话排在最前面，点开它。",
     waitCopy: "正在等刚才那条转人工会话出现在列表里。",
     targets: ["handoff-row"],
@@ -236,6 +254,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-detail",
     progress: "5/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "AI 已经写好一句话摘要，客服不用翻聊天记录。",
     waitCopy: "正在等转人工原因和摘要加载出来。",
     targets: ["handoff-reason", "ai-context"],
@@ -246,6 +265,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-takeover",
     progress: "5/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "点「接管」。接管之后，回复会自动填进输入框。",
     waitCopy: "正在等「接管」按钮。",
     targets: ["takeover"],
@@ -255,6 +275,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-reply",
     progress: "5/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "接管并回复买家。这句话已经填好，点「发送」。",
     waitCopy: "正在把回复填进输入框。",
     targets: ["seller-reply", "seller-send"],
@@ -264,6 +285,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s5-back",
     progress: "5/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "买家这边几秒内就收到了人工客服的回复。",
     waitCopy: "正在回到买家端。",
     center: true,
@@ -275,6 +297,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s6-go",
     progress: "6/6",
     kicker: "点这里",
+    advance: "click",
     sentence: "最后看成本：大部分消息应该挡在前面两层，又快又省。",
     waitCopy: WAIT,
     center: true,
@@ -285,6 +308,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s6-board",
     progress: "6/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "大部分消息在前两层就解决了；大模型层更慢也更贵，所以要尽量把消息挡在前面，又快又省。",
     waitCopy: "正在打开看板并切到「近 7 天」。",
     detail: "历史消息是模拟流量（看板底部有注明），今天新发的是真实消息。",
@@ -295,6 +319,7 @@ export const STEPS: Record<StepId, StepDef> = {
     id: "s6-eval",
     progress: "6/6",
     kicker: "看这里",
+    advance: "narrate",
     sentence: "这是 60 条测试对话的真实跑分。另外还有 15 条系统从没见过的题，通过了 13 条。",
     waitCopy: "正在等评测成绩卡。",
     detail: "主评测有一部分是对着失败用例调过的，所以另留了一组没见过的题检验泛化能力（docs/reports/holdout-eval.md）。",

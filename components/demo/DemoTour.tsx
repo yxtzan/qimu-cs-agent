@@ -130,36 +130,103 @@ function focusHole(els: HTMLElement[]): Hole | null {
   return { top, left, width, height, radius };
 }
 
+function drawerRect(): DOMRect | null {
+  const drawer = document.querySelector<HTMLElement>('[data-testid="chat-drawer"]');
+  if (!drawer || drawer.getAttribute("aria-hidden") === "true") return null;
+  const rect = drawer.getBoundingClientRect();
+  if (rect.width < 20 || rect.right < 8 || rect.left > window.innerWidth - 8) return null;
+  return rect;
+}
+
+/** 预填话术、输入框、卖家回复框的上沿。卡片不能压住这些字。 */
+function composerTop(): number | null {
+  const nodes = ["[data-testid='prefill-hint']", "[data-testid='chat-input']", "[data-tour='seller-reply']"]
+    .map((sel) => document.querySelector<HTMLElement>(sel))
+    .filter((el): el is HTMLElement => Boolean(el));
+  const tops = nodes
+    .map((el) => el.getBoundingClientRect())
+    .filter((rect) => rect.width > 2 && rect.height > 2 && rect.bottom > 0 && rect.top < window.innerHeight)
+    .map((rect) => rect.top);
+  return tops.length ? Math.min(...tops) : null;
+}
+
+function holeInDrawer(hole: Hole | null, drawer: DOMRect | null): boolean {
+  if (!hole || !drawer) return false;
+  const cx = hole.left + hole.width / 2;
+  return cx >= drawer.left && cx <= drawer.right;
+}
+
 function placeCard(hole: Hole | null, cardH: number, narrow: boolean): CardBox {
   const vh = window.innerHeight;
   const vw = window.innerWidth;
-  const width = narrow ? vw - 24 : Math.min(360, vw - 32);
-  const maxHeight = narrow ? Math.min(vh * 0.42, 320) : vh - 24;
+  const drawer = drawerRect();
+  const inChat = holeInDrawer(hole, drawer);
+  const composer = composerTop();
+
+  if (narrow) {
+    const width = vw - 24;
+    if (!hole) {
+      const maxHeight = vh - 24;
+      const top = Math.max(12, (vh - Math.min(cardH, maxHeight)) / 2);
+      return { top, left: 12, width, maxHeight };
+    }
+    let maxHeight = Math.min(vh * 0.38, 300);
+    let top = 12;
+    const targetLow = hole.top + hole.height / 2 > vh * 0.45;
+    if (!inChat && hole && !targetLow) top = Math.max(12, vh - Math.min(cardH, maxHeight) - 12);
+    const cardBottom = top + Math.min(cardH, maxHeight);
+    if (hole && top < hole.top + hole.height && cardBottom > hole.top) {
+      const below = hole.top + hole.height + 12;
+      const limit = Math.min(vh - 12, composer ?? vh);
+      if (below + 96 < limit) top = below;
+    }
+    if (composer && top < composer) maxHeight = Math.min(maxHeight, Math.max(96, composer - top - 8));
+    if (hole && top < hole.top && top + Math.min(cardH, maxHeight) > hole.top && hole.top > top + 96) {
+      maxHeight = Math.min(maxHeight, hole.top - top - 8);
+    }
+    return { top, left: 12, width, maxHeight };
+  }
+
+  if (inChat && drawer) {
+    const room = drawer.left - 28;
+    const width = Math.min(360, Math.max(220, room));
+    const left = Math.max(12, drawer.left - width - 16);
+    const top = hole
+      ? Math.min(Math.max(12, hole.top - 8), Math.max(12, vh - Math.min(cardH, 320) - 12))
+      : 16;
+    return { top, left, width, maxHeight: vh - top - 12 };
+  }
+
+  const width = Math.min(360, vw - 32);
+  const maxHeight = vh - 24;
   if (!hole) {
     return { top: Math.max(16, (vh - Math.min(cardH, maxHeight)) / 2), left: (vw - width) / 2, width, maxHeight };
   }
-  if (narrow) {
-    const centerY = hole.top + hole.height / 2;
-    if (centerY > vh * 0.5) return { top: 12, left: 12, width, maxHeight };
-    return { top: Math.max(12, vh - Math.min(cardH, maxHeight) - 12), left: 12, width, maxHeight };
-  }
   const gap = 16;
   const top = Math.min(Math.max(12, hole.top), Math.max(12, vh - cardH - 12));
+  let box: CardBox;
   if (hole.left >= width + gap + 12) {
-    return { top, left: Math.max(12, hole.left - width - gap), width, maxHeight: vh - 24 };
+    box = { top, left: Math.max(12, hole.left - width - gap), width, maxHeight: vh - 24 };
+  } else if (vw - (hole.left + hole.width) >= width + gap + 12) {
+    box = { top, left: hole.left + hole.width + gap, width, maxHeight: vh - 24 };
+  } else if (hole.top > cardH + 28) {
+    box = { top: hole.top - cardH - gap, left: Math.min(Math.max(12, hole.left), vw - width - 12), width, maxHeight: cardH };
+  } else {
+    box = {
+      top: Math.min(vh - Math.min(cardH, maxHeight) - 12, hole.top + hole.height + gap),
+      left: Math.min(Math.max(12, hole.left), vw - width - 12),
+      width,
+      maxHeight,
+    };
   }
-  if (vw - (hole.left + hole.width) >= width + gap + 12) {
-    return { top, left: hole.left + hole.width + gap, width, maxHeight: vh - 24 };
+  if (drawer && box.left < drawer.right && box.left + box.width > drawer.left) {
+    const room = drawer.left - 28;
+    if (room >= 200) {
+      const w = Math.min(box.width, room);
+      return { ...box, left: Math.max(12, drawer.left - w - 16), width: w };
+    }
   }
-  if (hole.top > cardH + 28) {
-    return { top: hole.top - cardH - gap, left: Math.min(Math.max(12, hole.left), vw - width - 12), width, maxHeight: cardH };
-  }
-  return {
-    top: Math.min(vh - Math.min(cardH, maxHeight) - 12, hole.top + hole.height + gap),
-    left: Math.min(Math.max(12, hole.left), vw - width - 12),
-    width,
-    maxHeight,
-  };
+  return box;
 }
 
 function near(a: number, b: number) {
@@ -255,8 +322,8 @@ export function DemoTour() {
           stepId: "s3-wait",
           text:
             detail.status === "waiting_human"
-              ? "这次直接转给了人工，没有生成确认卡。可以点「下一步」继续，或「上一步」再发一次。"
-              : "回复到了，但没有看到确认卡。可以点「下一步」继续，或「上一步」再发一次。",
+              ? "这次直接转给了人工，没有生成确认卡。可以退出演示后重新开始。"
+              : "回复到了，但没有看到确认卡。可以退出演示后重新开始。",
         });
       }
     };
@@ -421,6 +488,8 @@ export function DemoTour() {
   }
   const trace = demo.trace as RouteTrace | null;
   const showPrimary = step.primary && !(step.primary.kind === "buyer" && arrivedBuyer);
+  const showNav = step.advance === "narrate" || arrivedBuyer;
+  const showExit = step.id !== "intro" && step.id !== "end";
 
   const goNext = () => {
     if (step.id === "intro") {
@@ -449,7 +518,7 @@ export function DemoTour() {
   };
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[80]" data-testid="demo-tour" data-step={step.id}>
+    <div className="pointer-events-none fixed inset-0 z-[80]" data-testid="demo-tour" data-step={step.id} data-advance={arrivedBuyer ? "narrate" : (step.advance ?? "frame")}>
       <style>{`
         @keyframes qimu-demo-breathe {
           0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55); }
@@ -477,15 +546,21 @@ export function DemoTour() {
             : { top: 16, left: 16, width: 340, maxHeight: 420 }
         }
       >
-        <div className="flex items-center justify-between gap-2 border-b border-line px-3.5 py-2">
-          <span className="rounded-full bg-red-600 px-2 py-0.5 text-[11px] font-semibold text-white">{step.kicker}</span>
-          <span className="text-xs font-medium text-warm">演示 {step.progress}</span>
+        <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5">
+          <span className="rounded-full bg-red-600 px-2 py-0.5 text-xs font-semibold leading-5 text-white">{step.kicker}</span>
+          <span className="text-xs font-medium leading-5 text-warm">演示 {step.progress}</span>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto px-3.5 py-3">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3">
           <p data-testid="demo-sentence" className="text-[15px] font-medium leading-6 text-foreground">
             <RichText text={headline} />
           </p>
-          {showTimer ? <p className="mt-1.5 text-xs text-warm">已等 {elapsed} 秒</p> : null}
+          {step.showFunnel ? (
+            <div>
+              <FunnelDiagram />
+              <p className="mt-2 text-[13px] leading-5 text-warm">上面是漏斗的顺序。</p>
+            </div>
+          ) : null}
+          {showTimer ? <p className="mt-1.5 text-xs leading-5 text-warm">已等 {elapsed} 秒</p> : null}
           {stallText ? <p className="mt-2 text-xs leading-5 text-risk">{stallText}</p> : null}
           {errorText ? <p className="mt-2 text-xs leading-5 text-risk">{errorText}</p> : null}
           <button
@@ -493,14 +568,13 @@ export function DemoTour() {
             data-testid="demo-expand"
             aria-expanded={openDetail}
             onClick={() => setDetailFor(openDetail ? null : step.id)}
-            className="mt-2 text-xs font-medium text-brand"
+            className="mt-2 text-xs font-medium leading-5 text-brand"
           >
             {openDetail ? "收起详情" : "展开详情"}
           </button>
           {openDetail ? (
-            <div className="mt-2 rounded-xl bg-cream px-2.5 py-2 text-xs leading-5 text-warm">
-              {step.showFunnel ? <FunnelDiagram /> : null}
-              {step.detail ? <p className="mt-1.5">{step.detail}</p> : null}
+            <div className="mt-2 rounded-xl bg-cream px-3 py-2 text-[13px] leading-5 text-warm">
+              {step.detail ? <p>{step.detail}</p> : null}
               {step.showTrace && trace ? <TraceFacts trace={trace} /> : null}
               {step.showTrace && !trace ? <p className="mt-1.5">这一轮的路由数据还没到，数字不会先写死。</p> : null}
               {step.id === "end" ? (
@@ -523,28 +597,28 @@ export function DemoTour() {
             </div>
           ) : null}
         </div>
-        <div className="flex flex-wrap items-center gap-2 border-t border-line px-3 py-2.5">
-          {step.id !== "intro" && step.id !== "end" ? (
-            <>
-              <button
-                type="button"
-                data-testid="demo-prev"
-                disabled={busy}
-                onClick={goPrev}
-                className="rounded-full px-3 py-1.5 text-xs font-medium text-foreground disabled:opacity-40"
-              >
-                上一步
-              </button>
-              <button
-                type="button"
-                data-testid="demo-exit"
-                disabled={busy}
-                onClick={leave}
-                className="rounded-full px-3 py-1.5 text-xs font-medium text-warm"
-              >
-                退出演示
-              </button>
-            </>
+        <div className="flex flex-wrap items-center gap-2 border-t border-line px-4 py-2.5">
+          {showNav ? (
+            <button
+              type="button"
+              data-testid="demo-prev"
+              disabled={busy}
+              onClick={goPrev}
+              className="rounded-full px-3 py-1.5 text-xs font-medium leading-5 text-foreground disabled:opacity-40"
+            >
+              上一步
+            </button>
+          ) : null}
+          {showExit ? (
+            <button
+              type="button"
+              data-testid="demo-exit"
+              disabled={busy}
+              onClick={leave}
+              className="rounded-full px-3 py-1.5 text-xs font-medium leading-5 text-warm"
+            >
+              退出演示
+            </button>
           ) : null}
           <span className="ml-auto flex flex-wrap justify-end gap-2">
             {step.id === "end" ? (
@@ -553,7 +627,7 @@ export function DemoTour() {
                 data-testid="demo-retry"
                 disabled={busy}
                 onClick={() => void begin("intro")}
-                className="rounded-full border border-brand px-3 py-1.5 text-xs font-semibold text-brand disabled:opacity-50"
+                className="rounded-full border border-brand px-3 py-1.5 text-xs font-semibold leading-5 text-brand disabled:opacity-50"
               >
                 {busy ? "重置中…" : "再演示一次"}
               </button>
@@ -564,18 +638,18 @@ export function DemoTour() {
                 data-testid={step.primary.testId}
                 disabled={busy}
                 onClick={runPrimary}
-                className="rounded-full bg-red-600 px-3.5 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+                className="rounded-full bg-red-600 px-3.5 py-1.5 text-xs font-semibold leading-5 text-white disabled:opacity-50"
               >
                 {busy ? "请稍等…" : step.primary.label}
               </button>
             ) : null}
-            {step.id !== "intro" && step.id !== "end" ? (
+            {showNav ? (
               <button
                 type="button"
                 data-testid="demo-next"
                 disabled={busy}
                 onClick={goNext}
-                className="rounded-full bg-brand px-3.5 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+                className="rounded-full bg-brand px-3.5 py-1.5 text-xs font-semibold leading-5 text-white disabled:opacity-50"
               >
                 下一步
               </button>
