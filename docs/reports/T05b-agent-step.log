@@ -1,0 +1,53 @@
+❌ E50 付不了款怎么办                layer=human(来自L3) intent=order_status riskHit=[] handoff=true 5372ms $0.000171 ← 转人工判断错
+[agent-step] {
+  ms: 5111,
+  tools: [ 'check_stock', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 5066, tools: [ 'request_exchange' ], finish: 'tool_calls' }
+[agent-step] { ms: 1542, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 1447, tools: [ 'request_exchange' ], finish: 'tool_calls' }
+[agent-step] { ms: 1284, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+✅ E51 上周买的那件外套换成L码，顺便帮我看看有没有 layer=L3 intent=multi_step_complex riskHit=[] handoff=false 4697ms $0.000166（尝试2次）
+[agent-step] {
+  ms: 1813,
+  tools: [ 'track_logistics', 'get_aftersale' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 3994, tools: [], finish: 'stop' }
+✅ E52 帮我看看最近的订单 哪个还没到 哪个能退   layer=L3 intent=multi_step_complex riskHit=[] handoff=false 6212ms $0.000364
+[agent-step] { ms: 1098, tools: [ 'list_orders' ], finish: 'tool_calls' }
+[agent-step] {
+  ms: 1415,
+  tools: [ 'search_products', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 1447, tools: [ 'search_products' ], finish: 'tool_calls' }
+[agent-step] { ms: 1756, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 1500, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 2164, tools: [], finish: 'stop' }
+✅ E53 我想再买一件和上次那件大衣同色的开衫，有我的 layer=L3 intent=multi_step_complex riskHit=[] handoff=false 9802ms $0.000777
+[agent-step] {
+  ms: 1694,
+  tools: [ 'cancel_order', 'modify_address' ],
+  finish: 'tool_calls'
+}
+✅ E54 两个订单都帮我处理下：没付款的取消，已经付了 layer=L3 intent=multi_step_complex riskHit=[] handoff=false 2111ms $0.000139
+❌ E55 退的那条裙子钱到了我想用这钱再买条同款L码的 layer=L2 intent=stock_check riskHit=[] handoff=false 402ms $0.000063 ← 多步没识别
+[agent-step] { ms: 2271, tools: [], finish: 'stop' }
+❌ E56 比较一下你们家的大衣和开衫哪个更保暖，顺便告 layer=human(来自L3) intent=product_consult riskHit=[] handoff=true 5178ms $0.000165 ← 转人工判断错
+[agent-step] {
+  ms: 4043,
+  tools: [ 'track_logistics', 'get_order' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 5009, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-step] { ms: 3063, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 1411,
+  tools: [ 'track_logistics', 'get_aftersale' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 1986, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-failure] Error
+❌ E57 到哪了，另外我想把上周那件外套退了      layer=human(来自L3) intent=multi_step_complex riskHit=[] handoff=true 5853ms $0.000274 ← 转人工判断错（尝试2次）

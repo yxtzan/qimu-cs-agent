@@ -1,0 +1,515 @@
+{
+  "baseline": "7ab6c07",
+  "runAt": "2026-10-04T04:42:04.427Z",
+  "scope": "Final accepted attempt of each E51-E57 case; model durations from agent-step logs, traces sampled read-only before eval cleanup. No L3 code changed.",
+  "samples": [
+    {
+      "caseId": "E51",
+      "pass": true,
+      "attempts": 2,
+      "trace": {
+        "id": "TR-b84d6220-5bbc-4ae0-b969-630cab0bf14f",
+        "conversationId": "C1058",
+        "messageId": "C1058-M1",
+        "at": "2026-10-05T10:05:04.426+08:00",
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "stage": "other",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "check_stock",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "request_exchange",
+            "ok": true,
+            "ms": 2
+          },
+          {
+            "name": "list_coupons",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 4697,
+          "agentMs": 4283,
+          "decideMs": 393
+        },
+        "cost": {
+          "decideUsd": 0.000068418,
+          "generationUsd": 0,
+          "agentUsd": 0.000097226,
+          "totalUsd": 0.000165644,
+          "estimated": false
+        },
+        "confidence": 0.9,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 0.91
+          },
+          {
+            "id": "exchange",
+            "p": 0.09
+          },
+          {
+            "id": "logistics_track",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        1542,
+        1447,
+        1284
+      ]
+    },
+    {
+      "caseId": "E52",
+      "pass": true,
+      "attempts": 1,
+      "trace": {
+        "id": "TR-7d92b8bf-10d9-4483-9208-2830c7a03c1a",
+        "conversationId": "C1059",
+        "messageId": "C1059-M1",
+        "at": "2026-10-05T10:05:09.127+08:00",
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "stage": "other",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "track_logistics",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "get_aftersale",
+            "ok": true,
+            "ms": 1
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 6212,
+          "agentMs": 5812,
+          "decideMs": 390
+        },
+        "cost": {
+          "decideUsd": 0.000062454,
+          "generationUsd": 0,
+          "agentUsd": 0.00030137999999999996,
+          "totalUsd": 0.00036383399999999995,
+          "estimated": false
+        },
+        "confidence": 0.98,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 0.99
+          },
+          {
+            "id": "order_status",
+            "p": 0.01
+          },
+          {
+            "id": "other",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.02
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        1813,
+        3994
+      ]
+    },
+    {
+      "caseId": "E53",
+      "pass": true,
+      "attempts": 1,
+      "trace": {
+        "id": "TR-1cb11d72-8118-4c5c-8161-5fc4711d78dc",
+        "conversationId": "C1060",
+        "messageId": "C1060-M1",
+        "at": "2026-10-05T10:05:15.348+08:00",
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "stage": "other",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "search_products",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "list_coupons",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "search_products",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "check_stock",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "check_stock",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 9802,
+          "agentMs": 9394,
+          "decideMs": 392
+        },
+        "cost": {
+          "decideUsd": 0.000063294,
+          "generationUsd": 0,
+          "agentUsd": 0.000713736,
+          "totalUsd": 0.00077703,
+          "estimated": false
+        },
+        "confidence": 0.99,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 0.99
+          },
+          {
+            "id": "stock_check",
+            "p": 0.01
+          },
+          {
+            "id": "urge_shipping",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        1098,
+        1415,
+        1447,
+        1756,
+        1500,
+        2164
+      ]
+    },
+    {
+      "caseId": "E54",
+      "pass": true,
+      "attempts": 1,
+      "trace": {
+        "id": "TR-af9b4b3a-bb67-4814-911f-9ed866102db8",
+        "conversationId": "C1061",
+        "messageId": "C1061-M1",
+        "at": "2026-10-05T10:05:25.157+08:00",
+        "layer": "L3",
+        "intent": "multi_step_complex",
+        "stage": "other",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "cancel_order",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "modify_address",
+            "ok": true,
+            "ms": 2
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2111,
+          "agentMs": 1702,
+          "decideMs": 395
+        },
+        "cost": {
+          "decideUsd": 0.000064302,
+          "generationUsd": 0,
+          "agentUsd": 0.00007486,
+          "totalUsd": 0.000139162,
+          "estimated": false
+        },
+        "confidence": 1,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 1
+          },
+          {
+            "id": "shipping_policy",
+            "p": 0
+          },
+          {
+            "id": "return_policy",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        1694
+      ]
+    },
+    {
+      "caseId": "E55",
+      "pass": false,
+      "attempts": 1,
+      "trace": {
+        "id": "TR-68b37f43-df76-4e0f-84ee-33f3a5e76cc4",
+        "conversationId": "C1062",
+        "messageId": "C1062-M1",
+        "at": "2026-10-05T10:05:27.277+08:00",
+        "layer": "L2",
+        "intent": "stock_check",
+        "stage": "presale",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 402,
+          "handlerMs": 2,
+          "decideMs": 389
+        },
+        "cost": {
+          "decideUsd": 0.000063084,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0.000063084,
+          "estimated": false
+        },
+        "confidence": 0.93,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "stock_check",
+            "p": 0.93
+          },
+          {
+            "id": "multi_step_complex",
+            "p": 0.05
+          },
+          {
+            "id": "exchange",
+            "p": 0.01
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": []
+    },
+    {
+      "caseId": "E56",
+      "pass": false,
+      "attempts": 1,
+      "trace": {
+        "id": "TR-34fa2d2c-aa2a-4421-8730-e2e8e2c22144",
+        "conversationId": "C1063",
+        "messageId": "C1063-M1",
+        "at": "2026-10-05T10:05:27.687+08:00",
+        "layer": "human",
+        "intent": "product_consult",
+        "stage": "presale",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 5178,
+          "agentMs": 2276,
+          "decideMs": 379
+        },
+        "cost": {
+          "decideUsd": 0.000065856,
+          "generationUsd": 0,
+          "agentUsd": 0.0000995,
+          "totalUsd": 0.00016535600000000002,
+          "estimated": false
+        },
+        "confidence": 0.49,
+        "ragHits": 0,
+        "escalatedFrom": "L3",
+        "handoffReason": "l3_failed",
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "product_consult",
+            "p": 0.53
+          },
+          {
+            "id": "multi_step_complex",
+            "p": 0.47
+          },
+          {
+            "id": "return_policy",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        2271
+      ]
+    },
+    {
+      "caseId": "E57",
+      "pass": false,
+      "attempts": 2,
+      "trace": {
+        "id": "TR-ecd0477f-4f9d-4186-bf5b-43f9351cb03a",
+        "conversationId": "C1065",
+        "messageId": "C1065-M1",
+        "at": "2026-10-05T10:05:57.004+08:00",
+        "layer": "human",
+        "intent": "multi_step_complex",
+        "stage": "other",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "track_logistics",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "get_aftersale",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "apply_refund",
+            "ok": false,
+            "ms": 1
+          }
+        ],
+        "usedGeneration": true,
+        "latency": {
+          "totalMs": 5853,
+          "agentMs": 3402,
+          "decideMs": 361
+        },
+        "cost": {
+          "decideUsd": 0.000067326,
+          "generationUsd": 0.000019894,
+          "agentUsd": 0.00018663000000000002,
+          "totalUsd": 0.00027385,
+          "estimated": true
+        },
+        "confidence": 0.95,
+        "ragHits": 0,
+        "escalatedFrom": "L3",
+        "handoffReason": "l3_failed",
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 0.95
+          },
+          {
+            "id": "refund_apply",
+            "p": 0.04
+          },
+          {
+            "id": "logistics_track",
+            "p": 0.01
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.19
+        },
+        "riskHit": []
+      },
+      "modelStepsMs": [
+        1411,
+        1986
+      ]
+    }
+  ]
+}
