@@ -36,7 +36,7 @@
 | T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | done |
 | T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | done |
 | T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | done |
-| T23 | 部署到阿里云杭州 ECS，用 IP 访问（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | doing（环境已装好，等 T22） |
+| T23 | 部署到阿里云杭州 ECS，用 IP 访问（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | doing（已上线 http://120.27.142.15，待验收） |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 
 **2026-10-04 重排**：后端是关键路径，把不依赖流水线的后端活（会话数据层、卖家会话 / 规则 / 重置 API、种子流量、看板 API）从 Codex 的 T04–T06 里拆出来，交给 Cursor 做 T16、T17。Cursor 写过这些接口的 mock，对契约最熟。Codex 的关键路径 T03 → T04 → T05 → T06 因此缩短约 3.5 小时。
