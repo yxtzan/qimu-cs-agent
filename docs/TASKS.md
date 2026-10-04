@@ -32,8 +32,9 @@
 | T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | done |
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
-| T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | doing |
-| T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | Cursor | T21 | 7 | 4h | todo |
+| T21 | 演示模式：网页里一步步带着走（红圈导览） | Cursor | T09b | 7 | 3.5h | done |
+| T21b | 演示模式小修 + 看板措辞 | Cursor | T21 | 7 | 45m | doing |
+| T22 | 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 | **Codex**（额度恢复，改回后端负责人） | T21 | 7 | 4h | doing |
 | T23 | 部署到阿里云香港 + 子域名 + HTTPS（人类按 docs/DEPLOY.md 操作，Claude 指挥） | 人类 + Claude | T22 | 8 | 1h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | doing（剧本见 docs/DEMO.md，待人类走查） |
 
@@ -491,10 +492,10 @@
 
 ---
 
-## T22 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 — Cursor
+## T22 公开部署准备：每位访客独立数据 + 限流与花费上限 + 生产构建 — Codex
 
 - 分支：`t22-public-demo`
-- 依赖：T21（演示模式合并后再开工，避免同一份克隆里两个任务打架）
+- 依赖：T21（已合并）。Cursor 同时在做 T21b（只改 `components/demo/**`、看板措辞和 mock），目录不重叠。
 - 必读：`docs/DECISIONS.md` D005（JSON 文件存储）D014、`lib/store/index.ts` `lib/store/reset.ts` `lib/store/http.ts` `lib/store/conversations.ts`、`lib/brain/background.ts`、`app/api/**`、`docs/DEPLOY.md`
 - 说明：网站要部署到公网交作业，评审会同时打开。现在所有人共用一份演示数据：第一个人换完货，后面的人第 3 步都会被转人工；卖家端看到所有人的对话；谁点「重置」都会清空所有人。而且公开链接用的是人类的 OpenRouter key。本任务让**每位访客有一份自己的演示数据**，并加上限流和每日花费上限。只在环境变量 `PUBLIC_DEMO=1` 时生效，本地开发、评测、e2e 默认行为不变。
 
@@ -520,7 +521,7 @@ C. **生产构建可用**
 2. 新增 `GET /api/health` 返回 `{ ok: true }`（部署后检查用）。
 3. 用生产构建跑一遍：`npm run build && PUBLIC_DEMO=1 npm start` 后，`NEXT_PUBLIC_USE_MOCK=0 npm run e2e`（e2e 需要能指向已启动的服务，若现有配置不支持就加一个环境变量开关）。
 
-**目录归属（本任务特批）**：`lib/store/**`、`lib/brain/background.ts`（只为会话上下文和排队键）、`app/api/**`、`middleware.ts`（新建，如需要）、`lib/analytics/**`、`.env.example`、`next.config.ts`、`package.json`（如需加脚本）。**不改** `lib/brain/**` 的其他文件、`lib/tools/**` 的业务逻辑、`data/seed/**`、`data/eval/**`。
+**目录归属（本任务特批给 Codex，含 Cursor 原有的会话 / 规则 / 重置 / 看板接口与数据层）**：`lib/store/**`、`lib/brain/background.ts`（只为会话上下文和排队键）、`app/api/**`、`middleware.ts`（新建，如需要）、`lib/analytics/**`、`.env.example`、`next.config.ts`、`package.json`（如需加脚本）。**不改** `lib/brain/**` 的其他文件、`lib/tools/**` 的业务逻辑、`data/seed/**`、`data/eval/**`。
 
 **验收标准**
 
@@ -531,6 +532,31 @@ C. **生产构建可用**
 - [ ] `npm run build && PUBLIC_DEMO=1 npm start` 下，真实后端 e2e 6 步全部通过；`/api/health` 返回 ok
 - [ ] `npm run typecheck` `npm run lint`、`lib/**/*.test.ts` 通过
 - [ ] 限时 4 小时
+
+---
+
+## T21b 演示模式小修 + 看板措辞 — Cursor
+
+- 分支：`t21b-demo-polish`
+- 依赖：T21（已合并）。和 Codex 的 T22 并行（目录不重叠）。
+- 必读：`docs/handoff/T21.md`、`components/demo/**`、`components/seller/DashboardScreen.tsx`、`lib/mock/traffic.ts`、`TASKS.md` 末尾「待办」
+
+**要做**
+
+1. **一张卡片只留一个主按钮**：开场卡片现在同时有红色「开始演示」和绿色「下一步」，结束卡片有两个「自由体验」。改为：开场只有「开始演示」（重置后进第 1 步）；结束只有「再演示一次」和「自由体验」各一个；其余步骤保持「上一步 / 退出演示 / 下一步」。
+2. **看板主结论措辞**：「在 L1 / L2 就解决了，不调用大模型，又快又省」不准确——L2 的咨询类回复会调用一次生成模型。改为「在 L1 / L2 就解决了，不走大模型多步编排，又快又省」（或同义、更短的说法，意思不能变）。
+3. **mock 流量的 L3 成本**：`lib/mock/traffic.ts` 里 L3 成本还是旧的夸大值（$0.002–0.005），按 T15b 的口径改成 $0.00008–0.0002，和真实后端看板一致。
+4. **第 1 步首次回复慢的提示**：T21 实测第 1 步 L2 耗时近 9 秒（分类器冷启动）。在第 1 步「点发送」后的等待文案里加一句「第一条消息会慢一点，模型在热身」，等待超过 5 秒才显示。
+
+**目录归属**：`components/demo/**`、`components/seller/DashboardScreen.tsx`、`lib/mock/**`。不改后端。
+
+**验收标准**
+
+- [ ] 开场、结束卡片截图各一张，按钮符合第 1 条
+- [ ] 看板截图，主结论措辞已改
+- [ ] `NEXT_PUBLIC_USE_MOCK=1` 下看板 L3 每千条成本在 ¥1–2 左右
+- [ ] `npm run typecheck` `npm run lint` 通过；`e2e/demo-mode.spec.ts`（mock）和 `e2e/demo.spec.ts`（真实后端）都通过
+- [ ] 限时 45 分钟
 
 ---
 
@@ -807,6 +833,6 @@ C. **生产构建可用**
 ## 待办（不排期，演示后视情况处理）
 
 - ~~售后单幂等~~ → 已排进 T09b。
-- `lib/mock/traffic.ts` 的 L3 成本还是旧的夸大值，只在 `NEXT_PUBLIC_USE_MOCK=1` 时出现（T15b 遗留）。
-- 看板主结论写着「在 L1 / L2 就解决了，不调用大模型」：L2 的咨询类回复会调用生成模型（RAG + LLM），严格说不准确。对外讲时说「不走大模型多步编排」。
+- ~~mock 流量成本~~ → T21b。
+- ~~看板措辞~~ → T21b。
 - 按 trace ID 合并增量费用的数据层接口（T05b-1）。
