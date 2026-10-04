@@ -1,0 +1,2576 @@
+[
+  {
+    "buyer": "B001",
+    "text": "到哪了",
+    "response": {
+      "conversation": {
+        "id": "C1001",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "logistics_track",
+            "status": "done",
+            "startedAt": "2026-10-05T10:00:00.094+08:00"
+          },
+          "slots": {
+            "orderId": "QM2026100201"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "list_orders",
+              "summary": "已查询或申请：list_orders",
+              "at": "2026-10-05T10:00:00.094+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "track_logistics",
+              "summary": "已查询或申请：track_logistics",
+              "at": "2026-10-05T10:00:00.094+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "logistics_track",
+              "summary": "L1 R002：包裹正在配送中，预计 10-06 送达。",
+              "at": "2026-10-05T10:00:00.094+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "logistics_track"
+        },
+        "createdAt": "2026-10-05T10:00:00.079+08:00",
+        "updatedAt": "2026-10-05T10:00:00.095+08:00",
+        "lastMessagePreview": "包裹正在配送中，预计 10-06 送达。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L1"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "到哪了",
+          "id": "C1001-M1",
+          "conversationId": "C1001",
+          "createdAt": "2026-10-05T10:00:00.081+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "包裹正在配送中，预计 10-06 送达。",
+          "card": {
+            "kind": "logistics",
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          },
+          "traceId": "TR-c87b15f8-4493-497d-a539-24e270772b2f",
+          "id": "C1001-M2",
+          "conversationId": "C1001",
+          "createdAt": "2026-10-05T10:00:00.095+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-c87b15f8-4493-497d-a539-24e270772b2f",
+        "conversationId": "C1001",
+        "messageId": "C1001-M1",
+        "at": "2026-10-05T10:00:00.081+08:00",
+        "layer": "L1",
+        "intent": "logistics_track",
+        "stage": "insale",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 8
+          },
+          {
+            "name": "track_logistics",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 15,
+          "handlerMs": 9
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "ruleId": "R002",
+        "confidence": 1,
+        "ragHits": 0
+      }
+    },
+    "finalTrace": {
+      "id": "TR-c87b15f8-4493-497d-a539-24e270772b2f",
+      "conversationId": "C1001",
+      "messageId": "C1001-M1",
+      "at": "2026-10-05T10:00:00.081+08:00",
+      "layer": "L1",
+      "intent": "logistics_track",
+      "stage": "insale",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 8
+        },
+        {
+          "name": "track_logistics",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 15,
+        "handlerMs": 9,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": true
+      },
+      "ruleId": "R002",
+      "confidence": 1,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "logistics_track",
+          "p": 0.9
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "我160 50公斤穿什么码",
+    "response": {
+      "conversation": {
+        "id": "C1002",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "size_recommend",
+            "status": "done",
+            "startedAt": "2026-10-05T10:00:11.374+08:00"
+          },
+          "slots": {
+            "heightCm": 160,
+            "weightKg": 50,
+            "productId": "P002"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "recommend_size",
+              "summary": "已查询或申请：recommend_size",
+              "at": "2026-10-05T10:00:11.346+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "get_product",
+              "summary": "已查询或申请：get_product",
+              "at": "2026-10-05T10:00:11.347+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "size_recommend",
+              "summary": "建议您选 M 码，供您参考。",
+              "at": "2026-10-05T10:00:11.374+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "size_recommend"
+        },
+        "createdAt": "2026-10-05T10:00:09.070+08:00",
+        "updatedAt": "2026-10-05T10:00:11.374+08:00",
+        "lastMessagePreview": "这些资料供您参考。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L2"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "我160 50公斤穿什么码",
+          "id": "C1002-M1",
+          "conversationId": "C1002",
+          "createdAt": "2026-10-05T10:00:09.072+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "建议您选 M 码，供您参考。",
+          "card": {
+            "kind": "size_result",
+            "size": "M",
+            "basis": "身高 160cm 对应 M，体重 50kg 对应 M，取较大尺码 M。",
+            "productId": "P002"
+          },
+          "traceId": "TR-af213f17-3cde-4fbe-8e58-ee7270eb964b",
+          "id": "C1002-M2",
+          "conversationId": "C1002",
+          "createdAt": "2026-10-05T10:00:11.374+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "建议结合下面的尺码资料和穿着习惯选择。",
+          "traceId": "TR-af213f17-3cde-4fbe-8e58-ee7270eb964b",
+          "id": "C1002-M3",
+          "conversationId": "C1002",
+          "createdAt": "2026-10-05T10:00:11.374+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这些资料供您参考。",
+          "card": {
+            "kind": "sources",
+            "sources": [
+              {
+                "docTitle": "尺码指南",
+                "heading": "我们怎样推荐",
+                "snippet": "身高、体重分别查表，取较大的尺码。例如 160cm / 50kg，基础推荐 M；158cm / 47kg，基础推荐 S。宽松款如果身高和体重都在该码区间的下半段，可以小一码：喜欢宽松效果保留原码，想合身选小一码。修身款有任一指标落在区间上沿的最后 1cm 或 1kg，推荐大一码。超出表格范围时，请找人工确认，不会硬给您套一个码。"
+              },
+              {
+                "docTitle": "尺码指南",
+                "heading": "先看身高和体重",
+                "snippet": "不确定穿哪个码，可以把身高和体重发给我们，体重请带上单位。100 斤是 50kg，别把斤直接当成公斤。下面是店里的通用参考表，胸围和腰围单位也是 cm。选码还要结合商品版型和自己的穿着习惯，不能只凭平时买的字母尺码。\n\n| 尺码 | 身高 cm | 体重 kg | 胸围 cm | 腰围 cm |\n|---|---|---|---|---|\n| XS | 15"
+              },
+              {
+                "docTitle": "尺码指南",
+                "heading": "先看身高和体重",
+                "snippet": "164 | 50–54 | 88 | 70 |\n| L | 165–169 | 55–61 | 92 | 74 |\n| XL | 170–175 | 62–70 | 96 | 78 |"
+              },
+              {
+                "docTitle": "常见问题FAQ",
+                "heading": "买之前",
+                "snippet": "**1. 不知道选哪个码？** 发身高、体重和商品名。160cm / 50kg 的基础推荐是 M，版型还会修正；超出尺码表请人工确认。\n\n**2. 100 斤按多少算？** 是 50kg，请带上单位，别直接把 100 当公斤。\n\n**3. 大衣能机洗吗？** P007 羊毛混纺大衣建议专业干洗，勿机洗。\n\n**4. 真丝衬衫怎么洗？** P013 用真丝专用"
+              }
+            ]
+          },
+          "traceId": "TR-af213f17-3cde-4fbe-8e58-ee7270eb964b",
+          "id": "C1002-M4",
+          "conversationId": "C1002",
+          "createdAt": "2026-10-05T10:00:11.374+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-af213f17-3cde-4fbe-8e58-ee7270eb964b",
+        "conversationId": "C1002",
+        "messageId": "C1002-M1",
+        "at": "2026-10-05T10:00:09.072+08:00",
+        "layer": "L2",
+        "intent": "size_recommend",
+        "stage": "presale",
+        "toolCalls": [
+          {
+            "name": "recommend_size",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "get_product",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "search_kb",
+            "ok": true,
+            "ms": 26
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2303,
+          "handlerMs": 29,
+          "decideMs": 2270
+        },
+        "cost": {
+          "decideUsd": 0.000064134,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0.000064134,
+          "estimated": false
+        },
+        "confidence": 1,
+        "ragHits": 4,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "size_recommend",
+            "p": 1
+          },
+          {
+            "id": "exchange",
+            "p": 0
+          },
+          {
+            "id": "refund_apply",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-af213f17-3cde-4fbe-8e58-ee7270eb964b",
+      "conversationId": "C1002",
+      "messageId": "C1002-M1",
+      "at": "2026-10-05T10:00:09.072+08:00",
+      "layer": "L2",
+      "intent": "size_recommend",
+      "stage": "presale",
+      "toolCalls": [
+        {
+          "name": "recommend_size",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "get_product",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "search_kb",
+          "ok": true,
+          "ms": 26
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2303,
+        "handlerMs": 29,
+        "decideMs": 2270
+      },
+      "cost": {
+        "decideUsd": 0.000064134,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.000064134,
+        "estimated": false
+      },
+      "confidence": 1,
+      "ragHits": 4,
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "size_recommend",
+          "p": 1
+        },
+        {
+          "id": "exchange",
+          "p": 0
+        },
+        {
+          "id": "refund_apply",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.01,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.01,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "我九月中旬买的碎花裙",
+    "response": {
+      "conversation": {
+        "id": "C1003",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "other",
+            "status": "collecting",
+            "startedAt": "2026-10-05T10:00:20.357+08:00"
+          },
+          "slots": {
+            "orderId": "QM2026091501",
+            "itemId": "QM2026091501-1",
+            "productId": "P002"
+          },
+          "history": [
+            {
+              "type": "intent",
+              "name": "other",
+              "summary": "这个问题我需要再确认一下。",
+              "at": "2026-10-05T10:00:20.357+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 1,
+          "riskFlags": [],
+          "lastIntent": "other"
+        },
+        "createdAt": "2026-10-05T10:00:11.376+08:00",
+        "updatedAt": "2026-10-05T10:00:20.358+08:00",
+        "lastMessagePreview": "这个问题我需要再确认一下。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L3"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "我九月中旬买的碎花裙",
+          "id": "C1003-M1",
+          "conversationId": "C1003",
+          "createdAt": "2026-10-05T10:00:11.377+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这个问题我需要再确认一下。",
+          "traceId": "TR-058f448a-e1f9-4c33-940b-2ec96af1c484",
+          "id": "C1003-M2",
+          "conversationId": "C1003",
+          "createdAt": "2026-10-05T10:00:20.358+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-058f448a-e1f9-4c33-940b-2ec96af1c484",
+        "conversationId": "C1003",
+        "messageId": "C1003-M1",
+        "at": "2026-10-05T10:00:11.377+08:00",
+        "layer": "L3",
+        "intent": "other",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 8982,
+          "agentMs": 1,
+          "decideMs": 0
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": true
+        },
+        "confidence": 0.55,
+        "ragHits": 0,
+        "decideProvider": "mock",
+        "topIntents": [
+          {
+            "id": "other",
+            "p": 0.55
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-058f448a-e1f9-4c33-940b-2ec96af1c484",
+      "conversationId": "C1003",
+      "messageId": "C1003-M1",
+      "at": "2026-10-05T10:00:11.377+08:00",
+      "layer": "L3",
+      "intent": "other",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 8982,
+        "agentMs": 1,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": true
+      },
+      "confidence": 0.55,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "other",
+          "p": 0.55
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "退款到哪了",
+    "response": {
+      "conversation": {
+        "id": "C1003",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "refund_progress",
+            "status": "done",
+            "startedAt": "2026-10-05T10:00:20.367+08:00"
+          },
+          "slots": {
+            "orderId": "QM2026091501",
+            "itemId": "QM2026091501-1",
+            "productId": "P002"
+          },
+          "history": [
+            {
+              "type": "intent",
+              "name": "other",
+              "summary": "这个问题我需要再确认一下。",
+              "at": "2026-10-05T10:00:20.357+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "get_order",
+              "summary": "已查询或申请：get_order",
+              "at": "2026-10-05T10:00:20.367+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "get_aftersale",
+              "summary": "已查询或申请：get_aftersale",
+              "at": "2026-10-05T10:00:20.367+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "refund_progress",
+              "summary": "L1 R003：退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。",
+              "at": "2026-10-05T10:00:20.367+08:00"
+            }
+          ],
+          "turnCount": 2,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "refund_progress"
+        },
+        "createdAt": "2026-10-05T10:00:11.376+08:00",
+        "updatedAt": "2026-10-05T10:00:20.368+08:00",
+        "lastMessagePreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L1"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "退款到哪了",
+          "id": "C1003-M3",
+          "conversationId": "C1003",
+          "createdAt": "2026-10-05T10:00:20.362+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。",
+          "card": {
+            "kind": "aftersale",
+            "afterSale": {
+              "id": "AS20260920001",
+              "orderId": "QM2026091501",
+              "itemId": "QM2026091501-1",
+              "type": "return_refund",
+              "reason": "腰有点紧",
+              "amount": 389,
+              "status": "refunding",
+              "createdAt": "2026-09-20T10:00:00+08:00",
+              "timeline": [
+                {
+                  "at": "2026-09-20T10:00:00+08:00",
+                  "status": "pending_review",
+                  "note": "申请退货退款，腰有点紧"
+                },
+                {
+                  "at": "2026-09-20T15:00:00+08:00",
+                  "status": "approved",
+                  "note": "已同意退货，请寄回商品"
+                },
+                {
+                  "at": "2026-09-29T10:00:00+08:00",
+                  "status": "returning",
+                  "note": "买家已寄回，退件运输中"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "status": "refunding",
+                  "note": "商家已收到退货并发起退款，预计 1–3 个工作日原路退回"
+                }
+              ]
+            }
+          },
+          "traceId": "TR-569badb3-96fd-4401-bcbc-c82da733d9e1",
+          "id": "C1003-M4",
+          "conversationId": "C1003",
+          "createdAt": "2026-10-05T10:00:20.368+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-569badb3-96fd-4401-bcbc-c82da733d9e1",
+        "conversationId": "C1003",
+        "messageId": "C1003-M3",
+        "at": "2026-10-05T10:00:20.362+08:00",
+        "layer": "L1",
+        "intent": "refund_progress",
+        "stage": "aftersale",
+        "toolCalls": [
+          {
+            "name": "get_order",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "get_aftersale",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 7,
+          "handlerMs": 2
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "ruleId": "R003",
+        "confidence": 1,
+        "ragHits": 0
+      }
+    },
+    "finalTrace": {
+      "id": "TR-569badb3-96fd-4401-bcbc-c82da733d9e1",
+      "conversationId": "C1003",
+      "messageId": "C1003-M3",
+      "at": "2026-10-05T10:00:20.362+08:00",
+      "layer": "L1",
+      "intent": "refund_progress",
+      "stage": "aftersale",
+      "toolCalls": [
+        {
+          "name": "get_order",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "get_aftersale",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 7,
+        "handlerMs": 2,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": true
+      },
+      "ruleId": "R003",
+      "confidence": 1,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "refund_progress",
+          "p": 0.9
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "能换L吗",
+    "response": {
+      "conversation": {
+        "id": "C1004",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "exchange",
+            "status": "awaiting_confirm",
+            "startedAt": "2026-10-05T10:00:31.603+08:00"
+          },
+          "slots": {
+            "size": "L",
+            "orderId": "QM2026092801",
+            "itemId": "QM2026092801-1",
+            "productId": "P007"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "get_order",
+              "summary": "已查询或申请：get_order",
+              "at": "2026-10-05T10:00:31.601+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "check_stock",
+              "summary": "已查询或申请：check_stock",
+              "at": "2026-10-05T10:00:31.601+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "request_exchange",
+              "summary": "已查询或申请：request_exchange",
+              "at": "2026-10-05T10:00:31.603+08:00"
+            },
+            {
+              "type": "pending_action",
+              "name": "PA-314ae288-8afa-42ef-b9ab-885edaa8cc35",
+              "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件",
+              "at": "2026-10-05T10:00:31.603+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "exchange",
+              "summary": "请核对下面的信息，确认后我再为您办理。",
+              "at": "2026-10-05T10:00:31.603+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "pendingActionId": "PA-314ae288-8afa-42ef-b9ab-885edaa8cc35",
+          "lastIntent": "exchange"
+        },
+        "createdAt": "2026-10-05T10:00:29.347+08:00",
+        "updatedAt": "2026-10-05T10:00:31.604+08:00",
+        "lastMessagePreview": "请核对下面的信息，确认后我再为您办理。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L2"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "能换L吗",
+          "id": "C1004-M1",
+          "conversationId": "C1004",
+          "createdAt": "2026-10-05T10:00:29.350+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "请核对下面的信息，确认后我再为您办理。",
+          "card": {
+            "kind": "confirm",
+            "pendingAction": {
+              "id": "PA-314ae288-8afa-42ef-b9ab-885edaa8cc35",
+              "conversationId": "C1004",
+              "tool": "request_exchange",
+              "args": {
+                "orderId": "QM2026092801",
+                "itemId": "QM2026092801-1",
+                "newSize": "L",
+                "newColor": "燕麦色",
+                "buyerId": "B001"
+              },
+              "summary": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣 燕麦色 M」换成 燕麦色 L，共 1 件；请确认吊牌完好、未洗涤，收到退件后 24 小时内发新件",
+              "status": "pending",
+              "createdAt": "2026-10-05T10:00:31.602+08:00"
+            }
+          },
+          "traceId": "TR-4c0b2c5c-9e91-4021-b694-0b81f1dd7826",
+          "id": "C1004-M2",
+          "conversationId": "C1004",
+          "createdAt": "2026-10-05T10:00:31.604+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-4c0b2c5c-9e91-4021-b694-0b81f1dd7826",
+        "conversationId": "C1004",
+        "messageId": "C1004-M1",
+        "at": "2026-10-05T10:00:29.350+08:00",
+        "layer": "L2",
+        "intent": "exchange",
+        "stage": "aftersale",
+        "toolCalls": [
+          {
+            "name": "get_order",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "check_stock",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "request_exchange",
+            "ok": true,
+            "ms": 2
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2256,
+          "handlerMs": 3,
+          "decideMs": 2248
+        },
+        "cost": {
+          "decideUsd": 0.00006657,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0.00006657,
+          "estimated": false
+        },
+        "confidence": 0.99,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "exchange",
+            "p": 1
+          },
+          {
+            "id": "greeting",
+            "p": 0
+          },
+          {
+            "id": "multi_step_complex",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": 0.01
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-4c0b2c5c-9e91-4021-b694-0b81f1dd7826",
+      "conversationId": "C1004",
+      "messageId": "C1004-M1",
+      "at": "2026-10-05T10:00:29.350+08:00",
+      "layer": "L2",
+      "intent": "exchange",
+      "stage": "aftersale",
+      "toolCalls": [
+        {
+          "name": "get_order",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "check_stock",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "request_exchange",
+          "ok": true,
+          "ms": 2
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2256,
+        "handlerMs": 3,
+        "decideMs": 2248
+      },
+      "cost": {
+        "decideUsd": 0.00006657,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.00006657,
+        "estimated": false
+      },
+      "confidence": 0.99,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "exchange",
+          "p": 1
+        },
+        {
+          "id": "greeting",
+          "p": 0
+        },
+        {
+          "id": "multi_step_complex",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.02,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.02,
+        "emotion": 0.01
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B002",
+    "text": "穿了全身起红疹 不处理就去12315",
+    "response": {
+      "conversation": {
+        "id": "C1005",
+        "mode": "human",
+        "status": "waiting_human",
+        "riskFlags": [
+          "legal_threat",
+          "health_safety"
+        ],
+        "tags": [],
+        "state": {
+          "currentTask": null,
+          "slots": {},
+          "history": [
+            {
+              "type": "handoff",
+              "name": "风险闸门：legal_threat 1.00；health_safety 1.00",
+              "summary": "转人工：风险闸门：legal_threat 1.00；health_safety 1.00",
+              "at": "2026-10-05T10:00:49.589+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [
+            "legal_threat",
+            "health_safety"
+          ]
+        },
+        "createdAt": "2026-10-05T10:00:49.585+08:00",
+        "updatedAt": "2026-10-05T10:00:49.590+08:00",
+        "lastMessagePreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "unreadForSeller": 1,
+        "buyerId": "B002",
+        "handoffAt": "2026-10-05T10:00:49.589+08:00",
+        "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00",
+        "handoffSummary": "买家周雨桐，待核实需求，风险闸门：legal_threat 1.00；health_safety 1.00",
+        "lastLayer": "risk_gate"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "穿了全身起红疹 不处理就去12315",
+          "id": "C1005-M1",
+          "conversationId": "C1005",
+          "createdAt": "2026-10-05T10:00:49.586+08:00"
+        },
+        {
+          "role": "system",
+          "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+          "traceId": "TR-32526ba3-6640-4c48-953c-165e38816527",
+          "id": "C1005-M2",
+          "conversationId": "C1005",
+          "createdAt": "2026-10-05T10:00:49.590+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-32526ba3-6640-4c48-953c-165e38816527",
+        "conversationId": "C1005",
+        "messageId": "C1005-M1",
+        "at": "2026-10-05T10:00:49.586+08:00",
+        "layer": "risk_gate",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 3
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0
+        },
+        "riskScores": {
+          "legal_threat": 1,
+          "health_safety": 1,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": [
+          "legal_threat",
+          "health_safety"
+        ],
+        "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00"
+      }
+    },
+    "finalTrace": {
+      "id": "TR-32526ba3-6640-4c48-953c-165e38816527",
+      "conversationId": "C1005",
+      "messageId": "C1005-M1",
+      "at": "2026-10-05T10:00:49.586+08:00",
+      "layer": "risk_gate",
+      "intent": "quality_issue",
+      "stage": "aftersale",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 3,
+        "decideMs": 2257
+      },
+      "cost": {
+        "decideUsd": 0.000062202,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.000062202,
+        "estimated": false
+      },
+      "riskScores": {
+        "legal_threat": 1,
+        "health_safety": 1,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.25,
+        "emotion": 2.74
+      },
+      "riskHit": [
+        "legal_threat",
+        "health_safety",
+        "emotion"
+      ],
+      "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00",
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "quality_issue",
+          "p": 0.86
+        },
+        {
+          "id": "refund_apply",
+          "p": 0.14
+        },
+        {
+          "id": "refund_progress",
+          "p": 0
+        }
+      ],
+      "confidence": 0.84
+    }
+  },
+  {
+    "buyer": "B002",
+    "text": "请尽快处理",
+    "response": {
+      "conversation": {
+        "id": "C1005",
+        "mode": "human",
+        "status": "waiting_human",
+        "riskFlags": [
+          "legal_threat",
+          "health_safety",
+          "emotion"
+        ],
+        "tags": [],
+        "state": {
+          "currentTask": null,
+          "slots": {},
+          "history": [
+            {
+              "type": "handoff",
+              "name": "风险闸门：legal_threat 1.00；health_safety 1.00",
+              "summary": "转人工：风险闸门：legal_threat 1.00；health_safety 1.00",
+              "at": "2026-10-05T10:00:49.589+08:00"
+            }
+          ],
+          "turnCount": 2,
+          "unresolvedTurns": 0,
+          "riskFlags": [
+            "legal_threat",
+            "health_safety",
+            "emotion"
+          ]
+        },
+        "createdAt": "2026-10-05T10:00:49.585+08:00",
+        "updatedAt": "2026-10-05T10:00:51.850+08:00",
+        "lastMessagePreview": "请尽快处理",
+        "unreadForSeller": 2,
+        "buyerId": "B002",
+        "handoffAt": "2026-10-05T10:00:49.589+08:00",
+        "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00",
+        "handoffSummary": "买家周雨桐，待核实需求，风险闸门：legal_threat 1.00；health_safety 1.00",
+        "lastLayer": "human"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "请尽快处理",
+          "id": "C1005-M3",
+          "conversationId": "C1005",
+          "createdAt": "2026-10-05T10:00:51.850+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-5c31283e-f3bf-42f4-b20e-a65762c17bcb",
+        "conversationId": "C1005",
+        "messageId": "C1005-M3",
+        "at": "2026-10-05T10:00:51.850+08:00",
+        "layer": "human",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0
+        }
+      }
+    },
+    "finalTrace": {
+      "id": "TR-5c31283e-f3bf-42f4-b20e-a65762c17bcb",
+      "conversationId": "C1005",
+      "messageId": "C1005-M3",
+      "at": "2026-10-05T10:00:51.850+08:00",
+      "layer": "human",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0
+      }
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "退款进度 再拖我就找律师",
+    "response": {
+      "conversation": {
+        "id": "C1006",
+        "mode": "human",
+        "status": "waiting_human",
+        "riskFlags": [
+          "legal_threat"
+        ],
+        "tags": [],
+        "state": {
+          "currentTask": null,
+          "slots": {},
+          "history": [
+            {
+              "type": "handoff",
+              "name": "风险闸门：legal_threat 1.00",
+              "summary": "转人工：风险闸门：legal_threat 1.00",
+              "at": "2026-10-05T10:00:51.857+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [
+            "legal_threat"
+          ]
+        },
+        "createdAt": "2026-10-05T10:00:51.853+08:00",
+        "updatedAt": "2026-10-05T10:00:51.858+08:00",
+        "lastMessagePreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "unreadForSeller": 1,
+        "buyerId": "B001",
+        "handoffAt": "2026-10-05T10:00:51.857+08:00",
+        "handoffReason": "风险闸门：legal_threat 1.00",
+        "handoffSummary": "买家林小满，待核实需求，风险闸门：legal_threat 1.00",
+        "lastLayer": "risk_gate"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "退款进度 再拖我就找律师",
+          "id": "C1006-M1",
+          "conversationId": "C1006",
+          "createdAt": "2026-10-05T10:00:51.854+08:00"
+        },
+        {
+          "role": "system",
+          "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+          "traceId": "TR-5a7038fc-a3e1-4783-a69e-1b3c93ab5f1f",
+          "id": "C1006-M2",
+          "conversationId": "C1006",
+          "createdAt": "2026-10-05T10:00:51.858+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-5a7038fc-a3e1-4783-a69e-1b3c93ab5f1f",
+        "conversationId": "C1006",
+        "messageId": "C1006-M1",
+        "at": "2026-10-05T10:00:51.854+08:00",
+        "layer": "risk_gate",
+        "intent": "refund_progress",
+        "stage": "aftersale",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 3
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0
+        },
+        "riskScores": {
+          "legal_threat": 1,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": [
+          "legal_threat"
+        ],
+        "handoffReason": "风险闸门：legal_threat 1.00"
+      }
+    },
+    "finalTrace": {
+      "id": "TR-5a7038fc-a3e1-4783-a69e-1b3c93ab5f1f",
+      "conversationId": "C1006",
+      "messageId": "C1006-M1",
+      "at": "2026-10-05T10:00:51.854+08:00",
+      "layer": "risk_gate",
+      "intent": "refund_progress",
+      "stage": "aftersale",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 3,
+        "decideMs": 4416
+      },
+      "cost": {
+        "decideUsd": 0.0000157024,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.0000157024,
+        "estimated": true
+      },
+      "riskScores": {
+        "legal_threat": 1,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 2
+      },
+      "riskHit": [
+        "legal_threat"
+      ],
+      "handoffReason": "风险闸门：legal_threat 1.00",
+      "decideProvider": "llm",
+      "topIntents": [
+        {
+          "id": "refund_progress",
+          "p": 0.95
+        }
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "请尽快处理",
+    "response": {
+      "conversation": {
+        "id": "C1006",
+        "mode": "human",
+        "status": "waiting_human",
+        "riskFlags": [
+          "legal_threat",
+          "emotion"
+        ],
+        "tags": [],
+        "state": {
+          "currentTask": null,
+          "slots": {},
+          "history": [
+            {
+              "type": "handoff",
+              "name": "风险闸门：legal_threat 1.00",
+              "summary": "转人工：风险闸门：legal_threat 1.00",
+              "at": "2026-10-05T10:00:51.857+08:00"
+            }
+          ],
+          "turnCount": 2,
+          "unresolvedTurns": 0,
+          "riskFlags": [
+            "legal_threat",
+            "emotion"
+          ]
+        },
+        "createdAt": "2026-10-05T10:00:51.853+08:00",
+        "updatedAt": "2026-10-05T10:00:59.276+08:00",
+        "lastMessagePreview": "请尽快处理",
+        "unreadForSeller": 2,
+        "buyerId": "B001",
+        "handoffAt": "2026-10-05T10:00:51.857+08:00",
+        "handoffReason": "风险闸门：legal_threat 1.00",
+        "handoffSummary": "买家林小满，待核实需求，风险闸门：legal_threat 1.00",
+        "lastLayer": "human"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "请尽快处理",
+          "id": "C1006-M3",
+          "conversationId": "C1006",
+          "createdAt": "2026-10-05T10:00:59.276+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-949e5f7f-b097-45c8-aedb-f4385763ac0f",
+        "conversationId": "C1006",
+        "messageId": "C1006-M3",
+        "at": "2026-10-05T10:00:59.276+08:00",
+        "layer": "human",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0
+        }
+      }
+    },
+    "finalTrace": {
+      "id": "TR-949e5f7f-b097-45c8-aedb-f4385763ac0f",
+      "conversationId": "C1006",
+      "messageId": "C1006-M3",
+      "at": "2026-10-05T10:00:59.276+08:00",
+      "layer": "human",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0
+      }
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "我 160cm 50kg 穿什么码？这件能机洗吗",
+    "response": {
+      "conversation": {
+        "id": "C1007",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "size_recommend",
+            "status": "done",
+            "startedAt": "2026-10-05T10:01:03.146+08:00"
+          },
+          "slots": {
+            "heightCm": 160,
+            "weightKg": 50,
+            "productId": "P002"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "recommend_size",
+              "summary": "已查询或申请：recommend_size",
+              "at": "2026-10-05T10:01:01.832+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "get_product",
+              "summary": "已查询或申请：get_product",
+              "at": "2026-10-05T10:01:01.832+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "size_recommend",
+              "summary": "建议您选 M 码，供您参考。",
+              "at": "2026-10-05T10:01:03.146+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "size_recommend"
+        },
+        "createdAt": "2026-10-05T10:00:59.280+08:00",
+        "updatedAt": "2026-10-05T10:01:03.147+08:00",
+        "lastMessagePreview": "这些资料供您参考。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L2"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "我 160cm 50kg 穿什么码？这件能机洗吗",
+          "id": "C1007-M1",
+          "conversationId": "C1007",
+          "createdAt": "2026-10-05T10:00:59.281+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "建议您选 M 码，供您参考。",
+          "card": {
+            "kind": "size_result",
+            "size": "M",
+            "basis": "身高 160cm 对应 M，体重 50kg 对应 M，取较大尺码 M。",
+            "productId": "P002"
+          },
+          "traceId": "TR-b37d99b4-8dfb-437c-b180-d80c9c643fde",
+          "id": "C1007-M2",
+          "conversationId": "C1007",
+          "createdAt": "2026-10-05T10:01:03.147+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "您好！根据资料，160cm/50kg 基础推荐 M 码。这款法式碎花茶歇裙材质为粘胶100%，建议冷水轻柔手洗，不机洗、不拧绞、整形阴干。",
+          "traceId": "TR-b37d99b4-8dfb-437c-b180-d80c9c643fde",
+          "id": "C1007-M3",
+          "conversationId": "C1007",
+          "createdAt": "2026-10-05T10:01:03.147+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这些资料供您参考。",
+          "card": {
+            "kind": "sources",
+            "sources": [
+              {
+                "docTitle": "法式碎花茶歇裙商品资料",
+                "heading": "材质与洗护",
+                "snippet": "粘胶 100%；冷水轻柔手洗，不长时间浸泡、不拧绞，整形阴干，勿高温烘干。"
+              },
+              {
+                "docTitle": "常见问题FAQ",
+                "heading": "买之前",
+                "snippet": "**1. 不知道选哪个码？** 发身高、体重和商品名。160cm / 50kg 的基础推荐是 M，版型还会修正；超出尺码表请人工确认。\n\n**2. 100 斤按多少算？** 是 50kg，请带上单位，别直接把 100 当公斤。\n\n**3. 大衣能机洗吗？** P007 羊毛混纺大衣建议专业干洗，勿机洗。\n\n**4. 真丝衬衫怎么洗？** P013 用真丝专用"
+              }
+            ]
+          },
+          "traceId": "TR-b37d99b4-8dfb-437c-b180-d80c9c643fde",
+          "id": "C1007-M4",
+          "conversationId": "C1007",
+          "createdAt": "2026-10-05T10:01:03.147+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-b37d99b4-8dfb-437c-b180-d80c9c643fde",
+        "conversationId": "C1007",
+        "messageId": "C1007-M1",
+        "at": "2026-10-05T10:00:59.281+08:00",
+        "layer": "L2",
+        "intent": "size_recommend",
+        "stage": "presale",
+        "toolCalls": [
+          {
+            "name": "recommend_size",
+            "ok": true,
+            "ms": 1
+          },
+          {
+            "name": "get_product",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "search_kb",
+            "ok": true,
+            "ms": 3
+          }
+        ],
+        "usedGeneration": true,
+        "latency": {
+          "totalMs": 3867,
+          "handlerMs": 1316,
+          "decideMs": 2548
+        },
+        "cost": {
+          "decideUsd": 0.000064974,
+          "generationUsd": 0.00006314,
+          "agentUsd": 0,
+          "totalUsd": 0.000128114,
+          "estimated": false
+        },
+        "confidence": 0.87,
+        "ragHits": 1,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "multi_step_complex",
+            "p": 0.88
+          },
+          {
+            "id": "size_recommend",
+            "p": 0.11
+          },
+          {
+            "id": "product_consult",
+            "p": 0.01
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-b37d99b4-8dfb-437c-b180-d80c9c643fde",
+      "conversationId": "C1007",
+      "messageId": "C1007-M1",
+      "at": "2026-10-05T10:00:59.281+08:00",
+      "layer": "L2",
+      "intent": "size_recommend",
+      "stage": "presale",
+      "toolCalls": [
+        {
+          "name": "recommend_size",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "get_product",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "search_kb",
+          "ok": true,
+          "ms": 3
+        }
+      ],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 3867,
+        "handlerMs": 1316,
+        "decideMs": 2548
+      },
+      "cost": {
+        "decideUsd": 0.000064974,
+        "generationUsd": 0.00006314,
+        "agentUsd": 0,
+        "totalUsd": 0.000128114,
+        "estimated": false
+      },
+      "confidence": 0.87,
+      "ragHits": 1,
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "multi_step_complex",
+          "p": 0.88
+        },
+        {
+          "id": "size_recommend",
+          "p": 0.11
+        },
+        {
+          "id": "product_consult",
+          "p": 0.01
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.02,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.01,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B003",
+    "text": "取消订单",
+    "response": {
+      "conversation": {
+        "id": "C1008",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "cancel_order",
+            "status": "collecting",
+            "startedAt": "2026-10-05T10:01:03.540+08:00"
+          },
+          "slots": {},
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "list_orders",
+              "summary": "已查询或申请：list_orders",
+              "at": "2026-10-05T10:01:03.540+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "cancel_order",
+              "summary": "您想查询或办理哪一单？",
+              "at": "2026-10-05T10:01:03.540+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "cancel_order"
+        },
+        "createdAt": "2026-10-05T10:01:03.150+08:00",
+        "updatedAt": "2026-10-05T10:01:03.541+08:00",
+        "lastMessagePreview": "您想查询或办理哪一单？",
+        "unreadForSeller": 0,
+        "buyerId": "B003",
+        "lastLayer": "L2"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "取消订单",
+          "id": "C1008-M1",
+          "conversationId": "C1008",
+          "createdAt": "2026-10-05T10:01:03.151+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "您想查询或办理哪一单？",
+          "card": {
+            "kind": "options",
+            "prompt": "请选择订单",
+            "options": [
+              {
+                "label": "QM2026100402 · 高腰直筒西装裤",
+                "value": "order:QM2026100402",
+                "sublabel": "待付款"
+              },
+              {
+                "label": "QM2026100401 · 软糯圆领开衫",
+                "value": "order:QM2026100401",
+                "sublabel": "待发货"
+              }
+            ]
+          },
+          "traceId": "TR-300f1c22-5f69-48e2-9057-906820c43fb1",
+          "id": "C1008-M2",
+          "conversationId": "C1008",
+          "createdAt": "2026-10-05T10:01:03.541+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-300f1c22-5f69-48e2-9057-906820c43fb1",
+        "conversationId": "C1008",
+        "messageId": "C1008-M1",
+        "at": "2026-10-05T10:01:03.151+08:00",
+        "layer": "L2",
+        "intent": "cancel_order",
+        "stage": "insale",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 390,
+          "handlerMs": 1,
+          "decideMs": 386
+        },
+        "cost": {
+          "decideUsd": 0.000060942,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0.000060942,
+          "estimated": false
+        },
+        "confidence": 1,
+        "ragHits": 0,
+        "decideProvider": "jev",
+        "topIntents": [
+          {
+            "id": "cancel_order",
+            "p": 1
+          },
+          {
+            "id": "exchange",
+            "p": 0
+          },
+          {
+            "id": "return_policy",
+            "p": 0
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.03,
+          "abuse_extreme": 0.02,
+          "emotion": 0.06
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-300f1c22-5f69-48e2-9057-906820c43fb1",
+      "conversationId": "C1008",
+      "messageId": "C1008-M1",
+      "at": "2026-10-05T10:01:03.151+08:00",
+      "layer": "L2",
+      "intent": "cancel_order",
+      "stage": "insale",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 390,
+        "handlerMs": 1,
+        "decideMs": 386
+      },
+      "cost": {
+        "decideUsd": 0.000060942,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.000060942,
+        "estimated": false
+      },
+      "confidence": 1,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "topIntents": [
+        {
+          "id": "cancel_order",
+          "p": 1
+        },
+        {
+          "id": "exchange",
+          "p": 0
+        },
+        {
+          "id": "return_policy",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.02,
+        "fraud_security": 0.03,
+        "abuse_extreme": 0.02,
+        "emotion": 0.06
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "到哪了",
+    "response": {
+      "conversation": {
+        "id": "C1010",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "logistics_track",
+            "status": "done",
+            "startedAt": "2026-10-05T10:01:04.323+08:00"
+          },
+          "slots": {
+            "orderId": "QM2026100201"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "list_orders",
+              "summary": "已查询或申请：list_orders",
+              "at": "2026-10-05T10:01:04.322+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "track_logistics",
+              "summary": "已查询或申请：track_logistics",
+              "at": "2026-10-05T10:01:04.323+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "logistics_track",
+              "summary": "L1 R002：包裹正在配送中，预计 10-06 送达。",
+              "at": "2026-10-05T10:01:04.323+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "logistics_track"
+        },
+        "createdAt": "2026-10-05T10:01:04.319+08:00",
+        "updatedAt": "2026-10-05T10:01:04.323+08:00",
+        "lastMessagePreview": "包裹正在配送中，预计 10-06 送达。",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L1"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "到哪了",
+          "id": "C1010-M1",
+          "conversationId": "C1010",
+          "createdAt": "2026-10-05T10:01:04.321+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "包裹正在配送中，预计 10-06 送达。",
+          "card": {
+            "kind": "logistics",
+            "orderId": "QM2026100201",
+            "logistics": {
+              "carrier": "顺丰速运",
+              "trackingNo": "SF0002026100201",
+              "status": "in_transit",
+              "estimatedDelivery": "2026-10-06T18:00:00+08:00",
+              "events": [
+                {
+                  "at": "2026-10-03T21:00:00+08:00",
+                  "location": "上海浦东配送站",
+                  "description": "已到达配送站，等待安排派送"
+                },
+                {
+                  "at": "2026-10-03T19:00:00+08:00",
+                  "location": "上海转运中心",
+                  "description": "到达上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T15:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "已发往上海转运中心"
+                },
+                {
+                  "at": "2026-10-03T12:00:00+08:00",
+                  "location": "杭州转运中心",
+                  "description": "到达杭州转运中心"
+                },
+                {
+                  "at": "2026-10-03T10:00:00+08:00",
+                  "location": "杭州仓",
+                  "description": "包裹已揽收"
+                }
+              ]
+            }
+          },
+          "traceId": "TR-407adb6d-f1d8-4537-abb0-b6ec567e177a",
+          "id": "C1010-M2",
+          "conversationId": "C1010",
+          "createdAt": "2026-10-05T10:01:04.323+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-407adb6d-f1d8-4537-abb0-b6ec567e177a",
+        "conversationId": "C1010",
+        "messageId": "C1010-M1",
+        "at": "2026-10-05T10:01:04.321+08:00",
+        "layer": "L1",
+        "intent": "logistics_track",
+        "stage": "insale",
+        "toolCalls": [
+          {
+            "name": "list_orders",
+            "ok": true,
+            "ms": 0
+          },
+          {
+            "name": "track_logistics",
+            "ok": true,
+            "ms": 1
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 3,
+          "handlerMs": 1
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "ruleId": "R002",
+        "confidence": 1,
+        "ragHits": 0
+      }
+    },
+    "finalTrace": {
+      "id": "TR-407adb6d-f1d8-4537-abb0-b6ec567e177a",
+      "conversationId": "C1010",
+      "messageId": "C1010-M1",
+      "at": "2026-10-05T10:01:04.321+08:00",
+      "layer": "L1",
+      "intent": "logistics_track",
+      "stage": "insale",
+      "toolCalls": [
+        {
+          "name": "list_orders",
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "name": "track_logistics",
+          "ok": true,
+          "ms": 1
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 3,
+        "handlerMs": 1,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": false
+      },
+      "ruleId": "R002",
+      "confidence": 1,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "logistics_track",
+          "p": 0.9
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B001",
+    "text": "不是，我问的是退款",
+    "response": {
+      "conversation": {
+        "id": "C1010",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "refund_apply",
+            "status": "collecting",
+            "startedAt": "2026-10-05T10:01:04.329+08:00"
+          },
+          "slots": {
+            "orderId": "QM2026100201"
+          },
+          "history": [
+            {
+              "type": "tool_call",
+              "name": "list_orders",
+              "summary": "已查询或申请：list_orders",
+              "at": "2026-10-05T10:01:04.322+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "track_logistics",
+              "summary": "已查询或申请：track_logistics",
+              "at": "2026-10-05T10:01:04.323+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "logistics_track",
+              "summary": "L1 R002：包裹正在配送中，预计 10-06 送达。",
+              "at": "2026-10-05T10:01:04.323+08:00"
+            },
+            {
+              "type": "tool_call",
+              "name": "get_order",
+              "summary": "已查询或申请：get_order",
+              "at": "2026-10-05T10:01:04.328+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "refund_apply",
+              "summary": "这单有几件商品，您想处理哪一件？",
+              "at": "2026-10-05T10:01:04.329+08:00"
+            }
+          ],
+          "turnCount": 2,
+          "unresolvedTurns": 0,
+          "riskFlags": [],
+          "lastIntent": "refund_apply"
+        },
+        "createdAt": "2026-10-05T10:01:04.319+08:00",
+        "updatedAt": "2026-10-05T10:01:04.329+08:00",
+        "lastMessagePreview": "这单有几件商品，您想处理哪一件？",
+        "unreadForSeller": 0,
+        "buyerId": "B001",
+        "lastLayer": "L2"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "不是，我问的是退款",
+          "id": "C1010-M3",
+          "conversationId": "C1010",
+          "createdAt": "2026-10-05T10:01:04.327+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这单有几件商品，您想处理哪一件？",
+          "card": {
+            "kind": "options",
+            "prompt": "请选择商品",
+            "options": [
+              {
+                "label": "高腰直筒西装裤 · 黑 S",
+                "value": "item:QM2026100201-1"
+              },
+              {
+                "label": "软糯圆领开衫 · 奶白 M",
+                "value": "item:QM2026100201-2"
+              }
+            ]
+          },
+          "traceId": "TR-a245db3a-86eb-4d21-8ccd-5c05318d0781",
+          "id": "C1010-M4",
+          "conversationId": "C1010",
+          "createdAt": "2026-10-05T10:01:04.329+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-a245db3a-86eb-4d21-8ccd-5c05318d0781",
+        "conversationId": "C1010",
+        "messageId": "C1010-M3",
+        "at": "2026-10-05T10:01:04.327+08:00",
+        "layer": "L2",
+        "intent": "refund_apply",
+        "stage": "aftersale",
+        "toolCalls": [
+          {
+            "name": "get_order",
+            "ok": true,
+            "ms": 0
+          }
+        ],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 3,
+          "handlerMs": 1,
+          "decideMs": 0
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "confidence": 0.9,
+        "ragHits": 0,
+        "decideProvider": "mock",
+        "topIntents": [
+          {
+            "id": "refund_apply",
+            "p": 0.9
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-a245db3a-86eb-4d21-8ccd-5c05318d0781",
+      "conversationId": "C1010",
+      "messageId": "C1010-M3",
+      "at": "2026-10-05T10:01:04.327+08:00",
+      "layer": "L2",
+      "intent": "refund_apply",
+      "stage": "aftersale",
+      "toolCalls": [
+        {
+          "name": "get_order",
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 3,
+        "handlerMs": 1,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": false
+      },
+      "confidence": 0.9,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "refund_apply",
+          "p": 0.9
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B003",
+    "text": "两个订单帮我处理，顺便查券",
+    "response": {
+      "conversation": {
+        "id": "C1011",
+        "mode": "ai",
+        "status": "ai_active",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "other",
+            "status": "collecting",
+            "startedAt": "2026-10-05T10:01:04.337+08:00"
+          },
+          "slots": {},
+          "history": [
+            {
+              "type": "intent",
+              "name": "other",
+              "summary": "这个问题我需要再确认一下。",
+              "at": "2026-10-05T10:01:04.337+08:00"
+            }
+          ],
+          "turnCount": 1,
+          "unresolvedTurns": 1,
+          "riskFlags": [],
+          "lastIntent": "other"
+        },
+        "createdAt": "2026-10-05T10:01:04.335+08:00",
+        "updatedAt": "2026-10-05T10:01:04.337+08:00",
+        "lastMessagePreview": "这个问题我需要再确认一下。",
+        "unreadForSeller": 0,
+        "buyerId": "B003",
+        "lastLayer": "L3"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "两个订单帮我处理，顺便查券",
+          "id": "C1011-M1",
+          "conversationId": "C1011",
+          "createdAt": "2026-10-05T10:01:04.336+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这个问题我需要再确认一下。",
+          "traceId": "TR-c5e71703-c6cc-4d8b-9c03-af70096453ea",
+          "id": "C1011-M2",
+          "conversationId": "C1011",
+          "createdAt": "2026-10-05T10:01:04.337+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-c5e71703-c6cc-4d8b-9c03-af70096453ea",
+        "conversationId": "C1011",
+        "messageId": "C1011-M1",
+        "at": "2026-10-05T10:01:04.336+08:00",
+        "layer": "L3",
+        "intent": "other",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 1,
+          "agentMs": 0,
+          "decideMs": 0
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "confidence": 0.55,
+        "ragHits": 0,
+        "decideProvider": "mock",
+        "topIntents": [
+          {
+            "id": "other",
+            "p": 0.55
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-c5e71703-c6cc-4d8b-9c03-af70096453ea",
+      "conversationId": "C1011",
+      "messageId": "C1011-M1",
+      "at": "2026-10-05T10:01:04.336+08:00",
+      "layer": "L3",
+      "intent": "other",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 1,
+        "agentMs": 0,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": false
+      },
+      "confidence": 0.55,
+      "ragHits": 0,
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "other",
+          "p": 0.55
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  },
+  {
+    "buyer": "B003",
+    "text": "两个订单帮我处理，顺便查券",
+    "response": {
+      "conversation": {
+        "id": "C1011",
+        "mode": "human",
+        "status": "waiting_human",
+        "riskFlags": [],
+        "tags": [],
+        "state": {
+          "currentTask": {
+            "intent": "other",
+            "status": "collecting",
+            "startedAt": "2026-10-05T10:01:04.337+08:00"
+          },
+          "slots": {},
+          "history": [
+            {
+              "type": "intent",
+              "name": "other",
+              "summary": "这个问题我需要再确认一下。",
+              "at": "2026-10-05T10:01:04.337+08:00"
+            },
+            {
+              "type": "intent",
+              "name": "other",
+              "summary": "这个问题我需要再确认一下。",
+              "at": "2026-10-05T10:01:04.340+08:00"
+            },
+            {
+              "type": "handoff",
+              "name": "连续两轮未能解决，需要人工协助",
+              "summary": "转人工：连续两轮未能解决，需要人工协助",
+              "at": "2026-10-05T10:01:04.340+08:00"
+            }
+          ],
+          "turnCount": 2,
+          "unresolvedTurns": 2,
+          "riskFlags": [],
+          "lastIntent": "other"
+        },
+        "createdAt": "2026-10-05T10:01:04.335+08:00",
+        "updatedAt": "2026-10-05T10:01:04.341+08:00",
+        "lastMessagePreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "unreadForSeller": 1,
+        "buyerId": "B003",
+        "lastLayer": "human",
+        "handoffAt": "2026-10-05T10:01:04.340+08:00",
+        "handoffReason": "连续两轮未能解决，需要人工协助",
+        "handoffSummary": "买家陈思，other，连续两轮未能解决，需要人工协助"
+      },
+      "messages": [
+        {
+          "role": "buyer",
+          "text": "两个订单帮我处理，顺便查券",
+          "id": "C1011-M3",
+          "conversationId": "C1011",
+          "createdAt": "2026-10-05T10:01:04.339+08:00"
+        },
+        {
+          "role": "ai",
+          "text": "这个问题我需要再确认一下。",
+          "traceId": "TR-8dfc5caf-b73a-4254-8121-4e70069d45da",
+          "id": "C1011-M4",
+          "conversationId": "C1011",
+          "createdAt": "2026-10-05T10:01:04.341+08:00"
+        },
+        {
+          "role": "system",
+          "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+          "traceId": "TR-8dfc5caf-b73a-4254-8121-4e70069d45da",
+          "id": "C1011-M5",
+          "conversationId": "C1011",
+          "createdAt": "2026-10-05T10:01:04.341+08:00"
+        }
+      ],
+      "trace": {
+        "id": "TR-8dfc5caf-b73a-4254-8121-4e70069d45da",
+        "conversationId": "C1011",
+        "messageId": "C1011-M3",
+        "at": "2026-10-05T10:01:04.339+08:00",
+        "layer": "human",
+        "intent": "other",
+        "stage": "other",
+        "toolCalls": [],
+        "usedGeneration": false,
+        "latency": {
+          "totalMs": 2,
+          "agentMs": 0,
+          "decideMs": 0
+        },
+        "cost": {
+          "decideUsd": 0,
+          "generationUsd": 0,
+          "agentUsd": 0,
+          "totalUsd": 0,
+          "estimated": false
+        },
+        "confidence": 0.55,
+        "ragHits": 0,
+        "escalatedFrom": "L3",
+        "handoffReason": "连续两轮未能解决，需要人工协助",
+        "decideProvider": "mock",
+        "topIntents": [
+          {
+            "id": "other",
+            "p": 0.55
+          }
+        ],
+        "riskScores": {
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
+        },
+        "riskHit": []
+      }
+    },
+    "finalTrace": {
+      "id": "TR-8dfc5caf-b73a-4254-8121-4e70069d45da",
+      "conversationId": "C1011",
+      "messageId": "C1011-M3",
+      "at": "2026-10-05T10:01:04.339+08:00",
+      "layer": "human",
+      "intent": "other",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2,
+        "agentMs": 0,
+        "decideMs": 0
+      },
+      "cost": {
+        "decideUsd": 0,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0,
+        "estimated": false
+      },
+      "confidence": 0.55,
+      "ragHits": 0,
+      "escalatedFrom": "L3",
+      "handoffReason": "连续两轮未能解决，需要人工协助",
+      "decideProvider": "mock",
+      "topIntents": [
+        {
+          "id": "other",
+          "p": 0.55
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0,
+        "health_safety": 0,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": []
+    }
+  }
+]
