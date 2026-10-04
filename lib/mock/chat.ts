@@ -1203,7 +1203,7 @@ function latestBuyerSeedAny(): Seed | undefined {
     .sort((a, b) => Date.parse(b.conversation.updatedAt) - Date.parse(a.conversation.updatedAt))[0];
 }
 
-if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK !== "0") {
+if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK === "1") {
   const need = () => {
     const seed = latestBuyerSeedAny();
     if (!seed) throw new Error("还没有买家会话：先在聊天窗里发一条消息");

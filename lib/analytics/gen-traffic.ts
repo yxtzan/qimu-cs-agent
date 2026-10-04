@@ -4,7 +4,8 @@
  * - 约 60 个历史会话、295 条买家消息，每条买家消息配一条 AI（或转人工系统）回复和一条 RouteTrace。
  * - 全部 `isSimulated: true`；会话 id 为 S1001…，不会出现在卖家会话列表，只能从看板样本点进去。
  * - 层级占比（精确计数）：风险 12 / L1 65 / L2 165 / L3 35 / 人工 18 = 4% / 22% / 56% / 12% / 6%。
- * - 延迟：L1 20–50ms，L2 300–600ms，L3 2–7s；成本：L2 按 Jev 实测 $0.000059/条（T01b），L3 额外 $0.002–0.005/条。
+ * - 延迟：L1 20–50ms，L2 300–600ms，L3 2–7s。
+ * - 成本：每条消息都有后台风险检查费 `decideUsd = $0.000059`（T04-3，含 L1）；L3 另加 agent $0.002–0.005/条。
  * - 时间：DEMO_NOW 前 7 天（含今天 00:00–10:00），白天多、夜里少。
  * - 固定随机种子，同一份代码每次生成的结果逐字节一致。
  * - 通过 registerResetHook("traffic", …) 接入"重置演示数据"（登记入口见 lib/store/reset-hooks.ts）。
@@ -356,7 +357,8 @@ export function buildSeedTraffic(buyers: string[] = buyerIds()): SeedTraffic {
     if (layer === "L1") {
       confidence = 1;
       latency = { totalMs: int(20, 50) };
-      decideUsd = 0;
+      // 规则匹配本身免费，但仍支付与真实 trace 相同的风险检查费（约 ¥0.4 / 千条）
+      decideUsd = JEV_DECIDE_USD;
     } else if (layer === "L2") {
       confidence = slot.lowConfidence ? round(between(0.5, 0.69), 2) : round(between(0.72, 0.98), 2);
       const decideMs = int(170, 215); // Jev 热状态，p50 约 384ms 的前半段

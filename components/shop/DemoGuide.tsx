@@ -137,10 +137,10 @@ export function DemoGuide() {
       window.open(step.path, "_blank", "noopener");
       return;
     }
-    // 先切买家（会清空聊天上下文），再跳页面，最后带着上下文和示例话术打开聊天窗
+    // 先切买家，再跳页面。newConversation：不续用上一步的会话，下一条消息不带 conversationId。
     if (step.buyerId) setBuyerId(step.buyerId);
     router.push(step.path);
-    openChat({ ...step.target, draft: step.draft });
+    openChat({ ...step.target, draft: step.draft, newConversation: true });
   };
 
   return (
@@ -179,7 +179,7 @@ export function DemoGuide() {
                   <h2 className="text-[17px] font-semibold">演示指南</h2>
                   <p className="mt-1 text-[13px] leading-5 text-white/80">
                     5 分钟走完 6 步。<b className="font-semibold text-white">从第 1 步开始，点「开始」</b>
-                    ——会自动切好买家、打开页面和聊天窗，并把示例话术填好。
+                    ——会自动切好买家、打开页面和聊天窗，新开一段对话，并把示例话术填好。
                   </p>
                 </div>
                 <button

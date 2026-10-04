@@ -13,6 +13,11 @@ export interface ChatTarget {
   orderId?: string;
   /** 打开聊天窗时预填进输入框的话术（不会自动发送）。演示指南使用。 */
   draft?: string;
+  /**
+   * 演示指南：丢掉当前会话，下一条消息不带 conversationId，让后端新建。
+   * 避免第 1、2 步的上下文干扰第 3 步的多步流程。
+   */
+  newConversation?: boolean;
 }
 
 interface ShopContextValue {
@@ -32,6 +37,11 @@ interface ShopContextValue {
   closeChat: () => void;
   chatOpen: boolean;
   chatTarget: ChatTarget | null;
+  /**
+   * 每次以 newConversation 打开聊天窗就 +1。聊天窗据此清空本地会话，
+   * 下一条消息不带 conversationId。
+   */
+  chatSession: number;
 }
 
 const ShopContext = createContext<ShopContextValue | null>(null);
@@ -81,6 +91,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   );
   const [chatOpen, setChatOpen] = useState(false);
   const [chatTarget, setChatTarget] = useState<ChatTarget | null>(null);
+  const [chatSession, setChatSession] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -105,6 +116,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   const openChat = useCallback((target?: ChatTarget) => {
     setChatTarget(target ?? null);
+    if (target?.newConversation) setChatSession((n) => n + 1);
     setChatOpen(true);
   }, []);
 
@@ -121,8 +133,9 @@ export function ShopProvider({ children }: { children: ReactNode }) {
       closeChat,
       chatOpen,
       chatTarget,
+      chatSession,
     }),
-    [buyers, buyerId, ready, setBuyerId, openChat, closeChat, chatOpen, chatTarget],
+    [buyers, buyerId, ready, setBuyerId, openChat, closeChat, chatOpen, chatTarget, chatSession],
   );
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

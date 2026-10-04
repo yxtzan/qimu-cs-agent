@@ -26,7 +26,7 @@ interface Snapshot {
   rules: RuleSeed[];
 }
 
-const enabled = () => typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK !== "0";
+const enabled = () => typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK === "1";
 
 let localRev = 0;
 let inflight = 0;
@@ -116,7 +116,7 @@ export function resetMockSync() {
   window.location.reload();
 }
 
-if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK !== "0") {
+if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_USE_MOCK === "1") {
   const w = window as unknown as { __qimuMock?: Record<string, unknown> };
   w.__qimuMock = { ...(w.__qimuMock ?? {}), reset: resetMockSync };
 }

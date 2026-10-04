@@ -27,12 +27,17 @@ export function registerResetHook(name: string, fn: ResetHook): void {
 export async function resetDemoData(): Promise<void> {
   const seedDir = join(process.cwd(), "data", "seed");
   const runtimeDir = join(process.cwd(), "data", "runtime");
-  // 评测结果（T06 产出）不是演示状态，重置时保留，否则看板的评测卡会消失
-  const evalFile = join(runtimeDir, "eval_latest.json");
-  const savedEval = existsSync(evalFile) ? readFileSync(evalFile) : undefined;
+  // 评测结果（T06）和向量缓存（T05-1）不是演示状态，重置时保留：
+  // 否则看板评测卡会消失，知识库会从向量检索退回 bigram。
+  const keepNames = ["eval_latest.json", "embedding_cache.json"];
+  const kept = new Map<string, Buffer>();
+  for (const name of keepNames) {
+    const file = join(runtimeDir, name);
+    if (existsSync(file)) kept.set(name, readFileSync(file));
+  }
   rmSync(runtimeDir, { recursive: true, force: true });
   mkdirSync(runtimeDir, { recursive: true });
-  if (savedEval) writeFileSync(evalFile, savedEval);
+  for (const [name, buf] of kept) writeFileSync(join(runtimeDir, name), buf);
   for (const file of readdirSync(seedDir).filter((f) => f.endsWith(".json"))) {
     copyFileSync(join(seedDir, file), join(runtimeDir, file));
   }
