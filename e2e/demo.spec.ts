@@ -150,7 +150,7 @@ test("3 售后多步：确认卡片 → 确认 → 售后单号 + 优惠券（�
   await expect(confirm).toHaveAttribute("data-status", "confirmed", { timeout: T_L3 });
   await expect(confirm.getByRole("button")).toHaveCount(0);
   await expect(drawer().getByTestId("card-aftersale").first()).toBeVisible({ timeout: T_FAST });
-  expect(await drawer().getByTestId("card-aftersale").first().getAttribute("data-id")).toMatch(/^AS/);
+  expect(await drawer().getByTestId("card-aftersale").first().getAttribute("data-id")).toMatch(/^AS\d{11}$/);
   await expect(confirm).toContainText(/售后单号\s*AS/);
 
   // 优惠券卡片：至少一张，且全部未过期（以演示时钟为准）

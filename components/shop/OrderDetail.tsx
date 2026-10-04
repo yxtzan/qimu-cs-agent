@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { ApiError, getOrder } from "@/lib/api-client";
 import type { AfterSale, Logistics, Order } from "@/lib/types";
 import { AFTER_SALE_TYPE_LABEL, LOGISTICS_STATUS_LABEL } from "./labels";
@@ -301,6 +302,16 @@ function Detail({ order }: { order: Order }) {
 function OrderDetailInner({ id }: { id: string }) {
   const { buyerId, buyer } = useShop();
   const { data, error, loading, reload } = useAsync(() => getOrder(id, buyerId), [id, buyerId]);
+  // 聊天里确认办理成功后，订单上的售后是新写进去的，这里再拉一次，左边才能看到
+  useEffect(() => {
+    const onUpdate = (event: Event) => {
+      const orderId = (event as CustomEvent<{ orderId?: string }>).detail?.orderId;
+      if (orderId && orderId !== id) return;
+      reload();
+    };
+    window.addEventListener("qimu:order-updated", onUpdate);
+    return () => window.removeEventListener("qimu:order-updated", onUpdate);
+  }, [id, reload]);
 
   if (error) {
     const forbidden = error instanceof ApiError && error.status === 403;

@@ -4,8 +4,13 @@
  * - 约 60 个历史会话、295 条买家消息，每条买家消息配一条 AI（或转人工系统）回复和一条 RouteTrace。
  * - 全部 `isSimulated: true`；会话 id 为 S1001…，不会出现在卖家会话列表，只能从看板样本点进去。
  * - 层级占比（精确计数）：风险 12 / L1 65 / L2 165 / L3 35 / 人工 18 = 4% / 22% / 56% / 12% / 6%。
- * - 延迟：L1 20–50ms，L2 300–600ms，L3 2–7s。
- * - 成本：每条消息都有后台风险检查费 `decideUsd = $0.000059`（T04-3，含 L1）；L3 另加 agent $0.002–0.005/条。
+ * - 延迟：L1 20–50ms，L2 300–600ms，L3 3–9s。
+ * - 成本：每条消息都有后台风险检查费 `decideUsd = $0.000059`（T01b / T04-3，含 L1）。
+ *   L3 的 `agentUsd` 取 $0.00008–$0.0002，不沿用早期编的 $0.002–0.005。
+ *   依据：T05 两条验收样本平均 agentUsd $0.000112（加分类后约 $0.00017，约为只有分类费的 L2 的 2–3 倍）；
+ *   T05b 评测里多数 L3 trace 的 agentUsd 约 $0.00007–$0.00019（`docs/reports/T05b-latency.json`）。
+ *   个别六轮样本到 $0.0007，不拿来拉高演示带。从 L3 失败转人工的那几条用同一档 agent 成本。
+ *   L3 延迟按 T05b 整轮样本（约 2.1–9.8s，热态 decide 约 360–400ms）取 3–9s。
  * - 时间：DEMO_NOW 前 7 天（含今天 00:00–10:00），白天多、夜里少。
  * - 固定随机种子，同一份代码每次生成的结果逐字节一致。
  * - 通过 registerResetHook("traffic", …) 接入"重置演示数据"（登记入口见 lib/store/reset-hooks.ts）。
@@ -370,10 +375,12 @@ export function buildSeedTraffic(buyers: string[] = buyerIds()): SeedTraffic {
         : intent === "multi_step_complex"
           ? round(between(0.72, 0.9), 2)
           : round(between(0.72, 0.85), 2);
-      const decideMs = int(175, 225);
-      const agentMs = int(1850, 6750);
+      // T05b：热态 decide 约 360–400ms；整轮取实测中间带 3–9s（样本约 2.1–9.8s）
+      const decideMs = int(360, 400);
+      const agentMs = int(2640, 8600);
       latency = { totalMs: decideMs + agentMs, decideMs, agentMs };
-      agentUsd = round(between(0.002, 0.005));
+      // T05 平均 agentUsd $0.000112；区间 $0.00008–$0.0002，见文件头
+      agentUsd = round(between(0.00008, 0.0002), 6);
     } else if (layer === "risk_gate") {
       confidence = round(between(0.5, 0.94), 2);
       const decideMs = int(175, 230);
@@ -385,9 +392,10 @@ export function buildSeedTraffic(buyers: string[] = buyerIds()): SeedTraffic {
         // 少数是 L3 跑失败后转人工：记为 human，escalatedFrom = "L3"
         escalated += 1;
         escalatedFrom = "L3";
-        const agentMs = int(4200, 7000);
+        // 转人工的 L3 与成功的 L3 同一档：agent 成本 $0.00008–$0.0002，整轮约 3–9s
+        const agentMs = int(2800, 8800);
         latency = { totalMs: decideMs + agentMs, decideMs, agentMs };
-        agentUsd = round(between(0.002, 0.004));
+        agentUsd = round(between(0.00008, 0.0002), 6);
       } else {
         latency = { totalMs: decideMs + int(80, 300), decideMs };
         latency.handlerMs = latency.totalMs - decideMs;

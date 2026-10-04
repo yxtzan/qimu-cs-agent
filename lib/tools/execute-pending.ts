@@ -33,6 +33,24 @@ function resolveAction(action: PendingAction, status: PendingAction['status'], r
   return next;
 }
 
+/** 售后单号：`AS` + 演示当天 `YYYYMMDD` + 当天三位序号（已有同日前缀里的最大序号 + 1）。`reserved` 用来避开同一次确认里还没写盘的单号。 */
+function nextAfterSaleId(at: string, reserved: Iterable<string> = []): string {
+  const prefix = `AS${at.slice(0, 10).replaceAll('-', '')}`;
+  let max = 0;
+  const take = (id: string) => {
+    if (!id.startsWith(prefix)) return;
+    const tail = id.slice(prefix.length);
+    if (!/^\d+$/.test(tail)) return;
+    const seq = Number(tail);
+    if (seq > max) max = seq;
+  };
+  for (const order of readCollection<{ afterSales: { id: string }[] }>('orders')) {
+    for (const sale of order.afterSales) take(sale.id);
+  }
+  for (const id of reserved) take(id);
+  return `${prefix}${String(max + 1).padStart(3, '0')}`;
+}
+
 // Deliberately synchronous between validation and persistence: parallel confirmations
 // in the same server process cannot reserve the same final unit or execute twice.
 export function confirmPendingAction(id: string, ctx: ToolContext): ToolResult<PendingExecution> {
@@ -53,14 +71,14 @@ export function confirmPendingAction(id: string, ctx: ToolContext): ToolResult<P
       if (valid.order.status === 'paid') {
         for (const item of valid.order.items) {
           if (afterSales.some(a => a.itemId === item.itemId && a.status === 'refunded')) continue;
-          afterSales.push({ id: `AS-${randomUUID()}`, orderId: valid.order.id, itemId: item.itemId, type: 'refund_only', reason: '买家确认取消已付款订单', amount: refundableAmount(valid.order, item), status: 'refunded', createdAt: at, timeline: [{ at, status: 'refunded', note: '订单取消，演示全额退款已完成，原路退回' }] });
+          afterSales.push({ id: nextAfterSaleId(at, afterSales.map(a => a.id)), orderId: valid.order.id, itemId: item.itemId, type: 'refund_only', reason: '买家确认取消已付款订单', amount: refundableAmount(valid.order, item), status: 'refunded', createdAt: at, timeline: [{ at, status: 'refunded', note: '订单取消，演示全额退款已完成，原路退回' }] });
         }
       }
       card = { kind: 'order', order: updateOrder(valid.order.id, { status: 'cancelled', afterSales })! };
     } else {
       const item = valid.item!;
-      // Use the action ID for a stable after-sale identity if a failed write is retried.
-      const afterSaleId = `AS-${action.id.slice(3)}`;
+      // 单号按演示日期 + 当天序号，不再用 PendingAction 的 uuid。动作 id 仍是 PA-uuid。
+      const afterSaleId = nextAfterSaleId(at);
       const existing = valid.order.afterSales.find(a => a.id === afterSaleId);
       if (existing) {
         card = { kind: 'aftersale', afterSale: existing };
