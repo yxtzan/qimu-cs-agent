@@ -28,7 +28,7 @@
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
 | T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | done |
 | T09 | 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 + L3 通用循环修复 | Codex | T05b T08 | 5 | 2.5h | done |
-| T09b | L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） | Codex | T09 T15b | 6 | 1h | doing |
+| T09b | L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） | **Cursor**（2026-10-04 改派，Codex 额度用完） | T09 T15b | 6 | 1h | doing |
 | T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | done |
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
@@ -402,7 +402,7 @@
 
 ---
 
-## T09b L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） — Codex
+## T09b L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） — Cursor（由 Codex 改派）
 
 - 分支：`t09b-final-eval`
 - 依赖：T09、T15、T15b（都已合并）
@@ -417,7 +417,7 @@
 4. **留出集评测**：`npm run eval -- --cases holdout.json` 跑**一次**，报告写到 `docs/reports/holdout-eval.md`（脚本默认如此，不会覆盖看板成绩）。**只运行、不调参**：失败照实列出原因分类，不要为了让留出集通过去改提示词、阈值或规则。
 5. 交接里写一张对比表：T09 第三次全量（56/60）、本次全量、留出集（x/15），各列通过数、意图 / 路由准确率、风险召回 / 误报、L3 平均延迟。
 
-**目录归属（本任务特批）**：`docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `docs/reports/holdout-eval.md` `docs/reports/holdout-eval.json` `data/seed/eval_latest.json`。`data/eval/**` 仍然只读。
+**目录归属（本任务特批给 Cursor）**：`lib/brain/agent.ts`（**只删第 1 条说的整句替换**，提示词和其他逻辑一个字都不改）、`lib/brain/agent.test.ts`、`lib/tools/execute-pending.ts`（只做第 2 条的幂等）、`lib/tools/*.test.ts`（为第 2 条加测试）、`docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `docs/reports/holdout-eval.md` `docs/reports/holdout-eval.json` `data/seed/eval_latest.json`。`data/eval/**` 仍然只读。任务结束后归还 Codex。
 
 **验收标准**
 
