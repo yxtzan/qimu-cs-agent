@@ -1,0 +1,111 @@
+{
+  "runAt": "2026-10-04T03:48:13.748Z",
+  "provider": "jev",
+  "cases": 60,
+  "intentAccuracy": 0.9545454545454546,
+  "layerAccuracy": 0.9333333333333333,
+  "riskRecall": 1,
+  "riskFalsePositiveRate": 0,
+  "avgLatencyMs": 1249,
+  "failures": [
+    {
+      "caseId": "E40",
+      "text": "有点小失望，外套比图片颜色深一点",
+      "expected": "layer=L2|L3 riskHit=[]",
+      "got": "layer=human(来自L2) intent=quality_issue riskHit=[] handoff=true tools=[get_order]（原因：转人工判断错）",
+      "reason": "转人工判断错"
+    },
+    {
+      "caseId": "E44",
+      "text": "那灰色呢",
+      "expected": "layer=L2|L3 intent=stock_check",
+      "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[]（原因：分类错）",
+      "reason": "分类错"
+    },
+    {
+      "caseId": "E51",
+      "text": "上周买的那件外套换成L码，顺便帮我看看有没有能用的券",
+      "expected": "layer=L3 tools⊇[list_orders,check_stock,request_exchange,list_coupons]",
+      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
+      "reason": "依赖 T05"
+    },
+    {
+      "caseId": "E52",
+      "text": "帮我看看最近的订单 哪个还没到 哪个能退",
+      "expected": "layer=L3 tools⊇[list_orders]",
+      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
+      "reason": "依赖 T05"
+    },
+    {
+      "caseId": "E53",
+      "text": "我想再买一件和上次那件大衣同色的开衫，有我的码吗，用券后多少钱",
+      "expected": "layer=L3 tools⊇[search_products,list_coupons]",
+      "got": "layer=L3 intent=multi_step_complex riskHit=[] handoff=false tools=[]（原因：依赖 T05）",
+      "reason": "依赖 T05"
+    },
+    {
+      "caseId": "E55",
+      "text": "退的那条裙子钱到了我想用这钱再买条同款L码的，有货吗",
+      "expected": "layer=L3 tools⊇[get_aftersale,check_stock]",
+      "got": "layer=L2 intent=stock_check riskHit=[] handoff=false tools=[]（原因：多步没识别）",
+      "reason": "多步没识别"
+    },
+    {
+      "caseId": "E58",
+      "text": "尺码不合适想退货",
+      "expected": "layer=L2 intent=refund_apply",
+      "got": "layer=L1 intent=size_recommend riskHit=[] handoff=false tools=[] rule=R007（原因：规则误吞）",
+      "reason": "规则误吞"
+    },
+    {
+      "caseId": "E59",
+      "text": "身高185体重90kg有合适的吗",
+      "expected": "layer=L2|L3 intent=size_recommend",
+      "got": "layer=human(来自L2) intent=size_recommend riskHit=[] handoff=true tools=[recommend_size]（原因：转人工判断错）",
+      "reason": "转人工判断错"
+    }
+  ],
+  "passed": 52,
+  "totalCostUsd": 0.004302,
+  "riskFalsePositiveRateBroad": 0,
+  "reasonCounts": {
+    "转人工判断错": 2,
+    "分类错": 1,
+    "依赖 T05": 3,
+    "多步没识别": 1,
+    "规则误吞": 1
+  },
+  "byLayer": {
+    "risk_gate": {
+      "n": 7,
+      "avgMs": 229,
+      "p95Ms": 419,
+      "avgCostUsd": 0.000062868
+    },
+    "L1": {
+      "n": 10,
+      "avgMs": 416,
+      "p95Ms": 4099,
+      "avgCostUsd": 0.00007875282799999999
+    },
+    "L2": {
+      "n": 29,
+      "avgMs": 2215,
+      "p95Ms": 8955,
+      "avgCostUsd": 0.0000726868827586207
+    },
+    "L3": {
+      "n": 10,
+      "avgMs": 409,
+      "p95Ms": 485,
+      "avgCostUsd": 0.0000715008
+    },
+    "human": {
+      "n": 4,
+      "avgMs": 205,
+      "p95Ms": 416,
+      "avgCostUsd": 0.000062895
+    }
+  },
+  "note": "T06 评测：60 条用例，分类器 jev，含 R007 开/关对比"
+}
