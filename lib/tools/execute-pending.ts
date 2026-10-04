@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { nowIso } from '../demo-clock';
 import { readCollection, writeCollection } from '../store';
-import { getBuyer, updateOrder, updateProduct } from '../store/collections';
+import { getBuyer, getOrder, updateOrder, updateProduct } from '../store/collections';
 import type { AfterSale, ChatCard, PendingAction } from '../types';
 import { ToolError, type ToolContext, type ToolResult } from './types';
 import { refundableAmount, validateWrite } from './write-rules';
@@ -47,8 +47,30 @@ function nextAfterSaleId(at: string, reserved: Iterable<string> = []): string {
   for (const order of readCollection<{ afterSales: { id: string }[] }>('orders')) {
     for (const sale of order.afterSales) take(sale.id);
   }
+  for (const pending of listPendingActions()) {
+    const saved = pending.args.afterSaleId;
+    if (typeof saved === 'string') take(saved);
+  }
   for (const id of reserved) take(id);
   return `${prefix}${String(max + 1).padStart(3, '0')}`;
+}
+
+/** 写盘前把单号记在这个 PendingAction 上。确认中断后重试仍用这一张，不再按新序号另开。 */
+function savedAfterSaleId(action: PendingAction): string | undefined {
+  const id = action.args.afterSaleId;
+  return typeof id === 'string' && /^AS\d{11}$/.test(id) ? id : undefined;
+}
+function rememberAfterSaleId(action: PendingAction, afterSaleId: string): PendingAction {
+  const next = { ...action, args: { ...action.args, afterSaleId } };
+  writeCollection('pending_actions', listPendingActions().map(a => a.id === next.id ? next : a));
+  return next;
+}
+function linkedAfterSale(action: PendingAction): AfterSale | undefined {
+  if (action.tool !== 'apply_refund' && action.tool !== 'request_exchange') return undefined;
+  const id = savedAfterSaleId(action);
+  const orderId = action.args.orderId;
+  if (!id || typeof orderId !== 'string') return undefined;
+  return getOrder(orderId)?.afterSales.find(sale => sale.id === id);
 }
 
 // Deliberately synchronous between validation and persistence: parallel confirmations
@@ -59,6 +81,11 @@ export function confirmPendingAction(id: string, ctx: ToolContext): ToolResult<P
   catch (error) { if (error instanceof ToolError) return { ok: false, reason: error.message }; throw error; }
   if (action.status === 'confirmed') return { ok: true, data: { pendingAction: action } };
   if (action.status !== 'pending') return { ok: false, reason: action.result ?? '这个操作已经处理，不能再次确认' };
+  const linked = linkedAfterSale(action);
+  if (linked) {
+    const resolved = resolveAction(action, 'confirmed', action.tool === 'request_exchange' ? '换货申请已提交，等待审核和退回商品' : '退款申请已办理，请查看售后进度');
+    return { ok: true, data: { pendingAction: resolved, card: { kind: 'aftersale', afterSale: linked } } };
+  }
   try {
     const valid = validateWrite(action.tool, action.args, ctx);
     const at = nowIso();
@@ -77,8 +104,12 @@ export function confirmPendingAction(id: string, ctx: ToolContext): ToolResult<P
       card = { kind: 'order', order: updateOrder(valid.order.id, { status: 'cancelled', afterSales })! };
     } else {
       const item = valid.item!;
-      // 单号按演示日期 + 当天序号，不再用 PendingAction 的 uuid。动作 id 仍是 PA-uuid。
-      const afterSaleId = nextAfterSaleId(at);
+      // 单号仍是演示日期 + 当天三位序号。先记在这个动作上，写盘中断后重试找回同一张。
+      let afterSaleId = savedAfterSaleId(action);
+      if (!afterSaleId) {
+        afterSaleId = nextAfterSaleId(at);
+        action = rememberAfterSaleId(action, afterSaleId);
+      }
       const existing = valid.order.afterSales.find(a => a.id === afterSaleId);
       if (existing) {
         card = { kind: 'aftersale', afterSale: existing };

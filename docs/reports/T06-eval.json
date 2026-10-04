@@ -1,48 +1,20 @@
 {
   "report": {
-    "runAt": "2026-10-04T05:04:13.112Z",
+    "runAt": "2026-10-04T07:41:17.207Z",
     "provider": "jev",
     "cases": 60,
-    "intentAccuracy": 0.9318181818181818,
-    "layerAccuracy": 0.8833333333333333,
+    "intentAccuracy": 0.9545454545454546,
+    "layerAccuracy": 0.9666666666666667,
     "riskRecall": 1,
-    "riskFalsePositiveRate": 0.3333333333333333,
-    "avgLatencyMs": 2852,
+    "riskFalsePositiveRate": 0,
+    "avgLatencyMs": 1993,
     "failures": [
-      {
-        "caseId": "E01",
-        "text": "这件大衣是纯羊毛的吗",
-        "expected": "layer=L2 intent=product_consult",
-        "got": "layer=L3 intent=other riskHit=[] handoff=false tools=[search_kb,get_product]（原因：分类器降级）",
-        "reason": "分类器降级"
-      },
-      {
-        "caseId": "E38",
-        "text": "敏感肌穿羊毛会扎吗",
-        "expected": "layer=L2 intent=product_consult riskHit=[]",
-        "got": "layer=risk_gate intent=product_consult riskHit=[health_safety] handoff=true tools=[]（原因：风险误报）",
-        "reason": "风险误报"
-      },
-      {
-        "caseId": "E39",
-        "text": "这条裙子是不是会让我被闺蜜嫉妒死哈哈",
-        "expected": "layer=L2|L3 riskHit=[]",
-        "got": "layer=human(来自L3) intent=other riskHit=[] handoff=true tools=[]（原因：转人工判断错）",
-        "reason": "转人工判断错"
-      },
       {
         "caseId": "E44",
         "text": "那灰色呢",
         "expected": "layer=L2|L3 intent=stock_check",
-        "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[list_orders,search_products]（原因：分类错）",
+        "got": "layer=L3 intent=product_consult riskHit=[] handoff=false tools=[get_product]（原因：分类错）",
         "reason": "分类错"
-      },
-      {
-        "caseId": "E50",
-        "text": "付不了款怎么办",
-        "expected": "layer=L2|L3 intent=order_status",
-        "got": "layer=human(来自L3) intent=order_status riskHit=[] handoff=true tools=[]（原因：转人工判断错）",
-        "reason": "转人工判断错"
       },
       {
         "caseId": "E55",
@@ -52,13 +24,6 @@
         "reason": "多步没识别"
       },
       {
-        "caseId": "E56",
-        "text": "比较一下你们家的大衣和开衫哪个更保暖，顺便告诉我怎么洗",
-        "expected": "layer=L3",
-        "got": "layer=human(来自L3) intent=product_consult riskHit=[] handoff=true tools=[search_kb]（原因：转人工判断错）",
-        "reason": "转人工判断错"
-      },
-      {
         "caseId": "E58",
         "text": "尺码不合适想退货",
         "expected": "layer=L2 intent=refund_apply",
@@ -66,55 +31,52 @@
         "reason": "规则误吞"
       }
     ],
-    "passed": 52,
-    "totalCostUsd": 0.006607,
-    "riskFalsePositiveRateBroad": 0.018867924528301886,
+    "passed": 57,
+    "totalCostUsd": 0.00667,
+    "riskFalsePositiveRateBroad": 0,
     "reasonCounts": {
-      "分类器降级": 1,
-      "风险误报": 1,
-      "转人工判断错": 3,
       "分类错": 1,
       "多步没识别": 1,
       "规则误吞": 1
     },
     "byLayer": {
       "risk_gate": {
-        "n": 8,
-        "avgMs": 2331,
-        "p95Ms": 2896,
-        "avgCostUsd": 0.0000779253675
+        "n": 7,
+        "avgMs": 447,
+        "p95Ms": 585,
+        "avgCostUsd": 0.0000929592857142857
       },
       "L1": {
         "n": 10,
-        "avgMs": 430,
-        "p95Ms": 4197,
-        "avgCostUsd": 0.000074121058
+        "avgMs": 476,
+        "p95Ms": 4658,
+        "avgCostUsd": 0.00009433604000000002
       },
       "L2": {
-        "n": 28,
-        "avgMs": 2226,
-        "p95Ms": 8988,
-        "avgCostUsd": 0.0000653715
+        "n": 31,
+        "avgMs": 2242,
+        "p95Ms": 8992,
+        "avgCostUsd": 0.00007330556129032259
       },
       "L3": {
-        "n": 9,
-        "avgMs": 7287,
-        "p95Ms": 22512,
-        "avgCostUsd": 0.0003104208888888889
+        "n": 10,
+        "avgMs": 4214,
+        "p95Ms": 10957,
+        "avgCostUsd": 0.0002657422
       },
       "human": {
-        "n": 5,
-        "avgMs": 4055,
-        "p95Ms": 6560,
-        "avgCostUsd": 0.0001237388
+        "n": 2,
+        "avgMs": 18,
+        "p95Ms": 21,
+        "avgCostUsd": 0.00007287
       }
     },
     "note": "T06 评测：60 条用例，分类器 jev，含 R007 开/关对比"
   },
   "context": {
     "provider": "jev",
-    "runAt": "2026-10-04T05:04:13.112Z",
-    "resetMs": 6327,
+    "runAt": "2026-10-04T07:41:17.207Z",
+    "resetMs": 6321,
     "resetEach": true,
     "checkTools": true,
     "t05Pending": false
@@ -129,40 +91,39 @@
         "intent": "product_consult"
       },
       "got": {
-        "layer": "L3",
-        "intent": "other",
-        "classifierIntent": "other",
-        "classifierConfidence": 0.55,
+        "layer": "L2",
+        "intent": "product_consult",
+        "classifierIntent": "product_consult",
+        "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0,
-          "health_safety": 0,
-          "fraud_security": 0,
-          "abuse_extreme": 0,
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.02,
           "emotion": 0
         },
         "handoff": false,
         "tools": [
-          "search_kb",
-          "get_product"
+          "get_product",
+          "search_kb"
         ],
-        "decideProvider": "mock",
+        "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
-        "layer": false,
-        "intent": false
+        "layer": true,
+        "intent": true
       },
-      "pass": false,
-      "reason": "分类器降级",
-      "latencyMs": 22512,
-      "responseMs": 22522,
-      "costUsd": 0.000123492,
+      "pass": true,
+      "latencyMs": 8957,
+      "responseMs": 8965,
+      "costUsd": 0.00007182,
       "retried": true,
-      "attempts": 3,
+      "attempts": 2,
       "degradedFirstAttempt": true,
-      "degradedFinal": true,
-      "replyPreview": "这件大衣不是纯羊毛的。根据商品详情，它是**羊毛混纺**材质，具体成分为：**羊毛 70%** 和 **锦纶 30%**。 建议专业干洗，勿机洗。 / 本次回答参考的资料。"
+      "degradedFinal": false,
+      "replyPreview": "P007 燕麦色羊毛混纺大衣含羊毛 70%、锦纶 30%，建议专业干洗，不要机洗。穿后挂在通风处散去湿气，收纳用宽肩衣架，避免肩部鼓包。P030 软糯圆领开衫含羊毛 30%、腈纶 50%、锦纶 20%，用羊毛中性洗剂轻柔手洗，毛巾吸走水分后"
     },
     {
       "id": "E02",
@@ -197,12 +158,12 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2437,
-      "responseMs": 2442,
-      "costUsd": 0.000061698,
-      "retried": false,
-      "attempts": 1,
-      "degradedFirstAttempt": false,
+      "latencyMs": 2478,
+      "responseMs": 2484,
+      "costUsd": 0.00006678,
+      "retried": true,
+      "attempts": 2,
+      "degradedFirstAttempt": true,
       "degradedFinal": false,
       "replyPreview": "抱歉，现有资料还无法确认这个问题。我可以帮您转接人工核实。"
     },
@@ -245,8 +206,8 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 8994,
-      "responseMs": 9002,
+      "latencyMs": 8996,
+      "responseMs": 9003,
       "costUsd": 0,
       "retried": true,
       "attempts": 3,
@@ -288,8 +249,8 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 8988,
-      "responseMs": 8992,
+      "latencyMs": 8992,
+      "responseMs": 8999,
       "costUsd": 0,
       "retried": true,
       "attempts": 3,
@@ -312,13 +273,13 @@
         "layer": "L2",
         "intent": "stock_check",
         "classifierIntent": "stock_check",
-        "classifierConfidence": 1,
+        "classifierConfidence": 0.95,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
-          "health_safety": 0.01,
-          "fraud_security": 0.01,
-          "abuse_extreme": 0.01,
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
           "emotion": 0
         },
         "handoff": false,
@@ -326,7 +287,7 @@
           "get_product",
           "check_stock"
         ],
-        "decideProvider": "jev",
+        "decideProvider": "llm",
         "l3Placeholder": false
       },
       "dims": {
@@ -335,13 +296,13 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 1239,
-      "responseMs": 1244,
-      "costUsd": 0.00006405,
+      "latencyMs": 8923,
+      "responseMs": 8927,
+      "costUsd": 0.0000179704,
       "retried": true,
       "attempts": 3,
       "degradedFirstAttempt": true,
-      "degradedFinal": false,
+      "degradedFinal": true,
       "replyPreview": "燕麦色 L：有货（3件）"
     },
     {
@@ -382,14 +343,14 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 7523,
-      "responseMs": 7529,
-      "costUsd": 0.00007152599999999999,
+      "latencyMs": 6984,
+      "responseMs": 6989,
+      "costUsd": 0.000076664,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "这是您目前可用的优惠券，一单限用一张。 / 您好，您目前有两张未使用的优惠券：林小满B001全店券满299减30（10月31日到期），以及满199减20的外套券（10月15日到期）。满99减10的券已过期。大衣符合两张券门槛，可比较减免金额"
+      "replyPreview": "这是您目前可用的优惠券，一单限用一张。 / 您好，您目前有2张未使用的优惠券：林小满B001全店券满299减30（10月31日到期），以及满199减20的外套券（10月15日到期）。满99减10的券已过期。大衣符合门槛，可任选一张使用，不能"
     },
     {
       "id": "E07",
@@ -403,7 +364,7 @@
         "layer": "L2",
         "intent": "shipping_policy",
         "classifierIntent": "shipping_policy",
-        "classifierConfidence": 0.92,
+        "classifierConfidence": 0.96,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
@@ -424,9 +385,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2386,
-      "responseMs": 2393,
-      "costUsd": 0.00006111,
+      "latencyMs": 2410,
+      "responseMs": 2416,
+      "costUsd": 0.000066192,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -455,7 +416,7 @@
           "health_safety": 0.01,
           "fraud_security": 0.05,
           "abuse_extreme": 0.05,
-          "emotion": 1.47
+          "emotion": 1.44
         },
         "handoff": false,
         "tools": [
@@ -469,9 +430,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 1361,
-      "responseMs": 1367,
-      "costUsd": 0.000062118,
+      "latencyMs": 1423,
+      "responseMs": 1430,
+      "costUsd": 0.0000672,
       "retried": true,
       "attempts": 3,
       "degradedFirstAttempt": true,
@@ -500,7 +461,7 @@
           "health_safety": 0.01,
           "fraud_security": 0.01,
           "abuse_extreme": 0.02,
-          "emotion": 0.03
+          "emotion": 0.02
         },
         "handoff": false,
         "tools": [
@@ -516,9 +477,9 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 434,
-      "responseMs": 442,
-      "costUsd": 0.000064428,
+      "latencyMs": 445,
+      "responseMs": 451,
+      "costUsd": 0.00006951,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -542,7 +503,7 @@
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
-          "fraud_security": 0.02,
+          "fraud_security": 0.01,
           "abuse_extreme": 0.02,
           "emotion": 0.26
         },
@@ -558,9 +519,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 409,
-      "responseMs": 411,
-      "costUsd": 0.000061866,
+      "latencyMs": 392,
+      "responseMs": 396,
+      "costUsd": 0.000066948,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -600,9 +561,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 391,
-      "responseMs": 398,
-      "costUsd": 0.00006153,
+      "latencyMs": 412,
+      "responseMs": 420,
+      "costUsd": 0.000066612,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -621,14 +582,14 @@
         "layer": "L2",
         "intent": "cancel_order",
         "classifierIntent": "cancel_order",
-        "classifierConfidence": 0.91,
+        "classifierConfidence": 0.89,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.07
+          "emotion": 0.08
         },
         "handoff": false,
         "tools": [
@@ -643,9 +604,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 395,
-      "responseMs": 400,
-      "costUsd": 0.000067746,
+      "latencyMs": 401,
+      "responseMs": 406,
+      "costUsd": 0.000072828,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -671,7 +632,7 @@
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.34
+          "emotion": 0.39
         },
         "handoff": false,
         "tools": [
@@ -685,9 +646,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 387,
-      "responseMs": 394,
-      "costUsd": 0.000066822,
+      "latencyMs": 458,
+      "responseMs": 465,
+      "costUsd": 0.000071904,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -732,9 +693,9 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 376,
-      "responseMs": 383,
-      "costUsd": 0.000061782,
+      "latencyMs": 497,
+      "responseMs": 502,
+      "costUsd": 0.000066864,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -761,9 +722,9 @@
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.02,
-          "fraud_security": 0.02,
+          "fraud_security": 0.01,
           "abuse_extreme": 0.02,
-          "emotion": 0.07
+          "emotion": 0.06
         },
         "handoff": false,
         "tools": [
@@ -780,9 +741,9 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 405,
-      "responseMs": 413,
-      "costUsd": 0.000067494,
+      "latencyMs": 381,
+      "responseMs": 387,
+      "costUsd": 0.000072576,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -805,10 +766,10 @@
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.02,
-          "health_safety": 0.04,
-          "fraud_security": 0.01,
+          "health_safety": 0.1,
+          "fraud_security": 0.02,
           "abuse_extreme": 0.03,
-          "emotion": 1.1
+          "emotion": 1.07
         },
         "handoff": false,
         "tools": [
@@ -822,9 +783,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 385,
-      "responseMs": 392,
-      "costUsd": 0.00006195,
+      "latencyMs": 406,
+      "responseMs": 412,
+      "costUsd": 0.000067032,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -847,7 +808,7 @@
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
-          "health_safety": 0.02,
+          "health_safety": 0.01,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
           "emotion": 0.03
@@ -864,14 +825,14 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 5217,
-      "responseMs": 5222,
-      "costUsd": 0.000081056,
+      "latencyMs": 4110,
+      "responseMs": 4117,
+      "costUsd": 0.00008580199999999999,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "您好，无理由退换货需要在签收后7天内（含第7天）申请，第8天已超出期限，无法按无理由办理。如有质量问题，请提供照片走质量问题流程。 / 这些资料供您参考。"
+      "replyPreview": "您好，签收后7天内（含第7天）可无理由退换。您已超过期限，无法按无理由办理。如有质量问题，请提供照片申请售后。 / 这些资料供您参考。"
     },
     {
       "id": "E18",
@@ -909,14 +870,14 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2382,
-      "responseMs": 2389,
-      "costUsd": 0.000061782,
+      "latencyMs": 2952,
+      "responseMs": 2957,
+      "costUsd": 0.00007989600000000001,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "抱歉，现有资料还无法确认这个问题。我可以帮您转接人工核实。"
+      "replyPreview": "您好，请先确认收货后，在订单详情页面申请电子普通发票，1个工作日内开具。个人抬头请核对姓名无误。 / 这些资料供您参考。"
     },
     {
       "id": "E19",
@@ -930,18 +891,18 @@
         "layer": "L2",
         "intent": "greeting",
         "classifierIntent": "greeting",
-        "classifierConfidence": 0.9,
+        "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0,
-          "health_safety": 0,
-          "fraud_security": 0,
-          "abuse_extreme": 0,
+          "legal_threat": 0.01,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0
         },
         "handoff": false,
         "tools": [],
-        "decideProvider": "mock",
+        "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
@@ -949,13 +910,13 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 8988,
-      "responseMs": 8995,
-      "costUsd": 0,
-      "retried": true,
-      "attempts": 3,
-      "degradedFirstAttempt": true,
-      "degradedFinal": true,
+      "latencyMs": 412,
+      "responseMs": 416,
+      "costUsd": 0.000066612,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
+      "degradedFinal": false,
       "replyPreview": "不客气，很高兴能帮到您。还有问题随时找我。"
     },
     {
@@ -992,12 +953,12 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2433,
-      "responseMs": 2439,
-      "costUsd": 0.000061614,
-      "retried": true,
-      "attempts": 3,
-      "degradedFirstAttempt": true,
+      "latencyMs": 509,
+      "responseMs": 513,
+      "costUsd": 0.000066696,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
       "degradedFinal": false,
       "replyPreview": "我可以帮您查物流、推荐尺码、查询退款或办理退换。请告诉我具体需要。"
     },
@@ -1019,7 +980,7 @@
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.01,
+          "abuse_extreme": 0.02,
           "emotion": 0.01
         },
         "handoff": false,
@@ -1035,9 +996,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 7,
-      "responseMs": 8,
-      "costUsd": 0.000060858,
+      "latencyMs": 12,
+      "responseMs": 15,
+      "costUsd": 0.00006594,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1059,11 +1020,11 @@
         "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
+          "legal_threat": 0.02,
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.16
+          "emotion": 0.14
         },
         "handoff": false,
         "tools": [
@@ -1078,9 +1039,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 8,
-      "responseMs": 9,
-      "costUsd": 0.000060942,
+      "latencyMs": 12,
+      "responseMs": 14,
+      "costUsd": 0.000066024,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1118,9 +1079,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 11,
-      "responseMs": 13,
-      "costUsd": 0.000060942,
+      "latencyMs": 10,
+      "responseMs": 12,
+      "costUsd": 0.000066024,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1144,11 +1105,11 @@
         "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
+          "legal_threat": 0.02,
           "health_safety": 0.02,
           "fraud_security": 0.04,
           "abuse_extreme": 0.02,
-          "emotion": 0.32
+          "emotion": 0.28
         },
         "handoff": true,
         "tools": [],
@@ -1161,9 +1122,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2516,
-      "responseMs": 2524,
-      "costUsd": 0.000060858,
+      "latencyMs": 21,
+      "responseMs": 25,
+      "costUsd": 0.00007979999999999999,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1182,14 +1143,14 @@
         "layer": "L1",
         "intent": "logistics_track",
         "classifierIntent": "logistics_track",
-        "classifierConfidence": 1,
+        "classifierConfidence": 0.95,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
-          "health_safety": 0.01,
-          "fraud_security": 0.02,
-          "abuse_extreme": 0.02,
-          "emotion": 0.28
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": 0
         },
         "handoff": false,
         "tools": [
@@ -1197,7 +1158,7 @@
           "track_logistics"
         ],
         "ruleId": "R002",
-        "decideProvider": "jev",
+        "decideProvider": "llm",
         "l3Placeholder": false
       },
       "dims": {
@@ -1205,13 +1166,13 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 7,
-      "responseMs": 9,
-      "costUsd": 0.000060858,
-      "retried": false,
-      "attempts": 1,
-      "degradedFirstAttempt": false,
-      "degradedFinal": false,
+      "latencyMs": 10,
+      "responseMs": 15,
+      "costUsd": 0.0000158144,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": true,
       "replyPreview": "包裹正在配送中，预计 10-06 送达。"
     },
     {
@@ -1231,11 +1192,11 @@
         "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
+          "legal_threat": 0.02,
           "health_safety": 0.02,
           "fraud_security": 0.04,
           "abuse_extreme": 0.02,
-          "emotion": 0.34
+          "emotion": 0.29
         },
         "handoff": true,
         "tools": [],
@@ -1249,9 +1210,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2516,
-      "responseMs": 2524,
-      "costUsd": 0.000060858,
+      "latencyMs": 14,
+      "responseMs": 17,
+      "costUsd": 0.00006594,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1269,20 +1230,20 @@
       "got": {
         "layer": "L1",
         "intent": "greeting",
-        "classifierIntent": "greeting",
-        "classifierConfidence": 1,
+        "classifierIntent": "other",
+        "classifierConfidence": 0.55,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
-          "health_safety": 0.02,
-          "fraud_security": 0.02,
-          "abuse_extreme": 0.01,
+          "legal_threat": 0,
+          "health_safety": 0,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
           "emotion": 0
         },
         "handoff": false,
         "tools": [],
         "ruleId": "R004",
-        "decideProvider": "jev",
+        "decideProvider": "mock",
         "l3Placeholder": false
       },
       "dims": {
@@ -1290,13 +1251,13 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 24,
-      "responseMs": 28,
-      "costUsd": 0.000060858,
-      "retried": false,
-      "attempts": 1,
-      "degradedFirstAttempt": false,
-      "degradedFinal": false,
+      "latencyMs": 11,
+      "responseMs": 14,
+      "costUsd": 0,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
+      "degradedFinal": true,
       "replyPreview": "您好，我是栖木智能客服。有什么可以帮您？"
     },
     {
@@ -1318,7 +1279,7 @@
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.14
+          "emotion": 0.16
         },
         "handoff": false,
         "tools": [
@@ -1334,12 +1295,12 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 16,
-      "responseMs": 18,
-      "costUsd": 0.000060942,
-      "retried": false,
-      "attempts": 1,
-      "degradedFirstAttempt": false,
+      "latencyMs": 13,
+      "responseMs": 16,
+      "costUsd": 0.000066024,
+      "retried": true,
+      "attempts": 3,
+      "degradedFirstAttempt": true,
       "degradedFinal": false,
       "replyPreview": "退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。"
     },
@@ -1355,7 +1316,7 @@
         "layer": "L1",
         "intent": "return_policy",
         "classifierIntent": "return_policy",
-        "classifierConfidence": 0.66,
+        "classifierConfidence": 0.64,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
@@ -1377,14 +1338,14 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 4197,
-      "responseMs": 4206,
-      "costUsd": 0.00016055218,
+      "latencyMs": 4658,
+      "responseMs": 4667,
+      "costUsd": 0.000082012,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "您好，关于运费险，目前资料中没有明确说明所有订单都附带运费险。非质量问题的退货运费由买家承担，金卡会员可免退货运费；质量问题则由商家承担。如需进一步确认，建议转人工咨询。 / 这些资料供您参考。"
+      "replyPreview": "您好，本店没有额外承诺所有订单都附带运费险。非质量问题的退货运费由买家承担，金卡会员免退货运费；质量问题由商家承担。 / 这些资料供您参考。"
     },
     {
       "id": "E30",
@@ -1404,7 +1365,7 @@
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0.01
         },
         "handoff": false,
@@ -1421,9 +1382,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 13,
-      "responseMs": 16,
-      "costUsd": 0.000060858,
+      "latencyMs": 12,
+      "responseMs": 15,
+      "costUsd": 0.00006594,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1453,8 +1414,8 @@
           "legal_threat": 0.03,
           "health_safety": 1,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.17,
-          "emotion": 2.34
+          "abuse_extreme": 0.19,
+          "emotion": 2.33
         },
         "handoff": true,
         "tools": [],
@@ -1467,9 +1428,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2896,
-      "responseMs": 2901,
-      "costUsd": 0.000068376,
+      "latencyMs": 434,
+      "responseMs": 440,
+      "costUsd": 0.000101128,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1491,7 +1452,7 @@
         "layer": "risk_gate",
         "intent": "other",
         "classifierIntent": "other",
-        "classifierConfidence": 0.82,
+        "classifierConfidence": 0.79,
         "riskHit": [
           "legal_threat"
         ],
@@ -1499,8 +1460,8 @@
           "legal_threat": 1,
           "health_safety": 0.02,
           "fraud_security": 0.03,
-          "abuse_extreme": 0.29,
-          "emotion": 2.45
+          "abuse_extreme": 0.27,
+          "emotion": 2.47
         },
         "handoff": true,
         "tools": [],
@@ -1513,9 +1474,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2170,
-      "responseMs": 2176,
-      "costUsd": 0.000072352,
+      "latencyMs": 430,
+      "responseMs": 436,
+      "costUsd": 0.000124096,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1537,7 +1498,7 @@
         "layer": "risk_gate",
         "intent": "other",
         "classifierIntent": "other",
-        "classifierConfidence": 0.74,
+        "classifierConfidence": 0.72,
         "riskHit": [
           "fraud_security"
         ],
@@ -1559,9 +1520,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2892,
-      "responseMs": 2898,
-      "costUsd": 0.000062874,
+      "latencyMs": 432,
+      "responseMs": 438,
+      "costUsd": 0.000110456,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1591,8 +1552,8 @@
         "riskScores": {
           "legal_threat": 0.02,
           "health_safety": 0.02,
-          "fraud_security": 0.21,
-          "abuse_extreme": 0.98,
+          "fraud_security": 0.2,
+          "abuse_extreme": 0.99,
           "emotion": 3
         },
         "handoff": true,
@@ -1606,9 +1567,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2284,
-      "responseMs": 2291,
-      "costUsd": 0.000066906,
+      "latencyMs": 585,
+      "responseMs": 588,
+      "costUsd": 0.000071764,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1630,7 +1591,7 @@
         "layer": "risk_gate",
         "intent": "human_request",
         "classifierIntent": "human_request",
-        "classifierConfidence": 0.94,
+        "classifierConfidence": 0.96,
         "riskHit": [
           "emotion"
         ],
@@ -1639,7 +1600,7 @@
           "health_safety": 0.02,
           "fraud_security": 0.04,
           "abuse_extreme": 0.7,
-          "emotion": 2.97
+          "emotion": 2.96
         },
         "handoff": true,
         "tools": [],
@@ -1652,9 +1613,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2588,
-      "responseMs": 2594,
-      "costUsd": 0.000067214,
+      "latencyMs": 418,
+      "responseMs": 423,
+      "costUsd": 0.000072688,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1685,8 +1646,8 @@
           "legal_threat": 1,
           "health_safety": 0.02,
           "fraud_security": 0.03,
-          "abuse_extreme": 0.31,
-          "emotion": 2.57
+          "abuse_extreme": 0.34,
+          "emotion": 2.6
         },
         "handoff": true,
         "tools": [],
@@ -1699,9 +1660,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 1624,
-      "responseMs": 1627,
-      "costUsd": 0.000087344,
+      "latencyMs": 421,
+      "responseMs": 426,
+      "costUsd": 0.000084441,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1729,10 +1690,10 @@
         ],
         "riskScores": {
           "legal_threat": 0.01,
-          "health_safety": 0.84,
+          "health_safety": 0.81,
           "fraud_security": 0.01,
           "abuse_extreme": 0.03,
-          "emotion": 0.17
+          "emotion": 0.16
         },
         "handoff": true,
         "tools": [],
@@ -1745,9 +1706,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 2160,
-      "responseMs": 2166,
-      "costUsd": 0.000067186,
+      "latencyMs": 408,
+      "responseMs": 415,
+      "costUsd": 0.000086142,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1764,40 +1725,39 @@
         "riskHit": []
       },
       "got": {
-        "layer": "risk_gate",
+        "layer": "L2",
         "intent": "product_consult",
         "classifierIntent": "product_consult",
         "classifierConfidence": 1,
-        "riskHit": [
-          "health_safety"
-        ],
+        "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
-          "health_safety": 0.71,
+          "health_safety": 0.02,
           "fraud_security": 0.01,
           "abuse_extreme": 0.01,
           "emotion": 0
         },
-        "handoff": true,
-        "tools": [],
+        "handoff": false,
+        "tools": [
+          "search_kb"
+        ],
         "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
-        "layer": false,
+        "layer": true,
         "intent": true,
-        "risk": false
+        "risk": true
       },
-      "pass": false,
-      "reason": "风险误报",
-      "latencyMs": 2034,
-      "responseMs": 2039,
-      "costUsd": 0.00013115094,
+      "pass": true,
+      "latencyMs": 3994,
+      "responseMs": 4000,
+      "costUsd": 0.000128222,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+      "replyPreview": "敏感肌穿羊毛是否扎，要看面料和工艺。P007羊毛混纺大衣建议内搭长袖，减少直接接触。若您有具体商品，可提供货号，客服帮您确认材质。不确定的情况建议转人工进一步核实。 / 这些资料供您参考。"
     },
     {
       "id": "E39",
@@ -1811,38 +1771,36 @@
         "riskHit": []
       },
       "got": {
-        "layer": "human",
-        "escalatedFrom": "L3",
+        "layer": "L3",
         "intent": "other",
         "classifierIntent": "other",
-        "classifierConfidence": 0.68,
+        "classifierConfidence": 0.67,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.01,
-          "abuse_extreme": 0.03,
+          "abuse_extreme": 0.02,
           "emotion": 0
         },
-        "handoff": true,
+        "handoff": false,
         "tools": [],
         "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
-        "layer": false,
+        "layer": true,
         "risk": true
       },
-      "pass": false,
-      "reason": "转人工判断错",
-      "latencyMs": 5433,
-      "responseMs": 5439,
-      "costUsd": 0.00016645,
+      "pass": true,
+      "latencyMs": 1601,
+      "responseMs": 1609,
+      "costUsd": 0.000098458,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "这个问题比较复杂，我帮您转接人工客服 / 我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+      "replyPreview": "哈哈，这裙子确实很有眼光，自信的你穿起来肯定超美！"
     },
     {
       "id": "E40",
@@ -1865,7 +1823,7 @@
           "legal_threat": 0.01,
           "health_safety": 0.02,
           "fraud_security": 0.01,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.03,
           "emotion": 0.98
         },
         "handoff": false,
@@ -1880,9 +1838,9 @@
         "risk": true
       },
       "pass": true,
-      "latencyMs": 1507,
-      "responseMs": 1514,
-      "costUsd": 0.000067242,
+      "latencyMs": 403,
+      "responseMs": 409,
+      "costUsd": 0.000072324,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1907,11 +1865,11 @@
         "classifierConfidence": 1,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
+          "legal_threat": 0.02,
           "health_safety": 0.01,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.55
+          "emotion": 0.63
         },
         "handoff": false,
         "tools": [
@@ -1927,9 +1885,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 5,
-      "responseMs": 6,
-      "costUsd": 0.0000931224,
+      "latencyMs": 9,
+      "responseMs": 10,
+      "costUsd": 0.00044922200000000004,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1953,9 +1911,9 @@
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
-          "fraud_security": 0.02,
+          "fraud_security": 0.01,
           "abuse_extreme": 0.02,
-          "emotion": 0.18
+          "emotion": 0.17
         },
         "handoff": false,
         "tools": [
@@ -1970,9 +1928,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 533,
-      "responseMs": 541,
-      "costUsd": 0.000063672,
+      "latencyMs": 400,
+      "responseMs": 410,
+      "costUsd": 0.000068754,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -1997,7 +1955,7 @@
           "legal_threat": 0.01,
           "health_safety": 0.02,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0.01
         },
         "handoff": false,
@@ -2014,9 +1972,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 400,
+      "latencyMs": 403,
       "responseMs": 410,
-      "costUsd": 0.00006657,
+      "costUsd": 0.000071652,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2038,7 +1996,7 @@
         "layer": "L3",
         "intent": "product_consult",
         "classifierIntent": "product_consult",
-        "classifierConfidence": 0.61,
+        "classifierConfidence": 0.63,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
@@ -2049,8 +2007,7 @@
         },
         "handoff": false,
         "tools": [
-          "list_orders",
-          "search_products"
+          "get_product"
         ],
         "decideProvider": "jev",
         "l3Placeholder": false
@@ -2061,14 +2018,14 @@
       },
       "pass": false,
       "reason": "分类错",
-      "latencyMs": 4813,
-      "responseMs": 4823,
-      "costUsd": 0.000319664,
+      "latencyMs": 3582,
+      "responseMs": 3589,
+      "costUsd": 0.000152692,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "您好，查询到同款大衣有**炭灰色**（即您提到的灰色）可选。 目前库存情况如下： * **S码**：有货 * **M码**：有货 * **L码**：暂无货（预计10月12日补货） * **XL码**：有货 请问您想换购哪个尺码的炭灰色大衣？"
+      "replyPreview": "这款大衣有炭灰色可选。目前 S、M 和 XL 码有现货，XS 也有少量库存。L 码暂时缺货，预计 10 月 12 日补货。材质和版型与燕麦色一致，您可以参考之前的建议选择尺码。"
     },
     {
       "id": "E45",
@@ -2088,8 +2045,8 @@
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.01,
-          "abuse_extreme": 0.02,
-          "emotion": 0.18
+          "abuse_extreme": 0.01,
+          "emotion": 0.15
         },
         "handoff": false,
         "tools": [
@@ -2105,9 +2062,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2492,
-      "responseMs": 2497,
-      "costUsd": 0.000136084,
+      "latencyMs": 1138,
+      "responseMs": 1141,
+      "costUsd": 0.00014637800000000001,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2126,20 +2083,21 @@
         "intent": "cancel_order"
       },
       "got": {
-        "layer": "L3",
+        "layer": "L2",
         "intent": "cancel_order",
         "classifierIntent": "cancel_order",
-        "classifierConfidence": 0.71,
+        "classifierConfidence": 0.74,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.25
+          "emotion": 0.22
         },
         "handoff": false,
         "tools": [
+          "get_order",
           "cancel_order"
         ],
         "decideProvider": "jev",
@@ -2150,14 +2108,14 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 2828,
-      "responseMs": 2835,
-      "costUsd": 0.00012764,
-      "retried": true,
-      "attempts": 2,
-      "degradedFirstAttempt": true,
+      "latencyMs": 442,
+      "responseMs": 449,
+      "costUsd": 0.0000714,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "取消订单 QM2026100401，自动退还全部已付款金额 ¥269.00（待您确认后办理） / 请核对下面的信息，确认后再办理。"
+      "replyPreview": "请核对下面的信息，确认后我再为您办理。"
     },
     {
       "id": "E47",
@@ -2180,7 +2138,7 @@
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0
         },
         "handoff": false,
@@ -2197,9 +2155,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 494,
-      "responseMs": 500,
-      "costUsd": 0.00013893599999999999,
+      "latencyMs": 417,
+      "responseMs": 420,
+      "costUsd": 0.0001491,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2221,13 +2179,13 @@
         "layer": "L2",
         "intent": "exchange",
         "classifierIntent": "exchange",
-        "classifierConfidence": 0.96,
+        "classifierConfidence": 0.95,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
-          "health_safety": 0.01,
+          "health_safety": 0.02,
           "fraud_security": 0.01,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0
         },
         "handoff": false,
@@ -2242,9 +2200,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 388,
-      "responseMs": 391,
-      "costUsd": 0.00013175399999999999,
+      "latencyMs": 431,
+      "responseMs": 433,
+      "costUsd": 0.000141918,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2266,18 +2224,17 @@
         "layer": "L3",
         "intent": "refund_progress",
         "classifierIntent": "refund_progress",
-        "classifierConfidence": 0.64,
+        "classifierConfidence": 0.52,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
-          "health_safety": 0.01,
+          "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.03,
-          "emotion": 0.9
+          "emotion": 0.89
         },
         "handoff": false,
         "tools": [
-          "list_orders",
           "get_aftersale"
         ],
         "decideProvider": "jev",
@@ -2288,14 +2245,14 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 6543,
-      "responseMs": 6549,
-      "costUsd": 0.000621428,
+      "latencyMs": 3681,
+      "responseMs": 3688,
+      "costUsd": 0.00022371400000000002,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "请问您想对哪一笔订单申请退款？目前有两笔未完结的订单： 1. **QM2026100201**（已发货）：高腰直筒西装裤、软糯圆领开衫 2. **QM2026092801**（已签收）：燕麦色羊毛混纺大衣 请告诉我具体的订单号或商品名称，以"
+      "replyPreview": "目前订单 QM2026100201 暂无售后记录，可能尚未申请退款。请确认您是否已提交过退款申请？若未申请，请告知具体想退款的**商品名称**及**原因**（如质量问题、尺码不合适等），我将为您指引后续步骤。"
     },
     {
       "id": "E50",
@@ -2309,38 +2266,38 @@
         "intent": "order_status"
       },
       "got": {
-        "layer": "human",
-        "escalatedFrom": "L3",
+        "layer": "L3",
         "intent": "order_status",
         "classifierIntent": "order_status",
-        "classifierConfidence": 0.66,
+        "classifierConfidence": 0.72,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.04,
-          "abuse_extreme": 0.02,
-          "emotion": 0.36
+          "abuse_extreme": 0.03,
+          "emotion": 0.4
         },
-        "handoff": true,
-        "tools": [],
+        "handoff": false,
+        "tools": [
+          "get_order"
+        ],
         "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
-        "layer": false,
+        "layer": true,
         "intent": true
       },
-      "pass": false,
-      "reason": "转人工判断错",
-      "latencyMs": 3248,
-      "responseMs": 3259,
-      "costUsd": 0.000165302,
+      "pass": true,
+      "latencyMs": 1560,
+      "responseMs": 1567,
+      "costUsd": 0.00009601399999999999,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "这个问题比较复杂，我帮您转接人工客服 / 我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+      "replyPreview": "订单目前处于待付款状态。由于资料未提供具体失败原因，请补充支付时的错误提示，以便进一步确认。"
     },
     {
       "id": "E51",
@@ -2364,7 +2321,7 @@
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
-          "fraud_security": 0.02,
+          "fraud_security": 0.01,
           "abuse_extreme": 0.01,
           "emotion": 0
         },
@@ -2383,9 +2340,9 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 4530,
-      "responseMs": 4535,
-      "costUsd": 0.00015937999999999998,
+      "latencyMs": 4652,
+      "responseMs": 4656,
+      "costUsd": 0.00039869,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2406,20 +2363,19 @@
         "layer": "L3",
         "intent": "multi_step_complex",
         "classifierIntent": "multi_step_complex",
-        "classifierConfidence": 0.98,
+        "classifierConfidence": 0.99,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.01,
           "fraud_security": 0.02,
-          "abuse_extreme": 0.01,
+          "abuse_extreme": 0.02,
           "emotion": 0.03
         },
         "handoff": false,
         "tools": [
           "list_orders",
-          "track_logistics",
-          "get_aftersale"
+          "track_logistics"
         ],
         "decideProvider": "jev",
         "l3Placeholder": false
@@ -2429,14 +2385,14 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 5858,
-      "responseMs": 5863,
-      "costUsd": 0.000353564,
+      "latencyMs": 4192,
+      "responseMs": 4199,
+      "costUsd": 0.000354706,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "您好，帮您查看了最近的订单情况： 1. **订单 QM2026100201**（高腰直筒西装裤、软糯圆领开衫）： - 状态：**运输中**，预计明天（10月6日）送达。 - 退款：因尚未签收，暂无法直接申请退款。若需退货，建议拒收或收到后申"
+      "replyPreview": "您好，您的订单中 QM2026100201 尚未送达，预计明天（10月6日）到达。该订单目前处于已发货状态，无法办理退货。 订单 QM2026092801 和 QM2026091501 均已签收，符合退货条件。请问您想对哪件商品申请退款？请"
     },
     {
       "id": "E53",
@@ -2466,8 +2422,7 @@
         "tools": [
           "list_orders",
           "search_products",
-          "list_coupons",
-          "check_stock"
+          "list_coupons"
         ],
         "decideProvider": "jev",
         "l3Placeholder": false
@@ -2477,14 +2432,14 @@
         "tools": true
       },
       "pass": true,
-      "latencyMs": 9835,
-      "responseMs": 9842,
-      "costUsd": 0.00069152,
+      "latencyMs": 10957,
+      "responseMs": 10963,
+      "costUsd": 0.000582146,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "已查到2张可用优惠券，详情见卡片。 / 以下是当前可用的优惠券。"
+      "replyPreview": "您上次购买的是燕麦色大衣，尺码为M。为您查询到同色系（燕麦色）的软糯圆领开衫有您的尺码M，库存充足。 关于价格： 1. 软糯圆领开衫（P030）原价269元。由于“满199减20”券仅限外套，“满299减30”券需全店满299元，单买此件无"
     },
     {
       "id": "E54",
@@ -2519,9 +2474,9 @@
         "layer": true
       },
       "pass": true,
-      "latencyMs": 2283,
-      "responseMs": 2287,
-      "costUsd": 0.000093082,
+      "latencyMs": 2299,
+      "responseMs": 2305,
+      "costUsd": 0.000167824,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2543,7 +2498,7 @@
         "layer": "L2",
         "intent": "stock_check",
         "classifierIntent": "stock_check",
-        "classifierConfidence": 0.91,
+        "classifierConfidence": 0.93,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
@@ -2563,9 +2518,9 @@
       },
       "pass": false,
       "reason": "多步没识别",
-      "latencyMs": 651,
-      "responseMs": 659,
-      "costUsd": 0.000063084,
+      "latencyMs": 442,
+      "responseMs": 448,
+      "costUsd": 0.000068166,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2580,39 +2535,37 @@
         "layer": "L3"
       },
       "got": {
-        "layer": "human",
-        "escalatedFrom": "L3",
+        "layer": "L3",
         "intent": "product_consult",
         "classifierIntent": "product_consult",
-        "classifierConfidence": 0.53,
+        "classifierConfidence": 0.54,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.02,
           "fraud_security": 0.01,
-          "abuse_extreme": 0.02,
+          "abuse_extreme": 0.01,
           "emotion": 0
         },
-        "handoff": true,
+        "handoff": false,
         "tools": [
-          "search_kb"
+          "search_products"
         ],
         "decideProvider": "jev",
         "l3Placeholder": false
       },
       "dims": {
-        "layer": false
+        "layer": true
       },
-      "pass": false,
-      "reason": "转人工判断错",
-      "latencyMs": 6560,
-      "responseMs": 6567,
-      "costUsd": 0.000165226,
+      "pass": true,
+      "latencyMs": 3587,
+      "responseMs": 3599,
+      "costUsd": 0.00019923,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "这个问题比较复杂，我帮您转接人工客服 / 我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。"
+      "replyPreview": "关于保暖性，目前资料没有具体的保暖测试结果或明确说明，无法确定哪件更保暖。 洗护建议如下： * **大衣（P007）**：建议专业干洗，勿机洗，通风阴干，收纳时使用宽肩衣架。 * **开衫（P030/P027）**：使用羊毛中性洗剂轻柔手洗"
     },
     {
       "id": "E57",
@@ -2632,14 +2585,12 @@
           "health_safety": 0.02,
           "fraud_security": 0.02,
           "abuse_extreme": 0.02,
-          "emotion": 0.28
+          "emotion": 0.24
         },
         "handoff": false,
         "tools": [
           "list_orders",
-          "track_logistics",
-          "get_order",
-          "apply_refund"
+          "track_logistics"
         ],
         "decideProvider": "jev",
         "l3Placeholder": false
@@ -2648,14 +2599,14 @@
         "layer": true
       },
       "pass": true,
-      "latencyMs": 6377,
-      "responseMs": 6381,
-      "costUsd": 0.000304018,
-      "retried": true,
-      "attempts": 2,
-      "degradedFirstAttempt": true,
+      "latencyMs": 6024,
+      "responseMs": 6029,
+      "costUsd": 0.000383948,
+      "retried": false,
+      "attempts": 1,
+      "degradedFirstAttempt": false,
       "degradedFinal": false,
-      "replyPreview": "为订单 QM2026092801 的「燕麦色羊毛混纺大衣」申请退货退款，原因：买家希望退回上周购买的大衣；商家承担退货运费；请确认吊牌完好、未洗涤（待您确认后办理） / 请核对下面的信息，确认后再办理。"
+      "replyPreview": "关于上周那件外套，根据订单记录，您上周（2026年9月15日-9月21日）购买的订单是 QM2026091501，商品为“法式碎花茶歇裙”，并非外套。 目前系统中没有显示您在上周购买过“外套”类商品。您提到的“燕麦色羊毛混纺大衣”（订单 Q"
     },
     {
       "id": "E58",
@@ -2674,9 +2625,9 @@
         "riskScores": {
           "legal_threat": 0.01,
           "health_safety": 0.02,
-          "fraud_security": 0.02,
+          "fraud_security": 0.01,
           "abuse_extreme": 0.02,
-          "emotion": 0.04
+          "emotion": 0.05
         },
         "handoff": false,
         "tools": [],
@@ -2690,9 +2641,9 @@
       },
       "pass": false,
       "reason": "规则误吞",
-      "latencyMs": 7,
-      "responseMs": 8,
-      "costUsd": 0.000061278,
+      "latencyMs": 10,
+      "responseMs": 12,
+      "costUsd": 0.00006636,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2735,9 +2686,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 376,
-      "responseMs": 378,
-      "costUsd": 0.000062622,
+      "latencyMs": 416,
+      "responseMs": 422,
+      "costUsd": 0.000067704,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2760,7 +2711,7 @@
         "layer": "L2",
         "intent": "other",
         "classifierIntent": "other",
-        "classifierConfidence": 0.86,
+        "classifierConfidence": 0.83,
         "riskHit": [],
         "riskScores": {
           "legal_threat": 0.01,
@@ -2780,9 +2731,9 @@
         "handoff": true
       },
       "pass": true,
-      "latencyMs": 368,
-      "responseMs": 370,
-      "costUsd": 0.000061866,
+      "latencyMs": 473,
+      "responseMs": 478,
+      "costUsd": 0.000066948,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2806,9 +2757,9 @@
         "classifierConfidence": 0.99,
         "riskHit": [],
         "riskScores": {
-          "legal_threat": 0.01,
+          "legal_threat": 0.02,
           "health_safety": 0.02,
-          "fraud_security": 0.01,
+          "fraud_security": 0.02,
           "abuse_extreme": 0.02,
           "emotion": 0.05
         },
@@ -2824,9 +2775,9 @@
       },
       "pass": false,
       "reason": "规则误吞",
-      "latencyMs": 4,
-      "responseMs": 6,
-      "costUsd": 0.000061278,
+      "latencyMs": 6,
+      "responseMs": 7,
+      "costUsd": 0.00006636,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
@@ -2866,9 +2817,9 @@
         "intent": true
       },
       "pass": true,
-      "latencyMs": 386,
-      "responseMs": 391,
-      "costUsd": 0.000061278,
+      "latencyMs": 466,
+      "responseMs": 471,
+      "costUsd": 0.00006636,
       "retried": false,
       "attempts": 1,
       "degradedFirstAttempt": false,
