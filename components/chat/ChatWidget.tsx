@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   getConversationMessages,
   getLatestConversation,
@@ -164,12 +164,14 @@ interface PanelProps {
   nickname: string;
   open: boolean;
   target: ChatTarget | null;
+  /** 演示指南每点一次「开始」就 +1，用来丢掉当前会话、让后端新建 */
+  chatSession: number;
   page: Page;
   onFabClick: () => void;
   onClose: () => void;
 }
 
-function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose }: PanelProps) {
+function ChatPanel({ buyerId, nickname, open, target, chatSession, page, onFabClick, onClose }: PanelProps) {
   const [messages, setMessages] = useState<UiMessage[]>([]);
   const [conversation, setConversation] = useState<Conversation | null>(null);
   const [traces, setTraces] = useState<Record<string, RouteTrace>>({});
@@ -195,6 +197,8 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
   const sendingRef = useRef(false);
   const pollingRef = useRef(false);
   const loadedOnce = useRef(false);
+  const appliedSession = useRef(0);
+  const loadGen = useRef(0);
   const localSeq = useRef(0);
   // 轮询等异步回调里要读到最新值
   const convRef = useRef<Conversation | null>(null);
@@ -218,12 +222,35 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
     };
   });
 
-  // 首次打开：恢复最近一次未关闭的会话
+  const dropConversation = useCallback(() => {
+    convRef.current = null;
+    messagesRef.current = [];
+    setConversation(null);
+    setMessages([]);
+    setTraces({});
+    setResolutions({});
+    setChosen({});
+    setError(null);
+    setLoaded(true);
+  }, []);
+
+  // 首次打开：恢复最近一次未关闭的会话。
+  // 演示指南的「开始」会递增 chatSession：丢掉本地会话，下一条消息不带 conversationId。
   useEffect(() => {
-    if (!open || loadedOnce.current) return;
+    if (!open) return;
+    if (chatSession > 0 && appliedSession.current !== chatSession) {
+      appliedSession.current = chatSession;
+      loadGen.current += 1;
+      loadedOnce.current = true;
+      dropConversation();
+      return;
+    }
+    if (loadedOnce.current) return;
     loadedOnce.current = true;
+    const gen = ++loadGen.current;
     getLatestConversation(buyerId)
       .then((res) => {
+        if (gen !== loadGen.current) return;
         if (res.conversation) {
           setConversation(res.conversation);
           setMessages(res.messages);
@@ -232,8 +259,19 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
       .catch(() => {
         /* 恢复失败不打扰买家：当作新会话 */
       })
-      .finally(() => setLoaded(true));
-  }, [open, buyerId]);
+      .finally(() => {
+        if (gen === loadGen.current) setLoaded(true);
+      });
+    return () => {
+      loadGen.current += 1;
+    };
+  }, [open, buyerId, chatSession, dropConversation]);
+
+  // 点了「开始」但还没发出去就关掉：下次从悬浮按钮打开时，仍恢复最近会话
+  useEffect(() => {
+    if (open || convRef.current) return;
+    loadedOnce.current = false;
+  }, [open]);
 
   // 演示指南：带着示例话术打开聊天窗 → 填进输入框（不自动发送），并提示买家点「发送」
   useEffect(() => {
@@ -758,7 +796,7 @@ function ChatPanel({ buyerId, nickname, open, target, page, onFabClick, onClose 
 }
 
 export function ChatWidget() {
-  const { ready, buyerId, buyer, chatOpen, chatTarget, openChat, closeChat } = useShop();
+  const { ready, buyerId, buyer, chatOpen, chatTarget, chatSession, openChat, closeChat } = useShop();
   const pathname = usePathname();
   // 客户端水合完成后才渲染：调试开关等从 localStorage 读取，避免水合不一致
   if (!ready) return null;
@@ -769,6 +807,7 @@ export function ChatWidget() {
       nickname={buyer?.nickname ?? ""}
       open={chatOpen}
       target={chatTarget}
+      chatSession={chatSession}
       page={pageOf(pathname)}
       onFabClick={() => openChat(targetFromPath(pathname))}
       onClose={closeChat}

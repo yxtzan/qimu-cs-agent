@@ -2,8 +2,8 @@
  * 前端调用后端 API 的唯一入口（docs/CONTRACTS.md）。
  *
  * - 类型一律来自 lib/types.ts。
- * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 强制使用本地 mock；设为 "0" 强制走真实后端；
- *   不设置时默认使用 mock（后端接口就绪前的过渡约定，后端合并后请在 .env.local 里设 NEXT_PUBLIC_USE_MOCK=0）。
+ * - Mock 开关：`NEXT_PUBLIC_USE_MOCK`。设为 "1" 使用本地 mock；设为 "0" 或不设置时走真实后端
+ *   （T15，见 docs/questions/T10-1.md）。演示机在 .env.local 里显式写 0 或 1。
  * - 商城（CONTRACTS §1）、买家聊天（§2，T12）、卖家会话（§3，T11）、知识库（§4）和规则（§5）（T13）、看板 / 评测（§6，T14）已实现（mock + 真实 fetch）；
  *   演示管理 resetDemo（设置页）也已实现；其余接口只写好了签名，调用会抛 `Error("not implemented: <函数名>")`，由后续任务填实现。
  * - 失败统一抛 `ApiError`（带 code / status，message 为中文，可直接展示）。
@@ -63,7 +63,7 @@ import {
 
 // ───────────────────────── 基础设施 ─────────────────────────
 
-export const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK !== "0";
+export const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "1";
 
 export class ApiError extends Error {
   constructor(
