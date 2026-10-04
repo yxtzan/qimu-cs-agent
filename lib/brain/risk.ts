@@ -49,3 +49,13 @@ export function checkRisk(text: string, result?: DecideResult): RiskResult {
   const flags = yellowKeys(scores);
   return { handoff: hits.length > 0, hits, flags, scores, downgraded };
 }
+
+/** Bound keyword arbitration; the classifier continues for background accounting. */
+export async function waitForKeywordDecision(pending: Promise<DecideResult>): Promise<DecideResult | undefined> {
+  const configured = Number(process.env.KEYWORD_RISK_WAIT_MS ?? 2500);
+  const ms = Number.isFinite(configured) && configured > 0 ? configured : 2500;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([pending, new Promise<undefined>(resolve => { timer = setTimeout(() => resolve(undefined), ms); })]);
+  } finally { if (timer) clearTimeout(timer); }
+}

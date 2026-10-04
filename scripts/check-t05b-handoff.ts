@@ -12,7 +12,7 @@ import type { DecideResult } from '../lib/types';
 
 // Controlled upstream fixtures exercise ordering and persistence, not model quality.
 const tick = () => new Promise<void>(resolve => setImmediate(resolve));
-const decision = (): DecideResult => ({ ...decideWithMock('你好'), provider: 'jev', costUsd: 0.00006 });
+const decision = (): DecideResult => ({ ...decideWithMock('你好'), provider: 'jev', risk: { ...decideWithMock('你好').risk, health_safety: 0.95, legal_threat: 0.95 }, costUsd: 0.00006 });
 async function main() {
   const root = process.cwd();
   const temp = mkdtempSync(join(tmpdir(), 'qimu-t05b-'));
@@ -25,7 +25,7 @@ async function main() {
     cpSync(join(root, 'data/seed'), join(temp, 'data/seed'), { recursive: true });
     process.chdir(temp); clearStoreCache();
     process.env.OPENROUTER_API_KEY = 'fixture-key'; process.env.CLASSIFIER_PROVIDER = 'jev';
-    process.env.GENERATION_MODEL = 'fixture-summary'; process.env.JEV_KEEPALIVE_MS = '0';
+    process.env.GENERATION_MODEL = 'fixture-summary'; process.env.JEV_KEEPALIVE_MS = '0'; process.env.KEYWORD_RISK_WAIT_MS = '2500';
     globalThis.fetch = async (_url, init) => {
       const body = JSON.parse(String(init?.body));
       assert.equal(body.model, 'fixture-summary');
@@ -36,7 +36,7 @@ async function main() {
     const slowDecision = new Promise<DecideResult>(resolve => { resolveDecision = resolve; });
     const started = Date.now();
     const early = await send(() => slowDecision);
-    assert(Date.now() - started < 1000);
+    assert(Date.now() - started < 3000);
     assert(early.messages.some(m => m.role === 'system' && m.text.includes('转接人工')));
     assert.match(early.conversation.handoffSummary!, /^买家/);
     assert.equal(early.conversation.mode, 'human');
@@ -49,7 +49,7 @@ async function main() {
     assert.equal(first.length, 1); assert(first[0].usedGeneration);
     assert.equal(first[0].cost.generationUsd, 0.0002);
     assert(Math.abs(first[0].cost.totalUsd - 0.00026) < 1e-12);
-    console.log('PASS 买家<1秒、模板/系统消息/红点立即可用；摘要先完成，费用随后落入唯一trace');
+    console.log('PASS 关键词分类等待<3秒、模板/系统消息/红点可用；摘要先完成，迟到分类费用落入唯一trace');
 
     const late = await send(); await tick();
     assert.equal(listTraces({ conversationId: late.conversation.id }).length, 1);

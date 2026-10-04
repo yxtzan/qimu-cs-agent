@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { readCollection, writeCollection } from '../store';
 import { appendTrace, getConversation, getMessage, listMessages } from '../store/conversations';
 import { updateConversation } from '../store/conversations';
 import type { ChatMessage, DecideResult, IntentId, Layer, RouteTrace } from '../types';
@@ -35,4 +36,14 @@ export function persistTrace(trace: RouteTrace): RouteTrace {
   // A slow background result must not replace the layer of a newer turn.
   if (newerBuyer && newerBuyer.id !== trace.messageId && current) updateConversation(current.id, { lastLayer: current.lastLayer });
   return stored;
+}
+
+/** Add late classifier cost without changing the timeout verdict or appending a trace. */
+export function recordLateDecisionCost(buyer: ChatMessage, decision: DecideResult): void {
+  if (!originStillExists(buyer)) return;
+  const traces = readCollection<RouteTrace>('traces');
+  writeCollection('traces', traces.map(trace => trace.messageId !== buyer.id ? trace : {
+    ...trace, latency: { ...trace.latency, decideMs: decision.latencyMs },
+    cost: { ...trace.cost, decideUsd: decision.costUsd, totalUsd: trace.cost.generationUsd + trace.cost.agentUsd + decision.costUsd, estimated: true },
+  }));
 }

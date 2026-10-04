@@ -20,7 +20,7 @@ const originalCwd = process.cwd();
 const temp = mkdtempSync(join(tmpdir(), 'qimu-t08-'));
 cpSync(join(originalCwd, 'data/seed'), join(temp, 'data/seed'), { recursive: true });
 process.chdir(temp); clearStoreCache();
-process.env.OPENROUTER_API_KEY = ''; process.env.CLASSIFIER_PROVIDER = 'mock'; process.env.JEV_KEEPALIVE_MS = '0';
+process.env.OPENROUTER_API_KEY = ''; process.env.CLASSIFIER_PROVIDER = 'mock'; process.env.JEV_KEEPALIVE_MS = '0'; process.env.KEYWORD_RISK_WAIT_MS = '2500';
 after(() => { process.chdir(originalCwd); rmSync(temp, { recursive: true, force: true }); });
 
 interface Fake { provider?: DecideResult['provider']; confidence?: number; multiStep?: number; emotion?: number; risk?: Partial<Record<Exclude<RiskKey, 'emotion'>, number>> }
@@ -65,12 +65,12 @@ test('E59: size beyond the chart → state the chart limit, offer a button, tran
   assert.equal(clicked.conversation.mode, 'human');
 });
 
-test('keyword hit + real model clearly denies (< 0.3) → no handoff, yellow flag + reassurance + 转人工 button', async () => {
+test('keyword hit + real model clearly denies (< 0.3) → no handoff, yellow flag + 转人工 button without reassurance', async () => {
   for (const provider of ['jev', 'llm'] as const) {
     const r = await send('B001', '我闺蜜是律师，她说这件挺好看', fake('other', { provider, risk: { legal_threat: 0.05 } }));
     assert.equal(r.trace!.layer, 'L2', provider); assert.equal(r.conversation.mode, 'ai');
     assert.deepEqual(r.trace!.riskHit, []); assert.equal(r.trace!.riskScores!.legal_threat, 1);
-    assert.equal(aiTexts(r)[0], CAUTION_TEXT.legal_threat); assert(labels(r).includes('转人工'));
+    assert.equal(aiTexts(r).some(t => Object.values(CAUTION_TEXT).includes(t)), false); assert(labels(r).includes('转人工'));
   }
 });
 test('keyword hit is kept when the model is unsure, unavailable, or mock; real threats still go to risk_gate', async () => {
@@ -131,4 +131,24 @@ test('a handler that already hands off keeps its own reason (no extra reassuranc
   const r = await send('B001', '我要找人工客服', fake('human_request', { emotion: 2 }));
   assert.equal(r.conversation.mode, 'human');
   assert.equal(aiTexts(r).some(t => Object.values(CAUTION_TEXT).includes(t)), false);
+});
+
+test('keyword timeout transfers within 3 seconds; late denial only adds cost to the same trace', async () => {
+  let release!: (d: DecideResult) => void;
+  const before = Date.now();
+  const r = await handleMessage({ buyerId: 'B001', text: '不解决我就去12315', debug: true }, { decide: () => new Promise(resolve => { release = resolve; }) });
+  assert(Date.now() - before < 3000);
+  assert.equal(r.trace!.layer, 'risk_gate'); assert.equal(r.conversation.mode, 'human');
+  assert.equal(r.trace!.decideProvider, undefined); assert.match(r.trace!.handoffReason!, /等待超时/);
+  release(fake('other', { risk: { legal_threat: 0 } })); await drainBackgroundTasks();
+  const stored = listTraces({ conversationId: r.conversation.id });
+  assert.equal(stored.length, 1); assert.equal(stored[0].id, r.trace!.id);
+  assert.equal(stored[0].decideProvider, undefined); assert.deepEqual(stored[0].riskHit, ['legal_threat']);
+  assert.equal(stored[0].cost.decideUsd, 0.00006);
+  assert.equal(getConversation(r.conversation.id)!.mode, 'human');
+});
+test('a real model yellow item still reassures when another item was downgraded', async () => {
+  const r = await send('B001', '律师朋友也嫌快递慢', fake('logistics_track', { emotion: 2, risk: { legal_threat: 0.05 } }));
+  assert.equal(r.conversation.mode, 'ai'); assert.equal(aiTexts(r)[0], CAUTION_TEXT.emotion);
+  assert(labels(r).includes('转人工'));
 });

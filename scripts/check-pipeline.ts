@@ -50,7 +50,8 @@ async function main() {
     assert.equal(logistics.trace!.layer, 'L1'); assert.equal(logistics.trace!.ruleId, 'R002'); assert.equal(card(logistics, 'logistics').orderId, 'QM2026100201');
     const size = await send('B001', '我160 50公斤穿什么码', undefined, { productId: 'P002' });
     assert.equal(size.trace!.layer, 'L2'); assert.equal(size.trace!.intent, 'size_recommend'); assert.equal(card(size, 'size_result').size, 'M');
-    const first = await send('B001', '我九月中旬买的碎花裙');
+    // T05 mock L3 hands off; test order lookup with explicit page context.
+    const first = await send('B001', '你好', undefined, { orderId: 'QM2026091501' });
     assert.equal(first.conversation.state.slots.orderId, 'QM2026091501');
     const refund = await send('B001', '退款到哪了', first.conversation.id);
     assert.equal(card(refund, 'aftersale').afterSale.id, 'AS20260920001');
@@ -129,14 +130,14 @@ async function main() {
     assert.equal(blocked.trace!.layer, 'risk_gate'); assert.equal(getOrder('QM2026100402')!.status, 'pending_payment'); await drainBackgroundTasks();
     console.log('PASS 买家/会话/订单越权、非法动作拒绝；确认动作不能绕过风险闸门');
     const l3 = await send('B003', '两个订单帮我处理，顺便查券');
-    assert.equal(l3.trace!.layer, 'L3');
+    assert.equal(l3.trace!.layer, 'human'); assert.equal(l3.trace!.escalatedFrom, 'L3');
     const twice = await send('B003', '两个订单帮我处理，顺便查券', l3.conversation.id);
-    assert.equal(twice.trace!.layer, 'human'); assert.equal(twice.trace!.escalatedFrom, 'L3');
+    assert.equal(twice.trace!.layer, 'human'); assert.equal(twice.messages.length, 1);
     const reset = createConversation('B001'); let finish!: (value: DecideResult) => void;
     await handleMessage({ buyerId: 'B001', conversationId: reset.id, text: '在吗' }, { decide: () => new Promise(r => { finish = r; }) });
     writeCollection('conversations', []); writeCollection('messages', []); writeCollection('traces', []);
     finish(risky); await drainBackgroundTasks(); assert.equal(listTraces().length, 0);
-    console.log('PASS 连续两轮L3占位转人工；重置后不回写后台旧结果');
+    console.log('PASS 无key的L3转人工、后续消息仅转发；重置后不回写后台旧结果');
     if (process.argv.includes('--report')) writeFileSync(join(root, `docs/reports/T04-${live ? 'live' : 'mock'}-transcript.json`), JSON.stringify(records, null, 2) + '\n');
     console.log(`全部通过（${live ? '真实分类器/生成 + 控制流夹具' : 'mock、无key、控制流夹具'}；隔离临时数据，未改当前演示数据）`);
   } finally {

@@ -1,0 +1,756 @@
+[
+  {
+    "id": "Q1",
+    "input": {
+      "text": "这件是防过敏面料吗"
+    },
+    "context": {
+      "productId": "P013"
+    },
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "product_consult",
+          "confidence": 1,
+          "probabilities": {
+            "product_consult": 1,
+            "logistics_track": 0,
+            "quality_issue": 0,
+            "multi_step_complex": 0,
+            "human_request": 0,
+            "refund_apply": 0,
+            "size_recommend": 0,
+            "promotion": 0,
+            "order_status": 0,
+            "exchange": 0,
+            "urge_shipping": 0,
+            "cancel_order": 0,
+            "invoice": 0,
+            "stock_check": 0,
+            "modify_order": 0,
+            "other": 0,
+            "shipping_policy": 0,
+            "refund_progress": 0,
+            "greeting": 0,
+            "return_policy": 0
+          }
+        },
+        "multiStep": 0.09,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.02,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.01,
+          "emotion": {
+            "score": 0,
+            "confidence": 1
+          }
+        },
+        "latencyMs": 556,
+        "costUsd": 6.8418e-05
+      }
+    ],
+    "trace": {
+      "id": "TR-a90c835e-4558-4283-b232-b7cc786c92fb",
+      "conversationId": "C1006",
+      "messageId": "C1006-M1",
+      "at": "2026-10-05T10:00:44.329+08:00",
+      "layer": "L2",
+      "intent": "product_consult",
+      "stage": "presale",
+      "toolCalls": [
+        {
+          "name": "get_product",
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "name": "search_kb",
+          "ok": true,
+          "ms": 731
+        }
+      ],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 3901,
+        "handlerMs": 3338,
+        "decideMs": 557
+      },
+      "cost": {
+        "decideUsd": 6.8418e-05,
+        "generationUsd": 2.2532e-05,
+        "agentUsd": 0,
+        "totalUsd": 9.094999999999999e-05,
+        "estimated": false
+      },
+      "confidence": 1,
+      "ragHits": 4,
+      "decideProvider": "jev",
+      "multiStep": 0.09,
+      "topIntents": [
+        {
+          "id": "product_consult",
+          "p": 1
+        },
+        {
+          "id": "logistics_track",
+          "p": 0
+        },
+        {
+          "id": "quality_issue",
+          "p": 0
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 1,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.01,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "ai_active",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "这款云感真丝衬衫材质为桑蚕丝92%、氨纶8%，并非专门防过敏面料。如果穿着后出现红疹或不适，请先停止穿着并联系我们，我们会转人工跟进处理。",
+        "traceId": "TR-a90c835e-4558-4283-b232-b7cc786c92fb",
+        "id": "C1006-M2",
+        "conversationId": "C1006",
+        "createdAt": "2026-10-05T10:00:48.227+08:00"
+      },
+      {
+        "role": "ai",
+        "text": "这些资料供您参考。",
+        "card": {
+          "kind": "sources",
+          "sources": [
+            {
+              "docTitle": "云感真丝衬衫商品资料",
+              "heading": "材质与洗护",
+              "snippet": "桑蚕丝 92% 氨纶 8%；用真丝专用中性洗剂轻柔手洗，不搓拧、不暴晒，垫布低温熨烫。"
+            },
+            {
+              "docTitle": "洗护指南",
+              "heading": "真丝",
+              "snippet": "P013 云感真丝衬衫的材质是桑蚕丝 92%、氨纶 8%。真丝建议用专用中性洗剂轻柔手洗，先把洗剂在水中化开，再放入衣服。别搓拧，不要暴晒，不用漂白剂。需要熨烫时垫一层布，低温处理，别让热熨斗直接长时间压在面料上。象牙白和雾蓝都按这套方式护理，浅色款请与深色衣物分开洗。"
+            },
+            {
+              "docTitle": "质量问题处理",
+              "heading": "身体不适要及时说明",
+              "snippet": "如果穿后起红疹、过敏或有其他身体不适，先停止穿着，并告诉我们订单、商品和出现不适的时间；需要时及时就医。客服不会做医疗诊断，也不会直接断定衣服就是原因。涉及健康安全会转人工跟进，保留商品和相关记录有助于核查。周雨桐的 P013 真丝衬衫投诉是演示场景，商品材质是桑蚕丝 92%、氨纶 8%，不能把投诉当作已经确认的材质结论。"
+            },
+            {
+              "docTitle": "常见问题FAQ",
+              "heading": "买之前",
+              "snippet": "**1. 不知道选哪个码？** 发身高、体重和商品名。160cm / 50kg 的基础推荐是 M，版型还会修正；超出尺码表请人工确认。\n\n**2. 100 斤按多少算？** 是 50kg，请带上单位，别直接把 100 当公斤。\n\n**3. 大衣能机洗吗？** P007 羊毛混纺大衣建议专业干洗，勿机洗。\n\n**4. 真丝衬衫怎么洗？** P013 用真丝专用"
+            },
+            {
+              "docTitle": "尺码指南",
+              "heading": "各款版型差异",
+              "snippet": "P007 羊毛混纺大衣、P021 西装裤是标准版型；P013 真丝衬衫和 P030 圆领开衫是宽松版型；P002 茶歇裙是修身版型，腰部贴合，尤其要留意腰围。裤装看腰和臀部活动空间，裙装看腰部，外套还要考虑里面是否叠穿厚衣。收到后建议保留吊牌试穿，走动、坐下试试，符合条件可在签收后 7 天内（含第 7 天）申请退换。"
+            }
+          ]
+        },
+        "quickReplies": [
+          {
+            "label": "转人工",
+            "action": {
+              "type": "quick_action",
+              "name": "human"
+            }
+          }
+        ],
+        "traceId": "TR-a90c835e-4558-4283-b232-b7cc786c92fb",
+        "id": "C1006-M3",
+        "conversationId": "C1006",
+        "createdAt": "2026-10-05T10:00:48.227+08:00"
+      }
+    ],
+    "tools": [
+      {
+        "name": "get_product",
+        "args": {
+          "productId": "P013"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "id": "P013",
+            "name": "云感真丝衬衫",
+            "category": "上衣",
+            "price": 459,
+            "colors": [
+              "象牙白",
+              "雾蓝"
+            ],
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "fit": "宽松",
+            "material": "桑蚕丝 92% 氨纶 8%",
+            "care": "用真丝专用中性洗剂轻柔手洗，不搓拧、不暴晒，垫布低温熨烫。",
+            "description": "柔软真丝带一点弹力，宽松肩线方便活动，浅色内搭建议选肤色。",
+            "highlights": [
+              "真丝微弹",
+              "宽松肩线",
+              "通勤衬衫"
+            ],
+            "images": [],
+            "sales": 318,
+            "rating": 4.7,
+            "tags": [
+              "通勤",
+              "真丝"
+            ],
+            "skus": [
+              {
+                "skuId": "P013-C1-XS",
+                "color": "象牙白",
+                "size": "XS",
+                "stock": 5
+              },
+              {
+                "skuId": "P013-C1-S",
+                "color": "象牙白",
+                "size": "S",
+                "stock": 8
+              },
+              {
+                "skuId": "P013-C1-M",
+                "color": "象牙白",
+                "size": "M",
+                "stock": 10
+              },
+              {
+                "skuId": "P013-C1-L",
+                "color": "象牙白",
+                "size": "L",
+                "stock": 7
+              },
+              {
+                "skuId": "P013-C1-XL",
+                "color": "象牙白",
+                "size": "XL",
+                "stock": 3
+              },
+              {
+                "skuId": "P013-C2-XS",
+                "color": "雾蓝",
+                "size": "XS",
+                "stock": 4
+              },
+              {
+                "skuId": "P013-C2-S",
+                "color": "雾蓝",
+                "size": "S",
+                "stock": 7
+              },
+              {
+                "skuId": "P013-C2-M",
+                "color": "雾蓝",
+                "size": "M",
+                "stock": 11
+              },
+              {
+                "skuId": "P013-C2-L",
+                "color": "雾蓝",
+                "size": "L",
+                "stock": 6
+              },
+              {
+                "skuId": "P013-C2-XL",
+                "color": "雾蓝",
+                "size": "XL",
+                "stock": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "modelReplies": []
+  },
+  {
+    "id": "Q2",
+    "input": {
+      "text": "我闺蜜是律师，她说这件挺好看"
+    },
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "other",
+          "confidence": 0.82,
+          "probabilities": {
+            "greeting": 0.08,
+            "promotion": 0,
+            "size_recommend": 0,
+            "modify_order": 0,
+            "multi_step_complex": 0,
+            "quality_issue": 0,
+            "order_status": 0,
+            "human_request": 0,
+            "urge_shipping": 0,
+            "stock_check": 0,
+            "exchange": 0,
+            "refund_apply": 0,
+            "return_policy": 0,
+            "invoice": 0,
+            "shipping_policy": 0,
+            "cancel_order": 0,
+            "logistics_track": 0,
+            "refund_progress": 0,
+            "other": 0.84,
+            "product_consult": 0.08
+          }
+        },
+        "multiStep": 0.07,
+        "risk": {
+          "legal_threat": 0.02,
+          "health_safety": 0.01,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.02,
+          "emotion": {
+            "score": 0,
+            "confidence": 1
+          }
+        },
+        "latencyMs": 388,
+        "costUsd": 6.6948e-05
+      }
+    ],
+    "trace": {
+      "id": "TR-332599f8-44d1-48b4-b345-187fdeb7949d",
+      "conversationId": "C1007",
+      "messageId": "C1007-M1",
+      "at": "2026-10-05T10:00:48.233+08:00",
+      "layer": "L2",
+      "intent": "other",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 396,
+        "handlerMs": 1,
+        "decideMs": 389
+      },
+      "cost": {
+        "decideUsd": 6.6948e-05,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 6.6948e-05,
+        "estimated": false
+      },
+      "confidence": 0.82,
+      "ragHits": 0,
+      "decideProvider": "jev",
+      "multiStep": 0.07,
+      "topIntents": [
+        {
+          "id": "other",
+          "p": 0.84
+        },
+        {
+          "id": "greeting",
+          "p": 0.08
+        },
+        {
+          "id": "product_consult",
+          "p": 0.08
+        }
+      ],
+      "riskScores": {
+        "legal_threat": 1,
+        "health_safety": 0.01,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.02,
+        "emotion": 0
+      },
+      "riskHit": []
+    },
+    "status": "ai_active",
+    "messages": [
+      {
+        "role": "ai",
+        "text": "我可以帮您查物流、推荐尺码、查询退款或办理退换。请告诉我具体需要。",
+        "quickReplies": [
+          {
+            "label": "查物流",
+            "action": {
+              "type": "quick_action",
+              "name": "track_logistics"
+            }
+          },
+          {
+            "label": "退款进度",
+            "action": {
+              "type": "quick_action",
+              "name": "refund_progress"
+            }
+          },
+          {
+            "label": "转人工",
+            "action": {
+              "type": "quick_action",
+              "name": "human"
+            }
+          }
+        ],
+        "traceId": "TR-332599f8-44d1-48b4-b345-187fdeb7949d",
+        "id": "C1007-M2",
+        "conversationId": "C1007",
+        "createdAt": "2026-10-05T10:00:48.628+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": []
+  },
+  {
+    "id": "Q3",
+    "input": {
+      "text": "穿了全身起红疹 不处理就去12315"
+    },
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "quality_issue",
+          "confidence": 0.84,
+          "probabilities": {
+            "human_request": 0,
+            "quality_issue": 0.85,
+            "stock_check": 0,
+            "cancel_order": 0,
+            "multi_step_complex": 0,
+            "shipping_policy": 0,
+            "refund_progress": 0,
+            "modify_order": 0,
+            "other": 0,
+            "product_consult": 0,
+            "logistics_track": 0,
+            "exchange": 0,
+            "refund_apply": 0.15,
+            "order_status": 0,
+            "return_policy": 0,
+            "greeting": 0,
+            "size_recommend": 0,
+            "promotion": 0,
+            "invoice": 0,
+            "urge_shipping": 0
+          }
+        },
+        "multiStep": 0.44,
+        "risk": {
+          "legal_threat": 0.98,
+          "health_safety": 0.98,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.24,
+          "emotion": {
+            "score": 2.76,
+            "confidence": 0.76
+          }
+        },
+        "latencyMs": 364,
+        "costUsd": 6.7284e-05
+      }
+    ],
+    "trace": {
+      "id": "TR-cac8bcce-b088-4425-ae75-91a489fdef59",
+      "conversationId": "C1008",
+      "messageId": "C1008-M1",
+      "at": "2026-10-05T10:00:48.632+08:00",
+      "layer": "risk_gate",
+      "intent": "quality_issue",
+      "stage": "aftersale",
+      "toolCalls": [],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 373,
+        "decideMs": 364
+      },
+      "cost": {
+        "decideUsd": 6.7284e-05,
+        "generationUsd": 6.216e-06,
+        "agentUsd": 0,
+        "totalUsd": 7.35e-05,
+        "estimated": false
+      },
+      "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00；emotion 2.76",
+      "riskScores": {
+        "legal_threat": 1,
+        "health_safety": 1,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.24,
+        "emotion": 2.76
+      },
+      "riskHit": [
+        "legal_threat",
+        "health_safety",
+        "emotion"
+      ],
+      "decideProvider": "jev",
+      "multiStep": 0.44,
+      "topIntents": [
+        {
+          "id": "quality_issue",
+          "p": 0.85
+        },
+        {
+          "id": "refund_apply",
+          "p": 0.15
+        },
+        {
+          "id": "human_request",
+          "p": 0
+        }
+      ],
+      "confidence": 0.84
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-cac8bcce-b088-4425-ae75-91a489fdef59",
+        "id": "C1008-M2",
+        "conversationId": "C1008",
+        "createdAt": "2026-10-05T10:00:49.001+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": []
+  },
+  {
+    "id": "Q4",
+    "input": {
+      "text": "穿了一天脖子痒得睡不着"
+    },
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "quality_issue",
+          "confidence": 0.98,
+          "probabilities": {
+            "stock_check": 0,
+            "refund_progress": 0,
+            "shipping_policy": 0,
+            "other": 0,
+            "promotion": 0,
+            "logistics_track": 0,
+            "refund_apply": 0.02,
+            "quality_issue": 0.98,
+            "invoice": 0,
+            "exchange": 0,
+            "greeting": 0,
+            "human_request": 0,
+            "modify_order": 0,
+            "cancel_order": 0,
+            "return_policy": 0,
+            "multi_step_complex": 0,
+            "order_status": 0,
+            "product_consult": 0,
+            "size_recommend": 0,
+            "urge_shipping": 0
+          }
+        },
+        "multiStep": 0.13,
+        "risk": {
+          "legal_threat": 0.01,
+          "health_safety": 0.96,
+          "fraud_security": 0.01,
+          "abuse_extreme": 0.05,
+          "emotion": {
+            "score": 1.19,
+            "confidence": 0.8
+          }
+        },
+        "latencyMs": 364,
+        "costUsd": 6.678e-05
+      }
+    ],
+    "trace": {
+      "id": "TR-e3670db3-c670-4def-83f2-b5eba943b112",
+      "conversationId": "C1009",
+      "messageId": "C1009-M1",
+      "at": "2026-10-05T10:00:54.582+08:00",
+      "layer": "risk_gate",
+      "intent": "quality_issue",
+      "stage": "aftersale",
+      "toolCalls": [],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 372,
+        "decideMs": 364
+      },
+      "cost": {
+        "decideUsd": 6.678e-05,
+        "generationUsd": 5.264e-06,
+        "agentUsd": 0,
+        "totalUsd": 7.204399999999999e-05,
+        "estimated": false
+      },
+      "handoffReason": "风险闸门：health_safety 0.96",
+      "decideProvider": "jev",
+      "multiStep": 0.13,
+      "topIntents": [
+        {
+          "id": "quality_issue",
+          "p": 0.98
+        },
+        {
+          "id": "refund_apply",
+          "p": 0.02
+        },
+        {
+          "id": "stock_check",
+          "p": 0
+        }
+      ],
+      "confidence": 0.98,
+      "riskScores": {
+        "legal_threat": 0.01,
+        "health_safety": 0.96,
+        "fraud_security": 0.01,
+        "abuse_extreme": 0.05,
+        "emotion": 1.19
+      },
+      "riskHit": [
+        "health_safety"
+      ]
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-e3670db3-c670-4def-83f2-b5eba943b112",
+        "id": "C1009-M2",
+        "conversationId": "C1009",
+        "createdAt": "2026-10-05T10:00:54.951+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": []
+  },
+  {
+    "id": "Q5",
+    "input": {
+      "text": "我要让所有人都知道你们家东西什么质量"
+    },
+    "decisions": [
+      {
+        "provider": "jev",
+        "intent": {
+          "id": "quality_issue",
+          "confidence": 0.83,
+          "probabilities": {
+            "product_consult": 0,
+            "size_recommend": 0,
+            "stock_check": 0,
+            "promotion": 0,
+            "shipping_policy": 0,
+            "order_status": 0,
+            "logistics_track": 0,
+            "urge_shipping": 0,
+            "modify_order": 0,
+            "cancel_order": 0,
+            "refund_apply": 0,
+            "refund_progress": 0,
+            "exchange": 0,
+            "quality_issue": 0.85,
+            "return_policy": 0,
+            "invoice": 0,
+            "human_request": 0,
+            "greeting": 0,
+            "multi_step_complex": 0,
+            "other": 0.15
+          }
+        },
+        "multiStep": 0.15,
+        "risk": {
+          "legal_threat": 0.6,
+          "health_safety": 0.05,
+          "fraud_security": 0.02,
+          "abuse_extreme": 0.33,
+          "emotion": {
+            "score": 2.63,
+            "confidence": 0.63
+          }
+        },
+        "latencyMs": 366,
+        "costUsd": 6.72e-05
+      }
+    ],
+    "trace": {
+      "id": "TR-14a2b05c-31d0-4569-a5c1-a5db0fdaa98b",
+      "conversationId": "C1010",
+      "messageId": "C1010-M1",
+      "at": "2026-10-05T10:00:58.043+08:00",
+      "layer": "risk_gate",
+      "intent": "quality_issue",
+      "stage": "aftersale",
+      "toolCalls": [],
+      "usedGeneration": true,
+      "latency": {
+        "totalMs": 374,
+        "decideMs": 366
+      },
+      "cost": {
+        "decideUsd": 6.72e-05,
+        "generationUsd": 5.04e-06,
+        "agentUsd": 0,
+        "totalUsd": 7.224e-05,
+        "estimated": false
+      },
+      "handoffReason": "风险闸门：emotion 2.63",
+      "decideProvider": "jev",
+      "multiStep": 0.15,
+      "topIntents": [
+        {
+          "id": "quality_issue",
+          "p": 0.85
+        },
+        {
+          "id": "other",
+          "p": 0.15
+        },
+        {
+          "id": "product_consult",
+          "p": 0
+        }
+      ],
+      "confidence": 0.83,
+      "riskScores": {
+        "legal_threat": 0.6,
+        "health_safety": 0.05,
+        "fraud_security": 0.02,
+        "abuse_extreme": 0.33,
+        "emotion": 2.63
+      },
+      "riskHit": [
+        "emotion"
+      ]
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-14a2b05c-31d0-4569-a5c1-a5db0fdaa98b",
+        "id": "C1010-M2",
+        "conversationId": "C1010",
+        "createdAt": "2026-10-05T10:00:58.415+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": []
+  }
+]

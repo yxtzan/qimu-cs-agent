@@ -1,0 +1,601 @@
+===== e38-1 =====
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E38
+
+评测开始：分类器后端 jev；只跑 E38
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":387,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 112.0 秒 → 只在开始时重置一次（单次重置 ≥ 10 秒）
+[jev-warmup] {"reason":"startup","latencyMs":404,"costUsd":0.00001302,"estimated":false}
+✅ E38 敏感肌穿羊毛会扎吗              layer=L2 intent=product_consult riskHit=[] handoff=false 2588ms $0.000088（尝试2次）
+
+通过 1/1 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 2588ms · 总成本 $0.000088
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+===== e38-2 =====
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E38
+
+评测开始：分类器后端 jev；只跑 E38
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":6282,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 6.3 秒 → 每条用例前都重置
+[jev-warmup] {"reason":"startup","latencyMs":402,"costUsd":0.00001302,"estimated":false}
+✅ E38 敏感肌穿羊毛会扎吗              layer=L2 intent=product_consult riskHit=[] handoff=false 5946ms $0.000130（尝试2次）
+
+通过 1/1 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 5946ms · 总成本 $0.000130
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+===== e38-3 =====
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E38
+
+评测开始：分类器后端 jev；只跑 E38
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":6270,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 6.4 秒 → 每条用例前都重置
+[jev-warmup] {"reason":"startup","latencyMs":409,"costUsd":0.00001302,"estimated":false}
+✅ E38 敏感肌穿羊毛会扎吗              layer=L2 intent=product_consult riskHit=[] handoff=false 6647ms $0.000092（尝试2次）
+
+通过 1/1 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 6647ms · 总成本 $0.000092
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+===== l3-only-final =====
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E39,E50,E53,E56,E57
+
+评测开始：分类器后端 jev；只跑 E39,E50,E53,E56,E57
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":2919,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 3.0 秒 → 每条用例前都重置
+[jev-warmup] {"reason":"startup","latencyMs":407,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1520, tools: [], finish: 'stop' }
+✅ E39 这条裙子是不是会让我被闺蜜嫉妒死哈哈     layer=L3 intent=other riskHit=[] handoff=false 1916ms $0.000174（尝试2次）
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":376,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1780, tools: [], finish: 'stop' }
+✅ E50 付不了款怎么办                layer=L3 intent=order_status riskHit=[] handoff=false 2179ms $0.000098
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":453,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1360, tools: [ 'list_orders' ], finish: 'tool_calls' }
+[agent-step] { ms: 1322, tools: [ 'search_products' ], finish: 'tool_calls' }
+[agent-step] { ms: 1873, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 1167, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 3129, tools: [], finish: 'stop' }
+✅ E53 我想再买一件和上次那件大衣同色的开衫，有我的 layer=L3 intent=multi_step_complex riskHit=[] handoff=false 9502ms $0.000842
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":362,"costUsd":0.00001302,"estimated":false}
+[agent-step] {
+  ms: 1466,
+  tools: [ 'search_products', 'search_products' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 2557, tools: [], finish: 'stop' }
+✅ E56 比较一下你们家的大衣和开衫哪个更保暖，顺便告 layer=L3 intent=product_consult riskHit=[] handoff=false 4404ms $0.000272
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":388,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1461, tools: [ 'track_logistics' ], finish: 'tool_calls' }
+[agent-step] { ms: 2931, tools: [], finish: 'stop' }
+✅ E57 到哪了，另外我想把上周那件外套退了      layer=L3 intent=multi_step_complex riskHit=[] handoff=false 4796ms $0.000377
+
+通过 5/5 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 4559ms · 总成本 $0.001764
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+===== tests =====
+[agent-step] { ms: 1, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'list_coupons', 'cancel_order' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 1,
+  tools: [ 'apply_refund', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 1, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'length' }
+✔ first factual model call requires a tool, even after prefetched orders (7.769583ms)
+✔ tool-free casual replies are allowed only for other/greeting, <=80 code points and no numbers (3.558167ms)
+✔ order-status requests with known context pre-read facts independently of their wording (1.188333ms)
+✔ generic loop preserves model summary alongside confirm/coupon cards (1.448375ms)
+✔ normal business refusal is fed back to the model and explained without handoff (1.025125ms)
+✔ invalid parameters, access errors and business rules requiring review still hand off (1.477791ms)
+✔ generic summaries must finish; truncated prose cannot silently omit questions (0.544333ms)
+✔ E40: signed within 7 days → apologise and offer options, no automatic handoff (7.611541ms)
+✔ quality issue past 7 days: over ¥500 still goes to a human; the rule is by order state, not by wording (6.809708ms)
+✔ E59: size beyond the chart → state the chart limit, offer a button, transfer only when clicked (5.669417ms)
+✔ keyword hit + real model clearly denies (< 0.3) → no handoff, yellow flag + 转人工 button without reassurance (4.590791ms)
+✔ keyword hit is kept when the model is unsure, unavailable, or mock; real threats still go to risk_gate (6.39225ms)
+✔ B001 with a product page: 「防过敏面料吗」 is a question, not a health complaint (2.550208ms)
+✔ L1 + keyword waits for decide and is downgraded too; L1 without a keyword never waits (8.671333ms)
+✔ yellow zone: reassurance first, 转人工 button last; two yellow turns in a row → handoff (6.447ms)
+✔ a calm turn between two yellow turns resets the count (7.303375ms)
+✔ previous turn answered by L1 still counts when its background trace has a yellow score (4.934542ms)
+✔ a handler that already hands off keeps its own reason (no extra reassurance) (3.157042ms)
+✔ keyword timeout transfers within 3 seconds; late denial only adds cost to the same trace (2511.446125ms)
+✔ a real model yellow item still reassures when another item was downgraded (10.265959ms)
+✔ handler handoff follows the structured flag, independently of message wording (0.53775ms)
+✔ existing review messages keep handoff=true; normal refusals and bad input differ (2.63025ms)
+✔ hard keywords cover L1 and every mandated safety category (0.840833ms)
+✔ model thresholds and yellow flags are separate, including emotion scale (1.007709ms)
+✔ emotion yellow flag starts at 1.5 on the 0–3 scale; the four risk items still flag at 0.5 (1.193792ms)
+✔ a keyword hit is downgraded to yellow only when a real model clearly says no (< 0.3) (0.3425ms)
+✔ a keyword hit still hands off when the model is unsure, unavailable, or mock (0.225709ms)
+✔ downgrade is per risk item: another keyword or a model hit still hands off (0.185458ms)
+✔ order and product identifiers do not become measurements (2.859666ms)
+✔ height, kg and jin including decimals (0.702ms)
+✔ Latin and Chinese sizes, including an adjacent Chinese question (1.205584ms)
+✔ longest matching color and explicit address fields (0.316875ms)
+✔ 160cm / 50kg → M；158cm / 47kg → S (2.156833ms)
+✔ 斤先换算为公斤，再走同一算法 (0.134125ms)
+✔ 身高体重分别查表，取较大码；小数区间空隙向上取码 (0.100583ms)
+✔ 宽松款下半段可小一码，说明保留宽松选择；任一指标超下半段不修正 (0.168209ms)
+✔ 修身上沿大一码，下沿不变；XL 上沿无法继续加码 (0.152625ms)
+✔ 表格范围外、非法数字、未知商品不硬推荐 (0.269416ms)
+✔ 超出尺码表返回结构化结果（不抛错、文案不含「转人工」），带上限和方向 (0.667583ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2826.335917
+
+===== pipeline =====
+B001「到哪了」→ L1/logistics_track · mock · 5ms · $0.0000000
+  包裹正在配送中，预计 10-06 送达。 [logistics]
+B001「我160 50公斤穿什么码」→ L2/size_recommend · mock · 8ms · $0.0000000
+  建议您选 M 码，供您参考。 [size_result]
+  建议结合下面的尺码资料和穿着习惯选择。
+  这些资料供您参考。 [sources]
+B001「你好」→ L1/greeting · mock · 2ms · $0.0000000
+  您好，我是栖木智能客服。有什么可以帮您？
+B001「退款到哪了」→ L1/refund_progress · mock · 2ms · $0.0000000
+  退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。 [aftersale]
+B001「能换L吗」→ L2/exchange · mock · 2ms · $0.0000000
+  请核对下面的信息，确认后我再为您办理。 [confirm]
+PASS 确认写入换货售后、重复确认幂等、消息和刷新后卡片状态一致
+B002「穿了全身起红疹 不处理就去12315」→ risk_gate/other · mock · 1ms · $0.0000000
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B002「请尽快处理」→ human/undefined · - · 0ms · $0.0000000
+B001「退款进度 再拖我就找律师」→ risk_gate/refund_progress · mock · 1ms · $0.0000000
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B001「请尽快处理」→ human/undefined · - · 0ms · $0.0000000
+B001「我 160cm 50kg 穿什么码？这件能机洗吗」→ L2/size_recommend · mock · 3ms · $0.0000000
+  建议您选 M 码，供您参考。 [size_result]
+  这件的洗护建议是：冷水轻柔手洗，不长时间浸泡、不拧绞，整形阴干，勿高温烘干。
+  这些资料供您参考。 [sources]
+B003「取消订单」→ L2/cancel_order · mock · 2ms · $0.0000000
+  您想查询或办理哪一单？ [options]
+PASS 多订单 options 补槽、选项标签落买家消息、取消动作不改订单
+PASS L1 与 decide 并行且未等待；延迟模型风险追加转人工；仅一条最终 trace（测试共3ms）
+PASS 分类等待期间卖家接管会阻止AI回复；咨询预算耗尽时基于资料回复、保留来源且不调用模型
+B001「到哪了」→ L1/logistics_track · mock · 2ms · $0.0000000
+  包裹正在配送中，预计 10-06 送达。 [logistics]
+B001「不是，我问的是退款」→ L2/refund_apply · mock · 2ms · $0.0000000
+  这单有几件商品，您想处理哪一件？ [options]
+PASS 上一轮L1否定反馈误判计数
+PASS 买家/会话/订单越权、非法动作拒绝；确认动作不能绕过风险闸门
+B003「两个订单帮我处理，顺便查券」→ human/other · mock · 1ms · $0.0000000
+  这个问题比较复杂，我帮您转接人工客服
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B003「两个订单帮我处理，顺便查券」→ human/undefined · - · 0ms · $0.0000000
+PASS 无key的L3转人工、后续消息仅转发；重置后不回写后台旧结果
+全部通过（mock、无key、控制流夹具；隔离临时数据，未改当前演示数据）
+
+===== handoff-regression =====
+[handoff-summary] { latencyMs: 7, costUsd: 0.0002, estimated: false }
+PASS 关键词分类等待<3秒、模板/系统消息/红点可用；摘要先完成，迟到分类费用落入唯一trace
+[handoff-summary] { latencyMs: 4, costUsd: 0.0002, estimated: false }
+PASS trace先落盘，摘要费用不重复计/不新增trace/不覆盖较新轮lastLayer
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS 非L1模型风险转人工同样后台补记费用
+[handoff-summary] { latencyMs: 2, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 5, costUsd: 0.0002, estimated: false }
+PASS 固定演示时间下release后再次转人工，旧摘要不覆盖新摘要；旧轮费用仍记
+[handoff-summary] { latencyMs: 2, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, error: 'OpenRouterError' }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS release/close保护、错误保留模板、截断不写摘要但实际费用保留
+[handoff-summary] { latencyMs: 6, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS 重置后同ID/同文案/同时间，旧摘要和费用均不污染新轮
+PASS 无key/mock完整转人工，无摘要模型请求
+
+===== agent-regression =====
+[agent-step] { ms: 2, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [ 'request_exchange' ], finish: 'tool_calls' }
+[agent-step] { ms: 1, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'cancel_order', 'modify_address' ],
+  finish: 'tool_calls'
+}
+PASS 两个写操作各自生成确认、订单和原地址未修改
+PASS 真实工具编排、独立agent费用、只创建确认、过期券过滤、结果回馈模型
+[agent-step] { ms: 0, tools: [ 'confirm_pending_action' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 1, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'create_handoff' ], finish: 'tool_calls' }
+[agent-step] {
+  ms: 0,
+  tools: [
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons'
+  ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-failure] { kind: 'network', status: undefined }
+PASS 未知工具、非法参数、越权、主动转人工、6次上限、空工具回答、网络异常安全兜底
+[agent-step] { ms: 1, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+PASS 工具挂起总超时 20020ms，迟到结果不会继续调用/写入
+PASS 无key/mock转人工、中文模板、人工消息只转发且未读+1、release恢复AI
+知识库索引：10 篇，embedding 10 / bigram 0
+PASS reset缓存内容保留、重复索引0次embedding、耗时 6ms
+PASS 内容变化只请求新增分块、其他文档复用缓存
+PASS 模型变化使缓存失效
+T05 安全与缓存自测全部通过（模型响应为明确标记的fixture）
+
+===== e2e-final =====
+
+> qimu-cs-agent@0.1.0 e2e
+> playwright test
+
+
+Running 6 tests using 1 worker
+
+(node:5860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[e2e] 第 1 步之前 今天总消息数 = 32
+  ✓  1 [chromium] › e2e/demo.spec.ts:112:5 › 1 售前：尺码卡片推荐 M + 引用资料 (11.7s)
+  ✓  2 [chromium] › e2e/demo.spec.ts:127:5 › 2 售中：物流时间线卡片（≥ 3 个节点） (1.5s)
+  ✓  3 [chromium] › e2e/demo.spec.ts:138:5 › 3 售后多步：确认卡片 → 确认 → 售后单号 + 优惠券（无过期券） (30.3s)
+  ✓  4 [chromium] › e2e/demo.spec.ts:168:5 › 4 高风险：转人工提示 + 顶栏「等待人工接入」 (2.1s)
+  ✓  5 [chromium] › e2e/demo.spec.ts:177:5 › 5 卖家端：红点 + 横幅 → 接管 → 回复 → 买家 2 秒内收到 (1.9s)
+[e2e] 现在 今天总消息数 = 33（第 1 步之前 32）
+  ✓  6 [chromium] › e2e/demo.spec.ts:212:5 › 6 看板：今天总消息数比第 1 步之前增加 (153ms)
+
+  6 passed (48.4s)
+
+
+E01 final targeted retry (does not alter full score)
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E01
+
+评测开始：分类器后端 jev；只跑 E01
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":4427,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 4.5 秒 → 每条用例前都重置
+[jev-warmup] {"reason":"startup","latencyMs":436,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 5468, tools: [ 'get_product' ], finish: 'tool_calls' }
+[agent-step] { ms: 5081, tools: [], finish: 'stop' }
+✅ E01 这件大衣是纯羊毛的吗             layer=L2 intent=product_consult riskHit=[] handoff=false 8494ms $0.000121（尝试3次）
+
+通过 1/1 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 8494ms · 总成本 $0.000121
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+
+Latest five-case evaluation after L3 fixes
+
+> qimu-cs-agent@0.1.0 eval
+> tsx scripts/eval.ts --only E39,E50,E53,E56,E57
+
+评测开始：分类器后端 jev；只跑 E39,E50,E53,E56,E57
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":6238,"costUsd":0.00001302,"estimated":false}
+重置演示数据耗时 6.3 秒 → 每条用例前都重置
+[jev-warmup] {"reason":"startup","latencyMs":368,"costUsd":0.00001302,"estimated":false}
+✅ E39 这条裙子是不是会让我被闺蜜嫉妒死哈哈     layer=L2 intent=product_consult riskHit=[] handoff=false 8959ms $0.000017（尝试3次，仍降级）
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":393,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 6174, tools: [], finish: 'stop' }
+✅ E50 付不了款怎么办                layer=L3 intent=order_status riskHit=[] handoff=false 8015ms $0.000144（尝试2次）
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":405,"costUsd":0.00001302,"estimated":false}
+[agent-step] { ms: 1679, tools: [ 'list_orders' ], finish: 'tool_calls' }
+[agent-step] { ms: 1216, tools: [ 'search_products' ], finish: 'tool_calls' }
+[agent-step] { ms: 1433, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 1464, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 1180, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 2599, tools: [], finish: 'stop' }
+✅ E53 我想再买一件和上次那件大衣同色的开衫，有我的 layer=L3 intent=multi_step_complex riskHit=[] handoff=false 9985ms $0.001024
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":493,"costUsd":0.00001302,"estimated":false}
+[agent-step] {
+  ms: 1712,
+  tools: [ 'search_products', 'search_products' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 1741, tools: [], finish: 'stop' }
+✅ E56 比较一下你们家的大衣和开衫哪个更保暖，顺便告 layer=L3 intent=product_consult riskHit=[] handoff=false 3887ms $0.000276
+知识库索引：10 篇，embedding 10 / bigram 0
+[jev-warmup] {"reason":"reset","latencyMs":377,"costUsd":0.00001302,"estimated":false}
+[agent-step] {
+  ms: 1765,
+  tools: [ 'track_logistics', 'get_aftersale' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 3255, tools: [], finish: 'stop' }
+✅ E57 到哪了，另外我想把上周那件外套退了      layer=L3 intent=multi_step_complex riskHit=[] handoff=false 5419ms $0.000374
+
+通过 5/5 · 意图 100.0% · 路由 100.0% · 风险召回 0.0% · 误报 0.0% · 平均 7253ms · 总成本 $0.001834
+
+（指定了 --only：不写报告 / eval_latest.json，也不重置数据）
+
+
+Final 44 brain/tools tests
+[agent-step] { ms: 1, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 1, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'list_coupons', 'cancel_order' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'apply_refund', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 1, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 1, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'length' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'apply_refund', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'get_product', 'list_coupons' ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 1, tools: [], finish: 'stop' }
+[agent-step] { ms: 0, tools: [ 'apply_refund' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+✔ first factual model call requires a tool, even after prefetched orders (7.274042ms)
+✔ tool-free casual replies are allowed only for other/greeting, <=80 code points and no numbers (4.742125ms)
+✔ order-status requests with known context pre-read facts independently of their wording (1.477459ms)
+✔ generic loop preserves model summary alongside confirm/coupon cards (3.667459ms)
+✔ normal business refusal is fed back to the model and explained without handoff (1.17225ms)
+✔ invalid parameters, access errors and business rules requiring review still hand off (2.02325ms)
+✔ generic L3 explains shipped refund refusal even when L2 requires handoff (0.673292ms)
+✔ generic summaries must finish; truncated prose cannot silently omit questions (0.52025ms)
+✔ refund reasons absent from buyer messages ask for input before creating a write (0.569ms)
+✔ generic final summary receives single-item coupon eligibility from queried facts (1.09375ms)
+✔ quoting a bare refund request cannot substitute for the missing reason (0.5085ms)
+✔ E40: signed within 7 days → apologise and offer options, no automatic handoff (8.472375ms)
+✔ quality issue past 7 days: over ¥500 still goes to a human; the rule is by order state, not by wording (10.898666ms)
+✔ E59: size beyond the chart → state the chart limit, offer a button, transfer only when clicked (5.305459ms)
+✔ keyword hit + real model clearly denies (< 0.3) → no handoff, yellow flag + 转人工 button without reassurance (5.070708ms)
+✔ keyword hit is kept when the model is unsure, unavailable, or mock; real threats still go to risk_gate (6.441333ms)
+✔ B001 with a product page: 「防过敏面料吗」 is a question, not a health complaint (2.491167ms)
+✔ L1 + keyword waits for decide and is downgraded too; L1 without a keyword never waits (5.516958ms)
+✔ yellow zone: reassurance first, 转人工 button last; two yellow turns in a row → handoff (6.548333ms)
+✔ a calm turn between two yellow turns resets the count (12.31325ms)
+✔ previous turn answered by L1 still counts when its background trace has a yellow score (6.804166ms)
+✔ a handler that already hands off keeps its own reason (no extra reassurance) (3.280708ms)
+✔ keyword timeout transfers within 3 seconds; late denial only adds cost to the same trace (2514.694791ms)
+✔ a real model yellow item still reassures when another item was downgraded (10.060542ms)
+✔ handler handoff follows the structured flag, independently of message wording (0.520375ms)
+✔ L2 preserves wording and handoff for expired, shipped-only-refund and mandatory review (4.55975ms)
+✔ existing review messages keep handoff=true; normal refusals and bad input differ (0.301333ms)
+✔ hard keywords cover L1 and every mandated safety category (0.607ms)
+✔ model thresholds and yellow flags are separate, including emotion scale (1.832958ms)
+✔ emotion yellow flag starts at 1.5 on the 0–3 scale; the four risk items still flag at 0.5 (0.499458ms)
+✔ a keyword hit is downgraded to yellow only when a real model clearly says no (< 0.3) (0.330958ms)
+✔ a keyword hit still hands off when the model is unsure, unavailable, or mock (3.124875ms)
+✔ downgrade is per risk item: another keyword or a model hit still hands off (0.544834ms)
+✔ order and product identifiers do not become measurements (3.559417ms)
+✔ height, kg and jin including decimals (0.263959ms)
+✔ Latin and Chinese sizes, including an adjacent Chinese question (0.101667ms)
+✔ longest matching color and explicit address fields (0.230667ms)
+✔ 160cm / 50kg → M；158cm / 47kg → S (1.552042ms)
+✔ 斤先换算为公斤，再走同一算法 (0.182417ms)
+✔ 身高体重分别查表，取较大码；小数区间空隙向上取码 (0.098291ms)
+✔ 宽松款下半段可小一码，说明保留宽松选择；任一指标超下半段不修正 (0.18ms)
+✔ 修身上沿大一码，下沿不变；XL 上沿无法继续加码 (0.149333ms)
+✔ 表格范围外、非法数字、未知商品不硬推荐 (0.248917ms)
+✔ 超出尺码表返回结构化结果（不抛错、文案不含「转人工」），带上限和方向 (0.493958ms)
+ℹ tests 44
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2780.04175
+
+
+Final pipeline checks
+B001「到哪了」→ L1/logistics_track · mock · 5ms · $0.0000000
+  包裹正在配送中，预计 10-06 送达。 [logistics]
+B001「我160 50公斤穿什么码」→ L2/size_recommend · mock · 10ms · $0.0000000
+  建议您选 M 码，供您参考。 [size_result]
+  建议结合下面的尺码资料和穿着习惯选择。
+  这些资料供您参考。 [sources]
+B001「你好」→ L1/greeting · mock · 1ms · $0.0000000
+  您好，我是栖木智能客服。有什么可以帮您？
+B001「退款到哪了」→ L1/refund_progress · mock · 2ms · $0.0000000
+  退款处理中，商家确认收到退货后24小时内发起，预计1–3个工作日原路退回，请您留意到账通知。 [aftersale]
+B001「能换L吗」→ L2/exchange · mock · 3ms · $0.0000000
+  请核对下面的信息，确认后我再为您办理。 [confirm]
+PASS 确认写入换货售后、重复确认幂等、消息和刷新后卡片状态一致
+B002「穿了全身起红疹 不处理就去12315」→ risk_gate/other · mock · 1ms · $0.0000000
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B002「请尽快处理」→ human/undefined · - · 0ms · $0.0000000
+B001「退款进度 再拖我就找律师」→ risk_gate/refund_progress · mock · 1ms · $0.0000000
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B001「请尽快处理」→ human/undefined · - · 0ms · $0.0000000
+B001「我 160cm 50kg 穿什么码？这件能机洗吗」→ L2/size_recommend · mock · 2ms · $0.0000000
+  建议您选 M 码，供您参考。 [size_result]
+  这件的洗护建议是：冷水轻柔手洗，不长时间浸泡、不拧绞，整形阴干，勿高温烘干。
+  这些资料供您参考。 [sources]
+B003「取消订单」→ L2/cancel_order · mock · 1ms · $0.0000000
+  您想查询或办理哪一单？ [options]
+PASS 多订单 options 补槽、选项标签落买家消息、取消动作不改订单
+PASS L1 与 decide 并行且未等待；延迟模型风险追加转人工；仅一条最终 trace（测试共4ms）
+PASS 分类等待期间卖家接管会阻止AI回复；咨询预算耗尽时基于资料回复、保留来源且不调用模型
+B001「到哪了」→ L1/logistics_track · mock · 2ms · $0.0000000
+  包裹正在配送中，预计 10-06 送达。 [logistics]
+B001「不是，我问的是退款」→ L2/refund_apply · mock · 2ms · $0.0000000
+  这单有几件商品，您想处理哪一件？ [options]
+PASS 上一轮L1否定反馈误判计数
+PASS 买家/会话/订单越权、非法动作拒绝；确认动作不能绕过风险闸门
+B003「两个订单帮我处理，顺便查券」→ human/other · mock · 1ms · $0.0000000
+  这个问题比较复杂，我帮您转接人工客服
+  我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。
+B003「两个订单帮我处理，顺便查券」→ human/undefined · - · 1ms · $0.0000000
+PASS 无key的L3转人工、后续消息仅转发；重置后不回写后台旧结果
+全部通过（mock、无key、控制流夹具；隔离临时数据，未改当前演示数据）
+
+
+Final D012 agent checks
+[agent-step] { ms: 1, tools: [ 'check_stock' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [ 'request_exchange' ], finish: 'tool_calls' }
+[agent-step] { ms: 1, tools: [ 'list_coupons' ], finish: 'tool_calls' }
+[agent-step] {
+  ms: 0,
+  tools: [ 'cancel_order', 'modify_address' ],
+  finish: 'tool_calls'
+}
+PASS 两个写操作各自生成确认、订单和原地址未修改
+PASS 真实工具编排、独立agent费用、只创建确认、过期券过滤、结果回馈模型
+[agent-step] { ms: 0, tools: [ 'confirm_pending_action' ], finish: 'tool_calls' }
+[agent-step] { ms: 0, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+[agent-step] { ms: 0, tools: [ 'create_handoff' ], finish: 'tool_calls' }
+[agent-step] {
+  ms: 1,
+  tools: [
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons',
+    'list_coupons'
+  ],
+  finish: 'tool_calls'
+}
+[agent-step] { ms: 0, tools: [], finish: 'stop' }
+[agent-failure] { kind: 'network', status: undefined }
+PASS 未知工具、非法参数、越权、主动转人工、6次上限、空工具回答、网络异常安全兜底
+[agent-step] { ms: 0, tools: [ 'get_order' ], finish: 'tool_calls' }
+[agent-failure] Error
+PASS 工具挂起总超时 20015ms，迟到结果不会继续调用/写入
+PASS 无key/mock转人工、中文模板、人工消息只转发且未读+1、release恢复AI
+知识库索引：10 篇，embedding 10 / bigram 0
+PASS reset缓存内容保留、重复索引0次embedding、耗时 3ms
+PASS 内容变化只请求新增分块、其他文档复用缓存
+PASS 模型变化使缓存失效
+T05 安全与缓存自测全部通过（模型响应为明确标记的fixture）
+
+
+Late classifier/summary accounting checks
+[handoff-summary] { latencyMs: 8, costUsd: 0.0002, estimated: false }
+PASS 关键词分类等待<3秒、模板/系统消息/红点可用；摘要先完成，迟到分类费用落入唯一trace
+[handoff-summary] { latencyMs: 3, costUsd: 0.0002, estimated: false }
+PASS trace先落盘，摘要费用不重复计/不新增trace/不覆盖较新轮lastLayer
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS 非L1模型风险转人工同样后台补记费用
+[handoff-summary] { latencyMs: 2, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 6, costUsd: 0.0002, estimated: false }
+PASS 固定演示时间下release后再次转人工，旧摘要不覆盖新摘要；旧轮费用仍记
+[handoff-summary] { latencyMs: 2, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, error: 'OpenRouterError' }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS release/close保护、错误保留模板、截断不写摘要但实际费用保留
+[handoff-summary] { latencyMs: 7, costUsd: 0.0002, estimated: false }
+[handoff-summary] { latencyMs: 1, costUsd: 0.0002, estimated: false }
+PASS 重置后同ID/同文案/同时间，旧摘要和费用均不污染新轮
+PASS 无key/mock完整转人工，无摘要模型请求
+
+
+Final actual-backend E2E
+
+> qimu-cs-agent@0.1.0 e2e
+> playwright test
+
+
+Running 6 tests using 1 worker
+
+(node:8175) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[e2e] 第 1 步之前 今天总消息数 = 32
+  ✓  1 [chromium] › e2e/demo.spec.ts:112:5 › 1 售前：尺码卡片推荐 M + 引用资料 (13.3s)
+  ✓  2 [chromium] › e2e/demo.spec.ts:127:5 › 2 售中：物流时间线卡片（≥ 3 个节点） (6.7s)
+  ✓  3 [chromium] › e2e/demo.spec.ts:138:5 › 3 售后多步：确认卡片 → 确认 → 售后单号 + 优惠券（无过期券） (27.9s)
+  ✓  4 [chromium] › e2e/demo.spec.ts:168:5 › 4 高风险：转人工提示 + 顶栏「等待人工接入」 (2.1s)
+  ✓  5 [chromium] › e2e/demo.spec.ts:177:5 › 5 卖家端：红点 + 横幅 → 接管 → 回复 → 买家 2 秒内收到 (1.9s)
+[e2e] 现在 今天总消息数 = 33（第 1 步之前 32）
+  ✓  6 [chromium] › e2e/demo.spec.ts:212:5 › 6 看板：今天总消息数比第 1 步之前增加 (182ms)
+
+  6 passed (53.3s)

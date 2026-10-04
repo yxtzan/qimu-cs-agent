@@ -1,0 +1,82 @@
+[
+  {
+    "id": "Q3",
+    "input": {
+      "text": "穿了全身起红疹 不处理就去12315"
+    },
+    "responseMs": 2521,
+    "decisions": [
+      {
+        "provider": "llm",
+        "intent": {
+          "id": "quality_issue",
+          "confidence": 0.95,
+          "probabilities": {
+            "quality_issue": 0.95,
+            "other": 0.05
+          }
+        },
+        "multiStep": 0,
+        "risk": {
+          "legal_threat": 1,
+          "health_safety": 1,
+          "fraud_security": 0,
+          "abuse_extreme": 0,
+          "emotion": {
+            "score": 3,
+            "confidence": 0.9
+          }
+        },
+        "latencyMs": 3219,
+        "costUsd": 0.000193764,
+        "error": "本次验收人为设置 Jev 超时，随后正常 LLM 兜底"
+      }
+    ],
+    "trace": {
+      "id": "TR-ea96e81c-1f83-4990-9ee3-e67c36f1b1ec",
+      "conversationId": "C1001",
+      "messageId": "C1001-M1",
+      "at": "2026-10-05T10:00:00.148+08:00",
+      "layer": "risk_gate",
+      "stage": "other",
+      "toolCalls": [],
+      "usedGeneration": false,
+      "latency": {
+        "totalMs": 2519,
+        "decideMs": 3228
+      },
+      "cost": {
+        "decideUsd": 0.000193764,
+        "generationUsd": 0,
+        "agentUsd": 0,
+        "totalUsd": 0.000193764,
+        "estimated": true
+      },
+      "handoffReason": "风险闸门：legal_threat 1.00；health_safety 1.00；关键词分类等待超时（decideProvider 缺失）",
+      "riskScores": {
+        "legal_threat": 1,
+        "health_safety": 1,
+        "fraud_security": 0,
+        "abuse_extreme": 0,
+        "emotion": 0
+      },
+      "riskHit": [
+        "legal_threat",
+        "health_safety"
+      ]
+    },
+    "status": "waiting_human",
+    "messages": [
+      {
+        "role": "system",
+        "text": "我已为您转接人工客服，正在等待人工接入。您可以继续补充情况，我们会认真协助您处理。",
+        "traceId": "TR-ea96e81c-1f83-4990-9ee3-e67c36f1b1ec",
+        "id": "C1001-M2",
+        "conversationId": "C1001",
+        "createdAt": "2026-10-05T10:00:02.663+08:00"
+      }
+    ],
+    "tools": [],
+    "modelReplies": []
+  }
+]
