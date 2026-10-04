@@ -1,0 +1,239 @@
+{
+ "_readme": [
+  "留出集（holdout），由 Claude 在 T09 合并后编写。T09 之前的所有调试都没见过这些句子。",
+  "用途：衡量流水线在「没被拿来调过」的问题上的真实表现，和 cases.json 的 60 条分开报告。",
+  "规则：Agent 只能运行、不得修改，也不得为了让某一条通过去改提示词、阈值或规则；失败照实报告，由 Claude 判断。",
+  "判定规则与 cases.json 的 _readme 相同。"
+ ],
+ "cases": [
+  {
+   "id": "H01",
+   "buyerId": "B001",
+   "setup": {
+    "context": {
+     "productId": "P013"
+    }
+   },
+   "input": {
+    "text": "这件真丝衬衫能直接放洗衣机吗"
+   },
+   "expect": {
+    "layer": "L2",
+    "intent": "product_consult",
+    "riskHit": []
+   }
+  },
+  {
+   "id": "H02",
+   "buyerId": "B001",
+   "setup": {
+    "context": {
+     "productId": "P021"
+    }
+   },
+   "input": {
+    "text": "我165 55kg，这条裤子拿哪个码"
+   },
+   "expect": {
+    "layer": "L2",
+    "intent": "size_recommend",
+    "tools": [
+     "recommend_size"
+    ]
+   }
+  },
+  {
+   "id": "H03",
+   "buyerId": "B001",
+   "input": {
+    "text": "我那条西装裤和开衫现在到哪儿了"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "intent": "logistics_track",
+    "tools": [
+     "track_logistics"
+    ]
+   }
+  },
+  {
+   "id": "H04",
+   "buyerId": "B001",
+   "input": {
+    "text": "碎花裙的钱退回来没有啊"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "intent": "refund_progress"
+   }
+  },
+  {
+   "id": "H05",
+   "buyerId": "B003",
+   "setup": {
+    "context": {
+     "orderId": "QM2026100401"
+    }
+   },
+   "input": {
+    "text": "地址写错了，帮我改成上海市徐汇区漕溪北路100号"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "intent": "modify_order"
+   }
+  },
+  {
+   "id": "H06",
+   "buyerId": "B002",
+   "input": {
+    "text": "这件衬衫我妈穿了一下午，脖子上起了一片小疙瘩，又痒又红"
+   },
+   "expect": {
+    "layer": "risk_gate",
+    "riskHit": [
+     "health_safety"
+    ],
+    "handoff": true
+   }
+  },
+  {
+   "id": "H07",
+   "buyerId": "B001",
+   "input": {
+    "text": "有人加我微信说是你们客服，让我先交保证金才能退款"
+   },
+   "expect": {
+    "layer": "risk_gate",
+    "riskHit": [
+     "fraud_security"
+    ],
+    "handoff": true
+   }
+  },
+  {
+   "id": "H08",
+   "buyerId": "B001",
+   "input": {
+    "text": "你们再这样敷衍，我就把聊天记录发到网上让大家评评理"
+   },
+   "expect": {
+    "layer": "risk_gate",
+    "handoff": true
+   }
+  },
+  {
+   "id": "H09",
+   "buyerId": "B001",
+   "setup": {
+    "context": {
+     "productId": "P007"
+    }
+   },
+   "input": {
+    "text": "我皮肤比较敏感，这件羊毛的贴身穿会痒吗"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "riskHit": []
+   }
+  },
+  {
+   "id": "H10",
+   "buyerId": "B001",
+   "input": {
+    "text": "我老公是做律师的，他说你家大衣版型挺正"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "riskHit": [],
+    "handoff": false
+   }
+  },
+  {
+   "id": "H11",
+   "buyerId": "B001",
+   "input": {
+    "text": "今天心情不错，随便逛逛"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "riskHit": [],
+    "handoff": false
+   }
+  },
+  {
+   "id": "H12",
+   "buyerId": "B001",
+   "input": {
+    "text": "上周那件大衣还能换L吗，另外最近那单到哪了"
+   },
+   "expect": {
+    "layer": "L3",
+    "tools": [
+     "list_orders",
+     "track_logistics"
+    ]
+   }
+  },
+  {
+   "id": "H13",
+   "buyerId": "B003",
+   "input": {
+    "text": "没付款的那单不要了，另外已经付款的那单什么时候发货"
+   },
+   "expect": {
+    "layer": "L3",
+    "tools": [
+     "list_orders"
+    ]
+   }
+  },
+  {
+   "id": "H14",
+   "buyerId": "B004",
+   "input": {
+    "text": "西装裤和茶歇裙哪个更显瘦，顺便说下怎么洗"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "handoff": false
+   }
+  },
+  {
+   "id": "H15",
+   "buyerId": "B001",
+   "input": {
+    "text": "那件大衣腰身有点大，我想退了"
+   },
+   "expect": {
+    "layer": [
+     "L2",
+     "L3"
+    ],
+    "intent": "refund_apply"
+   }
+  }
+ ]
+}

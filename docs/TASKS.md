@@ -27,7 +27,8 @@
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
 | T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | done |
-| T09 | 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 + L3 通用循环修复 | Codex | T05b T08 | 5 | 2.5h | doing |
+| T09 | 风险问法修订 + 关键词等待上限 + 文案驱动流程清理 + L3 通用循环修复 | Codex | T05b T08 | 5 | 2.5h | done |
+| T09b | L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） | Codex | T09 T15b | 6 | 1h | doing |
 | T15 | 前后端联调 | Cursor | T05 T08 T18（T05b 合并后 rebase） | 5 | 2h | done |
 | T15b | 演示打磨：看板数字如实 + 演示现场小修 | Cursor | T15 | 5 | 1.5h | done |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
@@ -401,6 +402,34 @@
 
 ---
 
+## T09b L3 收尾修正 + 售后单幂等 + 最终评测（含留出集） — Codex
+
+- 分支：`t09b-final-eval`
+- 依赖：T09、T15、T15b（都已合并）
+- 必读：`docs/handoff/T09.md`、`docs/DECISIONS.md` D013、`data/eval/holdout.json` 的 `_readme`、`TASKS.md` 末尾「待办」第 1 条
+- 说明：T09 质量很高，但 Claude 审查时发现一处会误伤的写法；另外 L3 提示词是对着评测失败一条条补出来的，56/60 有「对着考卷调参」的成分，需要一份**没见过的题**来检验。Claude 已写好 15 条留出集，并给评测脚本加了 `--cases` 参数。
+
+**要做（按顺序）**
+
+1. **去掉订单状态的固定回复覆盖**（`lib/brain/agent.ts`）：现在只要是 L3 里带 orderId 的 `order_status`、又没有卡片，就把模型的回答整句替换成「订单 X 目前为…状态。具体问题原因尚不确定，请补充遇到的错误提示。」。这是照着 E50「付不了款怎么办」写的，换成「这单什么时候发货」「我的单子怎么还没动」也会让买家去「补充错误提示」，答非所问。改为：保留 `get_order` 预读和提示词里「只说工具给出的状态、不推测原因」的约束，**删掉整句替换**。用 E50 和你自己另写的两三句订单状态问法验证（不要用 `holdout.json` 里的句子调试）。
+2. **售后单幂等**（`lib/tools/execute-pending.ts`，T15b 特批已归还给你）：T15b 把售后单号改成「日期 + 序号」后，原来「写盘失败重试时按单号找回同一张售后单」的保护没了。补回来：同一个 PendingAction 重复确认，只会产生一张售后单。优先不改公共类型；确实需要改 `lib/types.ts` 就写问题文件。
+3. **最终全量评测**（改完 1、2 之后，在包含 T15b 的最新代码上）：`npm run eval` 跑**一次**，提交更新后的 `docs/reports/T06-eval.md` / `.json` 和 `data/seed/eval_latest.json`（看板成绩卡会显示这次成绩）。
+4. **留出集评测**：`npm run eval -- --cases holdout.json` 跑**一次**，报告写到 `docs/reports/holdout-eval.md`（脚本默认如此，不会覆盖看板成绩）。**只运行、不调参**：失败照实列出原因分类，不要为了让留出集通过去改提示词、阈值或规则。
+5. 交接里写一张对比表：T09 第三次全量（56/60）、本次全量、留出集（x/15），各列通过数、意图 / 路由准确率、风险召回 / 误报、L3 平均延迟。
+
+**目录归属（本任务特批）**：`docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `docs/reports/holdout-eval.md` `docs/reports/holdout-eval.json` `data/seed/eval_latest.json`。`data/eval/**` 仍然只读。
+
+**验收标准**
+
+- [ ] `npm run typecheck` `npm run lint`、`lib/brain/*.test.ts` `lib/tools/*.test.ts`、`scripts/check-pipeline.ts` `scripts/check-agent.ts` 通过（agent 测试里如有断言整句替换，按第 1 条更新）
+- [ ] 第 1 条：E50 和你写的两三句订单状态问法的回复原文贴进交接，都不出现与问题无关的「请补充错误提示」，也不出现工具结果之外的原因
+- [ ] 第 2 条：有测试证明同一 PendingAction 确认两次只有一张售后单
+- [ ] 全量评测和留出集评测各跑一次，报告已提交，交接有对比表
+- [ ] `NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 6 步全部通过
+- [ ] 限时 1 小时（评测等待另计）
+
+---
+
 ## T13 人工接管台 + 知识库页 + 规则页 — Cursor
 
 - 分支：`t13-seller-pages`
@@ -673,7 +702,7 @@
 
 ## 待办（不排期，演示后视情况处理）
 
-- 售后单号改成日期 + 序号后，`confirmPendingAction` 原来「写盘失败重试时按单号找回同一张售后单」的幂等没了（T15b）。正常演示不会触发；要补就在售后单里记下来源 PendingAction id。
+- ~~售后单幂等~~ → 已排进 T09b。
 - `lib/mock/traffic.ts` 的 L3 成本还是旧的夸大值，只在 `NEXT_PUBLIC_USE_MOCK=1` 时出现（T15b 遗留）。
 - 看板主结论写着「在 L1 / L2 就解决了，不调用大模型」：L2 的咨询类回复会调用生成模型（RAG + LLM），严格说不准确。对外讲时说「不走大模型多步编排」。
 - 按 trace ID 合并增量费用的数据层接口（T05b-1）。

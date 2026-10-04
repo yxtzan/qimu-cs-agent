@@ -10,6 +10,7 @@
  *   npm run eval -- --no-latest           # 不覆盖 eval_latest.json（看板成绩卡保持不变）
  *   npm run eval -- --report docs/reports/x.md   # 报告写到别处（同名 .json 存逐条明细）
  *   npm run eval -- --keep-data           # 跑完不重置演示数据（默认会重置，避免评测会话混进卖家端）
+ *   npm run eval -- --cases holdout.json  # 跑留出集：报告默认写 docs/reports/holdout-eval.md，不覆盖 eval_latest.json
  */
 import { copyFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -34,16 +35,18 @@ function main(): Promise<void> {
   if (!["jev", "llm", "mock"].includes(provider)) throw new Error("--provider 只能是 jev | llm | mock");
   const only = param("--only")?.split(",").map((s) => s.trim()).filter(Boolean);
   const compareArg = param("--compare") ?? "auto";
-  const reportPath = param("--report") ?? join("docs", "reports", "T06-eval.md");
+  const casesFile = param("--cases") ?? "cases.json";
+  const holdout = casesFile !== "cases.json";
+  const reportPath = param("--report") ?? join("docs", "reports", holdout ? "holdout-eval.md" : "T06-eval.md");
   const full = !only?.length;
-  return run(provider, only, compareArg, reportPath, full, flag("--skip-r007"), flag("--no-latest"), flag("--keep-data"));
+  return run(provider, only, compareArg, reportPath, full, flag("--skip-r007") || holdout, flag("--no-latest") || holdout, flag("--keep-data"), casesFile);
 }
 
-async function run(provider: Provider, only: string[] | undefined, compareArg: string, reportPath: string, full: boolean, skipR007: boolean, noLatest: boolean, keepData: boolean): Promise<void> {
+async function run(provider: Provider, only: string[] | undefined, compareArg: string, reportPath: string, full: boolean, skipR007: boolean, noLatest: boolean, keepData: boolean, casesFile = "cases.json"): Promise<void> {
   const log = (line: string) => console.log(line);
   const live = provider !== "mock" && hasApiKey();
   log(`评测开始：分类器后端 ${provider}${live ? "" : provider === "mock" ? "" : "（未配置 OPENROUTER_API_KEY，将降级到 mock）"}；${only?.length ? `只跑 ${only.join(",")}` : "全部用例"}`);
-  const cases = loadCases();
+  const cases = loadCases(casesFile);
   const first = await runCases(cases, { provider, only, log });
   const results = first.results;
   const summary = summarize(results, live);

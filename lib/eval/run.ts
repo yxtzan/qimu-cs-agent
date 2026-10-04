@@ -107,8 +107,9 @@ export interface RunOutput {
 const MAX_ATTEMPTS = 3;
 const L3_PLACEHOLDER = "这个问题我需要再确认一下";
 
-export function loadCases(): EvalCase[] {
-  const raw = JSON.parse(readFileSync(join(process.cwd(), "data", "eval", "cases.json"), "utf8")) as { cases: EvalCase[] };
+/** file：data/eval/ 下的用例文件名，默认 cases.json；留出集用 holdout.json（Claude 加，T09 审查）。 */
+export function loadCases(file = "cases.json"): EvalCase[] {
+  const raw = JSON.parse(readFileSync(join(process.cwd(), "data", "eval", file), "utf8")) as { cases: EvalCase[] };
   return raw.cases;
 }
 
