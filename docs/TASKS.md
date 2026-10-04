@@ -17,7 +17,8 @@
 | T03 | 工具层 + RAG + 知识库 API | Codex | T02 | 2 | 3h | done |
 | T04 | 大脑流水线核心（状态/风险/L1/L2/handler/聊天 API） | Codex | T01b T03 T16 | 2 | 4.5h | done |
 | T12 | 买家客服聊天窗 | Cursor | T10 | 2 | 4h | done |
-| T05 | L3 Agent + 转人工 + 重置提速 | Codex | T04 | 3 | 3h | doing |
+| T05 | L3 Agent + 转人工 + 重置提速 | Codex | T04 | 3 | 3h | done |
+| T05b | 转人工摘要不阻塞 + T06 补跑评测 + L3 延迟拆解 | Codex | T05 | 5 | 1.5h | doing |
 | T13 | 人工接管台 + 知识库页 + 规则页 | Cursor | T11 | 3 | 3h | done |
 | T06 | 评测脚本 + 评测 API | **Cursor**（2026-10-04 改派） | T04 | 4 | 2h | done（T05 合并后补跑一次） |
 | T14 | 路由看板页 | Cursor | T13 | 4 | 2.5h | done |
@@ -26,7 +27,7 @@
 | T17 | 种子流量 + 看板 API | Cursor | T16 | 4 | 2h | done |
 | T18 | 演示剧本自动化冒烟测试（Playwright） | Cursor | T17 | 4 | 2h | done |
 | T08 | 边界情况处理（评测发现的问题 + 风险闸门补强） | Cursor | T06（在 T05 之后合并） | 5 | 2h | doing |
-| T15 | 前后端联调 | Cursor | T05 T08 T18 | 5 | 2h | todo |
+| T15 | 前后端联调 | Cursor | T05 T05b T08 T18 | 5 | 2h | todo |
 | T07 | (P1) 店铺 AI 助手 + Jev 批量打标 | Codex | T06 | 5 | 2.5h | todo |
 | T20 | 演示剧本 + 最终审查 | Claude | 全部 | 5 | — | todo |
 
@@ -308,6 +309,31 @@
 - [ ] 转人工后 `GET /api/conversations`（T16）里该会话排在最前、`handoffAt` 有值；卖家 `reply` 后买家端 `/messages?after=` 能取到；`release` 后 AI 恢复回复
 - [ ] L3 单条平均延迟和成本写进交接文件
 - [ ] `NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 6 步全部通过（第 3 步 L3 超时上限 30 秒，不够可以在交接文件里说明实测耗时）
+
+---
+
+## T05b 转人工摘要不阻塞 + T06 补跑评测 + L3 延迟拆解 — Codex
+
+- 分支：`t05b-followups`
+- 依赖：T05（已合并）
+- 必读：`docs/handoff/T05.md`、`docs/handoff/T06.md`、`docs/reports/T06-eval.md`、`docs/DECISIONS.md` D011 D012、`lib/brain/background.ts`
+- 说明：T05 让转人工时**等**模型生成一句话摘要（最多 2.5 秒）再回复买家，连硬关键词命中的风险闸门也要等——这一步原本是毫秒级的，演示「过敏 + 12315」时会明显变慢。摘要是给卖家看的，买家不需要等它。另外 T06 的评测要在 T05 合并后补跑一次。
+
+**要做（按顺序）**
+
+1. **先补跑评测**（在当前 main 上、改任何代码之前）：`npm run eval`（真实 Jev）。提交更新后的 `docs/reports/T06-eval.md` / `.json`、`data/seed/eval_latest.json`，并在 `docs/handoff/T06.md` 的对比表补上「T05 合并后」一列，下面逐条写 E51–E57 的结果（层级、工具序列、延迟、通过与否）。注意 E46 的期望已由 Claude 放宽为 L2/L3（见 T06-3 答复），对比时注明。
+2. **转人工摘要改为后台生成**（`lib/brain/handoff.ts`）：进入转人工时立即写入系统消息和**模板摘要**并返回；模型摘要用 `lib/brain/background.ts` 的后台任务生成，完成后更新会话摘要。摘要费用在后台完成后补记到这一轮 trace 的 `generationUsd` / `totalUsd`（用现有的 trace 更新方式；做不到就记日志并在交接里说明）。**不要改 `lib/brain/pipeline.ts` 的风险闸门那几行**（T08 正在改）；确实需要动 pipeline，只能改文件底部的 `handoffMessages` 函数。
+3. **L3 延迟拆解**：T05 实测整轮平均约 10.9 秒，其中 Agent 自身约 5.7 秒。用第 1 步的评测数据和 `[agent-step]` 日志，在交接里写清楚一条 L3 消息的时间花在哪（decide / 预读订单 / 每次模型调用 / 工具 / 摘要），并给出 1–2 条最有效的提速建议。**这一条只分析、不改代码。**
+
+**目录归属（本任务特批）**：`docs/reports/T06-eval.md` `docs/reports/T06-eval.json` `data/seed/eval_latest.json` `docs/handoff/T06.md`（只补对比列和 E51–E57 结果）。
+
+**验收标准**
+
+- [ ] 补跑评测的报告已提交，T06 交接里有两次结果对比
+- [ ] B002「穿了全身起红疹 不处理就去12315」：买家收到转人工消息的时间回到 1 秒以内（trace 的 totalMs 或 chat-cli 计时），卖家端稍后能看到模型摘要
+- [ ] `npm run typecheck` `npm run lint`、`scripts/check-agent.ts`、`scripts/check-t05-api.ts` 通过；`NEXT_PUBLIC_USE_MOCK=0 npm run e2e` 6 步全部通过
+- [ ] 交接里有 L3 延迟拆解和提速建议
+- [ ] 限时 1.5 小时
 
 ---
 
