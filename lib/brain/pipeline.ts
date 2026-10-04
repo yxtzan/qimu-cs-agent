@@ -7,6 +7,7 @@ import { startJevWarmup } from './decide/warmup';
 import { describeInput, parseChatRequest, validateIdentity, type ChatRequest } from './input';
 import { addHistory, serializeStateForModel, updateState } from './state';
 import { checkRisk, type RiskResult } from './risk';
+import { applyCaution } from './caution';
 import { matchRule, recordNegativeFeedback, recordRuleHit } from './rules';
 import { createHandlerContext, type HandlerResult } from './handlers/context';
 import { isSizeCareCombination, runHandler } from './handlers';
@@ -70,16 +71,23 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   const rule = matchRule(text, request.action);
 
   // ④a Hard risks cover every input, including L1 and confirmation buttons.
-  const hardRisk = checkRisk(text);
+  let hardRisk = checkRisk(text);
+  let earlyDecision: DecideResult | undefined;
+  if (hardRisk.handoff) {
+    // D011: a keyword alone transfers only if the real model does not clearly deny it (< 0.3).
+    // decide() is already running and bounded by DECIDE_BUDGET_MS; mock / failure keeps the keyword verdict.
+    earlyDecision = await decisionPromise;
+    hardRisk = checkRisk(text, earlyDecision);
+  }
   if (hardRisk.handoff) {
     mergeRiskFlags(id, hardRisk);
-    const trace = { ...makeTrace(buyer, 'risk_gate', started, rule?.intent), riskScores: hardRisk.scores, riskHit: hardRisk.hits, handoffReason: riskReason(hardRisk) };
-    appendMessages(id, (await handoffMessages(trace, id, trace.handoffReason, hardRisk.flags)).map(m => ({ ...m, traceId: trace.id })));
+    const trace = withDecision({ ...makeTrace(buyer, 'risk_gate', started, rule?.intent ?? earlyDecision!.intent.id), handoffReason: riskReason(hardRisk) }, earlyDecision!, hardRisk);
+    appendMessages(id, (await handoffMessages(trace, id, trace.handoffReason!, hardRisk.flags)).map(m => ({ ...m, traceId: trace.id })));
     trace.latency.totalMs = Date.now() - started;
-    updateConversation(id, { lastLayer: 'risk_gate' });
-    schedule(() => finishEarlyTrace(trace, buyer, text, decisionPromise, started));
+    persistTrace(trace);
     return response(id, buyer, request.debug, trace);
   }
+  if (earlyDecision) mergeRiskFlags(id, hardRisk);
 
   // Confirmation is a deterministic action, not a fresh intent classification.
   if (request.action?.type === 'confirm') {
@@ -112,6 +120,7 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   let intent: IntentId;
   let layer: 'L1' | 'L2' | 'L3';
   if (rule) {
+    decision = earlyDecision; // only set when a keyword made us wait for decide()
     recordRuleHit(rule);
     intent = rule.intent;
     layer = 'L1';
@@ -142,6 +151,7 @@ async function processMessage(request: ChatRequest, id: string, options: Pipelin
   catch { result = { status: 'collecting', messages: [{ role: 'ai', text: '抱歉，暂时无法完成查询，我帮您转人工核实。' }], handoffReason: '执行查询异常，需要人工核实' }; }
   if (getConversation(id)?.mode === 'human') return forwardedResponse(id, buyer, request.debug, started, decision, checkRisk(text, decision));
   applyHandlerState(id, state, intent, result, rule?.ruleId);
+  if (layer !== 'L1' && decision) result = applyCaution({ conversationId: id, buyer, risk: checkRisk(text, decision), result }); // yellow zone (T08)
   let trace: RouteTrace = { ...makeTrace(buyer, layer, started, intent), ruleId: rule?.ruleId, confidence: layer === 'L1' ? 1 : decision?.intent.confidence };
   trace = withHandler(trace, ctx.metrics, Date.now() - handlerStart, Date.now() - started);
   const reason = result.handoffReason ?? (state.unresolvedTurns >= 2 ? '连续两轮未能解决，需要人工协助' : undefined);

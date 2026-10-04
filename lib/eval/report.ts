@@ -200,6 +200,9 @@ export interface ReportContext {
 
 const md = (s: string) => s.replace(/\|/g, "\\|");
 
+/** Claude's T06-3 answer: E58 fails on purpose while the deliberately over-broad R007 is on. Judging and totals are unchanged. */
+const expectedFailure = (r: CaseResult): string => (r.id === "E58" && r.reason === "规则误吞" ? "（预期内失败：R007 为反面教材规则）" : "");
+
 export function renderMarkdown(results: CaseResult[], ctx: ReportContext): string {
   const s = summarize(results, ctx.checkTools);
   const layers = layerStats(results);
@@ -241,7 +244,7 @@ export function renderMarkdown(results: CaseResult[], ctx: ReportContext): strin
   if (Object.keys(reasons).length) L.push(`原因汇总：${Object.entries(reasons).map(([k, v]) => `${k} ${v}`).join("；")}`, "");
   if (failed.length) {
     L.push(`| 用例 | 买家说 | 期望 | 实际 | 原因 |`, `|---|---|---|---|---|`);
-    for (const r of failed) L.push(`| ${r.id} | ${md(r.text)} | ${md(describeExpect(r.expect, ctx.checkTools))} | ${md(describeGot(r.got, ctx.checkTools))}${r.error ? ` 错误：${md(r.error)}` : ""} | ${r.reason} |`);
+    for (const r of failed) L.push(`| ${r.id} | ${md(r.text)} | ${md(describeExpect(r.expect, ctx.checkTools))} | ${md(describeGot(r.got, ctx.checkTools))}${r.error ? ` 错误：${md(r.error)}` : ""} | ${r.reason}${expectedFailure(r)} |`);
   } else L.push("全部通过。");
   L.push("");
 
