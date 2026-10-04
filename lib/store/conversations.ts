@@ -9,6 +9,7 @@
  * 所有函数都是同步的（读-改-写在同一个事件循环里完成），所以同一进程内不会互相覆盖。
  * Codex 的 T04 直接调用这些函数，签名请保持稳定。
  */
+import { currentVisitor, publicDemo } from './visitor-context';
 import { nowIso } from "../demo-clock";
 import type {
   ChatMessage,
@@ -75,10 +76,10 @@ export function createConversation(
   init: Partial<Omit<Conversation, "buyerId">> = {},
 ): Conversation {
   const all = readOrEmpty<Conversation>(CONVERSATIONS);
-  const maxNo = all.reduce((max, c) => Math.max(max, Number(/^C(\d+)$/.exec(c.id)?.[1]) || 0), 1000);
+  const maxNo = all.reduce((max, c) => Math.max(max, Number(/^C(\d+)(?:-|$)/.exec(c.id)?.[1]) || 0), 1000);
   const t = nowIso();
   const conversation: Conversation = {
-    id: `C${maxNo + 1}`,
+    id: `C${maxNo + 1}${currentVisitor() ? `-${currentVisitor()!.sid}` : ''}`,
     mode: "ai",
     status: "ai_active",
     riskFlags: [],
@@ -250,6 +251,12 @@ export function replaceSimulatedHistory(data: {
   messages: ChatMessage[];
   traces: RouteTrace[];
 }): void {
+  if (publicDemo() && !currentVisitor()) {
+    writeCollection('simulated_conversations', data.conversations);
+    writeCollection('simulated_messages', data.messages);
+    writeCollection('simulated_traces', data.traces);
+    return;
+  }
   const oldConversations = readOrEmpty<Conversation>(CONVERSATIONS);
   const simulatedIds = new Set(oldConversations.filter((c) => c.isSimulated).map((c) => c.id));
   writeCollection(CONVERSATIONS, [...oldConversations.filter((c) => !c.isSimulated), ...data.conversations]);
@@ -275,6 +282,7 @@ export function markMisfire(traceId: string): void {
 function requireConversation(id: string): Conversation {
   const c = getConversation(id);
   if (!c) throw new ConversationError("NOT_FOUND", "没有找到这个会话", 404);
+  if (currentVisitor() && c.isSimulated) throw new ConversationError('CONFLICT', '模拟历史会话为只读，请体验自己的客服会话', 409);
   return c;
 }
 
@@ -286,7 +294,8 @@ function withHistory(c: Conversation, name: string, summary: string): DialogStat
 
 /** 读取会话详情并把 unreadForSeller 归零（卖家打开会话 = 已读）。 */
 export function openConversationForSeller(id: string) {
-  const c = requireConversation(id);
+  const c = getConversation(id);
+  if (!c) throw new ConversationError('NOT_FOUND', '没有找到这个会话', 404);
   const conversation = c.unreadForSeller ? updateConversation(id, { unreadForSeller: 0 })! : c;
   return {
     conversation,

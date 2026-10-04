@@ -10,7 +10,8 @@
  */
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { clearStoreCache } from "./index";
+import { clearStoreCache, SHARED_COLLECTIONS } from "./index";
+import { currentVisitor, newVisitorGeneration, publicDemo, sharedDirectory, withSharedStore } from './visitor-context';
 
 type ResetHook = () => void | Promise<void>;
 
@@ -26,27 +27,53 @@ export function registerResetHook(name: string, fn: ResetHook): void {
 /** 重置：seed → runtime，清缓存，再执行所有钩子。钩子报错会中断并抛出。 */
 export async function resetDemoData(): Promise<void> {
   const seedDir = join(process.cwd(), "data", "seed");
-  const runtimeDir = join(process.cwd(), "data", "runtime");
+  const visitor = currentVisitor();
+  const runtimeDir = visitor?.directory ?? sharedDirectory();
   // 评测结果（T06）和向量缓存（T05-1）不是演示状态，重置时保留：
   // 否则看板评测卡会消失，知识库会从向量检索退回 bigram。
-  const keepNames = ["eval_latest.json", "embedding_cache.json"];
+  const keepNames = visitor ? [] : ["eval_latest.json", "embedding_cache.json", ...(publicDemo() ? ['public-demo-limits.json'] : [])];
+  if (visitor) newVisitorGeneration(runtimeDir);
   const kept = new Map<string, Buffer>();
   for (const name of keepNames) {
     const file = join(runtimeDir, name);
     if (existsSync(file)) kept.set(name, readFileSync(file));
   }
-  rmSync(runtimeDir, { recursive: true, force: true });
+  if (publicDemo() && !visitor) {
+    mkdirSync(runtimeDir, { recursive: true });
+    for (const entry of readdirSync(runtimeDir)) if (entry !== 'visitors') rmSync(join(runtimeDir, entry), { recursive: true, force: true });
+  } else rmSync(runtimeDir, { recursive: true, force: true });
   mkdirSync(runtimeDir, { recursive: true });
+  if (visitor) newVisitorGeneration(runtimeDir);
   for (const [name, buf] of kept) writeFileSync(join(runtimeDir, name), buf);
   for (const file of readdirSync(seedDir).filter((f) => f.endsWith(".json"))) {
-    copyFileSync(join(seedDir, file), join(runtimeDir, file));
+    if (!visitor || !SHARED_COLLECTIONS.has(file.slice(0, -5))) copyFileSync(join(seedDir, file), join(runtimeDir, file));
   }
   clearStoreCache();
   for (const [name, hook] of hooks) {
+    if (visitor && ['traffic', 'kb-index', 'jev-warmup', 'handoff-summary'].includes(name)) continue;
     try {
       await hook();
     } catch (err) {
       throw new Error(`重置钩子「${name}」执行失败：${err instanceof Error ? err.message : String(err)}`);
     }
   }
+}
+
+const sharedGlobals = globalThis as unknown as { __qimuSharedInit?: Map<string, Promise<void>> };
+/** Initialize shared read-only resources once; visitors never copy or reset them. */
+export async function ensurePublicSharedData(): Promise<void> {
+  if (!publicDemo()) return;
+  const root = sharedDirectory();
+  const pending = sharedGlobals.__qimuSharedInit ??= new Map();
+  let run = pending.get(root);
+  if (!run) {
+    run = withSharedStore(async () => {
+      for (const [name, file] of [['traffic', 'simulated_traces.json'], ['kb-index', 'kb_index.json']]) {
+        if (!existsSync(join(root, file))) await hooks.get(name)?.();
+      }
+    });
+    pending.set(root, run);
+    void run.catch(() => pending.delete(root));
+  }
+  await run;
 }
