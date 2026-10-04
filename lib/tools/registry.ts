@@ -5,6 +5,7 @@ import { getBuyer, getProduct, listCoupons, listOrders, listProducts, orderStatu
 import { searchKnowledge } from '../rag/search';
 import { createPendingAction } from './execute-pending';
 import { recommendSize } from './recommend-size';
+import { trackLogistics } from './track-logistics';
 import { ownedOrder } from './write-rules';
 import { textArg, ToolError, type ToolContext, type ToolDefinition, type ToolResult } from './types';
 export type { ToolContext, ToolResult } from './types';
@@ -52,7 +53,7 @@ function product(args: Record<string, unknown>) {
 
 add('list_orders', '查询当前买家的订单，按下单时间倒序；可筛选状态和最近天数，不能查询其他买家。', schema({ status: string('订单状态筛选', orderStatuses), sinceDays: number('最近多少天内下单，以演示时间为准', 0) }), 'read', (args, ctx) => listOrders(ctx.buyerId, args.status as Parameters<typeof listOrders>[1]).filter(o => args.sinceDays === undefined || Date.parse(o.createdAt) >= Date.parse(DEMO_NOW) - (args.sinceDays as number) * 86400000));
 add('get_order', '查询当前买家的一张订单，获取商品行 itemId、状态、收货地址和售后单；自动校验归属。', schema({ orderId }, ['orderId']), 'read', (args, ctx) => ownedOrder(textArg(args, 'orderId'), ctx));
-add('track_logistics', '查询当前买家订单的物流公司、单号和时间线，未发货时说明尚无物流。', schema({ orderId }, ['orderId']), 'read', (args, ctx) => { const order = ownedOrder(textArg(args, 'orderId'), ctx); if (!order.logistics) throw new ToolError('订单尚未发货，暂无物流信息'); return { orderId: order.id, logistics: order.logistics }; });
+add('track_logistics', '查询当前买家订单的物流。已发货返回 shipped 为 true，以及物流公司和时间线。未发货不报错：返回 shipped 为 false 和订单 status。status 为 paid 时还有 expectedShipBy（付款时间加 48 小时），直接告诉买家预计该时间前发货，不要转人工，也不要当成查询失败。status 为 pending_payment 时没有预计时间，说明付款后才会发货。', schema({ orderId }, ['orderId']), 'read', (args, ctx) => trackLogistics(ownedOrder(textArg(args, 'orderId'), ctx)));
 add('get_aftersale', '查询当前买家订单的全部售后单及进度时间线，包含退款和换货。', schema({ orderId }, ['orderId']), 'read', (args, ctx) => ownedOrder(textArg(args, 'orderId'), ctx).afterSales);
 add('search_products', '按名称或标签搜索店内商品，可按品类筛选，返回按销量排序的商品列表。', schema({ query: string('商品名称或标签关键词，例如 大衣'), category: string('商品品类', productCategories) }, ['query']), 'read', args => listProducts({ q: textArg(args, 'query'), category: args.category as ProductCategory | undefined }));
 add('get_product', '查询商品详情，包括材质、版型、洗护说明、颜色尺码和实时 SKU 库存。', schema({ productId }, ['productId']), 'read', args => product(args));

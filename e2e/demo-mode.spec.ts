@@ -96,3 +96,108 @@ test("手机宽度卡片不挡住发送按钮", async ({ page }) => {
   expect(overlaps, "手机宽度下导览卡片挡住了发送按钮").toBe(false);
   await shot(page, "mobile-send");
 });
+
+const PHONE = path.join(__dirname, "../docs/handoff/t21d");
+
+async function phoneShot(page: import("@playwright/test").Page, name: string) {
+  fs.mkdirSync(PHONE, { recursive: true });
+  await page.screenshot({ path: path.join(PHONE, `${name}.png`) });
+}
+
+/** 390 宽：没有横向滚动，红圈和卡片都完整落在视口里。 */
+async function assertPhoneFit(page: import("@playwright/test").Page, step: string) {
+  const fit = await page.evaluate(() => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const box = (sel: string) => {
+      const el = document.querySelector(sel);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height };
+    };
+    const inside = (b: { l: number; t: number; r: number; b: number; w: number; h: number } | null) =>
+      !!b && b.w > 2 && b.h > 2 && b.l >= -1 && b.t >= -1 && b.r <= vw + 1 && b.b <= vh + 1;
+    const ring = box("[data-testid=demo-ring]");
+    const card = box("[data-testid=demo-card]");
+    return {
+      scroll: document.documentElement.scrollWidth,
+      inner: vw,
+      ring,
+      card,
+      ringIn: inside(ring),
+      cardIn: inside(card),
+    };
+  });
+  expect(fit.scroll, `${step} 出现横向滚动 scrollWidth=${fit.scroll} inner=${fit.inner}`).toBe(fit.inner);
+  expect(fit.cardIn, `${step} 卡片超出视口 ${JSON.stringify(fit.card)}`).toBe(true);
+  if (fit.ring) expect(fit.ringIn, `${step} 红圈超出视口 ${JSON.stringify(fit.ring)}`).toBe(true);
+}
+
+test("手机宽度走完全程，每步都没有横向溢出", async ({ page }) => {
+  test.setTimeout(8 * 60_000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?demo=1");
+  const tour = page.getByTestId("demo-tour");
+
+  async function at(step: string, shotName?: string) {
+    await expect(tour).toHaveAttribute("data-step", step, { timeout: 45_000 });
+    const centered = ["intro", "s5-go", "s5-back", "s6-go", "end"].includes(step);
+    if (!centered) await expect(page.getByTestId("demo-ring")).toBeVisible({ timeout: 20_000 });
+    await page.waitForTimeout(300);
+    await assertPhoneFit(page, step);
+    if (shotName) await phoneShot(page, shotName);
+  }
+
+  await at("intro");
+  await page.getByTestId("demo-start").click();
+
+  await at("s1-send", "phone-01-send");
+  await page.getByTestId("chat-send").click();
+  await at("s1-reply");
+  await page.getByTestId("demo-next").click();
+
+  await at("s2-send");
+  await page.getByTestId("chat-send").click();
+  await at("s2-reply");
+  await page.getByTestId("demo-next").click();
+
+  await at("s3-send");
+  await page.getByTestId("chat-send").click();
+  await expect(tour).toHaveAttribute("data-step", /s3-wait|s3-confirm/, { timeout: 45_000 });
+  if ((await tour.getAttribute("data-step")) === "s3-wait") await at("s3-wait");
+  await at("s3-confirm", "phone-03-confirm");
+  await page.locator("[data-tour=confirm-yes]").click();
+  await at("s3-done");
+  await page.getByTestId("demo-next").click();
+
+  await at("s4-send");
+  await page.getByTestId("chat-send").click();
+  await at("s4-reply");
+  await page.getByTestId("demo-next").click();
+
+  await at("s5-go");
+  await page.getByTestId("demo-go-seller").click();
+  await at("s5-list");
+  await page.locator("[data-tour=handoff-row]").first().click();
+  await at("s5-detail");
+  await page.getByTestId("demo-next").click();
+  await at("s5-takeover");
+  await page.locator("[data-tour=takeover]").click();
+  await at("s5-reply", "phone-05-reply");
+  await page.locator("[data-tour=seller-send]").click();
+
+  await at("s5-back");
+  await page.getByTestId("demo-go-buyer").click();
+  await expect(page.getByTestId("demo-ring")).toBeVisible({ timeout: 20_000 });
+  await page.waitForTimeout(300);
+  await assertPhoneFit(page, "s5-back-arrived");
+  await page.getByTestId("demo-next").click();
+
+  await at("s6-go");
+  await page.getByTestId("demo-go-board").click();
+  await at("s6-board");
+  await page.getByTestId("demo-next").click();
+  await at("s6-eval");
+  await page.getByTestId("demo-next").click();
+  await at("end");
+});

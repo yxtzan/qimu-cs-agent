@@ -70,6 +70,11 @@ export async function writeIntent(ctx: HandlerContext): Promise<HandlerResult> {
       const followUp = !switching && remembersRefundOnly(ctx.state) && ctx.state.currentTask?.status === 'collecting' && ctx.state.currentTask.intent === 'refund_apply';
       const wantsOnly = !switching && (phrase || followUp);
       if (wantsOnly && !ctx.state.slots.reason && hasConcreteReason(ctx.text)) ctx.state.slots.reason = ctx.text.trim();
+      // 已发货 / 已签收的仅退款当轮就说明，不等买家先把原因说完。原因如果这句话里已经有，留给「改为退货退款」。
+      if (wantsOnly && (order.status === 'shipped' || order.status === 'delivered' || order.status === 'completed')) {
+        rememberRefundOnly(ctx.state);
+        return refuseRefundOnly(order.status);
+      }
       const reason = ctx.state.slots.reason;
       if (!reason) {
         if (phrase) rememberRefundOnly(ctx.state);

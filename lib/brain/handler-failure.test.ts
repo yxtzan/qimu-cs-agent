@@ -95,18 +95,19 @@ test('refund-only four acceptance scenes', async () => {
   assert.match(changed.messages.find(m => m.card?.kind === 'confirm')?.card?.kind === 'confirm' ? String(changed.messages.find(m => m.card?.kind === 'confirm')?.text) : '', /核对/);
 
   const asked = await handleMessage({ buyerId: 'B001', text: '我想退款不退货', context: { orderId: 'QM2026092801', page: 'order_detail' } }, { decide: mockDecide });
+  const askedAi = asked.messages.filter(m => m.role === 'ai');
   assert.equal(confirmType(asked.messages), undefined);
-  assert.match(asked.messages.filter(m => m.role === 'ai').at(-1)?.text ?? '', /原因/);
+  assert.equal(askedAi.at(-1)?.text, REFUSAL.signed);
+  assert.deepEqual(askedAi.at(-1)?.quickReplies?.map(q => q.label), ['改为退货退款', '转人工']);
   assert.equal(asked.conversation.state.history.some(h => h.summary === '买家想仅退款'), true);
 
-  const followed = await handleMessage({
-    buyerId: 'B001', conversationId: asked.conversation.id, text: '腰太紧了',
+  const needReason = await handleMessage({
+    buyerId: 'B001', conversationId: asked.conversation.id,
+    action: { type: 'text', text: '改为退货退款' },
     context: { orderId: 'QM2026092801', page: 'order_detail' },
   }, { decide: mockDecide });
-  const followedAi = followed.messages.filter(m => m.role === 'ai');
-  assert.equal(followedAi.at(-1)?.text, REFUSAL.signed);
-  assert.equal(confirmType(followed.messages), undefined);
-  assert.deepEqual(followedAi.at(-1)?.quickReplies?.map(q => q.label), ['改为退货退款', '转人工']);
+  assert.equal(confirmType(needReason.messages), undefined);
+  assert.match(needReason.messages.filter(m => m.role === 'ai').at(-1)?.text ?? '', /原因/);
 });
 test('existing review messages keep handoff=true; normal refusals and bad input differ', async () => {
   const args = { orderId: 'QM2026092801', itemId: 'QM2026092801-1', reason: '质量问题', type: 'return_refund' };
